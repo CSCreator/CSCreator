@@ -1,9 +1,6 @@
-import logging
-import os
-
 from PySide2.QtCore import QStandardPaths, QDir
 
-from controllers.configcontroller import ConfigController
+from src.controllers.configcontroller import ConfigController
 
 global config_controller
 config_controller = ConfigController()
@@ -38,7 +35,7 @@ if __name__ == "__main__":
     logger.info("Application started")
 
     import sys
-    from controllers.maincontroller import MainController
+    from src.controllers.maincontroller import MainController
 
     app = QApplication(sys.argv)
     qss = "qt_design/stylesheet.qss"
@@ -55,7 +52,7 @@ if __name__ == "__main__":
         data_dir.mkdir("importers")
 
     if os.environ.get("DEBUG") is not None:
-        copytree("data/importers", os.path.join(data_location, "importers"))
+        copytree("src/data/importers", os.path.join(data_location, "importers"))
 
     main_controller = MainController()
     main_view = main_controller.get_window()
