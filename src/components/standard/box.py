@@ -67,7 +67,7 @@ class BoxController(ComponentController):
             font_size -= 1
             if font_size <= 1:
                 break
-            logging.info(
+            logger.info(
                 "Changed font size to {} because {} wont fit".format(
                     font_size, text_to_render
                 )

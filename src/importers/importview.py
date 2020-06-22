@@ -132,10 +132,10 @@ class pdfWizardFactory:
 
     @event
     def import_new_player(self, file, importer):
-        logging.info(f"New import request for {file} with {importer}")
+        logger.info(f"New import request for {file} with {importer}")
 
     def create(self, parent):
-        logging.info("Opening Import PDF Wizard")
+        logger.info("Opening Import PDF Wizard")
         file_name = do_file(parent)
         importer_names, importer_files = find_importers()
         ui = importPdfDialog(parent, importer_names)

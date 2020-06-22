@@ -158,6 +158,6 @@ class CharacterModel:
     def character_view_changed_event(self, character_property, value):
         # Do not call set_value here, otherwise we fire an event back to the View, who has the latest character_property already
         setattr(self, character_property.name, value)
-        logging.debug(
+        logger.debug(
             f"Recieved changed character_property {character_property.name} from the view with value {value}"
         )

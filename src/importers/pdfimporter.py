@@ -204,7 +204,7 @@ class PDFImporter:
 
     def apply_preprocessing(self, forms):
         for new_field, process in self.pre_processing.items():
-            logging.debug(
+            logger.debug(
                 f"Preprocessing method {process} to create new field {new_field}"
             )
             method = process["method"]

@@ -157,7 +157,7 @@ class CustomTableModel(QAbstractTableModel):
         super(CustomTableModel, self).__init__()
         self.items = []
         if type(custom_table_item) is not type(CustomTableItemType):
-            logging.debug(f"Inserted custom_table_item invalid")
+            logger.debug(f"Inserted custom_table_item invalid")
         self.headers = custom_table_item.columns_names
         self.delegates = custom_table_item.delegates
 

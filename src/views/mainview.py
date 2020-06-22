@@ -31,7 +31,7 @@ class MainView(QMainWindow):
         self.setWindowTitle("Charactersheet Creator")
 
         # self.puzzleWidget.clear()
-        logging.debug("MainView constructed")
+        logger.debug("MainView constructed")
 
         self.pdf_wizard_factory = pdfWizardFactory()
 
@@ -39,11 +39,11 @@ class MainView(QMainWindow):
 
     @event
     def create_new_player(self):
-        logging.info("New player creation requested")
+        logger.info("New player creation requested")
 
     @event
     def export_to_sheet(self):
-        logging.info("New sheet creation requested")
+        logger.info("New sheet creation requested")
 
     def setup_menus(self):
 
@@ -69,7 +69,7 @@ class MainView(QMainWindow):
 
         exit_action.triggered.connect(QApplication.instance().quit)
 
-        logging.debug("Menus set-up")
+        logger.debug("Menus set-up")
         # restart_action.triggered.connect(self.setup_overview)
 
     def setup_tabs(self):
@@ -93,7 +93,7 @@ class MainView(QMainWindow):
         temp_layout.addWidget(label)
         self.character_tab.setLayout(temp_layout)
 
-        logging.debug("Tabs set-up")
+        logger.debug("Tabs set-up")
 
     def set_character_layout(self, qt_layout):
         current_layout = self.character_tab.layout()
@@ -103,9 +103,9 @@ class MainView(QMainWindow):
         garbage_collecting_widget.setLayout(current_layout)
 
         self.character_tab.setLayout(qt_layout)
-        logging.debug("Character layout set")
+        logger.debug("Character layout set")
 
     def set_sheet_layout(self, qt_layout):
 
         self.sheet_tab.setLayout(qt_layout)
-        logging.debug("Sheet layout set")
+        logger.debug("Sheet layout set")

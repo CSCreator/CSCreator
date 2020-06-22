@@ -79,7 +79,7 @@ class ComponentController:
         )
         self.pixmap = QIcon("tmp/pixmap_intermediate.svg").pixmap(pixmap_size)
         self.svg_renderer.load(QByteArray(string_image))
-        logging.info("Rendered img updated")
+        logger.info("Rendered img updated")
 
     def create_canvas(self, size):
         width_mm = config_controller.pixel_to_mm(size[0])
@@ -94,7 +94,7 @@ class ComponentController:
     def set_position(self, point):
         self.properties.x = point.x() // config_controller.box_size[0]
         self.properties.y = point.y() // config_controller.box_size[1]
-        # logging.info(f"Set positions to {self.properties.x} {self.properties.y}")
+        # logger.info(f"Set positions to {self.properties.x} {self.properties.y}")
 
     def get_q_svg_scene_item(self, parent=None):
 

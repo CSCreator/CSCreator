@@ -14,7 +14,7 @@ class PageController:
         self.page_model = self.set_standard_layout(character_controller)
         self.page_view = PageView(scene=self.page_model)
         # self.page_view.show()
-        logging.info("PageView constructed")
+        logger.info("PageView constructed")
 
     def set_standard_layout(self, active_character_controller):
         main_grid = PageModel()

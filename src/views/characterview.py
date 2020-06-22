@@ -137,21 +137,21 @@ class CharacterView(QWidget):
 
     def register_signals(self, player_model):
         for value in CH:
-            logging.debug(f"Checking if {value} exists in UI")
+            logger.debug(f"Checking if {value} exists in UI")
             if hasattr(self.char_layout, value.name):
                 attribute = getattr(self.char_layout, value.name)
                 self.register_signal_for_generic_widget(
                     attribute, player_model.character_view_changed_event, value
                 )
             else:
-                logging.info(f"{value} does not exists in UI")
+                logger.info(f"{value} does not exists in UI")
 
     def character_model_changed_event(self, subject, character_property, value):
-        logging.debug(
+        logger.debug(
             f"Event fired from subject {subject} with arg {character_property}"
         )
         if not hasattr(self.char_layout, character_property):
-            logging.debug(
+            logger.debug(
                 f"CharacterView does not have a property {character_property}. Ignoring event."
             )
             return
@@ -206,7 +206,7 @@ class CharacterView(QWidget):
 
             attribute.stateChanged.connect(lambda_method)
         elif isinstance(attribute, QLabel):
-            pass  # logging.debug("QLabels shouldn't change without the Model doing so.")
+            pass  # logger.debug("QLabels shouldn't change without the Model doing so.")
         else:
             logging.warning(
                 f"Attempting to register signal of unknown type {attribute}"
