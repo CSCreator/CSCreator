@@ -3,6 +3,7 @@ import logging
 
 from src.controllers.charactercontroller import CharacterController
 from exceptions import NotAllImportedWarning, ValueEnumKeyNotFoundException, DefinitionFileUnreadableException
+from src.importers.preprocessing_functions import concat, to_boolean_true_if
 from src.models.charactermodel import CH, SkillProficiencies
 from src.pdf.pdfutils import get_forms_from_pdf
 
@@ -19,35 +20,35 @@ def find_candidate_key(key_patterns, format, dict_to_search, hardcoded_keys):
             if formatted_key_pattern in key:
                 return key
 
-    # logging.info(f"Key pattern {[k.format(format) for k in key_patterns]} not found.")
     return False
 
+def get_rows_per_header(list_keys, forms):
+    form_keys_with_last_header_value = {}
+
+    header_name = list_keys["header"]
+    last_header_value = None
+
+    for form_key in forms:
+        if header_name in form_key:
+            last_header_value = forms[form_key]
+            continue
+
+        if last_header_value is None:
+            continue
+
+        form_keys_with_last_header_value[form_key] = last_header_value
+
+    return form_keys_with_last_header_value
 
 def parse_list(list_keys, keys_to_parse, forms):
 
+
     header_present = "header" in list_keys.keys()
-
     if header_present:
-        form_keys_with_last_header_value = {}
-
-        header_name = list_keys["header"]
-        last_header_value = None
-
-        for form_key in forms:
-            if header_name in form_key:
-                last_header_value = forms[form_key]
-                continue
-
-            if last_header_value is None:
-                continue
-
-            form_keys_with_last_header_value[form_key] = last_header_value
+        form_keys_with_last_header_value = get_rows_per_header(list_keys, forms)
 
     items = []
     for i in range(list_keys["max_items"]):
-        if i == 49:
-            print()
-
         if not list_keys["zero_indexed"]:
             i += 1
         candidate_keys = [
@@ -85,7 +86,7 @@ class PDFImporter:
             with open(definition_file, "r") as j:
                 definition = json.loads(j.read())
         except IOError:
-            raise DefinitionFileUnreadableException(f"Definition file {definition} cannot be read or found")
+            raise DefinitionFileUnreadableException(f"Definition file {definition_file} cannot be read or found")
 
         self.experimental = definition.get("experimental", False)
         self.key_conversion = definition.get("key_conversion", None)
@@ -175,26 +176,26 @@ class PDFImporter:
                 list(self.key_conversion.values()).index(value)
             ]
 
-        str = get_key_from_value(CH.STR)
-        dex = get_key_from_value(CH.DEX)
-        con = get_key_from_value(CH.CON)
-        int = get_key_from_value(CH.INT)
-        wis = get_key_from_value(CH.WIS)
-        cha = get_key_from_value(CH.CHA)
-        strmod = get_key_from_value(CH.STR_MOD)
-        dexmod = get_key_from_value(CH.DEX_MOD)
-        conmod = get_key_from_value(CH.CON_MOD)
-        intmod = get_key_from_value(CH.INT_MOD)
-        wismod = get_key_from_value(CH.WIS_MOD)
-        chamod = get_key_from_value(CH.CHA_MOD)
+        str_value = get_key_from_value(CH.STR)
+        dex_value = get_key_from_value(CH.DEX)
+        con_value = get_key_from_value(CH.CON)
+        int_value = get_key_from_value(CH.INT)
+        wis_value = get_key_from_value(CH.WIS)
+        cha_value = get_key_from_value(CH.CHA)
+        str_mod = get_key_from_value(CH.STR_MOD)
+        dex_mod = get_key_from_value(CH.DEX_MOD)
+        con_mod = get_key_from_value(CH.CON_MOD)
+        int_mod = get_key_from_value(CH.INT_MOD)
+        wis_mod = get_key_from_value(CH.WIS_MOD)
+        cha_mod = get_key_from_value(CH.CHA_MOD)
 
         for pair in [
-            (str, strmod),
-            (dex, dexmod),
-            (con, conmod),
-            (int, intmod),
-            (wis, wismod),
-            (cha, chamod),
+            (str_value, str_mod),
+            (dex_value, dex_mod),
+            (con_value, con_mod),
+            (int_value, int_mod),
+            (wis_value, wis_mod),
+            (cha_value, cha_mod),
         ]:
             forms[pair[0]], forms[pair[1]] = return_score_then_prof(
                 forms[pair[0]], forms[pair[1]]
@@ -214,19 +215,13 @@ class PDFImporter:
                 else False
             )
             new_value = ""
+
             if method == "concat":
-                for parameter in parameters:
-                    new_value += forms.get(parameter, "")
+                new_value = concat(forms,parameters)
             if method == "to_bool_true_if":
-                true_value = parameters["value"]
-                if isinstance(true_value, bool):
-                    new_value = bool(forms[new_field]) == true_value
-                elif isinstance(true_value, str):
-                    new_value = forms[new_field] == true_value
-                else:
-                    logging.error(
-                        f"Unknown type {type(true_value)} for method {method}"
-                    )
+                if not "field" in parameters:
+                    parameters["field"] = new_field
+                new_value = to_boolean_true_if(forms, parameters)
 
             forms[new_field] = new_value
 

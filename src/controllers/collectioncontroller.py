@@ -3,7 +3,7 @@ import logging
 from PySide2.QtWidgets import QHBoxLayout
 from obsub import event
 
-from src.controllers import SheetController
+from src.controllers.sheetcontroller import SheetController
 from src.views.stagingview import StagingView
 
 logger = logging.getLogger(__name__)

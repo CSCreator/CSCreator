@@ -1,5 +1,6 @@
 import logging
 
+from src.components.utils import unit_str_to_float
 from src.controllers.componentcontroller import (
     ComponentController,
     EditableProperty,
@@ -11,7 +12,6 @@ logger = logging.getLogger(__name__)
 
 import svgwrite
 
-from src.components import unit_str_to_float
 import svgutils.transform as sg
 
 from src.svg.text import text_width

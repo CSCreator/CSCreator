@@ -1,6 +1,6 @@
 from PySide2.QtWidgets import QHBoxLayout
 
-from src.controllers import PageController
+from src.controllers.pagecontroller import PageController
 from src.views.sheetview import SheetView
 
 

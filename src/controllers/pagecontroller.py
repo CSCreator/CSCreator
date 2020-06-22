@@ -1,7 +1,7 @@
 import logging
 
-from src.components import Properties
-from src.components import BoxController
+from src.components.properties import Properties
+from src.components.standard.box import BoxController
 from src.models.charactermodel import CH
 from src.models.pagemodel import PageModel
 from src.views.pageview import PageView

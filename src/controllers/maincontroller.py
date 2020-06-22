@@ -1,12 +1,12 @@
 import logging
 
 from src.controllers.charactercontroller import CharacterController
-from src.exporters import PDFExporter
+from src.exporters.pdfexporter import PDFExporter
 
 logger = logging.getLogger(__name__)
 
-from src.controllers import CollectionController
-from src.importers import PDFImporter
+from src.controllers.collectioncontroller import CollectionController
+from src.importers.pdfimporter import PDFImporter
 from src.views.mainview import MainView
 
 
@@ -51,7 +51,7 @@ class MainController:
     def import_player(
         self,
         file_name="resc/dndbeyond_extreme.pdf",
-        definition_file="data/importers/dndbeyond.json",
+        definition_file="src/data/importers/dndbeyond.json",
     ):
         importer = PDFImporter(definition_file=definition_file)
         importer.load(file_name)

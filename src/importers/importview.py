@@ -2,8 +2,7 @@ import json
 import logging
 import os
 
-from PySide2 import QtGui
-from PySide2.QtWidgets import QFileDialog, QDialog
+from PySide2.QtWidgets import QFileDialog, QDialog, QVBoxLayout, QFormLayout, QLabel, QComboBox, QDialogButtonBox
 from obsub import event
 
 logger = logging.getLogger(__name__)
@@ -11,34 +10,14 @@ logger = logging.getLogger(__name__)
 from PySide2.QtCore import (
     QCoreApplication,
     QMetaObject,
-    QObject,
-    QPoint,
-    QRect,
-    QSize,
-    QUrl,
     Qt,
     QStandardPaths,
 )
-from PySide2.QtGui import (
-    QBrush,
-    QColor,
-    QConicalGradient,
-    QCursor,
-    QFont,
-    QFontDatabase,
-    QIcon,
-    QLinearGradient,
-    QPalette,
-    QPainter,
-    QPixmap,
-    QRadialGradient,
-)
-from PySide2.QtWidgets import *
 
 
-class importPDFDialog(QDialog):
+class importPdfDialog(QDialog):
     def __init__(self, parent, importers_stringlist):
-        super(importPDFDialog, self).__init__(parent)
+        super(importPdfDialog, self).__init__(parent)
         self.resize(320, 240)
 
         self.importer_selected = 0
@@ -159,7 +138,7 @@ class pdfWizardFactory:
         logging.info("Opening Import PDF Wizard")
         file_name = do_file(parent)
         importer_names, importer_files = find_importers()
-        ui = importPDFDialog(parent, importer_names)
+        ui = importPdfDialog(parent, importer_names)
         ui.selected_label.setText(file_name[0])
         status = ui.exec()
         selected_importer_file_index = importer_files[ui.importer_selected]

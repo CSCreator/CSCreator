@@ -4,7 +4,8 @@ from PySide2.QtCore import QStandardPaths, Qt
 from PySide2.QtGui import QDesktopServices
 from obsub import event
 
-from src.importers import pdfWizardFactory
+from src.importers.importview import pdfWizardFactory
+from src.importers.pdfimporter import PDFImporter
 
 logger = logging.getLogger(__name__)
 
