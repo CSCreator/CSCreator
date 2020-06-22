@@ -1,9 +1,6 @@
-import logging
-import os
-
 from PySide2.QtCore import QStandardPaths, QDir
 
-from controllers.configcontroller import ConfigController
+from src.controllers import ConfigController
 
 global config_controller
 config_controller = ConfigController()
@@ -38,7 +35,7 @@ if __name__ == "__main__":
     logger.info("Application started")
 
     import sys
-    from controllers.maincontroller import MainController
+    from src.controllers import MainController
 
     app = QApplication(sys.argv)
     qss = "qt_design/stylesheet.qss"
