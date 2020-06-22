@@ -1,0 +1,27 @@
+version: 1
+formatters:
+  brief:
+    format: '%(levelname)-8s: [%(filename)-25s %(lineno)-4d]: %(message)s'
+  precise:
+    format: '%(asctime)s %(levelname)-8s [%(filename)-25s %(funcName)-25s %(lineno)-4d]: %(message)s'
+handlers:
+  console:
+    class : logging.StreamHandler
+    formatter: brief
+    level   : DEBUG
+    stream  : ext://sys.stdout
+  file:
+    class : logging.handlers.RotatingFileHandler
+    formatter: precise
+    filename: logs/log_info.log
+    level: INFO
+    backupCount: 1
+  debugfile:
+    class : logging.handlers.RotatingFileHandler
+    formatter: precise
+    level   : DEBUG
+    filename: logs/log_debug.log
+    mode: a
+root:
+  level     : DEBUG
+  handlers  : [console, file, debugfile]

@@ -1,0 +1,600 @@
+{
+	"importer_name": "MorePurpleMoreBetter",
+	"experimental": true,
+	"key_conversion": {
+		"PC Name": "CH.CHARACTER_NAME",
+		"Player Name": "CH.PLAYER_NAME",
+		"Race": "CH.RACE",
+		"PP_EXPERIENCE": "CH.XP",
+		"Str": "CH.STR",
+		"Str Mod": "CH.STR_MOD",
+		"Str ST Mod": "CH.STR_ST_MOD",
+		"Dex": "CH.DEX",
+		"Dex Mod": "CH.DEX_MOD",
+		"Dex ST Mod": "CH.DEX_ST_MOD",
+		"Con": "CH.CON",
+		"Con Mod": "CH.CON_MOD",
+		"Con ST Mod": "CH.CON_ST_MOD",
+		"Int": "CH.INT",
+		"Int Mod": "CH.INT_MOD",
+		"Int ST Mod": "CH.INT_ST_MOD",
+		"Wis": "CH.WIS",
+		"Wis Mod": "CH.WIS_MOD",
+		"Wis ST Mod": "CH.WIS_ST_MOD",
+		"Cha": "CH.CHA",
+		"Cha Mod": "CH.CHA_MOD",
+		"Cha ST Mod": "CH.CHA_ST_MOD",
+		"PP_RESISTANCE": "CH.SAVE_MODIFIERS",
+		"PP_DEFENSES": "CH.DEFENSES",
+		"Passive Perception": "CH.PASSIVE_PERCEPTION",
+		"Vision": "CH.SENSES",
+		"Proficiency Bonus": "CH.PROF_BONUS",
+		"HP Max": "CH.MAX_HP",
+		"HP Temp": "CH.TEMP_HP",
+		"HP Current": "CH.HP Current",
+		"Death Save Success1": "CH.SUCCESSFUL_SAVE_1",
+		"Death Save Success2": "CH.SUCCESSFUL_SAVE_2",
+		"Death Save Success3": "CH.SUCCESSFUL_SAVE_3",
+		"Death Save Fail1": "CH.FAILED_SAVE_1",
+		"Death Save Fail2": "CH.FAILED_SAVE_2",
+		"Death Save Fail3": "CH.FAILED_SAVE_3",
+		"PP_HIT_DICE": "CH.TOTAL_HIT_DICE",
+		"AC": "CH.AC",
+		"Init Bonus": "CH.INITIATIVE",
+		"Speed": "CH.SPEED",
+		"PP_ACTIONS": "CH.ACTIONS",
+		"Sex": "CH.GENDER",
+		"Age": "CH.AGE",
+		"Height": "CH.SIZE",
+		"Weight": "CH.WEIGHT",
+		"Alignment": "CH.ALIGNMENT",
+		"Faith/Deity": "CH.FAITH",
+		"Hair colour": "CH.HAIR",
+		"Eyes colour": "CH.EYES",
+		"Skin colour": "CH.SKIN",
+		"Weight Carried": "CH.WEIGHT_CARRIED",
+		"Weight Encumbered": "CH.ENCUMBERED",
+		"Weight Heavily Encumbered": "CH.",
+		"Weight Push/Drag/Lift": "CH.PUSH_DRAG_LIFT",
+		"Copper Pieces": "CH.CP",
+		"Silver Pieces": "CH.SP",
+		"Gold Pieces": "CH.GP",
+		"Electrum Pieces": "CH.EP",
+		"Platinum Pieces": "CH.PP",
+		"Spell DC 1 Mod": "CH.ABILITYSAVEDC1",
+		"Spell DC 2 Mod": "CH.ABILITYSAVEDC2",
+		"Spell save DC 1": "CH.ABILITYSAVESCORE1",
+		"Spell save DC 2": "CH.ABILITYSAVESCORE2",
+		"PP_FEATURES_RACIAL_TRAITS": "CH.FEATURES_TRAITS",
+		"Personality Trait": "CH.PERSONALITY_TRAITS",
+		"Ideal": "CH.IDEALS",
+		"Bond": "CH.BONDS",
+		"Flaw": "CH.FLAWS",
+		"Background_Appearance": "CH.APPEARANCE",
+		"Background_History": "CH.BACKSTORY"
+	},
+	"keys_to_ignore": [
+		"Image.calc_boxes.CSfront",
+		"Image.calc_lines.CSfront",
+		"Show Buttons",
+		"HeaderIcon",
+		"Whiteout.Standard",
+		"Image.HoS",
+		"Image.calc_boxes.HoS",
+		"Image.calc_lines.HoS",
+		"Text.HoS.Ability",
+		"HoS",
+		"HoS Mod",
+		"Text.HoS.Save",
+		"Save Modifiers Title",
+		"Skill Modifiers All Text",
+		"Skill Modifiers Title",
+		"Buttons.HP Max",
+		"Heal",
+		"Proficiency Bonus Modifiers Title",
+		"Proficiency Bonus Dice",
+		"Proficiency Bonus Dice Title",
+		"Speed encumbered",
+		"AC Shield Weight Title",
+		"AC Armor Weight Title",
+		"AC Armor Bonus",
+		"AC Shield Bonus",
+		"AC Dexterity Modifier",
+		"AC Magic",
+		"AC Misc Mod 1",
+		"AC Misc Mod 2",
+		"AC Armor Description",
+		"AC Armor Weight",
+		"AC Shield Bonus Description",
+		"AC Shield Weight",
+		"Medium Armor",
+		"Heavy Armor",
+		"AC Stealth Disadvantage Title",
+		"AC Stealth Disadvantage",
+		"AC Magic Description",
+		"AC Misc Mod 1 Description",
+		"AC Misc Mod 2 Description",
+		"Inspiration",
+		"Image.SaveDC",
+		"P5.ASnotes.Notes.Options",
+		"P5.ASnotes.Whiteout.Notes.Left",
+		"P5.ASnotes.Whiteout.Notes.Right",
+		"P5.ASnotes.SheetInformation",
+		"P5.ASnotes.CopyrightInformation",
+		"P6.ASnotes.Notes.Options",
+		"P6.ASnotes.Whiteout.Notes.Left",
+		"P6.ASnotes.Whiteout.Notes.Right",
+		"P6.ASnotes.SheetInformation",
+		"P6.ASnotes.CopyrightInformation",
+		"PRsheet.toFocus",
+		"Text.PRsheet.AL.explanation",
+		"Text.PRsheet.AL.asterisk",
+		"Lifestyle daily cost",
+		"Lifestyle",
+		"Image.Background_FactionRank",
+		"Background_Faction.Text",
+		"Portrait",
+		"Symbol",
+		"Image.DnDLogo.short",
+		"Size Category",
+		"Feat Button 1",
+		"Feat Button 2",
+		"Feat Button 3",
+		"Feat Button 4",
+		"Carrying Capacity Multiplier Title",
+		"Carrying Capacity Multiplier",
+		"Display.Weighttxt.LbKg",
+		"Adventuring Gear Location.Line",
+		"Adventuring Gear Location.Title",
+		"Class Features Menu",
+		"Background Menu",
+		"Race Features Menu",
+		"Equipment.menu",
+		"Weight Remember Coins Total",
+		"Weight Remember Coins",
+		"Attuned Magic Items Whiteout",
+		"Attuned Magic Items Title",
+		"ATTUNED MAGICAL ITEMS",
+		"Attack.Titles",
+		"SR",
+		"LR",
+		"Dawn",
+		"ShowHide 2nd DC"
+	],
+	"wildcards_to_ignore": [
+		"AScomp",
+		"Adventuring Gear Button",
+		"Adventuring Gear Location.Subtotal",
+		"Button",
+		"Image",
+		"BlueText",
+		"Limited Feature ",
+		"Weapon Selection",
+		" Remember"
+	],
+	"pre_processing": {
+		"PP_CHAR_LEVEL": {
+			"method": "concat",
+			"parameters": [
+				"Character Level",
+				"Class and Levels"
+			],
+			"delete_parameters": true
+		},
+		"PP_BACKGROUND": {
+			"method": "concat",
+			"parameters": [
+				"Background",
+				"Background Extra"
+			],
+			"delete_parameters": true
+		},
+		"PP_EXPERIENCE": {
+			"method": "concat",
+			"parameters": [
+				"Total Experience",
+				"Next level"
+			],
+			"delete_parameters": true
+		},
+		"PP_RESISTANCE": {
+			"method": "concat",
+			"parameters": [
+				"Resistance Damage Type 1",
+				"Resistance Damage Type 2",
+				"Resistance Damage Type 3",
+				"Resistance Damage Type 4",
+				"Resistance Damage Type 5",
+				"Resistance Damage Type 6"
+			],
+			"delete_parameters": true
+		},
+		"Str ST Prof": {
+			"method": "to_bool_true_if",
+			"parameters": {
+				"value": true
+			}
+		},
+		"Dex ST Prof": {
+			"method": "to_bool_true_if",
+			"parameters": {
+				"value": true
+			}
+		},
+		"Con ST Prof": {
+			"method": "to_bool_true_if",
+			"parameters": {
+				"value": true
+			}
+		},
+		"Int ST Prof": {
+			"method": "to_bool_true_if",
+			"parameters": {
+				"value": true
+			}
+		},
+		"Wis ST Prof": {
+			"method": "to_bool_true_if",
+			"parameters": {
+				"value": true
+			}
+		},
+		"Cha ST Prof": {
+			"method": "to_bool_true_if",
+			"parameters": {
+				"value": true
+			}
+		},
+		"Death Save Success1": {
+			"method": "to_bool_true_if",
+			"parameters": {
+				"value": true
+			}
+		},
+		"Death Save Success2": {
+			"method": "to_bool_true_if",
+			"parameters": {
+				"value": true
+			}
+		},
+		"Death Save Success3": {
+			"method": "to_bool_true_if",
+			"parameters": {
+				"value": true
+			}
+		},
+		"Death Save Fail1": {
+			"method": "to_bool_true_if",
+			"parameters": {
+				"value": true
+			}
+		},
+		"Death Save Fail2": {
+			"method": "to_bool_true_if",
+			"parameters": {
+				"value": true
+			}
+		},
+		"Death Save Fail3": {
+			"method": "to_bool_true_if",
+			"parameters": {
+				"value": true
+			}
+		},
+		"PP_HIT_DICE": {
+			"method": "concat",
+			"parameters": [
+				"HD1 Level",
+				"HD1 Die",
+				"HD2 Level",
+				"HD2 Die",
+				"HD3 Level",
+				"HD3 Die"
+			],
+			"delete_parameters": true
+		},
+		"PP_ACTIONS": {
+			"method": "concat",
+			"parameters": [
+				"Action 1",
+				"Action 2",
+				"Action 3",
+				"Action 4",
+				"Action 5",
+				"Action 6",
+				"Bonus Action 1",
+				"Bonus Action 2",
+				"Bonus Action 3",
+				"Bonus Action 4",
+				"Bonus Action 5",
+				"Bonus Action 6",
+				"Reaction 1",
+				"Reaction 2",
+				"Reaction 3",
+				"Reaction 4",
+				"Reaction 5",
+				"Reaction 6"
+			],
+			"delete_parameters": true
+		},
+		"PP_NOTES": {
+			"method": "concat",
+			"parameters": [
+				"Extra.Notes",
+				"P5.ASnotes.Notes.Left",
+				"P5.ASnotes.Notes.Right",
+				"P6.ASnotes.Notes.Left",
+				"P6.ASnotes.Notes.Right"
+			],
+			"delete_parameters": true
+		},
+		"PP_FEATURES_RACIAL_TRAITS": {
+			"method": "concat",
+			"parameters": [
+				"Class, Features",
+				"Racial Traits"
+			],
+			"delete_parameters": true
+		},
+		"PP_ALLIES_ORGANIZATIONS": {
+			"method": "concat",
+			"parameters": [
+				"Background_Organisation.Left",
+				"Background_Organisation.Right",
+				"Background_Enemies"
+			],
+			"delete_parameters": true
+		}
+	},
+	"skill_keys": {
+		"Acrobatics": {
+			"proficiency_field": "Acr Prof",
+			"expertise_field": "Acr Exp",
+			"modifier_field": "Acr",
+			"bonus_field": "Acr Bonus"
+		},
+		"Animal Handling": {
+			"proficiency_field": "Ani Prof",
+			"expertise_field": "Ani Exp",
+			"modifier_field": "Ani",
+			"bonus_field": "Ani Bonus"
+		},
+		"Arcana": {
+			"proficiency_field": "Arc Prof",
+			"expertise_field": "Arc Exp",
+			"modifier_field": "Arc",
+			"bonus_field": "Arc Bonus"
+		},
+		"Athletics": {
+			"proficiency_field": "Ath Prof",
+			"expertise_field": "Ath Exp",
+			"modifier_field": "Ath",
+			"bonus_field": "Ath Bonus"
+		},
+		"Deception": {
+			"proficiency_field": "Dec Prof",
+			"expertise_field": "Dec Exp",
+			"modifier_field": "Dec",
+			"bonus_field": "Dec Bonus"
+		},
+		"History": {
+			"proficiency_field": "His Prof",
+			"expertise_field": "His Exp",
+			"modifier_field": "His",
+			"bonus_field": "His Bonus"
+		},
+		"Insight": {
+			"proficiency_field": "Ins Prof",
+			"expertise_field": "Ins Exp",
+			"modifier_field": "Ins",
+			"bonus_field": "Ins Bonus"
+		},
+		"Intimidation": {
+			"proficiency_field": "Inti Prof",
+			"expertise_field": "Inti Exp",
+			"modifier_field": "Inti",
+			"bonus_field": "Inti Bonus"
+		},
+		"Investigation": {
+			"proficiency_field": "Inv Prof",
+			"expertise_field": "Inv Exp",
+			"modifier_field": "Inv",
+			"bonus_field": "Inv Bonus"
+		},
+		"Medicine": {
+			"proficiency_field": "Med Prof",
+			"expertise_field": "Med Exp",
+			"modifier_field": "Med",
+			"bonus_field": "Med Bonus"
+		},
+		"Nature": {
+			"proficiency_field": "Nat Prof",
+			"expertise_field": "Nat Exp",
+			"modifier_field": "Nat",
+			"bonus_field": "Nat Bonus"
+		},
+		"Perception": {
+			"proficiency_field": "Perc Prof",
+			"expertise_field": "Perc Exp",
+			"modifier_field": "Perc",
+			"bonus_field": "Perc Bonus"
+		},
+		"Performance": {
+			"proficiency_field": "Perf Prof",
+			"expertise_field": "Perf Exp",
+			"modifier_field": "Perf",
+			"bonus_field": "Perf Bonus"
+		},
+		"Persuasion": {
+			"proficiency_field": "Pers Prof",
+			"expertise_field": "Pers Exp",
+			"modifier_field": "Pers",
+			"bonus_field": "Pers Bonus"
+		},
+		"Religion": {
+			"proficiency_field": "Rel Prof",
+			"expertise_field": "Rel Exp",
+			"modifier_field": "Rel",
+			"bonus_field": "Rel Bonus"
+		},
+		"Sleight of Hand": {
+			"proficiency_field": "Sle Prof",
+			"expertise_field": "Sle Exp",
+			"modifier_field": "Sle",
+			"bonus_field": "Sle Bonus"
+		},
+		"Stealth": {
+			"proficiency_field": "Ste Prof",
+			"expertise_field": "Ste Exp",
+			"modifier_field": "Ste",
+			"bonus_field": "Ste Bonus"
+		},
+		"Survival": {
+			"proficiency_field": "Sur Prof",
+			"expertise_field": "Sur Exp",
+			"modifier_field": "Sur",
+			"bonus_field": "Sur Bonus"
+		},
+		"Tool": {
+			"proficiency_field": "Too Prof",
+			"expertise_field": "Too Exp",
+			"modifier_field": "Too",
+			"bonus_field": "Too Bonus",
+			"name_field": "Too Text"
+		}
+	},
+	"weapon_list_keys": {
+		"name": [
+			"Attack.{}.Weapon"
+		],
+		"attack_bonus": [
+			"Attack.{}.To Hit"
+		],
+		"damage": [
+			"Attack.{}.Damage"
+		],
+		"notes": [
+			"Attack.{}.Description"
+		],
+		"damage_type": [
+			"Attack.{}.Damage Type"
+		],
+		"range": [
+			"Attack.{}.Range"
+		],
+		"proficiency": [
+			"Attack.{}.Proficiency"
+		],
+		"mod": [
+			"Attack.{}.Mod"
+		],
+		"max_items": 6,
+		"zero_indexed": false,
+		"hardcoded_keys": {
+			"Wpn Name 1": "Wpn Name"
+		}
+	},
+	"equipment_list_keys": {
+		"name": [
+			"Adventuring Gear Row {}",
+			"Extra.Gear Location.Row {}"
+		],
+		"quantity": [
+			"Adventuring Gear Amount {}", "Extra.Gear Amount {}"
+		],
+		"weight": [
+			"Adventuring Gear Weight {}", "Extra.Gear Weight {}"
+		],
+		"max_items": 55,
+		"zero_indexed": false,
+		"hardcoded_keys": {
+
+		}
+	},
+	"attuned_equipment_list_keys": {
+		"name": [
+			"Extra.Magic Item {}"
+		],
+		"quantity": [
+			"Attuned Qty{}"
+		],
+		"weight": [
+			"Attuned Weight{}"
+		],
+		"max_items": 3,
+		"zero_indexed": false,
+		"hardcoded_keys": {
+			"Attuned Weight3": "AttunedWeight3"
+		}
+	},
+	"spell_list_keys": {
+		"prepared": [
+			"spellPrepared{}",
+			"Prepared{}"
+		],
+		"name": [
+			"spellName{}",
+			"Name{}"
+		],
+		"source": [
+			"spellSource{}",
+			"Source{}"
+		],
+		"save_hit": [
+			"spellSaveHit{}",
+			"SaveHit{}"
+		],
+		"time": [
+			"spellCastingTime{}",
+			"CastingTime{}"
+		],
+		"spell_range": [
+			"spellRange{}",
+			"Range{}"
+		],
+		"components": [
+			"spellComponents{}",
+			"Components{}"
+		],
+		"duration": [
+			"spellDuration{}",
+			"Duration{}"
+		],
+		"page": [
+			"spellPage{}",
+			"Page{}"
+		],
+		"notes": [
+			"spellNotes{}",
+			"Notes{}"
+		],
+		"max_items": 50,
+		"zero_indexed": true,
+		"hardcoded_keys": {
+			"spellSource45": "Source45",
+			"spellSource46": "Source46",
+			"spellSource47": "Source47",
+			"spellSource48": "Source48",
+			"spellSource49": "Source49",
+			"spellPage45": "SpellSource45",
+			"spellPage46": "SpellSource46",
+			"spellPage47": "SpellSource47",
+			"spellPage48": "SpellSource48",
+			"spellPage49": "SpellSource49"
+		},
+		"header": "spellHeader"
+	},
+	"spellslot_list_keys": {
+		"level": [
+			"spellHeader{}"
+		],
+		"n_slots": [
+			"spellSlotHeader{}"
+		],
+		"max_items": 10,
+		"zero_indexed": true,
+		"hardcoded_keys": {
+
+		}
+	}
+}

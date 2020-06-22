@@ -1,0 +1,9 @@
+QObject {
+    font-family: "Palatino Linotype";
+}
+QGroupBox {
+    font: 13pt bold;
+}
+QLabel {
+    font: 12pt;
+}

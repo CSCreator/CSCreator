@@ -1,0 +1,432 @@
+{
+   "importer_name" : "DND Beyond",
+   "key_conversion":{
+      "PP_NOTES":"CH.ADDITIONAL_NOTES",
+      "PP_ACTIONS":"CH.ACTIONS",
+      "PP_FEATURES":"CH.FEATURES_TRAITS",
+      "CharacterName":"CH.CHARACTER_NAME",
+      "CLASS  LEVEL":"CH.CLASS_LEVEL",
+      "PLAYER NAME":"CH.PLAYER_NAME",
+      "RACE":"CH.RACE",
+      "BACKGROUND":"CH.BACKGROUND",
+      "EXPERIENCE POINTS":"CH.XP",
+      "StrProf":"CH.STR_ST_PROF",
+      "DexProf":"CH.DEX_ST_PROF",
+      "ConProf":"CH.CON_ST_PROF",
+      "IntProf":"CH.INT_ST_PROF",
+      "WisProf":"CH.WIS_ST_PROF",
+      "ChaProf":"CH.CHA_ST_PROF",
+      "ST Strength":"CH.STR_ST_MOD",
+      "ST Dexterity":"CH.DEX_ST_MOD",
+      "ST Constitution":"CH.CON_ST_MOD",
+      "ST Intelligence":"CH.INT_ST_MOD",
+      "ST Wisdom":"CH.WIS_ST_MOD",
+      "ST Charisma":"CH.CHA_ST_MOD",
+      "STR":"CH.STR",
+      "DEX":"CH.DEX",
+      "CON":"CH.CON",
+      "INT":"CH.INT",
+      "WIS":"CH.WIS",
+      "CHA":"CH.CHA",
+      "STRmod":"CH.STR_MOD",
+      "DEXmod ":"CH.DEX_MOD",
+      "CONmod":"CH.CON_MOD",
+      "INTmod":"CH.INT_MOD",
+      "WISmod":"CH.WIS_MOD",
+      "CHamod":"CH.CHA_MOD",
+
+      "Defenses":"CH.DEFENSES",
+      "SaveModifiers":"CH.SAVE_MODIFIERS",
+      "Passive1":"CH.PASSIVE_PERCEPTION",
+      "Passive2":"CH.PASSIVE_WISDOM",
+      "Passive3":"CH.PASSIVE_INVESTIGATION",
+      "AdditionalSenses":"CH.SENSES",
+      "Init":"CH.INITIATIVE",
+      "AC":"CH.AC",
+      "ProfBonus":"CH.PROF_BONUS",
+      "AbilitySaveDC":"CH.ABILITYSAVEDC1",
+      "AbilitySaveScore1":"CH.ABILITYSAVESCORE1",
+      "AbilitySaveScore2":"CH.ABILITYSAVESCORE2",
+      "AbilitySaveDC2":"CH.ABILITYSAVEDC2",
+      "Speed":"CH.SPEED",
+      "MaxHP":"CH.MAX_HP",
+      "CurrentHP":"CH.CURRENT_HP",
+      "TempHP":"CH.TEMP_HP",
+      "Total":"CH.TOTAL_HIT_DICE",
+      "HD":"CH.HIT_DICE",
+      "Check Box 12":"CH.SUCCESSFUL_SAVE_1",
+      "Check Box 13":"CH.SUCCESSFUL_SAVE_2",
+      "Check Box 14":"CH.SUCCESSFUL_SAVE_3",
+      "Check Box 15":"CH.FAILED_SAVE_1",
+      "Check Box 16":"CH.FAILED_SAVE_2",
+      "Check Box 17":"CH.FAILED_SAVE_3",
+      "ProficienciesLang":"CH.PROFICIENCIES_LANGUAGES",
+      "CP":"CH.CP",
+      "SP":"CH.SP",
+      "EP":"CH.EP",
+      "GP":"CH.GP",
+      "PP":"CH.PP",
+      "Weight Carried":"CH.WEIGHT_CARRIED",
+      "Encumbered":"CH.ENCUMBERED",
+      "PushDragLift":"CH.PUSH_DRAG_LIFT",
+      "GENDER":"CH.GENDER",
+      "AGE":"CH.AGE",
+      "SIZE":"CH.SIZE",
+      "HEIGHT":"CH.HEIGHT",
+      "WEIGHT":"CH.WEIGHT",
+      "ALIGNMENT":"CH.ALIGNMENT",
+      "FAITH":"CH.FAITH",
+      "SKIN":"CH.SKIN",
+      "EYES":"CH.EYES",
+      "HAIR":"CH.HAIR",
+      "CHARACTER IMAGE":"CH.CHARACTER_IMAGE",
+      "AlliesOrganizations":"CH.ALLIES_ORGANIZATIONS",
+      "PersonalityTraits ":"CH.PERSONALITY_TRAITS",
+      "Ideals":"CH.IDEALS",
+      "Bonds":"CH.BONDS",
+      "Appearance":"CH.APPEARANCE",
+      "Flaws":"CH.FLAWS",
+      "Backstory":"CH.BACKSTORY",
+      "spellCastingAbility0":"CH.SPELLCASTINGABILITY0",
+      "spellSaveDC0":"CH.SPELLSAVEDC0",
+      "spellAtkBonus0":"CH.SPELLATKBONUS0",
+      "spellCastingClass0":"CH.SPELLCASTINGCLASS0"
+   },
+   "keys_to_ignore":{
+      "CharacterName2":null,
+      "CLASS  LEVEL2":null,
+      "PLAYER NAME2":null,
+      "RACE2":null,
+      "BACKGROUND2":null,
+      "EXPERIENCE POINTS2":null,
+      "CharacterName3":null,
+      "CLASS  LEVEL3":null,
+      "PLAYER NAME3":null,
+      "RACE3":null,
+      "BACKGROUND3":null,
+      "EXPERIENCE POINTS3":null,
+      "CharacterName4":null,
+      "CustomProf1":null,
+      "Custom Skill Bonus 1":null,
+      "CustomSkill1":null,
+      "CustomProf2":null,
+      "Custom Skill Bonus 2":null,
+      "CustomSkill2":null,
+      "CustomProf3":null,
+      "Custom Skill Bonus 3":null,
+      "CustomSkill3":null,
+      "spellPreparedHeader0":null,
+      "spellSaveHitHeader0":null,
+      "spellCastingTimeHeader0":null,
+      "spellRangeHeader0":null,
+      "spellComponentsHeader0":null,
+      "spellDurationHeader0":null,
+      "spellPageHeader0":null,
+      "spellNotesHeader0":null
+   },
+   "wildcards_to_ignore":{
+      "spellPreparedBlankHeader":null,
+      "spellNameBlankHeader":null,
+      "spellSourceBlankHeader":null,
+      "spellSaveHitBlankHeader":null,
+      "spellCastingTimeBlankHeader":null,
+      "spellRangeBlankHeader":null,
+      "spellComponentsBlankHeader":null,
+      "spellDurationBlankHeader":null,
+      "spellPageBlankHeader":null,
+      "spellNotesBlankHeader":null,
+      "spellPreparedHeader":null,
+      "spellSaveHitHeader":null,
+      "spellCastingTimeHeader":null,
+      "spellRangeHeader":null,
+      "spellComponentsHeader":null,
+      "spellDurationHeader":null,
+      "spellPageHeader":null,
+      "spellNotesHeader":null
+   },
+   "pre_processing":{
+      "PP_NOTES":{
+         "method":"concat",
+         "parameters":[
+            "AdditionalNotes1",
+            "AdditionalNotes2"
+         ],
+         "delete_parameters":true
+      },
+      "PP_ACTIONS":{
+         "method":"concat",
+         "parameters":[
+            "Actions1",
+            "Actions2"
+         ],
+         "delete_parameters":true
+      },
+      "PP_FEATURES":{
+         "method":"concat",
+         "parameters":[
+            "FeaturesTraits1",
+            "FeaturesTraits2",
+            "FeaturesTraits3",
+            "FeaturesTraits4",
+            "FeaturesTraits5",
+            "FeaturesTraits6"
+         ],
+         "delete_parameters":true
+      },
+      "StrProf":{
+         "method":"to_bool_true_if",
+         "parameters":{
+            "value":true
+         }
+      },
+      "DexProf":{
+         "method":"to_bool_true_if",
+         "parameters":{
+            "value":true
+         }
+      },
+      "ConProf":{
+         "method":"to_bool_true_if",
+         "parameters":{
+            "value":true
+         }
+      },
+      "IntProf":{
+         "method":"to_bool_true_if",
+         "parameters":{
+            "value":true
+         }
+      },
+      "WisProf":{
+         "method":"to_bool_true_if",
+         "parameters":{
+            "value":true
+         }
+      },
+      "ChaProf":{
+         "method":"to_bool_true_if",
+         "parameters":{
+            "value":true
+         }
+      }
+   },
+   "proficiency_values":{
+      "":"prof_none",
+      "H":"prof_half",
+      "P":"prof_proficient",
+      "E":"prof_expertise"
+   },
+   "skill_keys":{
+      "Acrobatics":{
+         "proficiency_field":"AcrobaticsProf",
+         "modifier_field":"AcrobaticsMod",
+         "bonus_field":"Acrobatics"
+      },
+      "Animal Handling":{
+         "proficiency_field":"AnimalHandlingProf",
+         "modifier_field":"AnimalMod",
+         "bonus_field":"Animal"
+      },
+      "Arcana":{
+         "proficiency_field":"ArcanaProf",
+         "modifier_field":"ArcanaMod",
+         "bonus_field":"Arcana"
+      },
+      "Athletics":{
+         "proficiency_field":"AthleticsProf",
+         "modifier_field":"AthleticsMod",
+         "bonus_field":"Athletics"
+      },
+      "Deception":{
+         "proficiency_field":"DeceptionProf",
+         "modifier_field":"DeceptionMod",
+         "bonus_field":"Deception"
+      },
+      "History":{
+         "proficiency_field":"HistoryProf",
+         "modifier_field":"HistoryMod",
+         "bonus_field":"History"
+      },
+      "Insight":{
+         "proficiency_field":"InsightProf",
+         "modifier_field":"InsightMod",
+         "bonus_field":"Insight"
+      },
+      "Intimidation":{
+         "proficiency_field":"IntimidationProf",
+         "modifier_field":"IntimidationMod",
+         "bonus_field":"Intimidation"
+      },
+      "Investigation":{
+         "proficiency_field":"InvestigationProf",
+         "modifier_field":"InvestigationMod",
+         "bonus_field":"Investigation"
+      },
+      "Medicine":{
+         "proficiency_field":"MedicineProf",
+         "modifier_field":"MedicineMod",
+         "bonus_field":"Medicine"
+      },
+      "Nature":{
+         "proficiency_field":"NatureProf",
+         "modifier_field":"NatureMod",
+         "bonus_field":"Nature"
+      },
+      "Perception":{
+         "proficiency_field":"PerceptionProf",
+         "modifier_field":"PerceptionMod",
+         "bonus_field":"Perception"
+      },
+      "Performance":{
+         "proficiency_field":"PerformanceProf",
+         "modifier_field":"PerformanceMod",
+         "bonus_field":"Performance"
+      },
+      "Persuasion":{
+         "proficiency_field":"PersuasionProf",
+         "modifier_field":"PersuasionMod",
+         "bonus_field":"Persuasion"
+      },
+      "Religion":{
+         "proficiency_field":"ReligionProf",
+         "modifier_field":"ReligionMod",
+         "bonus_field":"Religion"
+      },
+      "Sleight of Hand":{
+         "proficiency_field":"SleightOfHandProf",
+         "modifier_field":"SleightofHandMod",
+         "bonus_field":"SleightofHand"
+      },
+      "Stealth":{
+         "proficiency_field":"StealthProf",
+         "modifier_field":"StealthMod",
+         "bonus_field":"Stealth "
+      },
+      "Survival":{
+         "proficiency_field":"SurvivalProf",
+         "modifier_field":"SurvivalMod",
+         "bonus_field":"Survival"
+      }
+   },
+   "weapon_list_keys":{
+      "name":[
+         "Wpn Name {}"
+      ],
+      "attack_bonus":[
+         "Wpn{} AtkBonus"
+      ],
+      "damage":[
+         "Wpn{} Damage"
+      ],
+      "notes":[
+         "Wpn Notes {}"
+      ],
+      "max_items":6,
+      "zero_indexed":false,
+      "hardcoded_keys":{
+         "Wpn Name 1":"Wpn Name"
+      }
+   },
+   "equipment_list_keys":{
+      "name":[
+         "Eq Name{}"
+      ],
+      "quantity":[
+         "Eq Qty{}"
+      ],
+      "weight":[
+         "Eq Weight{}"
+      ],
+      "max_items":56,
+      "zero_indexed":true,
+      "hardcoded_keys":{
+
+      }
+   },
+   "attuned_equipment_list_keys":{
+      "name":[
+         "Attuned Name{}"
+      ],
+      "quantity":[
+         "Attuned Qty{}"
+      ],
+      "weight":[
+         "Attuned Weight{}"
+      ],
+      "max_items":3,
+      "zero_indexed":false,
+      "hardcoded_keys":{
+         "Attuned Weight3":"AttunedWeight3"
+      }
+   },
+   "spell_list_keys":{
+      "prepared":[
+         "spellPrepared{}",
+         "Prepared{}"
+      ],
+      "name":[
+         "spellName{}",
+         "Name{}"
+      ],
+      "source":[
+         "spellSource{}",
+         "Source{}"
+      ],
+      "save_hit":[
+         "spellSaveHit{}",
+         "SaveHit{}"
+      ],
+      "time":[
+         "spellCastingTime{}",
+         "CastingTime{}"
+      ],
+      "spell_range":[
+         "spellRange{}",
+         "Range{}"
+      ],
+      "components":[
+         "spellComponents{}",
+         "Components{}"
+      ],
+      "duration":[
+         "spellDuration{}",
+         "Duration{}"
+      ],
+      "page":[
+         "spellPage{}",
+         "Page{}"
+      ],
+      "notes":[
+         "spellNotes{}",
+         "Notes{}"
+      ],
+      "max_items":50,
+      "zero_indexed":true,
+      "hardcoded_keys":{
+         "spellSource45":"Source45",
+         "spellSource46":"Source46",
+         "spellSource47":"Source47",
+         "spellSource48":"Source48",
+         "spellSource49":"Source49",
+         "spellPage45":"SpellSource45",
+         "spellPage46":"SpellSource46",
+         "spellPage47":"SpellSource47",
+         "spellPage48":"SpellSource48",
+         "spellPage49":"SpellSource49"
+      },
+      "header":"spellHeader"
+   },
+   "spellslot_list_keys":{
+      "level":[
+         "spellHeader{}"
+      ],
+      "n_slots":[
+         "spellSlotHeader{}"
+      ],
+      "max_items":10,
+      "zero_indexed":true,
+      "hardcoded_keys":{
+
+      }
+   }
+}
