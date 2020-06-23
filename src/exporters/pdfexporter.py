@@ -31,15 +31,32 @@ conversion_key = {
     "Front_Wis Score": "CH.WIS",
     "Front_Cha Mod": "CH.CHA_MOD",
     "Front_Cha Score": "CH.CHA",
+
     "Front_Save Str": "CH.STR_ST_PROF",
     "Front_Str Save Throw": "CH.STR_ST_MOD",
+    "Front_Save Dex": "CH.DEX_ST_PROF",
+    "Front_Dex Save Throw": "CH.DEX_ST_MOD",
+
+    "Front_Save Con": "CH.CON_ST_PROF",
+    "Front_Con Save Throw": "CH.CON_ST_MOD",
+
+    "Front_Save Int": "CH.INT_ST_PROF",
+    "Front_Int Save Throw": "CH.INT_ST_MOD",
+
+    "Front_Save Wis": "CH.WIS_ST_PROF",
+    "Front_Wis Save Throw": "CH.WIS_ST_MOD",
+
+    "Front_Save Cha": "CH.CHA_ST_PROF",
+    "Front_Cha Save Throw": "CH.CHA_ST_MOD",
+
+
+
     "Front_Archetype,Battlemaste": None,
     "Front_Str Mod": "CH.STR_MOD",
     "Front_Expertise Athletics": None,
     "Front_Proficiency Athletics": None,
     "Front_Skill Athletics": None,
-    "Front_Save Dex": None,
-    "Front_Dex Save Throw": None,
+
     "Front_Expertise Acrobatics": None,
     "Front_Proficiency Acrobatics": None,
     "Front_Skill Acrobatics": None,
@@ -49,10 +66,6 @@ conversion_key = {
     "Front_Expertise Stealth": None,
     "Front_Proficiency Stealth": None,
     "Front_Skill Stealth": None,
-    "Front_Save Con": None,
-    "Front_Con Save Throw": None,
-    "Front_Save Int": None,
-    "Front_Int Save Throw": None,
     "Front_Expertise Arcana": None,
     "Front_Proficiency Arcana": None,
     "Front_Skill Arcana": None,
@@ -68,8 +81,7 @@ conversion_key = {
     "Front_Expertise Religion": None,
     "Front_Proficiency Religion": None,
     "Front_Skill Religion": None,
-    "Front_Save Wis": "CH.WIS_ST_MOD",
-    "Front_Wis Save Throw": "CH.WIS_ST_PROF",
+
     "Front_Expertise Animal Handling": None,
     "Front_Proficiency Animal Handling": None,
     "Front_Skill Animal Handling": None,
@@ -85,8 +97,6 @@ conversion_key = {
     "Front_Expertise Survival": None,
     "Front_Proficiency Survival": None,
     "Front_Skill Survival": None,
-    "Front_Save Cha": None,
-    "Front_Cha Save Throw": None,
     "Front_Expertise Deception": None,
     "Front_Proficiency Deception": None,
     "Front_Skill Deception": None,
@@ -156,6 +166,26 @@ class PDFExporter:
     def __init__(self, player_controller):
         self.player_controller = player_controller
 
+    def get_field_type(self, field):
+        if field.field_type_string == 'Text':
+            return str
+        elif field.field_type_string == 'CheckBox':
+            return bool
+
+    def set_field(self, field_to_set, value):
+        value_type = type(value)
+        field_type = self.get_field_type(field_to_set)
+        if value_type is int and field_type is str:
+            value = str(value)
+        elif value_type is bool:
+            value = bool(value)
+        elif value_type is not field_type: #Int values need to be casted to str as well, but fail this clause
+            logging.warning(f"Setting value with type {value_type} to field with type {field_type}")
+            value = str(value)
+
+        field_to_set.field_value = value
+        field_to_set.update()
+
     def export(self):
         dir_to_search = QStandardPaths.writableLocation(QStandardPaths.AppDataLocation)
         dir_to_search = os.path.join(dir_to_search, "exporters")
@@ -174,10 +204,10 @@ class PDFExporter:
                         logger.info(f"Value {ch_candidate} is not a valid CH")
                         continue
                     ch = CH(ch_candidate)
-                    field.field_value = str(getattr(
+                    value = getattr(
                         self.player_controller.player_model, ch.name
-                    ))
-                    field.update()
+                    )
+                    self.set_field(field, value)
                 else:
                     form_fields[field.field_name] = field.field_value
 

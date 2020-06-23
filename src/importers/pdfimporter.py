@@ -4,7 +4,8 @@ import logging
 from src.controllers.charactercontroller import CharacterController
 from exceptions import NotAllImportedWarning, ValueEnumKeyNotFoundException, DefinitionFileUnreadableException
 from src.importers.preprocessing_functions import concat, to_boolean_true_if
-from src.models.charactermodel import CH, SkillProficiencies
+from src.models.charactermodel import CH
+from src.models.characterenums import SkillProficiencies
 from src.pdf.pdfutils import get_forms_from_pdf
 
 logger = logging.getLogger(__name__)

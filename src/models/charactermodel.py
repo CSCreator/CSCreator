@@ -133,13 +133,6 @@ class CH(CHName):
     SPELL_SLOTS_10 = auto()
 
 
-class SkillProficiencies(Enum):
-    No = auto()
-    Half = auto()
-    Prof = auto()
-    Eff = auto()
-
-
 class CharacterModel:
     def __init__(self):
         for value in CH:
