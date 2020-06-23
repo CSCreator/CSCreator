@@ -58,9 +58,15 @@ class CharacterController:
         new_skill = Skill(prof, modifier, bonus, name)
         self.player_model.skills_model.add_item(new_skill)
 
+    def get_skill(self, name):
+        return self.player_model.get_skill(name)
+
     def add_attack(self, name, attack, damage, notes):
         new_attack = Attack(name, attack, damage, notes)
         self.player_model.attack_model.add_item(new_attack)
+
+    def get_attack(self, index):
+        return self.player_model.get_attack(index)
 
     def add_spellslot(self, level, n_slots):
         new_spellslot = SpellSlot(level, n_slots)

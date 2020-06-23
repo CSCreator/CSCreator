@@ -15,9 +15,9 @@ from PySide2.QtCore import (
 )
 
 
-class importPdfDialog(QDialog):
+class ImportPdfDialog(QDialog):
     def __init__(self, parent, importers_stringlist):
-        super(importPdfDialog, self).__init__(parent)
+        super(ImportPdfDialog, self).__init__(parent)
         self.resize(320, 240)
 
         self.importer_selected = 0
@@ -128,7 +128,7 @@ def find_importers():
     return importer_names, importer_files
 
 
-class pdfWizardFactory:
+class PdfWizardFactory:
 
     @event
     def import_new_player(self, file, importer):
@@ -138,7 +138,7 @@ class pdfWizardFactory:
         logger.info("Opening Import PDF Wizard")
         file_name = do_file(parent)
         importer_names, importer_files = find_importers()
-        ui = importPdfDialog(parent, importer_names)
+        ui = ImportPdfDialog(parent, importer_names)
         ui.selected_label.setText(file_name[0])
         status = ui.exec()
         selected_importer_file_index = importer_files[ui.importer_selected]

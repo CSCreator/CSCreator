@@ -4,7 +4,7 @@ from PySide2.QtCore import QStandardPaths, Qt
 from PySide2.QtGui import QDesktopServices
 from obsub import event
 
-from src.importers.importview import pdfWizardFactory
+from src.importers.importview import PdfWizardFactory
 from src.importers.pdfimporter import PDFImporter
 
 logger = logging.getLogger(__name__)
@@ -33,7 +33,7 @@ class MainView(QMainWindow):
         # self.puzzleWidget.clear()
         logger.debug("MainView constructed")
 
-        self.pdf_wizard_factory = pdfWizardFactory()
+        self.pdf_wizard_factory = PdfWizardFactory()
 
         self.export_debug_action = None
 

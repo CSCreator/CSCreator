@@ -7,3 +7,6 @@ class ValueEnumKeyNotFoundException(Exception):
 
 class DefinitionFileUnreadableException(Exception):
     pass
+
+class InvalidFieldException(Exception):
+    pass

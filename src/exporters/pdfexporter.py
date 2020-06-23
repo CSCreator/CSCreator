@@ -5,6 +5,8 @@ import os
 from PySide2.QtCore import QStandardPaths
 from fitz import fitz
 
+from exceptions import InvalidFieldException
+from src.models.characterenums import SkillProficiencies
 from src.models.charactermodel import CH
 
 logger = logging.getLogger(__name__)
@@ -50,141 +52,44 @@ conversion_key = {
     "Front_Save Cha": "CH.CHA_ST_PROF",
     "Front_Cha Save Throw": "CH.CHA_ST_MOD",
 
-    "Front_Archetype,Battlemaste": None,
-
-    "Front_Expertise Athletics": None,
-    "Front_Proficiency Athletics": None,
-    "Front_Skill Athletics": None,
-
-    "Front_Expertise Acrobatics": None,
-    "Front_Proficiency Acrobatics": None,
-    "Front_Skill Acrobatics": None,
-
-    "Front_Expertise Sleight of Hand": None,
-    "Front_Proficiency Sleight of Hand": None,
-    "Front_Skill Sleight of Hand": None,
-
-    "Front_Expertise Stealth": None,
-    "Front_Proficiency Stealth": None,
-    "Front_Skill Stealth": None,
-
-    "Front_Expertise Arcana": None,
-    "Front_Proficiency Arcana": None,
-    "Front_Skill Arcana": None,
-
-    "Front_Expertise History": None,
-    "Front_Proficiency History": None,
-    "Front_Skill History": None,
-
-    "Front_Expertise Investigation": None,
-    "Front_Proficiency Investigation": None,
-    "Front_Skill Investigation": None,
-
-    "Front_Expertise Nature": None,
-    "Front_Proficiency Nature": None,
-    "Front_Skill Nature": None,
-
-    "Front_Expertise Religion": None,
-    "Front_Proficiency Religion": None,
-    "Front_Skill Religion": None,
-
-    "Front_Expertise Animal Handling": None,
-    "Front_Proficiency Animal Handling": None,
-    "Front_Skill Animal Handling": None,
-
-    "Front_Expertise Insight": None,
-    "Front_Proficiency Insight": None,
-    "Front_Skill Insight": None,
-
-    "Front_Expertise Medicine": None,
-    "Front_Proficiency Medicine": None,
-    "Front_Skill Medicine": None,
-
-    "Front_Expertise Perception": None,
-    "Front_Proficiency Perception": None,
-    "Front_Skill Perception": None,
-
-    "Front_Expertise Survival": None,
-    "Front_Proficiency Survival": None,
-    "Front_Skill Survival": None,
-
-    "Front_Expertise Deception": None,
-    "Front_Proficiency Deception": None,
-    "Front_Skill Deception": None,
-
-    "Front_Expertise Intimidation": None,
-    "Front_Proficiency Intimidation": None,
-    "Front_Skill Intimidation": None,
-
-    "Front_Expertise Performance": None,
-    "Front_Proficiency Performance": None,
-    "Front_Skill Performance": None,
-
-    "Front_Expertise Persuasion": None,
-    "Front_Proficiency Persuasion": None,
-    "Front_Skill Persuasion": None,
-
-    "Front_Racial Traits": None,
+    "Front_Racial Traits": "CH.FEATURES_TRAITS",
     "Front_Light Armour": None,
     "Front_Medium Armour": None,
     "Front_Heavy Armour": None,
     "Front_Simple Weapons": None,
     "Front_Martial Weapons": None,
     "Front_Shields": None,
-    "Front_Languages": None,
+    "Front_Languages": "CH.PROFICIENCIES_LANGUAGES",
     "Front_Tools": None,
     "Front_AC": "CH.AC",
     "Front_Shield Bonus": None,
     "Front_Initiative": "CH.INITIATIVE",
     "Front_Speed": "CH.SPEED",
     "Front_Max HP": "CH.MAX_HP",
-    "Front_Current HP": None,
-    "Front_Temp HP": None,
-    "Front_Used Hit Dice": None,
-    "Front_Total Hit Dice": None,
-    "Front_Success 1": None,
-    "Front_Success 2": None,
-    "Front_Success 3": None,
-    "Front_Fail 1": None,
-    "Front_Fail 2": None,
-    "Front_Fail 3": None,
-    "Front_Weapon Name 1": None,
-    "Front_Weapon Atk Bonus 1": None,
-    "Front_Weapon Damage 1": None,
-    "Front_Weapon Name 2": None,
-    "Front_Weapon Atk Bonus 2": None,
-    "Front_Weapon Damage 2": None,
-    "Front_Weapon Name 3": None,
-    "Front_Weapon Atk Bonus 3": None,
-    "Front_Weapon Damage 3": None,
-    "Front_Weapon Name 4": None,
-    "Front_Weapon Atk Bonus 4": None,
-    "Front_Weapon Damage 4": None,
-    "Front_Action Surge": None,
-    "Front_Extra Attack": None,
-    "Front_Indomitable": None,
-    "Front_Superiority Used": None,
-    "Front_Superiority Total": None,
-    "Front_Superiority Die": None,
-    "Front_Additional Combat Features": None,
-    "Front_Fighting Style": None,
-    "Front_Martial Archetype 3": None,
-    "Front_Martial Archetype 7": None,
-    "Front_Martial Archetype 10": None,
-    "Front_Martial Archetype 15": None,
-    "Front_Martial Archetype 18": None,
-    "Front_Maneuver DC": None,
-    "Front_Spell Atk": "CH.",
-    "Front_Spell DC": "CH.",
-    "Front_Spell Slots Used": "CH.",
-    "Front_Spell Slots Total": "CH.",
-    "Front_Spell Slots Level": "CH.",
+    "Front_Current HP": "CH.CURRENT_HP",
+    "Front_Temp HP": "CH.TEMP_HP",
+    "Front_Used Hit Dice": "CH.HIT_DICE",
+    "Front_Total Hit Dice": "CH.TOTAL_HIT_DICE",
+    "Front_Success 1": "CH.SUCCESSFUL_SAVE_1",
+    "Front_Success 2": "CH.SUCCESSFUL_SAVE_2",
+    "Front_Success 3": "CH.SUCCESSFUL_SAVE_3",
+    "Front_Fail 1": "CH.FAILED_SAVE_1",
+    "Front_Fail 2": "CH.FAILED_SAVE_2",
+    "Front_Fail 3": "CH.FAILED_SAVE_3",
+
+    "Front_Spell Atk": "CH.SPELLATKBONUS0",
+    "Front_Spell DC": "CH.SPELLSAVEDC0",
+    "Front_Spell Slots Used": None,
+    "Front_Spell Slots Total": None,
+    "Front_Spell Slots Level": None,
+
     "Front_Spell Attack Name 1": "CH.",
     "Front_Spell Range 1": "CH.",
     "Front_Spell Casting Time 1": "CH.",
     "Front_Spell Save 1": "CH.",
     "Front_Spell Effect 1": "CH.",
     "Front_Spell Concentration 1": "CH.",
+
     "Front_Spell Attack Name 2": "CH.",
     "Front_Spell Range 2": "CH.",
     "Front_Spell Casting Time 2": "CH.",
@@ -302,6 +207,114 @@ conversion_key = {
 
 }
 
+weapon_list_keys = {
+      "name":[
+         "Front_Weapon Name {}"
+      ],
+      "attack_bonus":[
+         "Front_Weapon Atk Bonus {}"
+      ],
+      "damage":[
+         "Front_Weapon Damage {}"
+      ],
+      "max_items":4,
+      "zero_indexed":False,
+      "hardcoded_keys":{}
+}
+
+skill_keys = {
+    "Skills.ACROBATICS": {
+        "expertise_field": "Front_Expertise Acrobatics",
+        "proficiency_field": "Front_Proficiency Acrobatics",
+        "modifier_field": "Front_Skill Acrobatics",
+    },
+    "Skills.ANIMALHANDLING": {
+        "expertise_field": "Front_Expertise Animal Handling",
+        "proficiency_field": "Front_Proficiency Animal Handling",
+        "modifier_field": "Front_Skill Animal Handling",
+    },
+    "Skills.ARCANA": {
+        "expertise_field": "Front_Expertise Arcana",
+        "proficiency_field": "Front_Proficiency Arcana",
+        "modifier_field": "Front_Skill Arcana",
+    },
+    "Skills.ATHLETICS": {
+        "expertise_field": "Front_Expertise Athletics",
+        "proficiency_field": "Front_Proficiency Athletics",
+        "modifier_field": "Front_Skill Athletics",
+    },
+    "Skills.DECEPTION": {
+        "expertise_field": "Front_Expertise Deception",
+        "proficiency_field": "Front_Proficiency Deception",
+        "modifier_field": "Front_Skill Deception",
+    },
+    "Skills.HISTORY": {
+        "expertise_field": "Front_Expertise History",
+        "proficiency_field": "Front_Proficiency History",
+        "modifier_field": "Front_Skill History",
+    },
+    "Skills.INSIGHT": {
+        "expertise_field": "Front_Expertise Insight",
+        "proficiency_field": "Front_Proficiency Insight",
+        "modifier_field": "Front_Skill Insight",
+    },
+    "Skills.INTIMIDATION": {
+        "expertise_field": "Front_Expertise Intimidation",
+        "proficiency_field": "Front_Proficiency Intimidation",
+        "modifier_field": "Front_Skill Intimidation",
+    },
+    "Skills.INVESTIGATION": {
+        "expertise_field": "Front_Expertise Investigation",
+        "proficiency_field": "Front_Proficiency Investigation",
+        "modifier_field": "Front_Skill Investigation",
+    },
+    "Skills.MEDICINE": {
+        "expertise_field": "Front_Expertise Medicine",
+        "proficiency_field": "Front_Proficiency Medicine",
+        "modifier_field": "Front_Skill Medicine",
+    },
+    "Skills.NATURE": {
+        "expertise_field": "Front_Expertise Nature",
+        "proficiency_field": "Front_Proficiency Nature",
+        "modifier_field": "Front_Skill Nature",
+    },
+    "Skills.PERCEPTION": {
+        "expertise_field": "Front_Expertise Perception",
+        "proficiency_field": "Front_Proficiency Perception",
+        "modifier_field": "Front_Skill Perception",
+    },
+    "Skills.PERFORMANCE": {
+        "expertise_field": "Front_Expertise Performance",
+        "proficiency_field": "Front_Proficiency Performance",
+        "modifier_field": "Front_Skill Performance",
+    },
+    "Skills.PERSUASION": {
+        "expertise_field": "Front_Expertise Persuasion",
+        "proficiency_field": "Front_Proficiency Persuasion",
+        "modifier_field": "Front_Skill Persuasion",
+    },
+    "Skills.RELIGION": {
+        "expertise_field": "Front_Expertise Religion",
+        "proficiency_field": "Front_Proficiency Religion",
+        "modifier_field": "Front_Skill Religion",
+    },
+    "Skills.SLEIGHTOFHAND": {
+        "expertise_field": "Front_Expertise Sleight of Hand",
+        "proficiency_field": "Front_Proficiency Sleight of Hand",
+        "modifier_field": "Front_Skill Sleight of Hand",
+    },
+    "Skills.STEALTH": {
+        "expertise_field": "Front_Expertise Stealth",
+        "proficiency_field": "Front_Proficiency Stealth",
+        "modifier_field": "Front_Skill Stealth",
+    },
+    "Skills.SURVIVAL": {
+        "expertise_field": "Front_Expertise Survival",
+        "proficiency_field": "Front_Proficiency Survival",
+        "modifier_field": "Front_Skill Survival",
+    }
+}
+
 
 class PDFExporter:
     def __init__(self, player_controller):
@@ -314,6 +327,10 @@ class PDFExporter:
             return bool
 
     def set_field(self, field_to_set, value):
+        if field_to_set is None:
+            logging.error(f"Attempting to set None field with value {value}")
+            raise InvalidFieldException(f"Attempting to set None field with value {value}")
+
         value_type = type(value)
         field_type = self.get_field_type(field_to_set)
         if value_type is int and field_type is str:
@@ -327,6 +344,52 @@ class PDFExporter:
         field_to_set.field_value = value
         field_to_set.update()
 
+    def export_skills(self, forms, skill_keys):
+        for skill in skill_keys:
+            this_skill = self.player_controller.get_skill(skill)
+            this_skill_half = skill_keys[skill].get("half_field", None)
+            this_skill_prof = skill_keys[skill].get("proficiency_field", None)
+            this_skill_expertise = skill_keys[skill].get("expertise_field", None)
+            this_skill_mod = skill_keys[skill].get("modifier_field", None)
+            mod_field = forms.get(this_skill_mod, None)
+            self.set_field(mod_field, this_skill.bonus)
+
+            field = None
+            if this_skill.prof == SkillProficiencies.Prof:
+                field = forms.get(this_skill_prof, None)
+            elif this_skill.prof == SkillProficiencies.Eff:
+                field = forms.get(this_skill_expertise, None)
+            elif this_skill.prof == SkillProficiencies.Half:
+                field = forms.get(this_skill_half, None)
+
+            if field is not None:
+                self.set_field(field, True)
+
+        return forms
+
+    def export_weapons(self, forms, weapon_keys):
+        max_weapons = weapon_keys["max_items"]
+        zero_indexed = weapon_keys["max_items"]
+        name_string = weapon_keys["name"][0]
+        attack_bonus_string = weapon_keys["attack_bonus"][0]
+        damage_string = weapon_keys["damage"][0]
+        for i in range(max_weapons):
+            if zero_indexed:
+                i+=1
+            attack = self.player_controller.get_attack(i)
+            if attack is None:
+                continue
+
+            name_form = forms.get(name_string.format(i), None)
+            attack_form = forms.get(attack_bonus_string.format(i), None)
+            damage_form = forms.get(damage_string.format(i), None)
+
+            self.set_field(name_form, attack.name)
+            self.set_field(attack_form, attack.attack)
+            self.set_field(damage_form, attack.damage)
+
+        return forms
+
     def export(self):
         dir_to_search = QStandardPaths.writableLocation(QStandardPaths.AppDataLocation)
         dir_to_search = os.path.join(dir_to_search, "exporters")
@@ -334,27 +397,32 @@ class PDFExporter:
             dir_to_search, "Character Sheet_WARLOCK_FILLABLE.pdf"
         )
 
-        form_fields = {}
+        forms = {}
         doc = fitz.open(file_to_export_to)
         for page_number in range(doc.pageCount):
             page = doc.loadPage(page_number)
             for field in page.widgets():
-                if field.field_name in conversion_key.keys():
-                    ch_candidate = conversion_key[field.field_name]
-                    if not ch_candidate in CH._value2member_map_:
-                        logger.info(f"Value {ch_candidate} is not a valid CH")
-                        continue
-                    ch = CH(ch_candidate)
-                    value = getattr(
-                        self.player_controller.player_model, ch.name
-                    )
-                    self.set_field(field, value)
-                else:
-                    form_fields[field.field_name] = field.field_value
+                forms[field.field_name] = field
+
+        form_fields_convertable = [field for field_name, field in forms.items() if field_name in conversion_key.keys()]
+        for field in form_fields_convertable:
+            ch_candidate = conversion_key[field.field_name]
+            if not ch_candidate in CH._value2member_map_:
+                logger.info(f"Value {ch_candidate} is not a valid CH")
+                continue
+            ch = CH(ch_candidate)
+            value = getattr(
+                self.player_controller.player_model, ch.name
+            )
+            self.set_field(field, value)
+            forms.pop(field.field_name)
+
+        forms = self.export_skills(forms, skill_keys)
+        forms = self.export_weapons(forms, weapon_list_keys)
 
         doc.save("test.pdf")
 
         with open("dict_out.csv", "w", encoding="utf-8") as csv_file:
             writer = csv.writer(csv_file)
-            for key, value in form_fields.items():
+            for key, value in forms.items():
                 writer.writerow([key, value])

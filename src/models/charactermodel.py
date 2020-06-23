@@ -1,6 +1,9 @@
 from enum import Enum, auto
 import logging
 
+from PySide2 import QtCore
+from PySide2.QtCore import QModelIndex
+from PySide2.QtGui import Qt
 from obsub import event
 
 from src.models.charactersubmodel import (
@@ -154,3 +157,15 @@ class CharacterModel:
         logger.debug(
             f"Recieved changed character_property {character_property.name} from the view with value {value}"
         )
+
+    def get_skill(self, name):
+        skill = None
+        for this_skill in self.skills_model.items:
+            if this_skill.name == name:
+                skill = this_skill
+        return skill
+
+    def get_attack(self, index):
+        if index < len(self.attack_model.items):
+            return self.attack_model.items[index]
+        return None

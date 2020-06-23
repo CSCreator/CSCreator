@@ -6,7 +6,7 @@ from src.controllers.charactercontroller import CharacterController
 from src.importers.preprocessing_functions import concat, to_boolean_true_if
 from src.models.characterenums import SkillProficiencies, Skills
 from src.models.charactermodel import CH
-from src.pdf.pdfutils import get_forms_from_pdf
+from src.pdf.pdfutils import get_form_names_and_values_from_pdf
 
 logger = logging.getLogger(__name__)
 
@@ -131,7 +131,8 @@ class PDFImporter:
 
     def load(self, file):
 
-        form_fields = get_forms_from_pdf(file)
+        form_fields, open_file = get_form_names_and_values_from_pdf(file)
+        open_file.close()
 
         form_fields = self.apply_preprocessing(form_fields)
         form_fields = self.handle_ability_order(form_fields)
