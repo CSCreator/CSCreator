@@ -1,11 +1,11 @@
 import json
 import logging
 
-from src.controllers.charactercontroller import CharacterController
 from exceptions import NotAllImportedWarning, ValueEnumKeyNotFoundException, DefinitionFileUnreadableException
+from src.controllers.charactercontroller import CharacterController
 from src.importers.preprocessing_functions import concat, to_boolean_true_if
+from src.models.characterenums import SkillProficiencies, Skills
 from src.models.charactermodel import CH
-from src.models.characterenums import SkillProficiencies
 from src.pdf.pdfutils import get_forms_from_pdf
 
 logger = logging.getLogger(__name__)
@@ -80,9 +80,7 @@ class PDFImporter:
     def __init__(self, definition_file):
         # super(DNDBeyondImporter, self).__init__()
         self.player = CharacterController()
-        self.load_definition(definition_file=definition_file)
 
-    def load_definition(self, definition_file):
         try:
             with open(definition_file, "r") as j:
                 definition = json.loads(j.read())
@@ -104,20 +102,13 @@ class PDFImporter:
         self.spell_list_keys = definition.get("spell_list_keys", None)
         self.spellslot_list_keys = definition.get("spellslot_list_keys", None)
 
-        values = tuple(item.value for item in CH)
+        for key, value in self.key_conversion.items():
+            if value in CH._value2member_map_:
+                enum_value = CH(value)
+                self.key_conversion[key] = enum_value
+            else:
+                logging.error(f"Value {value} is not a known CH. Enum")
 
-        def string_to_enum(dict_to_parse):
-            for key, value in dict_to_parse.items():
-                if value in values:
-                    try:
-                        enum_value = CH(value)
-                        dict_to_parse[key] = enum_value
-                    except Exception:
-                        pass
-                else:
-                    logging.error(f"Value {value} is not a known CH. Enum")
-
-        string_to_enum(self.key_conversion)
 
     def set_value_to_player_if_exists(self, form_fields, key):
         ch = self.key_conversion[key]
@@ -168,13 +159,16 @@ class PDFImporter:
     def handle_ability_order(self, forms):
         def return_score_then_prof(score, prof):
             if "-" in score or "+" in score:
-                # This is actually the proficiency bonus
+                # This is actually the proficiency bonus, switch
                 score, prof = prof, score
             return score, prof
 
         def get_key_from_value(value):
-            return list(self.key_conversion.keys())[
-                list(self.key_conversion.values()).index(value)
+
+            conversion_keys = list(self.key_conversion.keys())
+            conversion_values = list(self.key_conversion.values())
+            return conversion_keys[
+                conversion_values.index(value)
             ]
 
         str_value = get_key_from_value(CH.STR)
@@ -288,6 +282,10 @@ class PDFImporter:
             proficiency_field = self.skill_keys[name]["proficiency_field"]
             modifier_field = self.skill_keys[name]["modifier_field"]
             bonus_field = self.skill_keys[name]["bonus_field"]
+
+            if name in Skills._value2member_map_:
+                name = Skills(name)
+
             proficiency = prof_string_to_enum(info[proficiency_field])
             self.player.add_skill(
                 proficiency, info[modifier_field], info[bonus_field], name

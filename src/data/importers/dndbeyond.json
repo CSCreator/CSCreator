@@ -106,15 +106,6 @@
       "BACKGROUND3":null,
       "EXPERIENCE POINTS3":null,
       "CharacterName4":null,
-      "CustomProf1":null,
-      "Custom Skill Bonus 1":null,
-      "CustomSkill1":null,
-      "CustomProf2":null,
-      "Custom Skill Bonus 2":null,
-      "CustomSkill2":null,
-      "CustomProf3":null,
-      "Custom Skill Bonus 3":null,
-      "CustomSkill3":null,
       "spellPreparedHeader0":null,
       "spellSaveHitHeader0":null,
       "spellCastingTimeHeader0":null,
@@ -217,95 +208,110 @@
       "E":"prof_expertise"
    },
    "skill_keys":{
-      "Acrobatics":{
+      "Skills.ACROBATICS":{
          "proficiency_field":"AcrobaticsProf",
          "modifier_field":"AcrobaticsMod",
          "bonus_field":"Acrobatics"
       },
-      "Animal Handling":{
+      "Skills.ANIMALHANDLING":{
          "proficiency_field":"AnimalHandlingProf",
          "modifier_field":"AnimalMod",
          "bonus_field":"Animal"
       },
-      "Arcana":{
+      "Skills.ARCANA":{
          "proficiency_field":"ArcanaProf",
          "modifier_field":"ArcanaMod",
          "bonus_field":"Arcana"
       },
-      "Athletics":{
+      "Skills.ATHLETICS":{
          "proficiency_field":"AthleticsProf",
          "modifier_field":"AthleticsMod",
          "bonus_field":"Athletics"
       },
-      "Deception":{
+      "Skills.DECEPTION":{
          "proficiency_field":"DeceptionProf",
          "modifier_field":"DeceptionMod",
          "bonus_field":"Deception"
       },
-      "History":{
+      "Skills.HISTORY":{
          "proficiency_field":"HistoryProf",
          "modifier_field":"HistoryMod",
          "bonus_field":"History"
       },
-      "Insight":{
+      "Skills.INSIGHT":{
          "proficiency_field":"InsightProf",
          "modifier_field":"InsightMod",
          "bonus_field":"Insight"
       },
-      "Intimidation":{
+      "Skills.INTIMIDATION":{
          "proficiency_field":"IntimidationProf",
          "modifier_field":"IntimidationMod",
          "bonus_field":"Intimidation"
       },
-      "Investigation":{
+      "Skills.INVESTIGATION":{
          "proficiency_field":"InvestigationProf",
          "modifier_field":"InvestigationMod",
          "bonus_field":"Investigation"
       },
-      "Medicine":{
+      "Skills.MEDICINE":{
          "proficiency_field":"MedicineProf",
          "modifier_field":"MedicineMod",
          "bonus_field":"Medicine"
       },
-      "Nature":{
+      "Skills.NATURE":{
          "proficiency_field":"NatureProf",
          "modifier_field":"NatureMod",
          "bonus_field":"Nature"
       },
-      "Perception":{
+      "Skills.PERCEPTION":{
          "proficiency_field":"PerceptionProf",
          "modifier_field":"PerceptionMod",
          "bonus_field":"Perception"
       },
-      "Performance":{
+      "Skills.PERFORMANCE":{
          "proficiency_field":"PerformanceProf",
          "modifier_field":"PerformanceMod",
          "bonus_field":"Performance"
       },
-      "Persuasion":{
+      "Skills.PERSUASION":{
          "proficiency_field":"PersuasionProf",
          "modifier_field":"PersuasionMod",
          "bonus_field":"Persuasion"
       },
-      "Religion":{
+      "Skills.RELIGION":{
          "proficiency_field":"ReligionProf",
          "modifier_field":"ReligionMod",
          "bonus_field":"Religion"
       },
-      "Sleight of Hand":{
+      "Skills.SLEIGHTOFHAND":{
          "proficiency_field":"SleightOfHandProf",
          "modifier_field":"SleightofHandMod",
          "bonus_field":"SleightofHand"
       },
-      "Stealth":{
+      "Skills.STEALTH":{
          "proficiency_field":"StealthProf",
          "modifier_field":"StealthMod",
          "bonus_field":"Stealth "
       },
-      "Survival":{
+      "Skills.SURVIVAL":{
          "proficiency_field":"SurvivalProf",
          "modifier_field":"SurvivalMod",
          "bonus_field":"Survival"
+      },
+      "CustomSkill1":{
+         "proficiency_field":"CustomProf1",
+         "modifier_field":"Custom Skill Bonus 1",
+         "bonus_field":"CustomSkill1"
+      },
+      "CustomSkill2":{
+         "proficiency_field":"CustomProf2",
+         "modifier_field":"Custom Skill Bonus 2",
+         "bonus_field":"CustomSkill2"
+      },
+      "CustomSkill3":{
+         "proficiency_field":"CustomProf3",
+         "modifier_field":"Custom Skill Bonus 3",
+         "bonus_field":"CustomSkill3"
       }
    },
    "weapon_list_keys":{

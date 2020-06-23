@@ -6,6 +6,7 @@ from PySide2.QtCore import QStandardPaths
 from fitz import fitz
 
 from src.models.charactermodel import CH
+
 logger = logging.getLogger(__name__)
 
 conversion_key = {
@@ -19,7 +20,7 @@ conversion_key = {
     "Front_Passive Perception": "CH.PASSIVE_PERCEPTION",
     "Front_Inspiration": "CH.INITIATIVE",
     "Front_Passive Insight": "CH.PASSIVE_INVESTIGATION",
-    "Front_Str Mo": "CH.STR_MOD",
+    "Front_Str Mod": "CH.STR_MOD",
     "Front_Str Score": "CH.STR",
     "Front_Dex Mod": "CH.DEX_MOD",
     "Front_Dex Score": "CH.DEX",
@@ -49,10 +50,8 @@ conversion_key = {
     "Front_Save Cha": "CH.CHA_ST_PROF",
     "Front_Cha Save Throw": "CH.CHA_ST_MOD",
 
-
-
     "Front_Archetype,Battlemaste": None,
-    "Front_Str Mod": "CH.STR_MOD",
+
     "Front_Expertise Athletics": None,
     "Front_Proficiency Athletics": None,
     "Front_Skill Athletics": None,
@@ -60,24 +59,31 @@ conversion_key = {
     "Front_Expertise Acrobatics": None,
     "Front_Proficiency Acrobatics": None,
     "Front_Skill Acrobatics": None,
+
     "Front_Expertise Sleight of Hand": None,
     "Front_Proficiency Sleight of Hand": None,
     "Front_Skill Sleight of Hand": None,
+
     "Front_Expertise Stealth": None,
     "Front_Proficiency Stealth": None,
     "Front_Skill Stealth": None,
+
     "Front_Expertise Arcana": None,
     "Front_Proficiency Arcana": None,
     "Front_Skill Arcana": None,
+
     "Front_Expertise History": None,
     "Front_Proficiency History": None,
     "Front_Skill History": None,
+
     "Front_Expertise Investigation": None,
     "Front_Proficiency Investigation": None,
     "Front_Skill Investigation": None,
+
     "Front_Expertise Nature": None,
     "Front_Proficiency Nature": None,
     "Front_Skill Nature": None,
+
     "Front_Expertise Religion": None,
     "Front_Proficiency Religion": None,
     "Front_Skill Religion": None,
@@ -85,30 +91,39 @@ conversion_key = {
     "Front_Expertise Animal Handling": None,
     "Front_Proficiency Animal Handling": None,
     "Front_Skill Animal Handling": None,
+
     "Front_Expertise Insight": None,
     "Front_Proficiency Insight": None,
     "Front_Skill Insight": None,
+
     "Front_Expertise Medicine": None,
     "Front_Proficiency Medicine": None,
     "Front_Skill Medicine": None,
+
     "Front_Expertise Perception": None,
     "Front_Proficiency Perception": None,
     "Front_Skill Perception": None,
+
     "Front_Expertise Survival": None,
     "Front_Proficiency Survival": None,
     "Front_Skill Survival": None,
+
     "Front_Expertise Deception": None,
     "Front_Proficiency Deception": None,
     "Front_Skill Deception": None,
+
     "Front_Expertise Intimidation": None,
     "Front_Proficiency Intimidation": None,
     "Front_Skill Intimidation": None,
+
     "Front_Expertise Performance": None,
     "Front_Proficiency Performance": None,
     "Front_Skill Performance": None,
+
     "Front_Expertise Persuasion": None,
     "Front_Proficiency Persuasion": None,
     "Front_Skill Persuasion": None,
+
     "Front_Racial Traits": None,
     "Front_Light Armour": None,
     "Front_Medium Armour": None,
@@ -159,6 +174,132 @@ conversion_key = {
     "Front_Martial Archetype 15": None,
     "Front_Martial Archetype 18": None,
     "Front_Maneuver DC": None,
+    "Front_Spell Atk": "CH.",
+    "Front_Spell DC": "CH.",
+    "Front_Spell Slots Used": "CH.",
+    "Front_Spell Slots Total": "CH.",
+    "Front_Spell Slots Level": "CH.",
+    "Front_Spell Attack Name 1": "CH.",
+    "Front_Spell Range 1": "CH.",
+    "Front_Spell Casting Time 1": "CH.",
+    "Front_Spell Save 1": "CH.",
+    "Front_Spell Effect 1": "CH.",
+    "Front_Spell Concentration 1": "CH.",
+    "Front_Spell Attack Name 2": "CH.",
+    "Front_Spell Range 2": "CH.",
+    "Front_Spell Casting Time 2": "CH.",
+    "Front_Spell Save 2": "CH.",
+    "Front_Spell Effect 2": "CH.",
+    "Front_Spell Concentration 2": "CH.",
+    "Front_Spell Attack Name 3": "CH.",
+    "Front_Spell Range 3": "CH.",
+    "Front_Spell Casting Time 3": "CH.",
+    "Front_Spell Save 3": "CH.",
+    "Front_Spell Effect 3": "CH.",
+    "Front_Spell Concentration 3": "CH.",
+    "Front_Spell Attack Name 4": "CH.",
+    "Front_Spell Range 4": "CH.",
+    "Front_Spell Casting Time 4": "CH.",
+    "Front_Spell Save 4": "CH.",
+    "Front_Spell Effect 4": "CH.",
+    "Front_Spell Concentration 4": "CH.",
+    "Front_Spell Level 1": "CH.",
+    "Front_Spell Ritual 1": "CH.",
+    "Front_Spell Name 1": "CH.",
+    "Front_Spell Level 2": "CH.",
+    "Front_Spell Ritual 2": "CH.",
+    "Front_Spell Name 2": "CH.",
+    "Front_Spell Level 3": "CH.",
+    "Front_Spell Ritual 3": "CH.",
+    "Front_Spell Name 3": "CH.",
+    "Front_Spell Level 4": "CH.",
+    "Front_Spell Ritual 4": "CH.",
+    "Front_Spell Name 4": "CH.",
+    "Front_Spell Level 5": "CH.",
+    "Front_Spell Ritual 5": "CH.",
+    "Front_Spell Name 5": "CH.",
+    "Front_Spell Level 6": "CH.",
+    "Front_Spell Ritual 6": "CH.",
+    "Front_Spell Name 6": "CH.",
+    "Front_Spell Level 7": "CH.",
+    "Front_Spell Ritual 7": "CH.",
+    "Front_Spell Name 7": "CH.",
+    "Front_Spell Level 8": "CH.",
+    "Front_Spell Ritual 8": "CH.",
+    "Front_Spell Name 8": "CH.",
+    "Front_Spell Level 9": "CH.",
+    "Front_Spell Ritual 9": "CH.",
+    "Front_Spell Name 9": "CH.",
+    "Front_Spell Level 10": "CH.",
+    "Front_Spell Ritual 10": "CH.",
+    "Front_Spell Name 10": "CH.",
+    "Front_Spell Level 11": "CH.",
+    "Front_Spell Ritual 11": "CH.",
+    "Front_Spell Name 11": "CH.",
+    "Front_Spell Level 12": "CH.",
+    "Front_Spell Ritual 12": "CH.",
+    "Front_Spell Name 12": "CH.",
+    "Front_Spell Level 13": "CH.",
+    "Front_Spell Ritual 13": "CH.",
+    "Front_Spell Name 13": "CH.",
+    "Front_Spell Level 14": "CH.",
+    "Front_Spell Ritual 14": "CH.",
+    "Front_Spell Name 14": "CH.",
+    "Front_Spell Level 15": "CH.",
+    "Front_Spell Ritual 15": "CH.",
+    "Front_Spell Name 15": "CH.",
+    "Front_Spell Level 16": "CH.",
+    "Front_Spell Ritual 16": "CH.",
+    "Front_Spell Name 16": "CH.",
+    "Front_Spell Level 17": "CH.",
+    "Front_Spell Ritual 17": "CH.",
+    "Front_Spell Name 17": "CH.",
+    "Front_Spell Level 18": "CH.",
+    "Front_Spell Ritual 18": "CH.",
+    "Front_Spell Name 18": "CH.",
+    "Front_Spell Level 19": "CH.",
+    "Front_Spell Ritual 19": "CH.",
+    "Front_Spell Name 19": "CH.",
+    "Front_Spell Level 20": "CH.",
+    "Front_Spell Ritual 20": "CH.",
+    "Front_Spell Name 20": "CH.",
+    "Front_Spell Level 21": "CH.",
+    "Front_Spell Ritual 21": "CH.",
+    "Front_Spell Name 21": "CH.",
+    "Front_Spell Level 22": "CH.",
+    "Front_Spell Ritual 22": "CH.",
+    "Front_Spell Name 22": "CH.",
+    "Front_Spell Level 23": "CH.",
+    "Front_Spell Ritual 23": "CH.",
+    "Front_Spell Name 23": "CH.",
+    "Front_Spell Level 24": "CH.",
+    "Front_Spell Ritual 24": "CH.",
+    "Front_Spell Name 24": "CH.",
+    "Front_Spell Level 25": "CH.",
+    "Front_Spell Ritual 25": "CH.",
+    "Front_Spell Name 25": "CH.",
+    "Front_Spell Level 26": "CH.",
+    "Front_Spell Ritual 26": "CH.",
+    "Front_Spell Name 26": "CH.",
+    "Front_Spell Level 27": "CH.",
+    "Front_Spell Ritual 27": "CH.",
+    "Front_Spell Name 27": "CH.",
+    "Front_Spell Level 28": "CH.",
+    "Front_Spell Ritual 28": "CH.",
+    "Front_Spell Name 28": "CH.",
+    "Front_Spell Level 29": "CH.",
+    "Front_Spell Ritual 29": "CH.",
+    "Front_Spell Name 29": "CH.",
+    "Front_Spell Level 30": "CH.",
+    "Front_Spell Ritual 30": "CH.",
+    "Front_Spell Name 30": "CH.",
+    "Front_Spell Level 31": "CH.",
+    "Front_Spell Ritual 31": "CH.",
+    "Front_Spell Name 31": "CH.",
+    "Front_Spell Level 32": "CH.",
+    "Front_Spell Ritual 32": "CH.",
+    "Front_Spell Name 32": "CH.",
+
 }
 
 
@@ -179,7 +320,7 @@ class PDFExporter:
             value = str(value)
         elif value_type is bool:
             value = bool(value)
-        elif value_type is not field_type: #Int values need to be casted to str as well, but fail this clause
+        elif value_type is not field_type:  # Int values need to be casted to str as well, but fail this clause
             logging.warning(f"Setting value with type {value_type} to field with type {field_type}")
             value = str(value)
 
@@ -190,7 +331,7 @@ class PDFExporter:
         dir_to_search = QStandardPaths.writableLocation(QStandardPaths.AppDataLocation)
         dir_to_search = os.path.join(dir_to_search, "exporters")
         file_to_export_to = os.path.join(
-            dir_to_search, "Character Sheet_FIGHTER-BM_FILLABLE.pdf"
+            dir_to_search, "Character Sheet_WARLOCK_FILLABLE.pdf"
         )
 
         form_fields = {}

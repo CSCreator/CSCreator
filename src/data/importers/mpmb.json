@@ -347,109 +347,109 @@
 		}
 	},
 	"skill_keys": {
-		"Acrobatics": {
+		"ACROBATICS": {
 			"proficiency_field": "Acr Prof",
 			"expertise_field": "Acr Exp",
 			"modifier_field": "Acr",
 			"bonus_field": "Acr Bonus"
 		},
-		"Animal Handling": {
+		"ANIMALHANDLING": {
 			"proficiency_field": "Ani Prof",
 			"expertise_field": "Ani Exp",
 			"modifier_field": "Ani",
 			"bonus_field": "Ani Bonus"
 		},
-		"Arcana": {
+		"ARCANA": {
 			"proficiency_field": "Arc Prof",
 			"expertise_field": "Arc Exp",
 			"modifier_field": "Arc",
 			"bonus_field": "Arc Bonus"
 		},
-		"Athletics": {
+		"ATHLETICS": {
 			"proficiency_field": "Ath Prof",
 			"expertise_field": "Ath Exp",
 			"modifier_field": "Ath",
 			"bonus_field": "Ath Bonus"
 		},
-		"Deception": {
+		"DECEPTION": {
 			"proficiency_field": "Dec Prof",
 			"expertise_field": "Dec Exp",
 			"modifier_field": "Dec",
 			"bonus_field": "Dec Bonus"
 		},
-		"History": {
+		"HISTORY": {
 			"proficiency_field": "His Prof",
 			"expertise_field": "His Exp",
 			"modifier_field": "His",
 			"bonus_field": "His Bonus"
 		},
-		"Insight": {
+		"INSIGHT": {
 			"proficiency_field": "Ins Prof",
 			"expertise_field": "Ins Exp",
 			"modifier_field": "Ins",
 			"bonus_field": "Ins Bonus"
 		},
-		"Intimidation": {
+		"INTIMIDATION": {
 			"proficiency_field": "Inti Prof",
 			"expertise_field": "Inti Exp",
 			"modifier_field": "Inti",
 			"bonus_field": "Inti Bonus"
 		},
-		"Investigation": {
+		"INVESTIGATION": {
 			"proficiency_field": "Inv Prof",
 			"expertise_field": "Inv Exp",
 			"modifier_field": "Inv",
 			"bonus_field": "Inv Bonus"
 		},
-		"Medicine": {
+		"MEDICINE": {
 			"proficiency_field": "Med Prof",
 			"expertise_field": "Med Exp",
 			"modifier_field": "Med",
 			"bonus_field": "Med Bonus"
 		},
-		"Nature": {
+		"NATURE": {
 			"proficiency_field": "Nat Prof",
 			"expertise_field": "Nat Exp",
 			"modifier_field": "Nat",
 			"bonus_field": "Nat Bonus"
 		},
-		"Perception": {
+		"PERCEPTION": {
 			"proficiency_field": "Perc Prof",
 			"expertise_field": "Perc Exp",
 			"modifier_field": "Perc",
 			"bonus_field": "Perc Bonus"
 		},
-		"Performance": {
+		"PERFORMANCE": {
 			"proficiency_field": "Perf Prof",
 			"expertise_field": "Perf Exp",
 			"modifier_field": "Perf",
 			"bonus_field": "Perf Bonus"
 		},
-		"Persuasion": {
+		"PERSUASION": {
 			"proficiency_field": "Pers Prof",
 			"expertise_field": "Pers Exp",
 			"modifier_field": "Pers",
 			"bonus_field": "Pers Bonus"
 		},
-		"Religion": {
+		"RELIGION": {
 			"proficiency_field": "Rel Prof",
 			"expertise_field": "Rel Exp",
 			"modifier_field": "Rel",
 			"bonus_field": "Rel Bonus"
 		},
-		"Sleight of Hand": {
+		"SLEIGHTOFHAND": {
 			"proficiency_field": "Sle Prof",
 			"expertise_field": "Sle Exp",
 			"modifier_field": "Sle",
 			"bonus_field": "Sle Bonus"
 		},
-		"Stealth": {
+		"STEALTH": {
 			"proficiency_field": "Ste Prof",
 			"expertise_field": "Ste Exp",
 			"modifier_field": "Ste",
 			"bonus_field": "Ste Bonus"
 		},
-		"Survival": {
+		"SURVIVAL": {
 			"proficiency_field": "Sur Prof",
 			"expertise_field": "Sur Exp",
 			"modifier_field": "Sur",
