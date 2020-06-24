@@ -1,9 +1,6 @@
-from enum import Enum, auto
 import logging
+from enum import Enum, auto
 
-from PySide2 import QtCore
-from PySide2.QtCore import QModelIndex
-from PySide2.QtGui import Qt
 from obsub import event
 
 from src.models.charactersubmodel import (
@@ -146,6 +143,16 @@ class CharacterModel:
         self.attack_model = CustomTableModel(Attack)
         self.skills_model = CustomTableModel(Skill)
         self.spellslot_model = CustomTableModel(SpellSlot)
+        self.conversion = {
+            Spell: self.spell_model,
+            SpellSlot: self.spellslot_model,
+            Skill: self.skills_model,
+            Equipment: self.equipment_model,
+            Attack: self.attack_model,
+        }
+
+    def get_item(self, type, index):
+        return self.conversion[type].get_item_at_row(index)
 
     @event
     def set_value(self, value_name, value):

@@ -8,7 +8,6 @@ from src.views.itemdeligates.spinboxdelegate import SpinBoxDelegate
 
 logger = logging.getLogger(__name__)
 
-
 class CustomTableItemType:
     columns_names = None
     delegates = {}
@@ -161,7 +160,7 @@ class CustomTableModel(QAbstractTableModel):
         self.headers = custom_table_item.columns_names
         self.delegates = custom_table_item.delegates
 
-    def rowCount(self, parent):
+    def rowCount(self, parent=None):
         return len(self.items)
 
     def columnCount(self, parent):
@@ -216,3 +215,7 @@ class CustomTableModel(QAbstractTableModel):
             | QtCore.Qt.ItemIsEnabled
             | QtCore.Qt.ItemIsSelectable
         )
+
+    def get_item_at_row(self, index):
+        if index < self.rowCount():
+            return self.items[index]

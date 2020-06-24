@@ -8,6 +8,7 @@ from fitz import fitz
 from exceptions import InvalidFieldException
 from src.models.characterenums import SkillProficiencies
 from src.models.charactermodel import CH
+from src.models.charactersubmodel import Attack, Spell
 
 logger = logging.getLogger(__name__)
 
@@ -83,143 +84,42 @@ conversion_key = {
     "Front_Spell Slots Total": None,
     "Front_Spell Slots Level": None,
 
-    "Front_Spell Attack Name 1": "CH.",
-    "Front_Spell Range 1": "CH.",
-    "Front_Spell Casting Time 1": "CH.",
-    "Front_Spell Save 1": "CH.",
-    "Front_Spell Effect 1": "CH.",
-    "Front_Spell Concentration 1": "CH.",
-
-    "Front_Spell Attack Name 2": "CH.",
-    "Front_Spell Range 2": "CH.",
-    "Front_Spell Casting Time 2": "CH.",
-    "Front_Spell Save 2": "CH.",
-    "Front_Spell Effect 2": "CH.",
-    "Front_Spell Concentration 2": "CH.",
-    "Front_Spell Attack Name 3": "CH.",
-    "Front_Spell Range 3": "CH.",
-    "Front_Spell Casting Time 3": "CH.",
-    "Front_Spell Save 3": "CH.",
-    "Front_Spell Effect 3": "CH.",
-    "Front_Spell Concentration 3": "CH.",
-    "Front_Spell Attack Name 4": "CH.",
-    "Front_Spell Range 4": "CH.",
-    "Front_Spell Casting Time 4": "CH.",
-    "Front_Spell Save 4": "CH.",
-    "Front_Spell Effect 4": "CH.",
-    "Front_Spell Concentration 4": "CH.",
-    "Front_Spell Level 1": "CH.",
-    "Front_Spell Ritual 1": "CH.",
-    "Front_Spell Name 1": "CH.",
-    "Front_Spell Level 2": "CH.",
-    "Front_Spell Ritual 2": "CH.",
-    "Front_Spell Name 2": "CH.",
-    "Front_Spell Level 3": "CH.",
-    "Front_Spell Ritual 3": "CH.",
-    "Front_Spell Name 3": "CH.",
-    "Front_Spell Level 4": "CH.",
-    "Front_Spell Ritual 4": "CH.",
-    "Front_Spell Name 4": "CH.",
-    "Front_Spell Level 5": "CH.",
-    "Front_Spell Ritual 5": "CH.",
-    "Front_Spell Name 5": "CH.",
-    "Front_Spell Level 6": "CH.",
-    "Front_Spell Ritual 6": "CH.",
-    "Front_Spell Name 6": "CH.",
-    "Front_Spell Level 7": "CH.",
-    "Front_Spell Ritual 7": "CH.",
-    "Front_Spell Name 7": "CH.",
-    "Front_Spell Level 8": "CH.",
-    "Front_Spell Ritual 8": "CH.",
-    "Front_Spell Name 8": "CH.",
-    "Front_Spell Level 9": "CH.",
-    "Front_Spell Ritual 9": "CH.",
-    "Front_Spell Name 9": "CH.",
-    "Front_Spell Level 10": "CH.",
-    "Front_Spell Ritual 10": "CH.",
-    "Front_Spell Name 10": "CH.",
-    "Front_Spell Level 11": "CH.",
-    "Front_Spell Ritual 11": "CH.",
-    "Front_Spell Name 11": "CH.",
-    "Front_Spell Level 12": "CH.",
-    "Front_Spell Ritual 12": "CH.",
-    "Front_Spell Name 12": "CH.",
-    "Front_Spell Level 13": "CH.",
-    "Front_Spell Ritual 13": "CH.",
-    "Front_Spell Name 13": "CH.",
-    "Front_Spell Level 14": "CH.",
-    "Front_Spell Ritual 14": "CH.",
-    "Front_Spell Name 14": "CH.",
-    "Front_Spell Level 15": "CH.",
-    "Front_Spell Ritual 15": "CH.",
-    "Front_Spell Name 15": "CH.",
-    "Front_Spell Level 16": "CH.",
-    "Front_Spell Ritual 16": "CH.",
-    "Front_Spell Name 16": "CH.",
-    "Front_Spell Level 17": "CH.",
-    "Front_Spell Ritual 17": "CH.",
-    "Front_Spell Name 17": "CH.",
-    "Front_Spell Level 18": "CH.",
-    "Front_Spell Ritual 18": "CH.",
-    "Front_Spell Name 18": "CH.",
-    "Front_Spell Level 19": "CH.",
-    "Front_Spell Ritual 19": "CH.",
-    "Front_Spell Name 19": "CH.",
-    "Front_Spell Level 20": "CH.",
-    "Front_Spell Ritual 20": "CH.",
-    "Front_Spell Name 20": "CH.",
-    "Front_Spell Level 21": "CH.",
-    "Front_Spell Ritual 21": "CH.",
-    "Front_Spell Name 21": "CH.",
-    "Front_Spell Level 22": "CH.",
-    "Front_Spell Ritual 22": "CH.",
-    "Front_Spell Name 22": "CH.",
-    "Front_Spell Level 23": "CH.",
-    "Front_Spell Ritual 23": "CH.",
-    "Front_Spell Name 23": "CH.",
-    "Front_Spell Level 24": "CH.",
-    "Front_Spell Ritual 24": "CH.",
-    "Front_Spell Name 24": "CH.",
-    "Front_Spell Level 25": "CH.",
-    "Front_Spell Ritual 25": "CH.",
-    "Front_Spell Name 25": "CH.",
-    "Front_Spell Level 26": "CH.",
-    "Front_Spell Ritual 26": "CH.",
-    "Front_Spell Name 26": "CH.",
-    "Front_Spell Level 27": "CH.",
-    "Front_Spell Ritual 27": "CH.",
-    "Front_Spell Name 27": "CH.",
-    "Front_Spell Level 28": "CH.",
-    "Front_Spell Ritual 28": "CH.",
-    "Front_Spell Name 28": "CH.",
-    "Front_Spell Level 29": "CH.",
-    "Front_Spell Ritual 29": "CH.",
-    "Front_Spell Name 29": "CH.",
-    "Front_Spell Level 30": "CH.",
-    "Front_Spell Ritual 30": "CH.",
-    "Front_Spell Name 30": "CH.",
-    "Front_Spell Level 31": "CH.",
-    "Front_Spell Ritual 31": "CH.",
-    "Front_Spell Name 31": "CH.",
-    "Front_Spell Level 32": "CH.",
-    "Front_Spell Ritual 32": "CH.",
-    "Front_Spell Name 32": "CH.",
-
 }
 
 weapon_list_keys = {
-      "name":[
-         "Front_Weapon Name {}"
-      ],
-      "attack_bonus":[
-         "Front_Weapon Atk Bonus {}"
-      ],
-      "damage":[
-         "Front_Weapon Damage {}"
-      ],
-      "max_items":4,
-      "zero_indexed":False,
-      "hardcoded_keys":{}
+    "column_to_form": {
+        "Name": [
+            "Front_Weapon Name {}"
+        ],
+        "Attack": [
+            "Front_Weapon Atk Bonus {}"
+        ],
+        "Damage": [
+            "Front_Weapon Damage {}"
+        ]
+    },
+    "max_items": 4,
+    "zero_indexed": True,
+    "hardcoded_keys": {}
+}
+
+spell_list_keys = {
+    "column_to_form": {
+        "Prepared": [
+            "Front_Spell Concentration {}"
+        ],
+        "Spell Name": [
+            "Front_Spell Attack Name {}"
+        ],
+        "Notes": ["Front_Spell Effect {}"],
+        "Save/Attack": ["Front_Spell Save {}"],
+        "Duration": ["Front_Spell Casting Time {}"],
+        "Range": ["Front_Spell Range {}"],
+    },
+    "max_items": 4,
+    "zero_indexed": True,
+    "hardcoded_keys": {
+    }
 }
 
 skill_keys = {
@@ -367,27 +267,34 @@ class PDFExporter:
 
         return forms
 
-    def export_weapons(self, forms, weapon_keys):
-        max_weapons = weapon_keys["max_items"]
-        zero_indexed = weapon_keys["max_items"]
-        name_string = weapon_keys["name"][0]
-        attack_bonus_string = weapon_keys["attack_bonus"][0]
-        damage_string = weapon_keys["damage"][0]
-        for i in range(max_weapons):
+    def set_item_fields(self, item, fields_to_map, forms_to_fill, forms, index):
+        for value, form in forms_to_fill.items():
+            for column_index, value_name in fields_to_map.items():
+                if value_name == value:
+                    form_nominee = None
+                    for form_candidate in form:
+                        form_candidate = form_candidate.format(index)
+                        if form_candidate in forms:
+                            form_nominee = forms[form_candidate]
+                            break
+
+                    self.set_field(form_nominee, item.get_column(column_index))
+        return forms
+
+    def export_custom_table(self, item_class, forms, keys):
+        max_items = keys["max_items"]
+        zero_indexed = keys["zero_indexed"]
+
+        fields_to_map = item_class.columns_names
+        forms_to_fill = keys["column_to_form"]
+
+        for i in range(max_items):
             if zero_indexed:
-                i+=1
-            attack = self.player_controller.get_attack(i)
-            if attack is None:
-                continue
+                i += 1
 
-            name_form = forms.get(name_string.format(i), None)
-            attack_form = forms.get(attack_bonus_string.format(i), None)
-            damage_form = forms.get(damage_string.format(i), None)
-
-            self.set_field(name_form, attack.name)
-            self.set_field(attack_form, attack.attack)
-            self.set_field(damage_form, attack.damage)
-
+            item = self.player_controller.get_item(item_class, i)
+            if item is not None:
+                self.set_item_fields(item, fields_to_map, forms_to_fill, forms, i)
         return forms
 
     def export(self):
@@ -418,7 +325,8 @@ class PDFExporter:
             forms.pop(field.field_name)
 
         forms = self.export_skills(forms, skill_keys)
-        forms = self.export_weapons(forms, weapon_list_keys)
+        forms = self.export_custom_table(Attack, forms, weapon_list_keys)
+        forms = self.export_custom_table(Spell, forms, spell_list_keys)
 
         doc.save("test.pdf")
 
