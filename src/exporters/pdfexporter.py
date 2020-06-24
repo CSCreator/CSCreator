@@ -267,17 +267,20 @@ class PDFExporter:
 
         return forms
 
+    def find_form(self, form, forms, index):
+        form_nominee = None
+        for form_candidate in form:
+            form_candidate = form_candidate.format(index)
+            if form_candidate in forms:
+                form_nominee = forms[form_candidate]
+                break
+        return form_nominee
+
     def set_item_fields(self, item, fields_to_map, forms_to_fill, forms, index):
         for value, form in forms_to_fill.items():
             for column_index, value_name in fields_to_map.items():
                 if value_name == value:
-                    form_nominee = None
-                    for form_candidate in form:
-                        form_candidate = form_candidate.format(index)
-                        if form_candidate in forms:
-                            form_nominee = forms[form_candidate]
-                            break
-
+                    form_nominee = self.find_form(form, forms, index)
                     self.set_field(form_nominee, item.get_column(column_index))
         return forms
 
