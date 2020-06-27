@@ -4,6 +4,7 @@ from PySide2.QtCore import QStandardPaths, Qt
 from PySide2.QtGui import QDesktopServices
 from obsub import event
 
+from src.exporters.exportview import ExportPdfWizardFactory
 from src.importers.importview import PdfWizardFactory
 from src.importers.pdfimporter import PDFImporter
 
@@ -34,6 +35,7 @@ class MainView(QMainWindow):
         logger.debug("MainView constructed")
 
         self.pdf_wizard_factory = PdfWizardFactory()
+        self.export_pdf_wizard_factory = ExportPdfWizardFactory()
 
         self.export_debug_action = None
 
@@ -60,7 +62,7 @@ class MainView(QMainWindow):
 
         export_menu = self.menuBar().addMenu("&Export")
         export_debug_action = export_menu.addAction("Export Debug")
-        export_debug_action.triggered.connect(self.export_to_sheet)
+        export_debug_action.triggered.connect(lambda: self.export_pdf_wizard_factory.create(self))
 
         resource_menu = self.menuBar().addMenu("&Resources")
         open_app_data = resource_menu.addAction("Open Appdata Folder")

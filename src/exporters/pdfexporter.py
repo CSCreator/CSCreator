@@ -237,10 +237,10 @@ class PDFExporter:
             value = str(value)
         elif value_type is bool:
             value = bool(value)
-        elif value_type is not field_type:  # Int values need to be casted to str as well, but fail this clause
+        elif value_type is not field_type:
             logging.warning(f"Setting value with type {value_type} to field with type {field_type}")
             value = str(value)
-
+        field_to_set.text_fontsize = 0
         field_to_set.field_value = value
         field_to_set.update()
 

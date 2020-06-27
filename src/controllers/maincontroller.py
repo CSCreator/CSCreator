@@ -18,8 +18,10 @@ class MainController:
         self.main_view.pdf_wizard_factory.import_new_player += (
             self.import_player_handler
         )
+        self.main_view.export_pdf_wizard_factory.export_new_player += (
+            self.export_player_handler
+        )
         self.main_view.create_new_player += self.new_player_handler
-        self.main_view.export_to_sheet += self.export_sheet_handler
         self.collection_controller.add_player += self.player_added_handler
 
         # self.import_player(file_name="resc/mpmb_test.pdf")
@@ -61,7 +63,7 @@ class MainController:
     def player_added_handler(self, subject, arg):
         self.set_player_tab()
 
-    def export_sheet_handler(self, subject):
+    def export_player_handler(self, subject, file_name, importer):
         current_player = self.collection_controller.character_controllers
         exporter = PDFExporter(current_player)
         exporter.export()
