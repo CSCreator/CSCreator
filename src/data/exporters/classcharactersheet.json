@@ -1,5 +1,5 @@
 {
-  "exporter_name": "Class Character Sheet",
+  "name": "Class Character Sheet",
   "key_conversion": {
     "Front_Character Name": "CH.CHARACTER_NAME",
     "Front_Race": "CH.CHARACTER_NAME",

@@ -200,116 +200,7 @@
       }
     }
   },
-  "item_lists": {
-    "Skill": {
-      "enum_to_form": {
-        "Skills.ACROBATICS": {
-          "proficiency_field": "AcrobaticsProf",
-          "modifier_field": "AcrobaticsMod",
-          "bonus_field": "Acrobatics"
-        },
-        "Skills.ANIMALHANDLING": {
-          "proficiency_field": "AnimalHandlingProf",
-          "modifier_field": "AnimalMod",
-          "bonus_field": "Animal"
-        },
-        "Skills.ARCANA": {
-          "proficiency_field": "ArcanaProf",
-          "modifier_field": "ArcanaMod",
-          "bonus_field": "Arcana"
-        },
-        "Skills.ATHLETICS": {
-          "proficiency_field": "AthleticsProf",
-          "modifier_field": "AthleticsMod",
-          "bonus_field": "Athletics"
-        },
-        "Skills.DECEPTION": {
-          "proficiency_field": "DeceptionProf",
-          "modifier_field": "DeceptionMod",
-          "bonus_field": "Deception"
-        },
-        "Skills.HISTORY": {
-          "proficiency_field": "HistoryProf",
-          "modifier_field": "HistoryMod",
-          "bonus_field": "History"
-        },
-        "Skills.INSIGHT": {
-          "proficiency_field": "InsightProf",
-          "modifier_field": "InsightMod",
-          "bonus_field": "Insight"
-        },
-        "Skills.INTIMIDATION": {
-          "proficiency_field": "IntimidationProf",
-          "modifier_field": "IntimidationMod",
-          "bonus_field": "Intimidation"
-        },
-        "Skills.INVESTIGATION": {
-          "proficiency_field": "InvestigationProf",
-          "modifier_field": "InvestigationMod",
-          "bonus_field": "Investigation"
-        },
-        "Skills.MEDICINE": {
-          "proficiency_field": "MedicineProf",
-          "modifier_field": "MedicineMod",
-          "bonus_field": "Medicine"
-        },
-        "Skills.NATURE": {
-          "proficiency_field": "NatureProf",
-          "modifier_field": "NatureMod",
-          "bonus_field": "Nature"
-        },
-        "Skills.PERCEPTION": {
-          "proficiency_field": "PerceptionProf",
-          "modifier_field": "PerceptionMod",
-          "bonus_field": "Perception"
-        },
-        "Skills.PERFORMANCE": {
-          "proficiency_field": "PerformanceProf",
-          "modifier_field": "PerformanceMod",
-          "bonus_field": "Performance"
-        },
-        "Skills.PERSUASION": {
-          "proficiency_field": "PersuasionProf",
-          "modifier_field": "PersuasionMod",
-          "bonus_field": "Persuasion"
-        },
-        "Skills.RELIGION": {
-          "proficiency_field": "ReligionProf",
-          "modifier_field": "ReligionMod",
-          "bonus_field": "Religion"
-        },
-        "Skills.SLEIGHTOFHAND": {
-          "proficiency_field": "SleightOfHandProf",
-          "modifier_field": "SleightofHandMod",
-          "bonus_field": "SleightofHand"
-        },
-        "Skills.STEALTH": {
-          "proficiency_field": "StealthProf",
-          "modifier_field": "StealthMod",
-          "bonus_field": "Stealth "
-        },
-        "Skills.SURVIVAL": {
-          "proficiency_field": "SurvivalProf",
-          "modifier_field": "SurvivalMod",
-          "bonus_field": "Survival"
-        },
-        "CustomSkill1": {
-          "proficiency_field": "CustomProf1",
-          "modifier_field": "Custom Skill Bonus 1",
-          "bonus_field": "CustomSkill1"
-        },
-        "CustomSkill2": {
-          "proficiency_field": "CustomProf2",
-          "modifier_field": "Custom Skill Bonus 2",
-          "bonus_field": "CustomSkill2"
-        },
-        "CustomSkill3": {
-          "proficiency_field": "CustomProf3",
-          "modifier_field": "Custom Skill Bonus 3",
-          "bonus_field": "CustomSkill3"
-        }
-      }
-    },
+  "incremental_lists": {
     "Attack": {
       "column_to_form": {
         "name": [
@@ -438,12 +329,15 @@
       "zero_indexed": true,
       "hardcoded_keys": {
       }
-    },
+    }
+  },
+  "fixed_lists": {
     "Skill": {
       "Skills.ACROBATICS": {
-        "proficiency_field": "AcrobaticsProf",
-        "modifier_field": "AcrobaticsMod",
-        "bonus_field": "Acrobatics"
+        "name": "Skills.ACROBATICS",
+        "prof": "AcrobaticsProf",
+        "mod": "AcrobaticsMod",
+        "bonus": "Acrobatics"
       },
       "Skills.ANIMALHANDLING": {
         "proficiency_field": "AnimalHandlingProf",

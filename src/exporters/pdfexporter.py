@@ -14,8 +14,6 @@ from src.models.charactersubmodel import Attack, Spell
 logger = logging.getLogger(__name__)
 
 
-
-
 class PDFExporter:
     def __init__(self, player_controller, pdf_file, definition_file):
         self.player_controller = player_controller
@@ -24,7 +22,9 @@ class PDFExporter:
             with open(definition_file, "r") as j:
                 definition = json.loads(j.read())
         except IOError:
-            raise DefinitionFileUnreadableException(f"Definition file {definition_file} cannot be read or found")
+            raise DefinitionFileUnreadableException(
+                f"Definition file {definition_file} cannot be read or found"
+            )
 
         self.name = definition.get("exporter_name", False)
         self.key_conversion = definition.get("key_conversion", None)
@@ -34,17 +34,18 @@ class PDFExporter:
 
         self.pdf_target = pdf_file
 
-
     def get_field_type(self, field):
-        if field.field_type_string == 'Text':
+        if field.field_type_string == "Text":
             return str
-        elif field.field_type_string == 'CheckBox':
+        elif field.field_type_string == "CheckBox":
             return bool
 
     def set_field(self, field_to_set, value):
         if field_to_set is None:
             logging.error(f"Attempting to set None field with value {value}")
-            raise InvalidFieldException(f"Attempting to set None field with value {value}")
+            raise InvalidFieldException(
+                f"Attempting to set None field with value {value}"
+            )
 
         value_type = type(value)
         field_type = self.get_field_type(field_to_set)
@@ -53,7 +54,9 @@ class PDFExporter:
         elif value_type is bool:
             value = bool(value)
         elif value_type is not field_type:
-            logging.warning(f"Setting value with type {value_type} to field with type {field_type}")
+            logging.warning(
+                f"Setting value with type {value_type} to field with type {field_type}"
+            )
             value = str(value)
         field_to_set.text_fontsize = 0
         field_to_set.field_value = value
@@ -104,7 +107,7 @@ class PDFExporter:
         zero_indexed = keys["zero_indexed"]
 
         fields_to_map = item_class.columns_names
-        forms_to_fill = keys["column_to_form"]
+        forms_to_fill = keys["incremental_list"]
 
         for i in range(max_items):
             if zero_indexed:
@@ -129,16 +132,18 @@ class PDFExporter:
             for field in page.widgets():
                 forms[field.field_name] = field
 
-        form_fields_convertable = [field for field_name, field in forms.items() if field_name in self.key_conversion.keys()]
+        form_fields_convertable = [
+            field
+            for field_name, field in forms.items()
+            if field_name in self.key_conversion.keys()
+        ]
         for field in form_fields_convertable:
             ch_candidate = self.key_conversion[field.field_name]
             if not ch_candidate in CH._value2member_map_:
                 logger.info(f"Value {ch_candidate} is not a valid CH")
                 continue
             ch = CH(ch_candidate)
-            value = getattr(
-                self.player_controller.player_model, ch.name
-            )
+            value = getattr(self.player_controller.player_model, ch.name)
             self.set_field(field, value)
             forms.pop(field.field_name)
 

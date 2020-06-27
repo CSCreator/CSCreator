@@ -50,6 +50,9 @@ class CharacterController:
     def get_item(self, type, index):
         return self.player_model.get_item(type, index)
 
+    def add_item(self, type, item):
+        return self.player_model.add_item(type, item)
+
     def get_skills(self):
         return self.player_model.skills
 

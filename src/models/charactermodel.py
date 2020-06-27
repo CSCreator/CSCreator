@@ -176,3 +176,6 @@ class CharacterModel:
         if index < len(self.attack_model.items):
             return self.attack_model.items[index]
         return None
+
+    def add_item(self, type, item):
+        self.conversion[type].add_item(item)
