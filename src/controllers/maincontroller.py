@@ -63,7 +63,7 @@ class MainController:
     def player_added_handler(self, subject, arg):
         self.set_player_tab()
 
-    def export_player_handler(self, subject, file_name, importer):
+    def export_player_handler(self, subject, file_name, exporter):
         current_player = self.collection_controller.character_controllers
-        exporter = PDFExporter(current_player)
+        exporter = PDFExporter(current_player, file_name, exporter)
         exporter.export()

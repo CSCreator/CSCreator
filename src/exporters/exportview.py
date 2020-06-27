@@ -144,4 +144,4 @@ class ExportPdfWizardFactory:
         selected_importer_file_index = exporters_files[ui.importer_selected]
 
         if status == QDialog.Accepted:
-            self.export_new_player_new_player(file_name[0], selected_importer_file_index)
+            self.export_new_player(file_name[0], selected_importer_file_index)
