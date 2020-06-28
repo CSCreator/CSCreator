@@ -27,6 +27,8 @@ def do_file(parent):
 
 
 class PdfWizardFactory:
+    def __init__(self):
+        self.plugin_manager = None
 
     @event
     def import_new_player(self, file, importer):
@@ -35,13 +37,13 @@ class PdfWizardFactory:
     def create(self, parent):
         logger.info("Opening Import PDF Wizard")
         file_name = do_file(parent)
-        importer_names, importer_files = find_importers()
-        ui = PdfDialog(parent, importer_names)
+        importers = self.plugin_manager.importers
+        ui = PdfDialog(parent, [importer.name for importer in importers])
         ui.importer_label.setText("Importer")
         ui.setWindowTitle("Import Character Sheet")
         ui.selected_label.setText(file_name[0])
         status = ui.exec()
-        selected_importer_file_index = importer_files[ui.importer_selected]
+        selected_importer = importers[ui.importer_selected]
 
         if status == QDialog.Accepted:
-            self.import_new_player(file_name[0], selected_importer_file_index)
+            self.import_new_player(file_name[0], selected_importer)

@@ -16,16 +16,20 @@ class MainController:
 
         self.main_view = MainView()
         self.collection_controller = CollectionController()
+        self.plugin_manager = PluginManager()
+
+        self.main_view.pdf_wizard_factory.plugin_manager = self.plugin_manager
         self.main_view.pdf_wizard_factory.import_new_player += (
             self.import_player_handler
         )
+        self.main_view.export_pdf_wizard_factory.plugin_manager = self.plugin_manager
         self.main_view.export_pdf_wizard_factory.export_new_player += (
             self.export_player_handler
         )
         self.main_view.create_new_player += self.new_player_handler
         self.collection_controller.add_player += self.player_added_handler
 
-        self.plugin_manager = PluginManager()
+
 
         # self.import_player(file_name="resc/mpmb_test.pdf")
         # self.import_player(file_name="resc/aurora.pdf")

@@ -62,7 +62,7 @@ class IncrementalListParser():
         self.hardcoded_keys = incremental_lists.get("hardcoded_keys")
 
 
-    def parse_incremental_list(self, forms_to_import, character_controller):
+    def import_incremental_list(self, forms_to_import, character_controller):
         for i in range(self.max_items):
             if not self.zero_indexed:
                 i += 1
@@ -80,18 +80,26 @@ class IncrementalListParser():
             item = self.item_class(**item_columns)
             character_controller.add_item(self.item_class, item)
 
+    def export_incremental_list(self, forms_to_export, character_controller):
+        #TODO
+        pass
+
     def parse_import(self, forms_to_import, character_controller):
         if self.item_class is None:
             logger.warning(f"Attempting to parse a list with no item_class set")
             return
 
         if self.column_to_form:
-            self.parse_incremental_list(forms_to_import, character_controller)
+            self.import_incremental_list(forms_to_import, character_controller)
 
 
-    def export(self, forms_to_export, character_controller):
+    def parse_export(self, forms_to_export, character_controller):
+        if self.item_class is None:
+            logger.warning(f"Attempting to parse a list with no item_class set")
+            return
 
-        pass
+        if self.column_to_form:
+            self.import_incremental_list(forms_to_export, character_controller)
 
     def get_candidate_key(self, column_name, index, forms):
         if self.column_to_form is None:
@@ -148,8 +156,9 @@ class Plugin():
                     self.key_conversion[key] = CH(value)
         return all_conversions_valid
 
-    def export_character_incremental_lists(self, forms_to_fill, player_controller):
-        pass
+    def export_character_incremental_lists(self, forms_to_fill, character_controller):
+        for incremental_list_parser in self.incremental_lists:
+            incremental_list_parser.parse_export(forms_to_fill, character_controller)
 
     def import_character_incremental_lists(self, forms_to_read, character_controller):
         for incremental_list_parser in self.incremental_lists:

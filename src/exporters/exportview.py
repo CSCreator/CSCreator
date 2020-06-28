@@ -24,33 +24,9 @@ def do_file(parent):
 
     return fname
 
-
-def find_exporters():
-    dir_to_search = QStandardPaths.writableLocation(QStandardPaths.AppDataLocation)
-    dir_to_search = os.path.join(dir_to_search, "exporters")
-    importer_names = []
-    importer_files = []
-    for file in os.listdir(dir_to_search):
-        if file.endswith(".json"):
-            file = os.path.join(dir_to_search, file)
-            try:
-                with open(file, "r") as j:
-                    definition = json.loads(j.read())
-                    name = definition.get("exporter_name", None)
-                    if not name:
-                        logging.warning(
-                            f"JSON file {file}found in exporters dir, but no exporter_name present"
-                        )
-                    else:
-                        importer_names.append(name)
-                        importer_files.append(file)
-            except Exception:
-                logging.warning(f"JSON file {file} found but not openable")
-
-    return importer_names, importer_files
-
-
 class ExportPdfWizardFactory:
+    def __init__(self):
+        self.plugin_manager = None
 
     @event
     def export_new_player(self, file, importer):
@@ -59,13 +35,13 @@ class ExportPdfWizardFactory:
     def create(self, parent):
         logger.info("Opening Export PDF Wizard")
         file_name = do_file(parent)
-        exporters_names, exporters_files = find_exporters()
-        ui = PdfDialog(parent, exporters_names)
+        exporters = self.plugin_manager.exporters
+        ui = PdfDialog(parent, [exporter.name for exporter in exporters])
         ui.importer_label.setText("Exporter")
         ui.setWindowTitle("Export Character Sheet")
         ui.selected_label.setText(file_name[0])
         status = ui.exec()
-        selected_importer_file_index = exporters_files[ui.importer_selected]
+        selected_exporter = exporters[ui.importer_selected]
 
         if status == QDialog.Accepted:
-            self.export_new_player(file_name[0], selected_importer_file_index)
+            self.export_new_player(file_name[0], selected_exporter)
