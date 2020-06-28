@@ -9,9 +9,7 @@ from src.views.pdfdialog import PdfDialog
 
 logger = logging.getLogger(__name__)
 
-from PySide2.QtCore import (
-    QStandardPaths,
-)
+from PySide2.QtCore import QStandardPaths
 
 
 def do_file(parent):
@@ -21,9 +19,6 @@ def do_file(parent):
     )
 
     return fname
-
-
-
 
 
 class PdfWizardFactory:

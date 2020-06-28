@@ -82,7 +82,9 @@ class PDFExporter:
             pdf_file.set_field(field, value)
 
         # TODO maybe go to a model where we do not keep track of set fields and check it at another place (plugin?)
-        form_fields = [form for form in form_fields if form not in convertable_form_fields]
+        form_fields = [
+            form for form in form_fields if form not in convertable_form_fields
+        ]
 
         # TODO skills
         # forms = self.export_skills(form_fields, self.skill_keys)

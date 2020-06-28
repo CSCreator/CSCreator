@@ -1,5 +1,12 @@
 from PySide2.QtCore import Qt, QMetaObject, QCoreApplication
-from PySide2.QtWidgets import QDialog, QVBoxLayout, QFormLayout, QLabel, QComboBox, QDialogButtonBox
+from PySide2.QtWidgets import (
+    QDialog,
+    QVBoxLayout,
+    QFormLayout,
+    QLabel,
+    QComboBox,
+    QDialogButtonBox,
+)
 
 
 class PdfDialog(QDialog):

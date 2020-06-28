@@ -2,7 +2,15 @@ import json
 import logging
 import os
 
-from PySide2.QtWidgets import QFileDialog, QDialog, QVBoxLayout, QFormLayout, QLabel, QComboBox, QDialogButtonBox
+from PySide2.QtWidgets import (
+    QFileDialog,
+    QDialog,
+    QVBoxLayout,
+    QFormLayout,
+    QLabel,
+    QComboBox,
+    QDialogButtonBox,
+)
 from obsub import event
 
 from src.views.pdfdialog import PdfDialog
@@ -16,6 +24,7 @@ from PySide2.QtCore import (
     QStandardPaths,
 )
 
+
 def do_file(parent):
     dir_to_open = QStandardPaths.writableLocation(QStandardPaths.DocumentsLocation)
     fname = QFileDialog().getSaveFileName(
@@ -23,6 +32,7 @@ def do_file(parent):
     )
 
     return fname
+
 
 class ExportPdfWizardFactory:
     def __init__(self):

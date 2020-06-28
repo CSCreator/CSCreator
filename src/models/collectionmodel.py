@@ -1,4 +1,4 @@
 class CollectionModel:
     def __int__(self):
-        #not used yet
+        # not used yet
         pass

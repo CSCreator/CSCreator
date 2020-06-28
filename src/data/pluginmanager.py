@@ -10,7 +10,7 @@ from src.models.charactersubmodel import str_to_class
 logger = logging.getLogger(__name__)
 
 
-class FixedListParser():
+class FixedListParser:
     def __init__(self, item_type, fixed_list):
         self.item_class = str_to_class(item_type)
         if self.item_class is None:
@@ -51,7 +51,8 @@ class FixedListParser():
 
         return None
 
-class IncrementalListParser():
+
+class IncrementalListParser:
     def __init__(self, item_type, incremental_lists):
         self.item_class = str_to_class(item_type)
         if self.item_class is None:
@@ -60,7 +61,6 @@ class IncrementalListParser():
         self.max_items = incremental_lists.get("max_items")
         self.zero_indexed = incremental_lists.get("zero_indexed")
         self.hardcoded_keys = incremental_lists.get("hardcoded_keys")
-
 
     def import_incremental_list(self, forms_to_import, character_controller):
         for i in range(self.max_items):
@@ -72,16 +72,16 @@ class IncrementalListParser():
                 key = self.get_candidate_key(column_name, i, forms_to_import)
                 item_columns[column_name] = forms_to_import.get(key)
             values = item_columns.values()
-            if all(value == '' or value == None for value in values):
-                #TODO this does not catch all spells
-                #TODO if the column_names do not exist, this fails silently
+            if all(value == "" or value == None for value in values):
+                # TODO this does not catch all spells
+                # TODO if the column_names do not exist, this fails silently
                 continue
 
             item = self.item_class(**item_columns)
             character_controller.add_item(self.item_class, item)
 
     def export_incremental_list(self, forms_to_export, character_controller):
-        #TODO
+        # TODO
         pass
 
     def parse_import(self, forms_to_import, character_controller):
@@ -91,7 +91,6 @@ class IncrementalListParser():
 
         if self.column_to_form:
             self.import_incremental_list(forms_to_import, character_controller)
-
 
     def parse_export(self, forms_to_export, character_controller):
         if self.item_class is None:
@@ -117,7 +116,8 @@ class IncrementalListParser():
 
         return None
 
-class Plugin():
+
+class Plugin:
     def __init__(self, definition_file):
         try:
             with open(definition_file, "r") as j:
@@ -136,7 +136,9 @@ class Plugin():
         lists = definition.get("incremental_lists", None)
         if lists is not None:
             for item_type, incremental_lists in lists.items():
-                self.incremental_lists.append(IncrementalListParser(item_type, incremental_lists))
+                self.incremental_lists.append(
+                    IncrementalListParser(item_type, incremental_lists)
+                )
 
         all_conversions_valid = self.verify_conversions()
 
@@ -150,7 +152,9 @@ class Plugin():
         if self.key_conversion:
             for key, value in self.key_conversion.items():
                 if value not in CH._value2member_map_:
-                    logger.warning(f"Plugin refers to CH field {value} which does not exist")
+                    logger.warning(
+                        f"Plugin refers to CH field {value} which does not exist"
+                    )
                     all_conversions_valid = False
                 else:
                     self.key_conversion[key] = CH(value)
@@ -164,9 +168,12 @@ class Plugin():
         for incremental_list_parser in self.incremental_lists:
             incremental_list_parser.parse_import(forms_to_read, character_controller)
 
-class PluginManager():
+
+class PluginManager:
     def __init__(self):
-        self.plugin_dir = QStandardPaths.writableLocation(QStandardPaths.AppDataLocation)
+        self.plugin_dir = QStandardPaths.writableLocation(
+            QStandardPaths.AppDataLocation
+        )
         self.importers = self.find_valid_plugins(subdir="importers")
         self.exporters = self.find_valid_plugins(subdir="exporters")
 

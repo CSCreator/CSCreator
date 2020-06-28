@@ -62,7 +62,9 @@ class MainView(QMainWindow):
 
         export_menu = self.menuBar().addMenu("&Export")
         export_debug_action = export_menu.addAction("Export Debug")
-        export_debug_action.triggered.connect(lambda: self.export_pdf_wizard_factory.create(self))
+        export_debug_action.triggered.connect(
+            lambda: self.export_pdf_wizard_factory.create(self)
+        )
 
         resource_menu = self.menuBar().addMenu("&Resources")
         open_app_data = resource_menu.addAction("Open Appdata Folder")

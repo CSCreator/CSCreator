@@ -2,12 +2,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-from PySide2.QtCore import (
-    Qt,
-)
-from PySide2.QtWidgets import (
-    QGraphicsView,
-)
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QGraphicsView
 
 
 class PageView(QGraphicsView):

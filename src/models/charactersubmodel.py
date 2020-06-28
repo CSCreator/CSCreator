@@ -11,7 +11,6 @@ from src.views.itemdeligates.spinboxdelegate import SpinBoxDelegate
 logger = logging.getLogger(__name__)
 
 
-
 class CustomTableItemType:
     columns_names = None
     delegates = {}
@@ -19,7 +18,7 @@ class CustomTableItemType:
     def __init__(self, **kwargs):
         self.columns = [None] * len(self.columns_names)
         for index, column in self.columns_names.items():
-            value = kwargs.get(column,None)
+            value = kwargs.get(column, None)
             self.set_column(index, value)
 
     def get_column(self, column):
@@ -38,6 +37,7 @@ class Attack(CustomTableItemType):
     }
     delegates = {}
 
+
 class Equipment(CustomTableItemType):
     columns_names = {
         0: "quantity",
@@ -46,9 +46,6 @@ class Equipment(CustomTableItemType):
         3: "attuned",
     }
     delegates = {0: SpinBoxDelegate(0, 99999), 3: CheckBoxDelegate()}
-
-
-
 
 
 class Skill(CustomTableItemType):
@@ -62,8 +59,6 @@ class Skill(CustomTableItemType):
     delegates = {}
 
 
-
-
 class SpellSlot(CustomTableItemType):
     columns_names = {
         0: "level",
@@ -71,8 +66,6 @@ class SpellSlot(CustomTableItemType):
         # 3: "Custom",
     }
     delegates = {}
-
-
 
 
 class Spell(CustomTableItemType):
@@ -91,8 +84,10 @@ class Spell(CustomTableItemType):
     }
     delegates = {0: CheckBoxDelegate(), 1: SpinBoxDelegate(0, 99)}
 
+
 def str_to_class(classname):
     return getattr(sys.modules[__name__], classname)
+
 
 class CustomTableModel(QAbstractTableModel):
     def __init__(self, custom_table_item):

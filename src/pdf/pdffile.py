@@ -7,7 +7,7 @@ from exceptions import InvalidFieldException
 logger = logging.getLogger(__name__)
 
 
-class PDFFile():
+class PDFFile:
     def __init__(self, filename):
         self.doc = fitz.open(filename)
         self.pages = {}
@@ -16,7 +16,7 @@ class PDFFile():
     def get_forms(self):
         forms = {}
         for page_number in range(self.doc.pageCount):
-            #TODO storing these page references prevents the gc from destroying the widgets parents
+            # TODO storing these page references prevents the gc from destroying the widgets parents
             self.pages[page_number] = self.doc.loadPage(page_number)
             for field in self.pages[page_number].widgets():
                 forms[field.field_name] = field

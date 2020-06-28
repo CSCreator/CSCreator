@@ -21,6 +21,7 @@ class Skills(Enum):
     STEALTH = auto()
     SURVIVAL = auto()
 
+
 class Abilities(Enum):
     STR = auto()
     DEX = auto()
@@ -28,6 +29,7 @@ class Abilities(Enum):
     INT = auto()
     WIS = auto()
     CHA = auto()
+
 
 class SkillProficiencies(Enum):
     No = auto()

@@ -32,7 +32,15 @@ from PySide2.QtGui import (
     QPixmap,
     QRadialGradient,
 )
-from PySide2.QtWidgets import QVBoxLayout, QFormLayout, QLabel, QLineEdit, QSpinBox, QCheckBox, QDialogButtonBox
+from PySide2.QtWidgets import (
+    QVBoxLayout,
+    QFormLayout,
+    QLabel,
+    QLineEdit,
+    QSpinBox,
+    QCheckBox,
+    QDialogButtonBox,
+)
 
 
 class Ui_EquipmentDialog(object):

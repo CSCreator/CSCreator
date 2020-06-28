@@ -1,7 +1,11 @@
 import json
 import logging
 
-from exceptions import NotAllImportedWarning, ValueEnumKeyNotFoundException, DefinitionFileUnreadableException
+from exceptions import (
+    NotAllImportedWarning,
+    ValueEnumKeyNotFoundException,
+    DefinitionFileUnreadableException,
+)
 from src.controllers.charactercontroller import CharacterController
 from src.importers.preprocessing_functions import concat, to_boolean_true_if
 from src.models.characterenums import SkillProficiencies, Skills
@@ -10,8 +14,6 @@ from src.models.charactersubmodel import str_to_class
 from src.pdf.pdffile import PDFFile
 
 logger = logging.getLogger(__name__)
-
-
 
 
 def get_rows_per_header(list_keys, forms):
@@ -32,12 +34,12 @@ def get_rows_per_header(list_keys, forms):
 
     return form_keys_with_last_header_value
 
+
 class PDFImporter:
     def __init__(self, plugin):
         # super(DNDBeyondImporter, self).__init__()
         self.player = CharacterController()
         self.plugin = plugin
-
 
     def set_value_to_player_if_exists(self, form_fields, key):
         ch = self.plugin.key_conversion[key]
@@ -46,9 +48,7 @@ class PDFImporter:
         if not ch:
             return
         if isinstance(ch, str):
-            logging.error(
-                f"Attempting to set attribute {ch} which is not a CH value"
-            )
+            logging.error(f"Attempting to set attribute {ch} which is not a CH value")
             return
         if not hasattr(self.player.player_model, ch.name):
             logging.error(
@@ -60,7 +60,7 @@ class PDFImporter:
 
     def load(self, file):
         pdf_file = PDFFile(file)
-        form_fields  = pdf_file.get_forms_and_values()
+        form_fields = pdf_file.get_forms_and_values()
         pdf_file.close()
 
         form_fields = self.apply_preprocessing(form_fields)
@@ -91,9 +91,7 @@ class PDFImporter:
 
             conversion_keys = list(self.plugin.key_conversion.keys())
             conversion_values = list(self.plugin.key_conversion.values())
-            return conversion_keys[
-                conversion_values.index(value)
-            ]
+            return conversion_keys[conversion_values.index(value)]
 
         str_value = get_key_from_value(CH.STR)
         dex_value = get_key_from_value(CH.DEX)
@@ -136,7 +134,7 @@ class PDFImporter:
             new_value = ""
 
             if method == "concat":
-                new_value = concat(forms,parameters)
+                new_value = concat(forms, parameters)
             if method == "to_bool_true_if":
                 if not "field" in parameters:
                     parameters["field"] = new_field
