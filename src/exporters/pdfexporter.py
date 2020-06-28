@@ -1,16 +1,11 @@
-import csv
-import json
 import logging
 import os
 
 from PySide2.QtCore import QStandardPaths
-from fitz import fitz
 
-from exceptions import InvalidFieldException, DefinitionFileUnreadableException
 from src.models.characterenums import SkillProficiencies
 from src.models.charactermodel import CH
-from src.models.charactersubmodel import Attack, Spell
-from src.pdf.pdfutils import get_form_names_and_values_from_pdf, get_forms_from_pdf
+from src.pdf.pdffile import PDFFile
 
 logger = logging.getLogger(__name__)
 
@@ -21,34 +16,6 @@ class PDFExporter:
         self.plugin = plugin
 
         self.pdf_target = pdf_file
-
-    def get_field_type(self, field):
-        if field.field_type_string == "Text":
-            return str
-        elif field.field_type_string == "CheckBox":
-            return bool
-
-    def set_field(self, field_to_set, value):
-        if field_to_set is None:
-            logging.error(f"Attempting to set None field with value {value}")
-            raise InvalidFieldException(
-                f"Attempting to set None field with value {value}"
-            )
-
-        value_type = type(value)
-        field_type = self.get_field_type(field_to_set)
-        if value_type is int and field_type is str:
-            value = str(value)
-        elif value_type is bool:
-            value = bool(value)
-        elif value_type is not field_type:
-            logging.warning(
-                f"Setting value with type {value_type} to field with type {field_type}"
-            )
-            value = str(value)
-        field_to_set.text_fontsize = 0
-        field_to_set.field_value = value
-        field_to_set.update()
 
     def export_skills(self, forms, skill_keys):
         for skill in skill_keys:
@@ -91,38 +58,40 @@ class PDFExporter:
         return forms
 
     def export(self):
-        #TODO exporter should tell me what file to use
+        # TODO exporter should tell me what file to use
         dir_to_search = QStandardPaths.writableLocation(QStandardPaths.AppDataLocation)
         dir_to_search = os.path.join(dir_to_search, "exporters")
         file_to_export_to = os.path.join(
             dir_to_search, "Character Sheet_WARLOCK_FILLABLE.pdf"
         )
+        pdf_file = PDFFile(file_to_export_to)
+        form_fields = pdf_file.get_forms_names()
 
-        self.form_fields, self.open_file = get_forms_from_pdf(file_to_export_to)
-
-        form_fields_convertable = [
-            field
-            for field_name, field in self.form_fields.items()
+        convertable_form_fields = [
+            field_name
+            for field_name in form_fields
             if field_name in self.plugin.key_conversion.keys()
         ]
-        for field in form_fields_convertable:
-            ch_candidate = self.plugin.key_conversion[field.field_name]
+        for field in convertable_form_fields:
+            ch_candidate = self.plugin.key_conversion[field]
             if not ch_candidate:
                 logger.info(f"Value {ch_candidate} is not a valid CH")
                 continue
             ch = CH(ch_candidate)
             value = getattr(self.player_controller.player_model, ch.name)
-            self.set_field(field, value)
-            self.form_fields.pop(field.field_name)
-        #TODO skills
-        #forms = self.export_skills(form_fields, self.skill_keys)
-        self.plugin.export_character_incremental_lists(self.form_fields, self.player_controller)
+            pdf_file.set_field(field, value)
+
+        # TODO maybe go to a model where we do not keep track of set fields and check it at another place (plugin?)
+        form_fields = [form for form in form_fields if form not in convertable_form_fields]
+
+        # TODO skills
+        # forms = self.export_skills(form_fields, self.skill_keys)
+        self.plugin.export_character_incremental_lists(
+            form_fields, self.player_controller
+        )
 
         # with open("dict_out.csv", "w", encoding="utf-8") as csv_file:
         #     writer = csv.writer(csv_file)
         #     for key, value in form_fields.items():
         #         writer.writerow([key, value])
-
-        self.open_file.save(self.pdf_target)
-
-
+        pdf_file.save(self.pdf_target)

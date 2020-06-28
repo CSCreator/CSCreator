@@ -7,7 +7,7 @@ from src.importers.preprocessing_functions import concat, to_boolean_true_if
 from src.models.characterenums import SkillProficiencies, Skills
 from src.models.charactermodel import CH
 from src.models.charactersubmodel import str_to_class
-from src.pdf.pdfutils import get_form_names_and_values_from_pdf
+from src.pdf.pdffile import PDFFile
 
 logger = logging.getLogger(__name__)
 
@@ -59,9 +59,9 @@ class PDFImporter:
         self.player.player_model.set_value(ch.name, value)
 
     def load(self, file):
-
-        form_fields, open_file = get_form_names_and_values_from_pdf(file)
-        open_file.close()
+        pdf_file = PDFFile(file)
+        form_fields  = pdf_file.get_forms_and_values()
+        pdf_file.close()
 
         form_fields = self.apply_preprocessing(form_fields)
         form_fields = self.handle_ability_order(form_fields)
