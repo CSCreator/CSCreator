@@ -116,10 +116,6 @@ class CharacterView(QWidget):
         self.char_layout = Ui_Form()
         self.char_layout.setupUi(self)
         self.player_model = player_model
-        self.char_layout.equipment_add.clicked.connect(self.add_equipment)
-        self.char_layout.equipment_remove.clicked.connect(self.remove_equipment)
-        self.char_layout.spell_add.clicked.connect(self.add_spell)
-        self.char_layout.spell_remove.clicked.connect(self.remove_spell)
         self.register_deligates()
 
     def register_deligates(self):
