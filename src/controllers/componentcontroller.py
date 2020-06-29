@@ -5,6 +5,7 @@ from enum import Enum
 from PySide2 import QtSvg
 from PySide2.QtGui import QIcon
 
+from exceptions import UnknownCharacterProperty
 from main import config_controller
 from src.models.charactermodel import CH
 
@@ -50,7 +51,7 @@ class EditableProperty:
             else:
                 return ""
         else:
-            raise Exception("Unknown type of character_property passed")
+            raise UnknownCharacterProperty("Unknown type of character_property passed")
 
 
 class ComponentController:

@@ -25,7 +25,7 @@ from PySide2.QtCore import (
 )
 
 
-def do_file(parent):
+def ask_for_filename_to_save(parent):
     dir_to_open = QStandardPaths.writableLocation(QStandardPaths.DocumentsLocation)
     fname = QFileDialog().getSaveFileName(
         parent, "Save as PDF", dir_to_open, "PDF Files (*.pdf)"
@@ -44,7 +44,7 @@ class ExportPdfWizardFactory:
 
     def create(self, parent):
         logger.info("Opening Export PDF Wizard")
-        file_name = do_file(parent)
+        file_name = ask_for_filename_to_save(parent)
         exporters = self.plugin_manager.exporters
         ui = PdfDialog(parent, [exporter.name for exporter in exporters])
         ui.importer_label.setText("Exporter")

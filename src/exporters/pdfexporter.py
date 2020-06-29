@@ -82,9 +82,9 @@ class PDFExporter:
             pdf_file.set_field(field, value)
 
         # TODO maybe go to a model where we do not keep track of set fields and check it at another place (plugin?)
-        form_fields = [
-            form for form in form_fields if form not in convertable_form_fields
-        ]
+        # form_fields = [
+        #         #     form for form in form_fields if form not in convertable_form_fields
+        #         # ]
 
         # TODO skills
         # forms = self.export_skills(form_fields, self.skill_keys)
@@ -92,8 +92,4 @@ class PDFExporter:
             form_fields, self.player_controller
         )
 
-        # with open("dict_out.csv", "w", encoding="utf-8") as csv_file:
-        #     writer = csv.writer(csv_file)
-        #     for key, value in form_fields.items():
-        #         writer.writerow([key, value])
         pdf_file.save(self.pdf_target)

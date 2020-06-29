@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 from PySide2.QtCore import QStandardPaths
 
 
-def do_file(parent):
+def ask_for_filename_to_load(parent):
     dir_to_open = QStandardPaths.writableLocation(QStandardPaths.DocumentsLocation)
     fname = QFileDialog.getOpenFileName(
         parent, "Open PDF", dir_to_open, "PDF Files (*.pdf)"
@@ -31,7 +31,7 @@ class PdfWizardFactory:
 
     def create(self, parent):
         logger.info("Opening Import PDF Wizard")
-        file_name = do_file(parent)
+        file_name = ask_for_filename_to_load(parent)
         importers = self.plugin_manager.importers
         ui = PdfDialog(parent, [importer.name for importer in importers])
         ui.importer_label.setText("Importer")

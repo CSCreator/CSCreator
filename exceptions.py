@@ -12,3 +12,6 @@ class DefinitionFileUnreadableException(Exception):
 
 class InvalidFieldException(Exception):
     pass
+
+class UnknownCharacterProperty(Warning):
+    pass
