@@ -4,6 +4,7 @@ import os
 
 from PySide2.QtCore import QStandardPaths
 
+from exceptions import DefinitionFileUnreadableException
 from src.models.charactermodel import CH
 from src.models.charactersubmodel import str_to_class
 
@@ -72,7 +73,7 @@ class IncrementalListParser:
                 key = self.get_candidate_key(column_name, i, forms_to_import)
                 item_columns[column_name] = forms_to_import.get(key)
             values = item_columns.values()
-            if all(value == "" or value == None for value in values):
+            if all(value == "" or value is None for value in values):
                 # TODO this does not catch all spells
                 # TODO if the column_names do not exist, this fails silently
                 continue
@@ -122,7 +123,7 @@ class Plugin:
         try:
             with open(definition_file, "r") as j:
                 definition = json.loads(j.read())
-        except Exception:
+        except DefinitionFileUnreadableException:
             logger.warning(f"JSON file {definition_file} found but not openable")
 
         self.name = definition.get("name", None)

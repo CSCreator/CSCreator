@@ -7,10 +7,10 @@ from PySide2.QtWidgets import QStyledItemDelegate, QSpinBox, QAbstractItemDelega
 
 
 class SpinBoxDelegate(QStyledItemDelegate):
-    def __init__(self, min, max):
+    def __init__(self, min_value, max_value):
         super(SpinBoxDelegate, self).__init__()
-        self.min = min
-        self.max = max
+        self.min = min_value
+        self.max = max_value
 
     def createEditor(
         self,

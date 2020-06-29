@@ -1,6 +1,5 @@
 import logging
 import sys
-from enum import Enum, auto
 
 from PySide2 import QtCore
 from PySide2.QtCore import QAbstractTableModel, QModelIndex

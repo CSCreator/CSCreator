@@ -45,7 +45,7 @@ class PageModel(QGraphicsScene):
                 f"Quite some difference between scale_h {scale_h} and scale_w {scale_w}"
             )
 
-        item.setScale((scale_w))
+        item.setScale(scale_w)
 
         self.addItem(item)
         self.update()

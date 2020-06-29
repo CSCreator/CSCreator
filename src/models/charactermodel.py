@@ -151,8 +151,8 @@ class CharacterModel:
             Attack: self.attack_model,
         }
 
-    def get_item(self, type, index):
-        return self.conversion[type].get_item_at_row(index)
+    def get_item(self, item_type, index):
+        return self.conversion[item_type].get_item_at_row(index)
 
     @event
     def set_value(self, value_name, value):
