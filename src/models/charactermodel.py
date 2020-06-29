@@ -154,6 +154,9 @@ class CharacterModel:
     def get_item(self, item_type, index):
         return self.conversion[item_type].get_item_at_row(index)
 
+    def get_n_items(self, item_type):
+        return len(self.conversion[item_type].items)
+
     @event
     def set_value(self, value_name, value):
         setattr(self, value_name, value)

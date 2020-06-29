@@ -43,8 +43,14 @@ class CharacterController:
         # All chracter_properties in the view are linked to the model here
         self.character_view.register_signals(self.player_model)
 
+    def get_models(self):
+        return self.player_model.conversion.keys()
+
     def get_item(self, item_type, index):
         return self.player_model.get_item(item_type, index)
+
+    def get_n_items(self, item_type):
+        return self.player_model.get_n_items(item_type)
 
     def add_item(self, item_type, item):
         return self.player_model.add_item(item_type, item)

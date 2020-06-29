@@ -89,7 +89,7 @@ class PDFExporter:
         # TODO skills
         # forms = self.export_skills(form_fields, self.skill_keys)
         self.plugin.export_character_incremental_lists(
-            form_fields, self.player_controller
+            pdf_file, self.player_controller
         )
 
         pdf_file.save(self.pdf_target)

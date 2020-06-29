@@ -54,46 +54,48 @@
     "Front_Spell Atk": "CH.SPELLATKBONUS0",
     "Front_Spell DC": "CH.SPELLSAVEDC0"
   },
-  "weapon_list_keys": {
-    "column_to_form": {
-      "Name": [
-        "Front_Weapon Name {}"
-      ],
-      "Attack": [
-        "Front_Weapon Atk Bonus {}"
-      ],
-      "Damage": [
-        "Front_Weapon Damage {}"
-      ]
+  "incremental_lists": {
+    "Attack": {
+      "column_to_form": {
+        "name": [
+          "Front_Weapon Name {}"
+        ],
+        "attack_bonus": [
+          "Front_Weapon Atk Bonus {}"
+        ],
+        "damage": [
+          "Front_Weapon Damage {}"
+        ]
+      },
+      "max_items": 4,
+      "zero_indexed": true,
+      "hardcoded_keys": {}
     },
-    "max_items": 4,
-    "zero_indexed": true,
-    "hardcoded_keys": {}
-  },
-  "spell_list_keys": {
-    "column_to_form": {
-      "Prepared": [
-        "Front_Spell Concentration {}"
-      ],
-      "Spell Name": [
-        "Front_Spell Attack Name {}"
-      ],
-      "Notes": [
-        "Front_Spell Effect {}"
-      ],
-      "Save/Attack": [
-        "Front_Spell Save {}"
-      ],
-      "Duration": [
-        "Front_Spell Casting Time {}"
-      ],
-      "Range": [
-        "Front_Spell Range {}"
-      ]
-    },
-    "max_items": 4,
-    "zero_indexed": true,
-    "hardcoded_keys": {
+    "Spell": {
+      "column_to_form": {
+        "prepared": [
+          "Front_Spell Concentration {}"
+        ],
+        "name": [
+          "Front_Spell Attack Name {}"
+        ],
+        "notes": [
+          "Front_Spell Effect {}"
+        ],
+        "save_hit": [
+          "Front_Spell Save {}"
+        ],
+        "duration": [
+          "Front_Spell Casting Time {}"
+        ],
+        "spell_range": [
+          "Front_Spell Range {}"
+        ]
+      },
+      "max_items": 4,
+      "zero_indexed": true,
+      "hardcoded_keys": {
+      }
     }
   },
   "skill_keys": {

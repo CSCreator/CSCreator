@@ -3,6 +3,7 @@ import logging
 import os
 
 from PySide2.QtCore import QStandardPaths
+from fitz import Widget
 
 from exceptions import DefinitionFileUnreadableException
 from src.models.charactermodel import CH
@@ -11,28 +12,37 @@ from src.models.charactersubmodel import str_to_class
 logger = logging.getLogger(__name__)
 
 
-class FixedListParser:
-    def __init__(self, item_type, fixed_list):
+class HardcodedListParser:
+    def __init__(self, item_type, hardcoded_list):
         self.item_class = str_to_class(item_type)
         if self.item_class is None:
             logger.warning(f"SubModelName {item_type} unknown")
+        self.items_to_convert = hardcoded_list
 
-        self.hardcoded_keys = fixed_list.get("hardcoded_keys")
-
-    def parse_fixed_list(self, forms_to_import, character_controller):
-        pass
-
-    def parse_import(self, forms_to_import, character_controller):
+    def parse_import(self, pdf_file, character_controller):
         if self.item_class is None:
             logger.warning(f"Attempting to parse a list with no item_class set")
             return
 
-        if self.column_to_form:
-            self.parse_incremental_list(forms_to_import, character_controller)
-        elif self.enumn_to_form:
-            self.parse_fixed_list(forms_to_import, character_controller)
+        column_names = self.item_class.columns_names
+        column_names_inverted = {v: k for k, v in column_names.items()}
 
-    def export(self, forms_to_export, character_controller):
+        for item in self.items_to_convert.values():
+            submodel_item = self.item_class()
+            for column_name, form_name in item.items():
+                column_index = column_names_inverted[column_name]
+
+                forms_values = pdf_file.forms_and_values
+                value = forms_values.get(form_name)
+                if not value:
+                    #TODO handle enums here
+                    value = form_name
+
+                submodel_item.set_column(column_index, value)
+            character_controller.add_item(self.item_class, submodel_item)
+
+
+    def parse_export(self, forms_to_export, character_controller):
 
         pass
 
@@ -63,15 +73,15 @@ class IncrementalListParser:
         self.zero_indexed = incremental_lists.get("zero_indexed")
         self.hardcoded_keys = incremental_lists.get("hardcoded_keys")
 
-    def import_incremental_list(self, forms_to_import, character_controller):
+    def import_incremental_list(self, pdf_file, character_controller):
         for i in range(self.max_items):
             if not self.zero_indexed:
                 i += 1
 
             item_columns = {}
             for column_name in self.column_to_form:
-                key = self.get_candidate_key(column_name, i, forms_to_import)
-                item_columns[column_name] = forms_to_import.get(key)
+                key = self.get_candidate_key(column_name, i, pdf_file.forms)
+                item_columns[column_name] = pdf_file.forms_and_values.get(key)
             values = item_columns.values()
             if all(value == "" or value is None for value in values):
                 # TODO this does not catch all spells
@@ -81,17 +91,28 @@ class IncrementalListParser:
             item = self.item_class(**item_columns)
             character_controller.add_item(self.item_class, item)
 
-    def export_incremental_list(self, forms_to_export, character_controller):
-        # TODO
-        pass
+    def export_incremental_list(self, pdf_file, character_controller):
+        character_submodels = character_controller.get_models()
+        if self.item_class not in character_submodels:
+            return
+        for item_index in range(character_controller.get_n_items(self.item_class)):
+            current_item = character_controller.get_item(self.item_class, item_index)
+            if self.zero_indexed:
+                item_index += 1
+            for column_index in current_item.columns_names:
+                value = current_item.get_column(column_index)
+                column_name = current_item.columns_names[column_index]
+                field_to_set = self.get_candidate_key(column_name, item_index, pdf_file.forms)
+                if field_to_set:
+                    pdf_file.set_field(field_to_set, value)
 
-    def parse_import(self, forms_to_import, character_controller):
+    def parse_import(self, pdf_file, character_controller):
         if self.item_class is None:
             logger.warning(f"Attempting to parse a list with no item_class set")
             return
 
         if self.column_to_form:
-            self.import_incremental_list(forms_to_import, character_controller)
+            self.import_incremental_list(pdf_file, character_controller)
 
     def parse_export(self, forms_to_export, character_controller):
         if self.item_class is None:
@@ -99,7 +120,7 @@ class IncrementalListParser:
             return
 
         if self.column_to_form:
-            self.import_incremental_list(forms_to_export, character_controller)
+            self.export_incremental_list(forms_to_export, character_controller)
 
     def get_candidate_key(self, column_name, index, forms):
         if self.column_to_form is None:
@@ -136,9 +157,18 @@ class Plugin:
 
         lists = definition.get("incremental_lists", None)
         if lists is not None:
-            for item_type, incremental_lists in lists.items():
+            for item_type, incremental_list in lists.items():
                 self.incremental_lists.append(
-                    IncrementalListParser(item_type, incremental_lists)
+                    IncrementalListParser(item_type, incremental_list)
+                )
+
+        self.hardcoded_lists = []
+
+        lists = definition.get("hardcoded_lists", None)
+        if lists is not None:
+            for item_type, hardcoded_list in lists.items():
+                self.hardcoded_lists.append(
+                    HardcodedListParser(item_type, hardcoded_list)
                 )
 
         all_conversions_valid = self.verify_conversions()
@@ -161,13 +191,17 @@ class Plugin:
                     self.key_conversion[key] = CH(value)
         return all_conversions_valid
 
-    def export_character_incremental_lists(self, forms_to_fill, character_controller):
+    def export_character_incremental_lists(self, pdf_file, character_controller):
         for incremental_list_parser in self.incremental_lists:
-            incremental_list_parser.parse_export(forms_to_fill, character_controller)
+            incremental_list_parser.parse_export(pdf_file, character_controller)
+        for hardcoded_list_parser in self.hardcoded_lists:
+            hardcoded_list_parser.parse_export(pdf_file, character_controller)
 
-    def import_character_incremental_lists(self, forms_to_read, character_controller):
+    def import_character_incremental_lists(self, pdf_file, character_controller):
         for incremental_list_parser in self.incremental_lists:
-            incremental_list_parser.parse_import(forms_to_read, character_controller)
+            incremental_list_parser.parse_import(pdf_file, character_controller)
+        for hardcoded_list_parser in self.hardcoded_lists:
+            hardcoded_list_parser.parse_import(pdf_file, character_controller)
 
 
 class PluginManager:

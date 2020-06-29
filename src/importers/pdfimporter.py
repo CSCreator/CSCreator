@@ -61,7 +61,7 @@ class PDFImporter:
     def load(self, file):
         pdf_file = PDFFile(file)
         form_fields = pdf_file.get_forms_and_values()
-        pdf_file.close()
+
 
         form_fields = self.apply_preprocessing(form_fields)
         form_fields = self.handle_ability_order(form_fields)
@@ -75,8 +75,8 @@ class PDFImporter:
             ):
                 form_fields.pop(key, None)
 
-        self.plugin.import_character_incremental_lists(form_fields, self.player)
-
+        self.plugin.import_character_incremental_lists(pdf_file, self.player)
+        pdf_file.close()
         if len(form_fields) > 0:
             logger.warning(f"Not all dict values have been parsed! {form_fields}")
 

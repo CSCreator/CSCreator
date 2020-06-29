@@ -12,6 +12,7 @@ class PDFFile:
         self.doc = fitz.open(filename)
         self.pages = {}
         self.forms = self.get_forms()
+        self.forms_and_values = self.get_forms_and_values()
 
     def get_forms(self):
         forms = {}
@@ -40,6 +41,9 @@ class PDFFile:
 
         return forms
 
+    def get_field_value(self, field):
+        return self.forms.get(field)
+
     def get_field_type(self, field):
         if field.field_type_string == "Text":
             return str
@@ -47,7 +51,7 @@ class PDFFile:
             return bool
 
     def set_field(self, field_name_to_set, value):
-        form_to_set = self.forms[field_name_to_set]
+        form_to_set = self.forms.get(field_name_to_set)
         if form_to_set is None:
             logger.error(f"Attempting to set None field with value {value}")
             raise InvalidFieldException(
