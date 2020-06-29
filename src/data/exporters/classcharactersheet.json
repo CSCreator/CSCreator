@@ -98,96 +98,116 @@
       }
     }
   },
-  "skill_keys": {
-    "Skills.ACROBATICS": {
-      "expertise_field": "Front_Expertise Acrobatics",
-      "proficiency_field": "Front_Proficiency Acrobatics",
-      "modifier_field": "Front_Skill Acrobatics"
-    },
-    "Skills.ANIMALHANDLING": {
-      "expertise_field": "Front_Expertise Animal Handling",
-      "proficiency_field": "Front_Proficiency Animal Handling",
-      "modifier_field": "Front_Skill Animal Handling"
-    },
-    "Skills.ARCANA": {
-      "expertise_field": "Front_Expertise Arcana",
-      "proficiency_field": "Front_Proficiency Arcana",
-      "modifier_field": "Front_Skill Arcana"
-    },
-    "Skills.ATHLETICS": {
-      "expertise_field": "Front_Expertise Athletics",
-      "proficiency_field": "Front_Proficiency Athletics",
-      "modifier_field": "Front_Skill Athletics"
-    },
-    "Skills.DECEPTION": {
-      "expertise_field": "Front_Expertise Deception",
-      "proficiency_field": "Front_Proficiency Deception",
-      "modifier_field": "Front_Skill Deception"
-    },
-    "Skills.HISTORY": {
-      "expertise_field": "Front_Expertise History",
-      "proficiency_field": "Front_Proficiency History",
-      "modifier_field": "Front_Skill History"
-    },
-    "Skills.INSIGHT": {
-      "expertise_field": "Front_Expertise Insight",
-      "proficiency_field": "Front_Proficiency Insight",
-      "modifier_field": "Front_Skill Insight"
-    },
-    "Skills.INTIMIDATION": {
-      "expertise_field": "Front_Expertise Intimidation",
-      "proficiency_field": "Front_Proficiency Intimidation",
-      "modifier_field": "Front_Skill Intimidation"
-    },
-    "Skills.INVESTIGATION": {
-      "expertise_field": "Front_Expertise Investigation",
-      "proficiency_field": "Front_Proficiency Investigation",
-      "modifier_field": "Front_Skill Investigation"
-    },
-    "Skills.MEDICINE": {
-      "expertise_field": "Front_Expertise Medicine",
-      "proficiency_field": "Front_Proficiency Medicine",
-      "modifier_field": "Front_Skill Medicine"
-    },
-    "Skills.NATURE": {
-      "expertise_field": "Front_Expertise Nature",
-      "proficiency_field": "Front_Proficiency Nature",
-      "modifier_field": "Front_Skill Nature"
-    },
-    "Skills.PERCEPTION": {
-      "expertise_field": "Front_Expertise Perception",
-      "proficiency_field": "Front_Proficiency Perception",
-      "modifier_field": "Front_Skill Perception"
-    },
-    "Skills.PERFORMANCE": {
-      "expertise_field": "Front_Expertise Performance",
-      "proficiency_field": "Front_Proficiency Performance",
-      "modifier_field": "Front_Skill Performance"
-    },
-    "Skills.PERSUASION": {
-      "expertise_field": "Front_Expertise Persuasion",
-      "proficiency_field": "Front_Proficiency Persuasion",
-      "modifier_field": "Front_Skill Persuasion"
-    },
-    "Skills.RELIGION": {
-      "expertise_field": "Front_Expertise Religion",
-      "proficiency_field": "Front_Proficiency Religion",
-      "modifier_field": "Front_Skill Religion"
-    },
-    "Skills.SLEIGHTOFHAND": {
-      "expertise_field": "Front_Expertise Sleight of Hand",
-      "proficiency_field": "Front_Proficiency Sleight of Hand",
-      "modifier_field": "Front_Skill Sleight of Hand"
-    },
-    "Skills.STEALTH": {
-      "expertise_field": "Front_Expertise Stealth",
-      "proficiency_field": "Front_Proficiency Stealth",
-      "modifier_field": "Front_Skill Stealth"
-    },
-    "Skills.SURVIVAL": {
-      "expertise_field": "Front_Expertise Survival",
-      "proficiency_field": "Front_Proficiency Survival",
-      "modifier_field": "Front_Skill Survival"
+  "hardcoded_lists": {
+    "Skill": {
+      "Skills.ACROBATICS": {
+        "name": "Skills.ACROBATICS",
+        "expertise_field": "Front_Expertise Acrobatics",
+        "prof": "Front_Proficiency Acrobatics",
+        "bonus": "Front_Skill Acrobatics"
+      },
+      "Skills.ANIMALHANDLING": {
+        "name": "Skills.ANIMALHANDLING",
+        "expertise_field": "Front_Expertise Animal Handling",
+        "prof": "Front_Proficiency Animal Handling",
+        "bonus": "Front_Skill Animal Handling"
+      },
+      "Skills.ARCANA": {
+        "name": "Skills.ARCANA",
+        "expertise_field": "Front_Expertise Arcana",
+        "prof": "Front_Proficiency Arcana",
+        "bonus": "Front_Skill Arcana"
+      },
+      "Skills.ATHLETICS": {
+        "name": "Skills.ATHLETICS",
+        "expertise_field": "Front_Expertise Athletics",
+        "prof": "Front_Proficiency Athletics",
+        "bonus": "Front_Skill Athletics"
+      },
+      "Skills.DECEPTION": {
+        "name": "Skills.DECEPTION",
+        "expertise_field": "Front_Expertise Deception",
+        "prof": "Front_Proficiency Deception",
+        "bonus": "Front_Skill Deception"
+      },
+      "Skills.HISTORY": {
+        "name": "Skills.HISTORY",
+        "expertise_field": "Front_Expertise History",
+        "prof": "Front_Proficiency History",
+        "bonus": "Front_Skill History"
+      },
+      "Skills.INSIGHT": {
+        "name": "Skills.INSIGHT",
+        "expertise_field": "Front_Expertise Insight",
+        "prof": "Front_Proficiency Insight",
+        "bonus": "Front_Skill Insight"
+      },
+      "Skills.INTIMIDATION": {
+        "name": "Skills.INTIMIDATION",
+        "expertise_field": "Front_Expertise Intimidation",
+        "prof": "Front_Proficiency Intimidation",
+        "bonus": "Front_Skill Intimidation"
+      },
+      "Skills.INVESTIGATION": {
+        "name": "Skills.INVESTIGATION",
+        "expertise_field": "Front_Expertise Investigation",
+        "prof": "Front_Proficiency Investigation",
+        "bonus": "Front_Skill Investigation"
+      },
+      "Skills.MEDICINE": {
+        "name": "Skills.MEDICINE",
+        "expertise_field": "Front_Expertise Medicine",
+        "prof": "Front_Proficiency Medicine",
+        "bonus": "Front_Skill Medicine"
+      },
+      "Skills.NATURE": {
+        "name": "Skills.NATURE",
+        "expertise_field": "Front_Expertise Nature",
+        "prof": "Front_Proficiency Nature",
+        "bonus": "Front_Skill Nature"
+      },
+      "Skills.PERCEPTION": {
+        "name": "Skills.PERCEPTION",
+        "expertise_field": "Front_Expertise Perception",
+        "prof": "Front_Proficiency Perception",
+        "bonus": "Front_Skill Perception"
+      },
+      "Skills.PERFORMANCE": {
+        "name": "Skills.PERFORMANCE",
+        "expertise_field": "Front_Expertise Performance",
+        "prof": "Front_Proficiency Performance",
+        "bonus": "Front_Skill Performance"
+      },
+      "Skills.PERSUASION": {
+        "name": "Skills.PERSUASION",
+        "expertise_field": "Front_Expertise Persuasion",
+        "prof": "Front_Proficiency Persuasion",
+        "bonus": "Front_Skill Persuasion"
+      },
+      "Skills.RELIGION": {
+        "name": "Skills.RELIGION",
+        "expertise_field": "Front_Expertise Religion",
+        "prof": "Front_Proficiency Religion",
+        "bonus": "Front_Skill Religion"
+      },
+      "Skills.SLEIGHTOFHAND": {
+        "name": "Skills.SLEIGHTOFHAND",
+        "expertise_field": "Front_Expertise Sleight of Hand",
+        "prof": "Front_Proficiency Sleight of Hand",
+        "bonus": "Front_Skill Sleight of Hand"
+      },
+      "Skills.STEALTH": {
+        "name": "Skills.STEALTH",
+        "expertise_field": "Front_Expertise Stealth",
+        "prof": "Front_Proficiency Stealth",
+        "bonus": "Front_Skill Stealth"
+      },
+      "Skills.SURVIVAL": {
+        "name": "Skills.SURVIVAL",
+        "expertise_field": "Front_Expertise Survival",
+        "prof": "Front_Proficiency Survival",
+        "bonus": "Front_Skill Survival"
+      }
     }
   }
 }

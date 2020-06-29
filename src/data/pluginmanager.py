@@ -27,8 +27,9 @@ class HardcodedListParser:
         column_names = self.item_class.columns_names
         column_names_inverted = {v: k for k, v in column_names.items()}
 
-        for item in self.items_to_convert.values():
+        for enum, item in self.items_to_convert.items():
             submodel_item = self.item_class()
+            submodel_item.named_item_enum = enum
             for column_name, form_name in item.items():
                 column_index = column_names_inverted[column_name]
 
@@ -39,12 +40,32 @@ class HardcodedListParser:
                     value = form_name
 
                 submodel_item.set_column(column_index, value)
+            #TODO if submodel_item is completely None or EnumNames, do not add
             character_controller.add_item(self.item_class, submodel_item)
 
 
-    def parse_export(self, forms_to_export, character_controller):
+    def parse_export(self, pdf_file, character_controller):
+        character_submodels = character_controller.get_models()
+        if self.item_class not in character_submodels:
+            return
+        for item_index in range(character_controller.get_n_items(self.item_class)):
+            current_item = character_controller.get_item(self.item_class, item_index)
+            current_item_enum = current_item.named_item_enum
+            if not current_item_enum:
+                logger.warning(f"Trying to export fixed item {self.item_class}, but no named_item_enum_set. Do not know where to place")
+                continue
 
-        pass
+            current_item_forms = self.items_to_convert.get(current_item_enum)
+            if not current_item_forms:
+                logger.warning(f"Current_item_enum {current_item_enum} not found in self.items_to_convert")
+                continue
+
+            for column_index in current_item.columns_names:
+                value = current_item.get_column(column_index)
+                column_name = current_item.columns_names[column_index]
+                field_to_set = current_item_forms.get(column_name)
+                if field_to_set:
+                    pdf_file.set_field(field_to_set, value)
 
     def get_candidate_key(self, column_name, index, forms):
         if self.column_to_form is None:

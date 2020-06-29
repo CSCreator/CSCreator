@@ -54,9 +54,11 @@ class PDFFile:
         form_to_set = self.forms.get(field_name_to_set)
         if form_to_set is None:
             logger.error(f"Attempting to set None field with value {value}")
-            raise InvalidFieldException(
-                f"Attempting to set None field with value {value}"
-            )
+            return
+            # TODO either reimplement or do field checking when loading plugin
+            # raise InvalidFieldException(
+            #     f"Attempting to set None field with value {value}"
+            # )
 
         value_type = type(value)
         field_type = self.get_field_type(form_to_set)

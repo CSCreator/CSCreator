@@ -15,6 +15,7 @@ class CustomTableItemType:
     delegates = {}
 
     def __init__(self, **kwargs):
+        self.named_item_enum = None
         self.columns = [None] * len(self.columns_names)
         for index, column in self.columns_names.items():
             value = kwargs.get(column, None)
