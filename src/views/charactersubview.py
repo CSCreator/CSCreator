@@ -20,15 +20,15 @@ def add_item_to_model(submodel):
         widget_per_column[name] = line_edit
 
 
-    buttonBox = QDialogButtonBox()
-    buttonBox.setObjectName("buttonBox")
-    buttonBox.setOrientation(Qt.Horizontal)
-    buttonBox.setStandardButtons(QDialogButtonBox.Cancel | QDialogButtonBox.Ok)
-    buttonBox.accepted.connect(dialog.accept)
-    buttonBox.rejected.connect(dialog.reject)
+    button_box = QDialogButtonBox()
+    button_box.setObjectName("buttonBox")
+    button_box.setOrientation(Qt.Horizontal)
+    button_box.setStandardButtons(QDialogButtonBox.Cancel | QDialogButtonBox.Ok)
+    button_box.accepted.connect(dialog.accept)
+    button_box.rejected.connect(dialog.reject)
 
     v_layout.addLayout(form_layout)
-    v_layout.addWidget(buttonBox)
+    v_layout.addWidget(button_box)
 
     dialog.forms = form_layout
     dialog.setLayout(v_layout)
