@@ -44,7 +44,7 @@ class PDFFile:
     def get_field_value(self, field):
         return self.forms.get(field)
 
-    def get_field_type(self, field):
+    def get_form_type(self, field):
         if field.field_type_string == "Text":
             return str
         elif field.field_type_string == "CheckBox":
@@ -61,14 +61,14 @@ class PDFFile:
             # )
 
         value_type = type(value)
-        field_type = self.get_field_type(form_to_set)
-        if value_type is int and field_type is str:
+        form_type = self.get_form_type(form_to_set)
+        if value_type is int and form_type is str:
             value = str(value)
         elif value_type is bool:
             value = bool(value)
-        elif value_type is not field_type:
+        elif value_type is not form_type:
             logging.warning(
-                f"Setting value with type {value_type} to field with type {field_type}"
+                f"Setting value with type {value_type} to field with type {form_type}"
             )
             value = str(value)
         form_to_set.text_fontsize = 0
