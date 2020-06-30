@@ -48,8 +48,7 @@ class HardcodedListParser:
         character_submodels = character_controller.get_models()
         if self.item_class not in character_submodels:
             return
-        for item_index in range(character_controller.get_n_items(self.item_class)):
-            current_item = character_controller.get_item(self.item_class, item_index)
+        for current_item in character_controller.get_items(self.item_class):
             current_item_enum = current_item.named_item_enum
             if not current_item_enum:
                 logger.warning(f"Trying to export fixed item {self.item_class}, but no named_item_enum_set. Do not know where to place")
@@ -116,8 +115,7 @@ class IncrementalListParser:
         character_submodels = character_controller.get_models()
         if self.item_class not in character_submodels:
             return
-        for item_index in range(character_controller.get_n_items(self.item_class)):
-            current_item = character_controller.get_item(self.item_class, item_index)
+        for item_index, current_item in enumerate(character_controller.get_items(self.item_class)):
             if self.zero_indexed:
                 item_index += 1
             for column_index in current_item.columns_names:

@@ -154,8 +154,8 @@ class CharacterModel:
     def get_item(self, item_type, index):
         return self.conversion[item_type].get_item_at_row(index)
 
-    def get_n_items(self, item_type):
-        return len(self.conversion[item_type].items)
+    def get_items(self, item_type):
+        return self.conversion[item_type].get_items()
 
     @event
     def set_value(self, value_name, value):
@@ -167,18 +167,6 @@ class CharacterModel:
         logger.debug(
             f"Recieved changed character_property {character_property.name} from the view with value {value}"
         )
-
-    def get_skill(self, name):
-        skill = None
-        for this_skill in self.skills_model.items:
-            if this_skill.name == name:
-                skill = this_skill
-        return skill
-
-    def get_attack(self, index):
-        if index < len(self.attack_model.items):
-            return self.attack_model.items[index]
-        return None
 
     def add_item(self, type, item):
         self.conversion[type].add_item(item)

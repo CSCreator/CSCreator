@@ -224,7 +224,7 @@
              <enum>QTabWidget::North</enum>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>7</number>
             </property>
             <property name="elideMode">
              <enum>Qt::ElideNone</enum>
@@ -403,72 +403,7 @@
                  </layout>
                 </item>
                 <item>
-                 <widget class="QTableView" name="EQUIPMENT_TABLE">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="sizeAdjustPolicy">
-                   <enum>QAbstractScrollArea::AdjustToContents</enum>
-                  </property>
-                  <attribute name="horizontalHeaderVisible">
-                   <bool>false</bool>
-                  </attribute>
-                  <attribute name="horizontalHeaderDefaultSectionSize">
-                   <number>200</number>
-                  </attribute>
-                 </widget>
-                </item>
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_46">
-                  <item>
-                   <widget class="QPushButton" name="equipment_add">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="baseSize">
-                     <size>
-                      <width>0</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>+</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="equipment_remove">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="text">
-                     <string>-</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="verticalSpacer_2">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>20</width>
-                      <height>40</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
+                 <layout class="QHBoxLayout" name="EQUIPMENT_LAYOUT"/>
                 </item>
                </layout>
               </item>
@@ -579,50 +514,12 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QTableView" name="SPELLSLOT_TABLE">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                   </widget>
+                   <layout class="QHBoxLayout" name="SPELLSLOT_LAYOUT"/>
                   </item>
                  </layout>
                 </item>
                 <item>
-                 <widget class="QTableView" name="SPELL_TABLE"/>
-                </item>
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_48">
-                  <item>
-                   <widget class="QPushButton" name="spell_add">
-                    <property name="text">
-                     <string>+</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="spell_remove">
-                    <property name="text">
-                     <string>-</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="verticalSpacer_3">
-                    <property name="orientation">
-                     <enum>Qt::Vertical</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>20</width>
-                      <height>40</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
+                 <layout class="QHBoxLayout" name="SPELL_LAYOUT"/>
                 </item>
                </layout>
               </item>
@@ -739,17 +636,7 @@
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout">
                      <item>
-                      <widget class="QTableView" name="ATTACK_TABLE">
-                       <property name="sizeAdjustPolicy">
-                        <enum>QAbstractScrollArea::AdjustToContents</enum>
-                       </property>
-                       <property name="selectionMode">
-                        <enum>QAbstractItemView::ExtendedSelection</enum>
-                       </property>
-                       <attribute name="horizontalHeaderCascadingSectionResizes">
-                        <bool>true</bool>
-                       </attribute>
-                      </widget>
+                      <layout class="QHBoxLayout" name="ATTACK_LAYOUT"/>
                      </item>
                     </layout>
                    </widget>
@@ -1918,11 +1805,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_47">
           <item>
-           <widget class="QTableView" name="SKILL_TABLE">
-            <property name="autoFillBackground">
-             <bool>false</bool>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="SKILL_LAYOUT"/>
           </item>
          </layout>
         </widget>

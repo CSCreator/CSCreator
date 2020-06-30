@@ -157,3 +157,9 @@ class CustomTableModel(QAbstractTableModel):
     def get_item_at_row(self, index):
         if index < self.rowCount():
             return self.items[index]
+
+    def get_items(self):
+        index = 0
+        while index < self.rowCount():
+            yield self.get_item_at_row(index)
+            index += 1

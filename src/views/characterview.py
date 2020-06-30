@@ -116,20 +116,6 @@ class CharacterView(QWidget):
         self.char_layout = Ui_Form()
         self.char_layout.setupUi(self)
         self.player_model = player_model
-        self.register_deligates()
-
-    def register_deligates(self):
-        spell_model_view = self.char_layout.SPELL_TABLE
-        spell_model_delegates = self.player_model.spell_model.delegates
-        for delegate in spell_model_delegates:
-            this_delegate = spell_model_delegates[delegate]
-            spell_model_view.setItemDelegateForColumn(delegate, this_delegate)
-
-        equipment_model_view = self.char_layout.EQUIPMENT_TABLE
-        equipment_delegates = self.player_model.equipment_model.delegates
-        for delegate in equipment_delegates:
-            this_delegate = equipment_delegates[delegate]
-            equipment_model_view.setItemDelegateForColumn(delegate, this_delegate)
 
     def register_signals(self, player_model):
         for value in CH:
