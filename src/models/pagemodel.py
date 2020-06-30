@@ -22,7 +22,7 @@ class PageModel(QGraphicsScene):
         self.setSceneRect(0, 0, pixels_w, pixels_h)
         self.page_view_transform = None
         self.item_being_dragged = None
-        logging.debug("PageModel constructed")
+        logger.debug("PageModel constructed")
 
     def add_component_controller(self, component_controller):
         self.component_controllers.append(component_controller)
@@ -41,15 +41,15 @@ class PageModel(QGraphicsScene):
         scale_h = expected_h / actual_h
 
         if (scale_h - scale_w) < -0.5 or (scale_h - scale_w) > 0.5:
-            logging.warning(
+            logger.warning(
                 f"Quite some difference between scale_h {scale_h} and scale_w {scale_w}"
             )
 
-        item.setScale((scale_w))
+        item.setScale(scale_w)
 
         self.addItem(item)
         self.update()
-        logging.debug(f"Component controller added with scaling of {scale_w},{scale_h}")
+        logger.debug(f"Component controller added with scaling of {scale_w},{scale_h}")
 
     def remove_component_controller(self, component_controller):
         for i, o in enumerate(self.component_controllers):
@@ -64,15 +64,15 @@ class PageModel(QGraphicsScene):
         self.update()
 
     def create(self, total_width_pixels, total_height_pixels, player):
-        logging.info("Create called on PageModel, but this might not be needed anymore")
+        logger.info("Create called on PageModel, but this might not be needed anymore")
 
     def dragEnterEvent(self, event):
         event.accept()
 
     def dragMoveEvent(self, event):
-        # logging.info(f"DragMove pos: {event.scenePos()}")
+        # logger.info(f"DragMove pos: {event.scenePos()}")
         if self.item_being_dragged is None:
-            logging.error("Something is being dragged, but not item_being_dragged set.")
+            logger.error("Something is being dragged, but not item_being_dragged set.")
         self.item_being_dragged.set_position(event.scenePos())
         event.accept()
 
@@ -91,12 +91,12 @@ class PageModel(QGraphicsScene):
             data_stream >> hot_spot_point
             view_to_scene_transform, succes = self.page_view_transform.inverted()
             if not succes:
-                logging.error("Page_view_transform could not be inverted")
+                logger.error("Page_view_transform could not be inverted")
 
             hot_spot_point = view_to_scene_transform.map(hot_spot_point)
             item.set_position(event.scenePos() - hot_spot_point)
             self.add_component_controller(item)
-            logging.info("dropEvent")
+            logger.info("dropEvent")
             event.setDropAction(Qt.MoveAction)
             event.accept()
 
@@ -106,13 +106,13 @@ class PageModel(QGraphicsScene):
         ):
             item = source_widget.item_being_dragged
             if item is None:
-                logging.error("Drag does not have a item_being_dragged set.")
+                logger.error("Drag does not have a item_being_dragged set.")
             else:
                 accept_and_add(item, event)
                 source_widget.item_being_dragged = None
 
         elif source_widget is None and self.item_being_dragged is not None:
-            logging.info(
+            logger.info(
                 f"Dropevent probably into myself, unknown source {source_widget}"
             )
             item = self.item_being_dragged
@@ -120,7 +120,7 @@ class PageModel(QGraphicsScene):
             accept_and_add(item, event)
 
         else:
-            logging.info(f"Dropevent ignored, unknown source {source_widget}")
+            logger.info(f"Dropevent ignored, unknown source {source_widget}")
             event.ignore()
 
     def startDrag(self, event):
@@ -145,8 +145,8 @@ class PageModel(QGraphicsScene):
         drag = QDrag(self)
         drag.setMimeData(mime_data)
         horizontal_scaling = self.page_view_transform.m11()
-        logging.info(f"sceneBoundingRect {item.sceneBoundingRect().width()}")
-        logging.info(
+        logger.info(f"sceneBoundingRect {item.sceneBoundingRect().width()}")
+        logger.info(
             f"sceneBoundingRect {item.sceneBoundingRect().width()*horizontal_scaling}"
         )
         drag.setPixmap(

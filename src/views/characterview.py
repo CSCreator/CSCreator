@@ -116,10 +116,6 @@ class CharacterView(QWidget):
         self.char_layout = Ui_Form()
         self.char_layout.setupUi(self)
         self.player_model = player_model
-        self.char_layout.equipment_add.clicked.connect(self.add_equipment)
-        self.char_layout.equipment_remove.clicked.connect(self.remove_equipment)
-        self.char_layout.spell_add.clicked.connect(self.add_spell)
-        self.char_layout.spell_remove.clicked.connect(self.remove_spell)
         self.register_deligates()
 
     def register_deligates(self):
@@ -137,21 +133,21 @@ class CharacterView(QWidget):
 
     def register_signals(self, player_model):
         for value in CH:
-            logging.debug(f"Checking if {value} exists in UI")
+            logger.debug(f"Checking if {value} exists in UI")
             if hasattr(self.char_layout, value.name):
                 attribute = getattr(self.char_layout, value.name)
                 self.register_signal_for_generic_widget(
                     attribute, player_model.character_view_changed_event, value
                 )
             else:
-                logging.info(f"{value} does not exists in UI")
+                logger.info(f"{value} does not exists in UI")
 
     def character_model_changed_event(self, subject, character_property, value):
-        logging.debug(
+        logger.debug(
             f"Event fired from subject {subject} with arg {character_property}"
         )
         if not hasattr(self.char_layout, character_property):
-            logging.debug(
+            logger.debug(
                 f"CharacterView does not have a property {character_property}. Ignoring event."
             )
             return
@@ -206,71 +202,8 @@ class CharacterView(QWidget):
 
             attribute.stateChanged.connect(lambda_method)
         elif isinstance(attribute, QLabel):
-            pass  # logging.debug("QLabels shouldn't change without the Model doing so.")
+            pass  # logger.debug("QLabels shouldn't change without the Model doing so.")
         else:
             logging.warning(
                 f"Attempting to register signal of unknown type {attribute}"
             )
-
-    def add_equipment(self):
-        dialogg = QDialog()
-        dialog = Ui_EquipmentDialog()
-        dialog.setupUi(dialogg)
-        result = dialogg.exec_()
-        if result == QDialog.Rejected:
-            return
-        name = dialog.nameLineEdit.text()
-        quantity = dialog.amountSpinBox.value()
-        weight = dialog.weightLineEdit.text()
-        attuned = dialog.attunedCheckBox.isChecked()
-        self.player_model.equipment_model.add_item(
-            Equipment(name, quantity, weight, attuned)
-        )
-
-    def remove_equipment(self):
-        if not self.char_layout.EQUIPMENT_TABLE.selectionModel().hasSelection():
-            return
-        index_selected = self.char_layout.EQUIPMENT_TABLE.currentIndex().row()
-        self.player_model.equipment_model.remove_item(index_selected)
-
-    def add_spell(self):
-        dialogg = QDialog()
-        dialog = Ui_spellDialog()
-        dialog.setupUi(dialogg)
-        result = dialogg.exec_()
-        if result == QDialog.Rejected:
-            return
-
-        prepared = dialog.preparedCheckBox.isChecked()
-        name = dialog.spellNameLineEdit.text()
-        source = dialog.sourceLineEdit.text()
-        save_hit = dialog.saveAttackLineEdit.text()
-        time = dialog.timeLineEdit.text()
-        spell_range = dialog.rangeLineEdit.text()
-        components = dialog.componentsLineEdit.text()
-        duration = dialog.durationLineEdit.text()
-        page = dialog.pageReferenceLineEdit.text()
-        notes = dialog.notesLineEdit.text()
-        level = dialog.levelSpinBox.value()
-
-        self.player_model.spell_model.add_item(
-            Spell(
-                prepared,
-                name,
-                source,
-                save_hit,
-                time,
-                spell_range,
-                components,
-                duration,
-                page,
-                notes,
-                level,
-            )
-        )
-
-    def remove_spell(self):
-        if not self.char_layout.SPELL_TABLE.selectionModel().hasSelection():
-            return
-        index_selected = self.char_layout.SPELL_TABLE.currentIndex().row()
-        self.player_model.remove_equipment(index_selected)

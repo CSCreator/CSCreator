@@ -36,7 +36,7 @@ class CheckBoxDelegate(QStyledItemDelegate):
         index: PySide2.QtCore.QModelIndex,
     ):
         value = editor.isChecked()
-        logging.debug(f"Setting model {model} with value {value}")
+        logger.debug(f"Setting model {model} with value {value}")
         model.setData(index, value, Qt.EditRole)
 
     def updateEditorGeometry(

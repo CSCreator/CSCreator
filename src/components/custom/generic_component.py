@@ -67,7 +67,7 @@ class GenericComponentModel(ComponentModel):
         self.background_file = background_file
         desired_ratio = 5.0
         if properties.w / properties.h != desired_ratio:
-            logging.warning("Not ideal aspect ratio for banner")
+            logger.warning("Not ideal aspect ratio for banner")
         super(GenericComponentModel, self).__init__(properties)
 
     def create(self, box_width_pixels, box_height_pixels, player):
@@ -92,7 +92,7 @@ class GenericComponentModel(ComponentModel):
                 font_size -= 1
                 if font_size <= 1:
                     break
-            # logging.info("Changed font size to {} because {} wont fit".format(font_size, text_to_render))
+            # logger.info("Changed font size to {} because {} wont fit".format(font_size, text_to_render))
             text.add(
                 text.text(
                     text_to_render,
@@ -114,7 +114,7 @@ class GenericComponentModel(ComponentModel):
 def component_file_parser(file):
     with open(file) as json_file:
         data = json.load(json_file)
-        logging.debug(data)
+        logger.debug(data)
         component_definition = CustomComponentDefinition(
             data["background_file"], data["reference_size_x"], data["reference_size_y"]
         )

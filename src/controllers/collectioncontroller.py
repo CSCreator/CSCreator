@@ -18,12 +18,12 @@ class CollectionController(object):
     @event
     def add_player(self, player):
         self.character_controllers = player
-        logging.info(f"Added player {player.player_model.CHARACTER_NAME}")
+        logger.info(f"Added player {player.player_model.CHARACTER_NAME}")
 
     @event
     def remove_player(self, player):
         self.character_controllers = None
-        logging.info(f"Removed player {player.player_model.CHARACTER_NAME}")
+        logger.info(f"Removed player {player.player_model.CHARACTER_NAME}")
 
     def get_character_layout(self):
         qt_layout = self.character_controllers.get_layout()

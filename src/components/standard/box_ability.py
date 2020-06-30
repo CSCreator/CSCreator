@@ -23,6 +23,7 @@ def ability_name_text(img, text):
 class AbilityBox(ComponentModel):
     def __init__(self, properties, text="", style=""):
         super(AbilityBox, self).__init__(properties)
+        self.rendered_img = None
         self.text = text
         self.style = style
 

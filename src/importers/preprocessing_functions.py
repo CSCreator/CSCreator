@@ -7,6 +7,7 @@ def concat(forms, parameters):
         new_value += forms.get(parameter, "")
     return new_value
 
+
 def to_boolean_true_if(forms, parameters):
     new_value = ""
     true_value = parameters["value"]
@@ -16,7 +17,5 @@ def to_boolean_true_if(forms, parameters):
     elif isinstance(true_value, str):
         new_value = forms[field] == true_value
     else:
-        logging.error(
-            f"Unknown type {type(true_value)} for method to_boolean_true_if"
-        )
+        logging.error(f"Unknown type {type(true_value)} for method to_boolean_true_if")
     return new_value

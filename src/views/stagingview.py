@@ -25,10 +25,10 @@ class CustomQListWidgetItem(QListWidgetItem):
 
     def mouseMoveEvent(self, event):
         event.accept()
-        logging.info("CustomQListWidgetItem mouseMoveEvent")
+        logger.info("CustomQListWidgetItem mouseMoveEvent")
 
     def dragEnterEvent(self, event):
-        logging.info("dragEnterEvent CustomQListWidgetItem")
+        logger.info("dragEnterEvent CustomQListWidgetItem")
 
 
 class StagingView(QListWidget):
@@ -43,7 +43,7 @@ class StagingView(QListWidget):
         self.setAcceptDrops(True)
         self.setDropIndicatorShown(True)
         self.item_being_dragged = None
-        logging.debug("StagingView constructed")
+        logger.debug("StagingView constructed")
 
     def resizeEvent(self, event):
         logger.info("PiecesList resized")
@@ -96,7 +96,7 @@ class StagingView(QListWidget):
 
         def accept_and_add(item, event):
             self.add_component_controller(item)
-            logging.info("dropEvent")
+            logger.info("dropEvent")
             event.setDropAction(Qt.MoveAction)
             event.accept()
 
@@ -128,4 +128,4 @@ class StagingView(QListWidget):
         controller_item.component_controller = component_controller
         self.setItemWidget(controller_item, label)
         self.addItem(controller_item)
-        logging.debug("Component added")
+        logger.debug("Component added")

@@ -5,11 +5,7 @@ from PySide2.QtWidgets import QHBoxLayout
 
 from src.models.charactermodel import (
     CharacterModel,
-    Spell,
-    Equipment,
-    Attack,
 )
-from src.models.charactersubmodel import Skill, SpellSlot
 from src.views.characterview import CharacterView
 
 logger = logging.getLogger(__name__)
@@ -47,53 +43,26 @@ class CharacterController:
         # All chracter_properties in the view are linked to the model here
         self.character_view.register_signals(self.player_model)
 
+    def get_models(self):
+        return self.player_model.conversion.keys()
+
+    def get_item(self, item_type, index):
+        return self.player_model.get_item(item_type, index)
+
+    def get_n_items(self, item_type):
+        return self.player_model.get_n_items(item_type)
+
+    def add_item(self, item_type, item):
+        return self.player_model.add_item(item_type, item)
+
     def get_skills(self):
         return self.player_model.skills
 
-    def add_equipment(self, name, quantity, weight, attuned):
-        new_eq = Equipment(name, quantity, weight, attuned)
-        self.player_model.equipment_model.add_item(new_eq)
+    def get_skill(self, name):
+        return self.player_model.get_skill(name)
 
-    def add_skill(self, prof, modifier, bonus, name, custom=False):
-        new_skill = Skill(prof, modifier, bonus, name)
-        self.player_model.skills_model.add_item(new_skill)
-
-    def add_attack(self, name, attack, damage, notes):
-        new_attack = Attack(name, attack, damage, notes)
-        self.player_model.attack_model.add_item(new_attack)
-
-    def add_spellslot(self, level, n_slots):
-        new_spellslot = SpellSlot(level, n_slots)
-        self.player_model.spellslot_model.add_item(new_spellslot)
-
-    def add_spell(
-        self,
-        prepared,
-        name,
-        source,
-        save_hit,
-        time,
-        spell_range,
-        components,
-        duration,
-        page,
-        notes,
-        level,
-    ):
-        new_spell = Spell(
-            prepared,
-            name,
-            source,
-            save_hit,
-            time,
-            spell_range,
-            components,
-            duration,
-            page,
-            notes,
-            level,
-        )
-        self.player_model.spell_model.add_item(new_spell)
+    def get_attack(self, index):
+        return self.player_model.get_attack(index)
 
     def get_layout(self):
         layout = QHBoxLayout()

@@ -68,7 +68,7 @@ class SingleLineBox(ComponentModel):
         pos_x_end = total_width - linebox_end.width
         pos_y = int((total_height / 2.0) - (linebox_begin.height / 2.0))
         if pos_x_end - pos_x_mid <= 0 or linebox_mid.height <= 0:
-            logging.warning("Linebox does not have enough space")
+            logger.warning("Linebox does not have enough space")
             self.rendered_img = Image.new("RGBA", img.size, color="red")
             return self.rendered_img
         mid_stretched = linebox_mid.resize(

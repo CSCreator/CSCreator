@@ -1,6 +1,7 @@
 import logging
 
 from src.controllers.charactercontroller import CharacterController
+from src.data.pluginmanager import PluginManager, Plugin
 from src.exporters.pdfexporter import PDFExporter
 
 logger = logging.getLogger(__name__)
@@ -15,16 +16,25 @@ class MainController:
 
         self.main_view = MainView()
         self.collection_controller = CollectionController()
+        self.plugin_manager = PluginManager()
+
+        self.main_view.pdf_wizard_factory.plugin_manager = self.plugin_manager
         self.main_view.pdf_wizard_factory.import_new_player += (
             self.import_player_handler
         )
+        self.main_view.export_pdf_wizard_factory.plugin_manager = self.plugin_manager
+        self.main_view.export_pdf_wizard_factory.export_new_player += (
+            self.export_player_handler
+        )
         self.main_view.create_new_player += self.new_player_handler
-        self.main_view.export_to_sheet += self.export_sheet_handler
         self.collection_controller.add_player += self.player_added_handler
 
         # self.import_player(file_name="resc/mpmb_test.pdf")
         # self.import_player(file_name="resc/aurora.pdf")
-        self.import_player(file_name="resc/dndbeyond_extreme.pdf")
+        self.import_player(
+            file_name="resc/dndbeyond_extreme.pdf",
+            plugin=Plugin("src/data/importers/dndbeyond.json"),
+        )
         # self.import_player(file_name="resc/dndbeyond_lance_switched.pdf")
         # self.import_player(file_name="resc/dndbeyond_boring.pdf")
 
@@ -49,11 +59,9 @@ class MainController:
         self.collection_controller.add_player(player)
 
     def import_player(
-        self,
-        file_name="resc/dndbeyond_extreme.pdf",
-        definition_file="src/data/importers/dndbeyond.json",
+        self, file_name, plugin,
     ):
-        importer = PDFImporter(definition_file=definition_file)
+        importer = PDFImporter(plugin=plugin)
         importer.load(file_name)
         player_controller = importer.player
         self.collection_controller.add_player(player_controller)
@@ -61,7 +69,7 @@ class MainController:
     def player_added_handler(self, subject, arg):
         self.set_player_tab()
 
-    def export_sheet_handler(self, subject):
+    def export_player_handler(self, subject, file_name, exporter):
         current_player = self.collection_controller.character_controllers
-        exporter = PDFExporter(current_player)
+        exporter = PDFExporter(current_player, file_name, exporter)
         exporter.export()

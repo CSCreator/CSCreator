@@ -1,5 +1,5 @@
-from enum import Enum, auto
 import logging
+from enum import Enum, auto
 
 from obsub import event
 
@@ -133,13 +133,6 @@ class CH(CHName):
     SPELL_SLOTS_10 = auto()
 
 
-class SkillProficiencies(Enum):
-    No = auto()
-    Half = auto()
-    Prof = auto()
-    Eff = auto()
-
-
 class CharacterModel:
     def __init__(self):
         for value in CH:
@@ -150,6 +143,19 @@ class CharacterModel:
         self.attack_model = CustomTableModel(Attack)
         self.skills_model = CustomTableModel(Skill)
         self.spellslot_model = CustomTableModel(SpellSlot)
+        self.conversion = {
+            Spell: self.spell_model,
+            SpellSlot: self.spellslot_model,
+            Skill: self.skills_model,
+            Equipment: self.equipment_model,
+            Attack: self.attack_model,
+        }
+
+    def get_item(self, item_type, index):
+        return self.conversion[item_type].get_item_at_row(index)
+
+    def get_n_items(self, item_type):
+        return len(self.conversion[item_type].items)
 
     @event
     def set_value(self, value_name, value):
@@ -158,6 +164,21 @@ class CharacterModel:
     def character_view_changed_event(self, character_property, value):
         # Do not call set_value here, otherwise we fire an event back to the View, who has the latest character_property already
         setattr(self, character_property.name, value)
-        logging.debug(
+        logger.debug(
             f"Recieved changed character_property {character_property.name} from the view with value {value}"
         )
+
+    def get_skill(self, name):
+        skill = None
+        for this_skill in self.skills_model.items:
+            if this_skill.name == name:
+                skill = this_skill
+        return skill
+
+    def get_attack(self, index):
+        if index < len(self.attack_model.items):
+            return self.attack_model.items[index]
+        return None
+
+    def add_item(self, type, item):
+        self.conversion[type].add_item(item)

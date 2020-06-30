@@ -1,4 +1,5 @@
 import logging
+import sys
 
 from PySide2 import QtCore
 from PySide2.QtCore import QAbstractTableModel, QModelIndex
@@ -13,8 +14,12 @@ class CustomTableItemType:
     columns_names = None
     delegates = {}
 
-    def __init__(self, columns):
-        self.columns = columns
+    def __init__(self, **kwargs):
+        self.named_item_enum = None
+        self.columns = [None] * len(self.columns_names)
+        for index, column in self.columns_names.items():
+            value = kwargs.get(column, None)
+            self.set_column(index, value)
 
     def get_column(self, column):
         return self.columns[column]
@@ -25,131 +30,63 @@ class CustomTableItemType:
 
 class Attack(CustomTableItemType):
     columns_names = {
-        0: "Name",
-        1: "Attack",
-        2: "Damage",
-        3: "Notes",
+        0: "name",
+        1: "attack_bonus",
+        2: "damage",
+        3: "notes",
     }
     delegates = {}
-
-    def __init__(self, name, attack, damage, notes):
-        self.notes = notes
-        self.damage = damage
-        self.attack = attack
-        self.name = name
-        columns = [self.name, self.attack, self.damage, self.notes]
-
-        super(Attack, self).__init__(columns)
 
 
 class Equipment(CustomTableItemType):
     columns_names = {
-        0: "Quantity",
-        1: "Name",
-        2: "Weight",
-        3: "Attuned",
+        0: "quantity",
+        1: "name",
+        2: "weight",
+        3: "attuned",
     }
     delegates = {0: SpinBoxDelegate(0, 99999), 3: CheckBoxDelegate()}
-
-    def __init__(self, name, quantity, weight, attuned=False):
-        self.name = name
-        self.quantity = quantity
-        self.weight = weight
-        self.attuned = attuned
-        columns = [self.quantity, self.name, self.weight, self.attuned]
-
-        super(Equipment, self).__init__(columns)
 
 
 class Skill(CustomTableItemType):
     columns_names = {
-        0: "Prof.",
-        1: "Mod.",
-        2: "Bonus",
-        3: "Name",
+        0: "prof",
+        1: "mod",
+        2: "bonus",
+        3: "name",
         # 3: "Custom",
     }
     delegates = {}
-
-    def __init__(self, prof, modifier, bonus, name, custom=False):
-        self.prof = prof
-        self.name = name
-        self.modifier = modifier
-        self.bonus = bonus
-        columns = [self.prof, self.modifier, self.bonus, self.name]
-        super(Skill, self).__init__(columns)
 
 
 class SpellSlot(CustomTableItemType):
     columns_names = {
-        0: "Level",
-        1: "Number of slots",
+        0: "level",
+        1: "n_slots",
         # 3: "Custom",
     }
     delegates = {}
 
-    def __init__(self, level, n_slots):
-        self.level = level
-        self.n_slots = n_slots
-        columns = [self.level, self.n_slots]
-        super(SpellSlot, self).__init__(columns)
-
 
 class Spell(CustomTableItemType):
     columns_names = {
-        0: "Prepared",
-        1: "Level",
-        2: "Spell Name",
-        3: "Source",
-        4: "Save/Attack",
-        5: "Time",
-        6: "Range",
-        7: "Components",
-        8: "Duration",
-        9: "Page Reference",
-        10: "Notes",
+        0: "prepared",
+        1: "level",
+        2: "name",
+        3: "source",
+        4: "save_hit",
+        5: "time",
+        6: "spell_range",
+        7: "components",
+        8: "duration",
+        9: "page",
+        10: "notes",
     }
     delegates = {0: CheckBoxDelegate(), 1: SpinBoxDelegate(0, 99)}
 
-    def __init__(
-        self,
-        prepared,
-        name,
-        source,
-        save_hit,
-        time,
-        spell_range,
-        components,
-        duration,
-        page,
-        notes,
-        level,
-    ):
-        self.prepared = prepared
-        self.name = name
-        self.notes = notes
-        self.page = page
-        self.duration = duration
-        self.components = components
-        self.spell_range = spell_range
-        self.time = time
-        self.save_hit = save_hit
-        self.source = source
-        self.level = level
-        columns = [
-            self.prepared,
-            self.level,
-            self.name,
-            self.source,
-            self.save_hit,
-            self.time,
-            self.spell_range,
-            self.components,
-            self.duration,
-            self.page,
-            self.notes,
-        ]
-        super(Spell, self).__init__(columns)
+
+def str_to_class(classname):
+    return getattr(sys.modules[__name__], classname)
 
 
 class CustomTableModel(QAbstractTableModel):
@@ -157,11 +94,11 @@ class CustomTableModel(QAbstractTableModel):
         super(CustomTableModel, self).__init__()
         self.items = []
         if type(custom_table_item) is not type(CustomTableItemType):
-            logging.debug(f"Inserted custom_table_item invalid")
+            logger.debug(f"Inserted custom_table_item invalid")
         self.headers = custom_table_item.columns_names
         self.delegates = custom_table_item.delegates
 
-    def rowCount(self, parent):
+    def rowCount(self, parent=None):
         return len(self.items)
 
     def columnCount(self, parent):
@@ -216,3 +153,7 @@ class CustomTableModel(QAbstractTableModel):
             | QtCore.Qt.ItemIsEnabled
             | QtCore.Qt.ItemIsSelectable
         )
+
+    def get_item_at_row(self, index):
+        if index < self.rowCount():
+            return self.items[index]
