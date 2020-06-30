@@ -97,6 +97,7 @@ class CustomTableModel(QAbstractTableModel):
             logger.debug(f"Inserted custom_table_item invalid")
         self.headers = custom_table_item.columns_names
         self.delegates = custom_table_item.delegates
+        self.custom_table_item = custom_table_item
 
     def rowCount(self, parent=None):
         return len(self.items)
