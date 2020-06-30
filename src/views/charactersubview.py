@@ -2,9 +2,10 @@ import logging
 
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QTableView, QWidget, QHBoxLayout, QPushButton, QVBoxLayout, QSpacerItem, QSizePolicy, \
-    QDialog, QFormLayout, QLineEdit, QDialogButtonBox
+    QDialog, QFormLayout, QLineEdit, QDialogButtonBox, QAbstractItemView
 
 logger = logging.getLogger(__name__)
+
 
 def add_item_to_model(submodel):
     dialog = QDialog()
@@ -18,7 +19,6 @@ def add_item_to_model(submodel):
         line_edit = QLineEdit()
         form_layout.addRow(name, line_edit)
         widget_per_column[name] = line_edit
-
 
     button_box = QDialogButtonBox()
     button_box.setObjectName("buttonBox")
@@ -43,6 +43,15 @@ def add_item_to_model(submodel):
         submodel.add_item(new_item)
         logger.info(f"New item of type {item_type} added")
 
+
+def remove_item_from_model(submodel, tableview):
+    selection_model = tableview.selectionModel()
+    if selection_model.hasSelection():
+        model_index = selection_model.selectedRows()[0]
+        index = model_index.row()
+        submodel.remove_item(index)
+
+
 def get_view_for_submodel(submodel):
     main_widget = QWidget()
 
@@ -50,12 +59,17 @@ def get_view_for_submodel(submodel):
     vbox_layout = QVBoxLayout()
 
     table_view = QTableView()
+    table_view.setSelectionBehavior(QAbstractItemView.SelectRows);
     table_view.setModel(submodel)
 
     add_button = QPushButton("+")
     add_button.clicked.connect(lambda: add_item_to_model(submodel))
 
+    remove_button = QPushButton("-")
+    remove_button.clicked.connect(lambda: remove_item_from_model(submodel, table_view))
+
     vbox_layout.addWidget(add_button)
+    vbox_layout.addWidget(remove_button)
     vbox_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
     hbox_layout.addWidget(table_view)

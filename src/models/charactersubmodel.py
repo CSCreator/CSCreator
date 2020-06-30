@@ -141,7 +141,7 @@ class CustomTableModel(QAbstractTableModel):
         self.items.append(item)
         self.endInsertRows()
 
-    def remove_item(self, index):
+    def remove_item(self, index: int):
         self.beginRemoveRows(
             QModelIndex(), index, index + 1,
         )
