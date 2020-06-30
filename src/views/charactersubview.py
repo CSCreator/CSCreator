@@ -59,7 +59,8 @@ def get_view_for_submodel(submodel):
     vbox_layout = QVBoxLayout()
 
     table_view = QTableView()
-    table_view.setSelectionBehavior(QAbstractItemView.SelectRows);
+    table_view.setSelectionBehavior(QAbstractItemView.SelectRows)
+    table_view.setSelectionMode(QAbstractItemView.SingleSelection)
     table_view.setModel(submodel)
 
     add_button = QPushButton("+")
