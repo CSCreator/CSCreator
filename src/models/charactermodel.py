@@ -1,5 +1,6 @@
 import logging
 from enum import Enum, auto
+from typing import Iterator, Union, Callable, Any
 
 from obsub import event
 
@@ -10,13 +11,13 @@ from src.models.charactersubmodel import (
     Attack,
     Skill,
     SpellSlot,
-)
+    CustomTableItemType)
 
 logger = logging.getLogger(__name__)
 
 
 class CHName(Enum):
-    def _generate_next_value_(self, start, count, last_values):
+    def _generate_next_value_(self, start: int, count: int, last_values: str) -> str:
         return "CH." + self
 
 
@@ -134,7 +135,7 @@ class CH(CHName):
 
 
 class CharacterModel:
-    def __init__(self):
+    def __init__(self) -> None:
         for value in CH:
             setattr(self, value.name, None)
 
@@ -151,22 +152,23 @@ class CharacterModel:
             Attack: self.attack_model,
         }
 
-    def get_item(self, item_type, index):
+    def get_item(self, item_type: CustomTableItemType, index: int) -> CustomTableItemType:
         return self.conversion[item_type].get_item_at_row(index)
 
-    def get_items(self, item_type):
+    def get_items(self, item_type: CustomTableItemType) -> Iterator[CustomTableItemType]:
         return self.conversion[item_type].get_items()
 
     @event
-    def set_value(self, value_name, value):
+    def set_value(self, value_name: CH, value: Union[str, int, bool]):
         setattr(self, value_name, value)
 
-    def character_view_changed_event(self, character_property, value):
+    #TODO Any here indicates we need to generalize properties
+    def character_view_changed_event(self, character_property: Any, value: Callable) -> None:
         # Do not call set_value here, otherwise we fire an event back to the View, who has the latest character_property already
         setattr(self, character_property.name, value)
         logger.debug(
             f"Recieved changed character_property {character_property.name} from the view with value {value}"
         )
 
-    def add_item(self, type, item):
+    def add_item(self, type: CustomTableItemType, item: CustomTableItemType) -> None:
         self.conversion[type].add_item(item)

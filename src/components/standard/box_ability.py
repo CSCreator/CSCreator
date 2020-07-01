@@ -3,6 +3,7 @@ import logging
 from PIL import Image, ImageDraw, ImageFont
 
 from main import config
+from src.controllers.charactercontroller import CharacterController
 from src.models.componentmodel import ComponentModel
 from src.components import scale_height_to_real_size
 
@@ -21,13 +22,13 @@ def ability_name_text(img, text):
 
 
 class AbilityBox(ComponentModel):
-    def __init__(self, properties, text="", style=""):
+    def __init__(self, properties, text:str ="", style:str ="") -> None:
         super(AbilityBox, self).__init__(properties)
         self.rendered_img = None
         self.text = text
         self.style = style
 
-    def create(self, box_width_pixels, box_height_pixels, player):
+    def create(self, box_width_pixels:int, box_height_pixels:int, player: CharacterController) -> None:
         total_width = box_width_pixels
         total_height = box_height_pixels
         badge = Image.open("resc/ability_badge.png", "r")

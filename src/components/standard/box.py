@@ -36,7 +36,7 @@ class BoxController(ComponentController):
         self.total_width = -1
         self.total_height = -1
 
-    def create(self, box_width_pixels, box_height_pixels):
+    def create(self, box_width_pixels: int, box_height_pixels: int) -> sg.SVGFigure:
         self.total_width = box_width_pixels
         self.total_height = box_height_pixels
 

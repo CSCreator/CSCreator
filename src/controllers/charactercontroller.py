@@ -1,11 +1,13 @@
 import logging
 import uuid
+from typing import List
 
-from PySide2.QtWidgets import QHBoxLayout
+from PySide2.QtWidgets import QHBoxLayout, QLayout
 
 from src.models.charactermodel import (
     CharacterModel,
 )
+from src.models.charactersubmodel import CustomTableModel, CustomTableItemType
 from src.views.charactersubview import get_view_for_submodel
 from src.views.characterview import CharacterView
 
@@ -13,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 class CharacterController:
-    def __init__(self):
+    def __init__(self) -> None:
         self.uid = uuid.uuid4()
         self.player_model = CharacterModel()
         self.character_view = CharacterView(self.player_model)
@@ -35,19 +37,19 @@ class CharacterController:
         # All chracter_properties in the view are linked to the model here
         self.character_view.register_signals(self.player_model)
 
-    def get_models(self):
+    def get_models(self) -> List[CustomTableModel]:
         return self.player_model.conversion.keys()
 
-    def get_item(self, item_type, index):
+    def get_item(self, item_type: CustomTableItemType, index) -> CustomTableItemType:
         return self.player_model.get_item(item_type, index)
 
-    def get_items(self, item_type):
+    def get_items(self, item_type: CustomTableItemType) -> List[CustomTableItemType]:
         return self.player_model.get_items(item_type)
 
-    def add_item(self, item_type, item):
-        return self.player_model.add_item(item_type, item)
+    def add_item(self, item_type: CustomTableItemType, item: CustomTableItemType) -> None:
+        self.player_model.add_item(item_type, item)
 
-    def get_layout(self):
+    def get_layout(self) -> QLayout:
         layout = QHBoxLayout()
         layout.addWidget(self.character_view, 1)
         return layout

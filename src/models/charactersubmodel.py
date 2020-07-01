@@ -1,5 +1,6 @@
 import logging
 import sys
+from typing import Iterator
 
 from PySide2 import QtCore
 from PySide2.QtCore import QAbstractTableModel, QModelIndex
@@ -123,7 +124,7 @@ class CustomTableModel(QAbstractTableModel):
         else:
             return None
 
-    def setData(self, index, value, role=QtCore.Qt.EditRole):
+    def setData(self, index, value, role=QtCore.Qt.EditRole) -> bool:
         if role == QtCore.Qt.EditRole:
 
             row = index.row()
@@ -133,7 +134,7 @@ class CustomTableModel(QAbstractTableModel):
             return True
         return False
 
-    def add_item(self, item):
+    def add_item(self, item) -> None:
         index_to_insert = self.rowCount(QModelIndex())
         self.beginInsertRows(
             QModelIndex(), index_to_insert, index_to_insert + 1,
@@ -141,25 +142,25 @@ class CustomTableModel(QAbstractTableModel):
         self.items.append(item)
         self.endInsertRows()
 
-    def remove_item(self, index: int):
+    def remove_item(self, index: int) -> None:
         self.beginRemoveRows(
             QModelIndex(), index, index + 1,
         )
         self.items.pop(index)
         self.endRemoveRows()
 
-    def flags(self, index):
+    def flags(self, index: QModelIndex):
         return (
             QtCore.Qt.ItemIsEditable
             | QtCore.Qt.ItemIsEnabled
             | QtCore.Qt.ItemIsSelectable
         )
 
-    def get_item_at_row(self, index):
+    def get_item_at_row(self, index: int) -> CustomTableItemType:
         if index < self.rowCount():
             return self.items[index]
 
-    def get_items(self):
+    def get_items(self) -> Iterator[CustomTableItemType]:
         index = 0
         while index < self.rowCount():
             yield self.get_item_at_row(index)

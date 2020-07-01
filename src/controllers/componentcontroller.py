@@ -1,6 +1,7 @@
 import logging
 import uuid
 from enum import Enum
+from typing import Tuple
 
 from PySide2 import QtSvg
 from PySide2.QtGui import QIcon
@@ -82,7 +83,7 @@ class ComponentController:
         self.svg_renderer.load(QByteArray(string_image))
         logger.info("Rendered img updated")
 
-    def create_canvas(self, size):
+    def create_canvas(self, size: Tuple[int, int]):
         width_mm = config_controller.pixel_to_mm(size[0])
         height_mm = config_controller.pixel_to_mm(size[1])
         fig = sg.SVGFigure(width_mm, height_mm)

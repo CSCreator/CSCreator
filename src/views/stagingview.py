@@ -3,6 +3,7 @@ import logging
 from PySide2 import QtCore
 
 from main import config_controller
+from src.controllers.componentcontroller import ComponentController
 
 logger = logging.getLogger(__name__)
 
@@ -14,25 +15,25 @@ from PySide2.QtCore import (
     QIODevice,
     QMimeData,
     QPoint,
-)
+    QEvent)
 from PySide2.QtGui import QDrag
 from PySide2.QtWidgets import QListWidget, QListView, QListWidgetItem
 
 
 class CustomQListWidgetItem(QListWidgetItem):
-    def __init__(self):
+    def __init__(self) -> None:
         super(CustomQListWidgetItem, self).__init__()
 
-    def mouseMoveEvent(self, event):
+    def mouseMoveEvent(self, event: QEvent) -> None:
         event.accept()
         logger.info("CustomQListWidgetItem mouseMoveEvent")
 
-    def dragEnterEvent(self, event):
+    def dragEnterEvent(self, event: QEvent) -> None:
         logger.info("dragEnterEvent CustomQListWidgetItem")
 
 
 class StagingView(QListWidget):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         super(StagingView, self).__init__(parent)
         self.setDragEnabled(True)
         self.setViewMode(QListView.IconMode)
@@ -45,7 +46,7 @@ class StagingView(QListWidget):
         self.item_being_dragged = None
         logger.debug("StagingView constructed")
 
-    def resizeEvent(self, event):
+    def resizeEvent(self, event: QEvent) -> None:
         logger.info("PiecesList resized")
         spacing = self.spacing() * 2
         width = self.viewport().width() - spacing
@@ -53,16 +54,16 @@ class StagingView(QListWidget):
             width = 300
         self.setIconSize(QSize(width, width))
 
-    def dragEnterEvent(self, event):
+    def dragEnterEvent(self, event: QEvent) -> None:
         event.accept()
 
-    def dragMoveEvent(self, event):
+    def dragMoveEvent(self, event: QEvent) -> None:
         event.accept()
 
-    def dragLeaveEvent(self, event):
+    def dragLeaveEvent(self, event: QEvent) -> None:
         event.accept()
 
-    def startDrag(self, event):
+    def startDrag(self, event: QEvent) -> None:
         item = self.currentItem()
         if item is None:
             event.ignore()
@@ -88,13 +89,13 @@ class StagingView(QListWidget):
         if result:  # == QtCore.Qt.MoveAction:
             pass
 
-    def mouseMoveEvent(self, event):
+    def mouseMoveEvent(self, event: QEvent) -> None:
         self.startDrag(event)
 
-    def dropEvent(self, event):
+    def dropEvent(self, event: QEvent) -> None:
         from src.models.pagemodel import PageModel
 
-        def accept_and_add(item, event):
+        def accept_and_add(item: ComponentController, event: QEvent) -> None:
             self.add_component_controller(item)
             logger.info("dropEvent")
             event.setDropAction(Qt.MoveAction)
@@ -115,7 +116,7 @@ class StagingView(QListWidget):
         else:
             event.ignore()
 
-    def add_component_controller(self, component_controller):
+    def add_component_controller(self, component_controller: ComponentController) -> None:
         label = component_controller.get_q_svg_component_widget()
         controller_item = QListWidgetItem()
         controller_item.parent = component_controller
