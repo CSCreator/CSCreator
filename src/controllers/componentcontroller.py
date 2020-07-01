@@ -1,7 +1,7 @@
 import logging
 import uuid
 from enum import Enum
-from typing import Tuple, Union
+from typing import Tuple, Union, Any
 
 from PySide2 import QtSvg
 from PySide2.QtGui import QIcon
@@ -10,7 +10,7 @@ from exceptions import UnknownCharacterProperty
 from main import config_controller
 from src.components.properties import Properties
 from src.controllers.charactercontroller import CharacterController
-from src.models.charactermodel import CH
+from src.models.charactermodel import CHProperty
 
 logger = logging.getLogger(__name__)
 
@@ -55,7 +55,7 @@ class EditableProperty:
     def get_value(self, player: CharacterController) -> Any:
         if isinstance(self.value, str):
             return self.value
-        elif isinstance(self.value, CH):
+        elif isinstance(self.value, CHProperty):
             if player is not None:
                 return getattr(player, self.value.name)
             else:

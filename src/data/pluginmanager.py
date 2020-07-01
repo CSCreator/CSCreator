@@ -6,7 +6,7 @@ from PySide2.QtCore import QStandardPaths
 from fitz import Widget
 
 from exceptions import DefinitionFileUnreadableException
-from src.models.charactermodel import CH
+from src.models.charactermodel import CHProperty
 from src.models.charactersubmodel import str_to_class
 
 logger = logging.getLogger(__name__)
@@ -192,13 +192,13 @@ class Plugin:
         all_conversions_valid = True
         if self.key_conversion:
             for key, value in self.key_conversion.items():
-                if value not in CH._value2member_map_:
+                if value not in CHProperty._value2member_map_:
                     logger.warning(
                         f"Plugin refers to CH field {value} which does not exist"
                     )
                     all_conversions_valid = False
                 else:
-                    self.key_conversion[key] = CH(value)
+                    self.key_conversion[key] = CHProperty(value)
         return all_conversions_valid
 
     def export_character_incremental_lists(self, pdf_file, character_controller):

@@ -16,3 +16,6 @@ class InvalidFieldException(Exception):
 
 class UnknownCharacterProperty(Warning):
     pass
+
+class InvalidPropertyType(Exception):
+    pass

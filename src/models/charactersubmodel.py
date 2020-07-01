@@ -1,6 +1,6 @@
 import logging
 import sys
-from typing import Iterator, Dict
+from typing import Iterator, Dict, Any, Union
 
 from PySide2 import QtCore
 from PySide2.QtCore import QAbstractTableModel, QModelIndex
@@ -121,7 +121,7 @@ class CustomTableModel(QAbstractTableModel):
         else:
             return None
 
-    def data(self, index: int, role: QtCore.Qt) -> QVariant:
+    def data(self, index: int, role: QtCore.Qt) -> Any:
         if not index.isValid():
             return None
         elif role == QtCore.Qt.TextAlignmentRole:
