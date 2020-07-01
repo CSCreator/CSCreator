@@ -61,9 +61,9 @@ class CharacterModel:
 
     @event
     def set_value(self, value_name: CHProperty, value: Union[str, int, bool]) -> None:
-        property = self.character_properties[value_name]
-        if not isinstance(value, property.type):
-            raise InvalidPropertyType(f"Setting {value_name} of type {property.type} with value {value} of type {type(value)}")
+        character_property = self.character_properties[value_name]
+        if not isinstance(value, character_property.type):
+            raise InvalidPropertyType(f"Setting {value_name} of type {character_property.type} with value {value} of type {type(value)}")
         self.character_properties[value_name].value = value
 
     def get_ch_property(self, ch_property: CHProperty) -> Union[CharacterProperty, None]:
