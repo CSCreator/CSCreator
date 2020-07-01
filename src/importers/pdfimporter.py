@@ -62,7 +62,6 @@ class PDFImporter:
         pdf_file = PDFFile(file)
         form_fields = pdf_file.get_forms_and_values()
 
-
         form_fields = self.apply_preprocessing(form_fields)
         form_fields = self.handle_ability_order(form_fields)
 

@@ -1,8 +1,20 @@
 import logging
 
 from PySide2.QtCore import Qt
-from PySide2.QtWidgets import QTableView, QWidget, QHBoxLayout, QPushButton, QVBoxLayout, QSpacerItem, QSizePolicy, \
-    QDialog, QFormLayout, QLineEdit, QDialogButtonBox, QAbstractItemView
+from PySide2.QtWidgets import (
+    QTableView,
+    QWidget,
+    QHBoxLayout,
+    QPushButton,
+    QVBoxLayout,
+    QSpacerItem,
+    QSizePolicy,
+    QDialog,
+    QFormLayout,
+    QLineEdit,
+    QDialogButtonBox,
+    QAbstractItemView,
+)
 
 logger = logging.getLogger(__name__)
 

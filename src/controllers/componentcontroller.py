@@ -1,13 +1,15 @@
 import logging
 import uuid
 from enum import Enum
-from typing import Tuple
+from typing import Tuple, Union
 
 from PySide2 import QtSvg
 from PySide2.QtGui import QIcon
 
 from exceptions import UnknownCharacterProperty
 from main import config_controller
+from src.components.properties import Properties
+from src.controllers.charactercontroller import CharacterController
 from src.models.charactermodel import CH
 
 logger = logging.getLogger(__name__)
@@ -30,7 +32,14 @@ class PropertyTypes(Enum):
 
 
 class EditableProperty:
-    def __init__(self, property_type, description, value, owner, size_and_pos):
+    def __init__(
+        self,
+        property_type: PropertyTypes,
+        description: str,
+        value: Union[str, int, bool],
+        owner,
+        size_and_pos,
+    ) -> None:
         assert isinstance(property_type, PropertyTypes)
         assert isinstance(description, str)
         self.type = property_type
@@ -43,7 +52,7 @@ class EditableProperty:
         self.value = value
         self.owner.rendered_img = None
 
-    def get_value(self, player):
+    def get_value(self, player: CharacterController) -> Any:
         if isinstance(self.value, str):
             return self.value
         elif isinstance(self.value, CH):
@@ -56,8 +65,12 @@ class EditableProperty:
 
 
 class ComponentController:
-    def __init__(self, properties, character_controller, **kwargs):
-        super(ComponentController, self).__init__(**kwargs)
+    def __init__(
+        self,
+        properties: Properties,
+        character_controller: CharacterController,
+        **kwargs
+    ) -> None:
         self._rendered_img = None
         self.pixmap = None
         self.properties = properties

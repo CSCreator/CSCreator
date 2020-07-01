@@ -1,9 +1,10 @@
 import logging
 import sys
-from typing import Iterator
+from typing import Iterator, Dict
 
 from PySide2 import QtCore
 from PySide2.QtCore import QAbstractTableModel, QModelIndex
+from PySide2.QtWidgets import QStyledItemDelegate
 
 from src.views.itemdeligates.checkboxdelegate import CheckBoxDelegate
 from src.views.itemdeligates.spinboxdelegate import SpinBoxDelegate
@@ -12,8 +13,8 @@ logger = logging.getLogger(__name__)
 
 
 class CustomTableItemType:
-    columns_names = None
-    delegates = {}
+    columns_names: Dict[int, str] = {}
+    delegates: Dict[int, QStyledItemDelegate] = {}
 
     def __init__(self, **kwargs):
         self.named_item_enum = None
@@ -30,47 +31,50 @@ class CustomTableItemType:
 
 
 class Attack(CustomTableItemType):
-    columns_names = {
+    columns_names: Dict[int, str] = {
         0: "name",
         1: "attack_bonus",
         2: "damage",
         3: "notes",
     }
-    delegates = {}
+    delegates: Dict[int, QStyledItemDelegate] = {}
 
 
 class Equipment(CustomTableItemType):
-    columns_names = {
+    columns_names: Dict[int, str] = {
         0: "quantity",
         1: "name",
         2: "weight",
         3: "attuned",
     }
-    delegates = {0: SpinBoxDelegate(0, 99999), 3: CheckBoxDelegate()}
+    delegates: Dict[int, QStyledItemDelegate] = {
+        0: SpinBoxDelegate(0, 99999),
+        3: CheckBoxDelegate(),
+    }
 
 
 class Skill(CustomTableItemType):
-    columns_names = {
+    columns_names: Dict[int, str] = {
         0: "prof",
         1: "mod",
         2: "bonus",
         3: "name",
         # 3: "Custom",
     }
-    delegates = {}
+    delegates: Dict[int, QStyledItemDelegate] = {}
 
 
 class SpellSlot(CustomTableItemType):
-    columns_names = {
+    columns_names: Dict[int, str] = {
         0: "level",
         1: "n_slots",
         # 3: "Custom",
     }
-    delegates = {}
+    delegates: Dict[int, QStyledItemDelegate] = {}
 
 
 class Spell(CustomTableItemType):
-    columns_names = {
+    columns_names: Dict[int, str] = {
         0: "prepared",
         1: "level",
         2: "name",
@@ -83,7 +87,10 @@ class Spell(CustomTableItemType):
         9: "page",
         10: "notes",
     }
-    delegates = {0: CheckBoxDelegate(), 1: SpinBoxDelegate(0, 99)}
+    delegates: Dict[int, QStyledItemDelegate] = {
+        0: CheckBoxDelegate(),
+        1: SpinBoxDelegate(0, 99),
+    }
 
 
 def str_to_class(classname):
@@ -91,7 +98,7 @@ def str_to_class(classname):
 
 
 class CustomTableModel(QAbstractTableModel):
-    def __init__(self, custom_table_item):
+    def __init__(self, custom_table_item: CustomTableItemType) -> None:
         super(CustomTableModel, self).__init__()
         self.items = []
         if type(custom_table_item) is not type(CustomTableItemType):
@@ -100,21 +107,21 @@ class CustomTableModel(QAbstractTableModel):
         self.delegates = custom_table_item.delegates
         self.custom_table_item = custom_table_item
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent: Any = None) -> int:
         return len(self.items)
 
-    def columnCount(self, parent):
+    def columnCount(self, parent) -> int:
         return len(self.headers)
 
     def headerData(
         self, section: int, orientation: QtCore.Qt.Orientation, role: int = ...
-    ):
+    ) -> Union[None, Dict[int, str]]:
         if role == QtCore.Qt.DisplayRole and orientation == QtCore.Qt.Horizontal:
             return self.headers[section]
         else:
             return None
 
-    def data(self, index, role):
+    def data(self, index: int, role: QtCore.Qt) -> QVariant:
         if not index.isValid():
             return None
         elif role == QtCore.Qt.TextAlignmentRole:
@@ -126,7 +133,6 @@ class CustomTableModel(QAbstractTableModel):
 
     def setData(self, index, value, role=QtCore.Qt.EditRole) -> bool:
         if role == QtCore.Qt.EditRole:
-
             row = index.row()
             column = index.column()
 

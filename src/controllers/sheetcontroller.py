@@ -1,12 +1,15 @@
+from typing import List
+
 from PySide2.QtWidgets import QHBoxLayout, QLayout
 
+from src.controllers.charactercontroller import CharacterController
 from src.controllers.pagecontroller import PageController
 from src.views.sheetview import SheetView
 
 
 class SheetController:
-    def __init__(self, active_character_controller) -> None:
-        self.page_controllers = []
+    def __init__(self, active_character_controller: CharacterController) -> None:
+        self.page_controllers: List[PageController] = []
         self.add_page_controller(PageController(active_character_controller))
         self.set_active_page(0)
         self.sheet_view = None

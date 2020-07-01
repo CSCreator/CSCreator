@@ -4,9 +4,7 @@ from typing import List
 
 from PySide2.QtWidgets import QHBoxLayout, QLayout
 
-from src.models.charactermodel import (
-    CharacterModel,
-)
+from src.models.charactermodel import CharacterModel
 from src.models.charactersubmodel import CustomTableModel, CustomTableItemType
 from src.views.charactersubview import get_view_for_submodel
 from src.views.characterview import CharacterView
@@ -40,13 +38,17 @@ class CharacterController:
     def get_models(self) -> List[CustomTableModel]:
         return self.player_model.conversion.keys()
 
-    def get_item(self, item_type: CustomTableItemType, index) -> CustomTableItemType:
+    def get_item(
+        self, item_type: CustomTableItemType, index: int
+    ) -> CustomTableItemType:
         return self.player_model.get_item(item_type, index)
 
     def get_items(self, item_type: CustomTableItemType) -> List[CustomTableItemType]:
         return self.player_model.get_items(item_type)
 
-    def add_item(self, item_type: CustomTableItemType, item: CustomTableItemType) -> None:
+    def add_item(
+        self, item_type: CustomTableItemType, item: CustomTableItemType
+    ) -> None:
         self.player_model.add_item(item_type, item)
 
     def get_layout(self) -> QLayout:

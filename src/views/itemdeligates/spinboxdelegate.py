@@ -4,7 +4,12 @@ import PySide2
 
 logger = logging.getLogger(__name__)
 from PySide2.QtCore import Qt, QModelIndex
-from PySide2.QtWidgets import QStyledItemDelegate, QSpinBox, QWidget, QStyleOptionViewItem
+from PySide2.QtWidgets import (
+    QStyledItemDelegate,
+    QSpinBox,
+    QWidget,
+    QStyleOptionViewItem,
+)
 
 
 class SpinBoxDelegate(QStyledItemDelegate):
@@ -14,10 +19,7 @@ class SpinBoxDelegate(QStyledItemDelegate):
         self.max = max_value
 
     def createEditor(
-            self,
-            parent: QWidget,
-            option: QStyleOptionViewItem,
-            index: QModelIndex,
+        self, parent: QWidget, option: QStyleOptionViewItem, index: QModelIndex,
     ) -> PySide2.QtWidgets.QWidget:
         editor = QSpinBox(parent)
         editor.setFrame(False)
@@ -26,25 +28,25 @@ class SpinBoxDelegate(QStyledItemDelegate):
         return editor
 
     def setEditorData(
-            self, editor: PySide2.QtWidgets.QWidget, index: QModelIndex
-    ):
+        self, editor: PySide2.QtWidgets.QWidget, index: QModelIndex
+    ) -> None:
         value = index.model().data(index, Qt.EditRole)
         editor.setValue(int(value))
 
     def setModelData(
-            self,
-            editor: PySide2.QtWidgets.QSpinBox,
-            model: PySide2.QtCore.QAbstractItemModel,
-            index: PySide2.QtCore.QModelIndex,
-    ):
+        self,
+        editor: PySide2.QtWidgets.QSpinBox,
+        model: PySide2.QtCore.QAbstractItemModel,
+        index: PySide2.QtCore.QModelIndex,
+    ) -> None:
         value = editor.value()
         logger.debug(f"Setting model {model} with value {value}")
         model.setData(index, value, Qt.EditRole)
 
     def updateEditorGeometry(
-            self,
-            editor: PySide2.QtWidgets.QWidget,
-            option: PySide2.QtWidgets.QStyleOptionViewItem,
-            index: PySide2.QtCore.QModelIndex,
-    ):
+        self,
+        editor: PySide2.QtWidgets.QWidget,
+        option: PySide2.QtWidgets.QStyleOptionViewItem,
+        index: PySide2.QtCore.QModelIndex,
+    ) -> None:
         editor.setGeometry(option.rect)

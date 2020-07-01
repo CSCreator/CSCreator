@@ -36,13 +36,12 @@ class HardcodedListParser:
                 forms_values = pdf_file.forms_and_values
                 value = forms_values.get(form_name)
                 if not value:
-                    #TODO handle enums here
+                    # TODO handle enums here
                     value = form_name
 
                 submodel_item.set_column(column_index, value)
-            #TODO if submodel_item is completely None or EnumNames, do not add
+            # TODO if submodel_item is completely None or EnumNames, do not add
             character_controller.add_item(self.item_class, submodel_item)
-
 
     def parse_export(self, pdf_file, character_controller):
         character_submodels = character_controller.get_models()
@@ -51,12 +50,16 @@ class HardcodedListParser:
         for current_item in character_controller.get_items(self.item_class):
             current_item_enum = current_item.named_item_enum
             if not current_item_enum:
-                logger.warning(f"Trying to export fixed item {self.item_class}, but no named_item_enum_set. Do not know where to place")
+                logger.warning(
+                    f"Trying to export fixed item {self.item_class}, but no named_item_enum_set. Do not know where to place"
+                )
                 continue
 
             current_item_forms = self.items_to_convert.get(current_item_enum)
             if not current_item_forms:
-                logger.warning(f"Current_item_enum {current_item_enum} not found in self.items_to_convert")
+                logger.warning(
+                    f"Current_item_enum {current_item_enum} not found in self.items_to_convert"
+                )
                 continue
 
             for column_index in current_item.columns_names:
@@ -65,22 +68,6 @@ class HardcodedListParser:
                 field_to_set = current_item_forms.get(column_name)
                 if field_to_set:
                     pdf_file.set_field(field_to_set, value)
-
-    def get_candidate_key(self, column_name, index, forms):
-        if self.column_to_form is None:
-            return None
-        unformatted_fields = self.column_to_form.get(column_name)
-        if unformatted_fields is None:
-            return None
-
-        formatted_fields = [field.format(index) for field in unformatted_fields]
-        for formatted_field in formatted_fields:
-            if formatted_field in self.hardcoded_keys:
-                return self.hardcoded_keys[formatted_field]
-            if formatted_field in forms:
-                return formatted_field
-
-        return None
 
 
 class IncrementalListParser:
@@ -115,13 +102,17 @@ class IncrementalListParser:
         character_submodels = character_controller.get_models()
         if self.item_class not in character_submodels:
             return
-        for item_index, current_item in enumerate(character_controller.get_items(self.item_class)):
+        for item_index, current_item in enumerate(
+            character_controller.get_items(self.item_class)
+        ):
             if self.zero_indexed:
                 item_index += 1
             for column_index in current_item.columns_names:
                 value = current_item.get_column(column_index)
                 column_name = current_item.columns_names[column_index]
-                field_to_set = self.get_candidate_key(column_name, item_index, pdf_file.forms)
+                field_to_set = self.get_candidate_key(
+                    column_name, item_index, pdf_file.forms
+                )
                 if field_to_set:
                     pdf_file.set_field(field_to_set, value)
 

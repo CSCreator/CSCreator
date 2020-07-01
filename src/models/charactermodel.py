@@ -11,7 +11,8 @@ from src.models.charactersubmodel import (
     Attack,
     Skill,
     SpellSlot,
-    CustomTableItemType)
+    CustomTableItemType,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -152,18 +153,24 @@ class CharacterModel:
             Attack: self.attack_model,
         }
 
-    def get_item(self, item_type: CustomTableItemType, index: int) -> CustomTableItemType:
+    def get_item(
+        self, item_type: CustomTableItemType, index: int
+    ) -> CustomTableItemType:
         return self.conversion[item_type].get_item_at_row(index)
 
-    def get_items(self, item_type: CustomTableItemType) -> Iterator[CustomTableItemType]:
+    def get_items(
+        self, item_type: CustomTableItemType
+    ) -> Iterator[CustomTableItemType]:
         return self.conversion[item_type].get_items()
 
     @event
-    def set_value(self, value_name: CH, value: Union[str, int, bool]):
+    def set_value(self, value_name: CH, value: Union[str, int, bool]) -> None:
         setattr(self, value_name, value)
 
-    #TODO Any here indicates we need to generalize properties
-    def character_view_changed_event(self, character_property: Any, value: Callable) -> None:
+    # TODO Any here indicates we need to generalize properties
+    def character_view_changed_event(
+        self, character_property: Any, value: Callable
+    ) -> None:
         # Do not call set_value here, otherwise we fire an event back to the View, who has the latest character_property already
         setattr(self, character_property.name, value)
         logger.debug(

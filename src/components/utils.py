@@ -6,7 +6,7 @@ from PIL import Image
 from main import config_controller
 
 
-def scale_width_to_real_size(img: Image, target_size_mm: Union[float, int]):
+def scale_width_to_real_size(img: Image, target_size_mm: Union[float, int]) -> Image:
     scale_to_pixels = config_controller.mm_to_pixel(target_size_mm)
     factor = scale_to_pixels / img.width
     new_width = img.width * factor
@@ -17,7 +17,7 @@ def scale_width_to_real_size(img: Image, target_size_mm: Union[float, int]):
     return img
 
 
-def scale_height_to_real_size(img: Image, target_size_mm: Union[float, int]):
+def scale_height_to_real_size(img: Image, target_size_mm: Union[float, int]) -> Image:
     scale_to_pixels = config_controller.mm_to_pixel(target_size_mm)
     factor = scale_to_pixels / img.height
     new_width = img.width * factor

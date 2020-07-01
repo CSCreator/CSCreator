@@ -32,7 +32,15 @@ from PySide2.QtGui import (
     QPixmap,
     QRadialGradient,
 )
-from PySide2.QtWidgets import QVBoxLayout, QFormLayout, QLabel, QCheckBox, QSpinBox, QLineEdit, QDialogButtonBox
+from PySide2.QtWidgets import (
+    QVBoxLayout,
+    QFormLayout,
+    QLabel,
+    QCheckBox,
+    QSpinBox,
+    QLineEdit,
+    QDialogButtonBox,
+)
 
 
 class Ui_spellDialog(object):

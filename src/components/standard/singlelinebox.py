@@ -1,5 +1,6 @@
 import logging
 
+from src.components.properties import Properties
 from src.controllers.charactercontroller import CharacterController
 
 logger = logging.getLogger(__name__)
@@ -31,7 +32,7 @@ linebox = {
 
 
 class SingleLineBox(ComponentModel):
-    def __init__(self, properties, text="", style="standard") -> None:
+    def __init__(self, properties: Properties, text="", style="standard") -> None:
         super(SingleLineBox, self).__init__(properties)
         self.text = text
         self.style = style
@@ -42,7 +43,9 @@ class SingleLineBox(ComponentModel):
         )
         self.editable_properties.append(self.header_property)
 
-    def create(self, box_width_pixels: int, box_height_pixels: int, player: CharacterController):
+    def create(
+        self, box_width_pixels: int, box_height_pixels: int, player: CharacterController
+    ) -> Image:
         total_width = box_width_pixels
         total_height = box_height_pixels
         linebox_begin = Image.open(linebox[self.style]["begin"]["file"], "r")

@@ -15,9 +15,10 @@ from PySide2.QtCore import (
     QIODevice,
     QMimeData,
     QPoint,
-    QEvent)
+    QEvent,
+)
 from PySide2.QtGui import QDrag
-from PySide2.QtWidgets import QListWidget, QListView, QListWidgetItem
+from PySide2.QtWidgets import QListWidget, QListView, QListWidgetItem, QWidget
 
 
 class CustomQListWidgetItem(QListWidgetItem):
@@ -33,7 +34,7 @@ class CustomQListWidgetItem(QListWidgetItem):
 
 
 class StagingView(QListWidget):
-    def __init__(self, parent=None) -> None:
+    def __init__(self, parent: QWidget = None) -> None:
         super(StagingView, self).__init__(parent)
         self.setDragEnabled(True)
         self.setViewMode(QListView.IconMode)
@@ -116,7 +117,9 @@ class StagingView(QListWidget):
         else:
             event.ignore()
 
-    def add_component_controller(self, component_controller: ComponentController) -> None:
+    def add_component_controller(
+        self, component_controller: ComponentController
+    ) -> None:
         label = component_controller.get_q_svg_component_widget()
         controller_item = QListWidgetItem()
         controller_item.parent = component_controller
