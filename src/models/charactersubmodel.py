@@ -6,14 +6,31 @@ from PySide2 import QtCore
 from PySide2.QtCore import QAbstractTableModel, QModelIndex
 from PySide2.QtWidgets import QStyledItemDelegate
 
+from exceptions import InvalidPropertyType
 from src.views.itemdeligates.checkboxdelegate import CheckBoxDelegate
 from src.views.itemdeligates.spinboxdelegate import SpinBoxDelegate
 
 logger = logging.getLogger(__name__)
 
+def standard_type_conversion(value, type):
+    if isinstance(value, type):
+        return value
+    elif isinstance(value, str) and type is bool:
+        return bool(value)
+    elif value is None and type is bool:
+        return False
+    elif isinstance(value, int) and type is str:
+        return str(value)
+    elif isinstance(value, str) and type is int:
+        print(int)
+        return int(value)
+    else:
+        return value
+
 
 class CustomTableItemType:
     columns_names: Dict[int, str] = {}
+    columns_types: Dict[int, type] = {}
     delegates: Dict[int, QStyledItemDelegate] = {}
 
     def __init__(self, **kwargs):
@@ -27,6 +44,10 @@ class CustomTableItemType:
         return self.columns[column]
 
     def set_column(self, column, value):
+        column_type = self.columns_types[column]
+        value = standard_type_conversion(value, column_type)
+        if not isinstance(value, column_type) and value is not None:
+            raise InvalidPropertyType(f"Submodel of type {self.named_item_enum} column {column} is of type {column_type} while value being set is a {type(value)} {value}")
         self.columns[column] = value
 
 
@@ -37,6 +58,12 @@ class Attack(CustomTableItemType):
         2: "damage",
         3: "notes",
     }
+    columns_types: Dict[int, type] = {
+        0: str,
+        1: str,
+        2: str,
+        3: str,
+    }
     delegates: Dict[int, QStyledItemDelegate] = {}
 
 
@@ -46,6 +73,12 @@ class Equipment(CustomTableItemType):
         1: "name",
         2: "weight",
         3: "attuned",
+    }
+    columns_types: Dict[int, type] = {
+        0: int,
+        1: str,
+        2: str,
+        3: bool,
     }
     delegates: Dict[int, QStyledItemDelegate] = {
         0: SpinBoxDelegate(0, 99999),
@@ -61,6 +94,12 @@ class Skill(CustomTableItemType):
         3: "name",
         # 3: "Custom",
     }
+    columns_types: Dict[int, type] = {
+        0: bool,
+        1: str,
+        2: int,
+        3: str,
+    }
     delegates: Dict[int, QStyledItemDelegate] = {}
 
 
@@ -69,6 +108,10 @@ class SpellSlot(CustomTableItemType):
         0: "level",
         1: "n_slots",
         # 3: "Custom",
+    }
+    columns_types: Dict[int, type] = {
+        0: int,
+        1: int,
     }
     delegates: Dict[int, QStyledItemDelegate] = {}
 
@@ -86,6 +129,19 @@ class Spell(CustomTableItemType):
         8: "duration",
         9: "page",
         10: "notes",
+    }
+    columns_types: Dict[int, type] = {
+        0: bool,
+        1: int,
+        2: str,
+        3: str,
+        4: str,
+        5: str,
+        6: str,
+        7: str,
+        8: str,
+        9: str,
+        10: str,
     }
     delegates: Dict[int, QStyledItemDelegate] = {
         0: CheckBoxDelegate(),

@@ -68,7 +68,7 @@ class PDFFile:
             value = bool(value)
         elif value_type is not form_type:
             logging.warning(
-                f"Setting value with type {value_type} to field with type {form_type}"
+                f"Setting value with type {value_type} to field {field_name_to_set} with type {form_type}"
             )
             value = str(value)
         form_to_set.text_fontsize = 0
