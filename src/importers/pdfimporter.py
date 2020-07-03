@@ -52,6 +52,7 @@ class PDFImporter:
         form_fields = pdf_file.get_forms_and_values()
 
         form_fields = self.apply_preprocessing(form_fields)
+        pdf_file = self.plugin.override_values(pdf_file)
         form_fields = self.handle_ability_order(form_fields)
 
         for key in list(form_fields.keys()):

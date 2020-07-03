@@ -37,7 +37,7 @@ class HardcodedListParser:
                 value = forms_values.get(form_name)
                 if not value:
                     # TODO handle enums here
-                    value = form_name
+                    value = None
 
                 submodel_item.set_column(column_index, value)
             # TODO if submodel_item is completely None or EnumNames, do not add
@@ -79,6 +79,7 @@ class IncrementalListParser:
         self.max_items = incremental_lists.get("max_items")
         self.zero_indexed = incremental_lists.get("zero_indexed")
         self.hardcoded_keys = incremental_lists.get("hardcoded_keys")
+        self.header_key = incremental_lists.get("header_key")
 
     def import_incremental_list(self, pdf_file, character_controller):
         for i in range(self.max_items):
@@ -162,6 +163,7 @@ class Plugin:
         self.keys_to_ignore = definition.get("keys_to_ignore", None)
         self.wildcards_to_ignore = definition.get("wildcards_to_ignore", None)
         self.pre_processing = definition.get("pre_processing", None)
+        self.override = definition.get("override", None)
 
         self.incremental_lists = []
 
@@ -187,6 +189,12 @@ class Plugin:
             self.valid = True
         else:
             self.valid = False
+
+    def override_values(self, pdf_file):
+        for key, value in pdf_file.forms_and_values.items():
+            if value in self.override:
+                pdf_file.forms_and_values[key] = self.override[value]
+        return pdf_file
 
     def verify_conversions(self):
         all_conversions_valid = True

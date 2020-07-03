@@ -13,20 +13,24 @@ from src.views.itemdeligates.spinboxdelegate import SpinBoxDelegate
 logger = logging.getLogger(__name__)
 
 def standard_type_conversion(value, type):
-    if isinstance(value, type):
-        return value
-    elif isinstance(value, str) and type is bool:
-        return bool(value)
-    elif value is None and type is bool:
-        return False
-    elif isinstance(value, int) and type is str:
-        return str(value)
-    elif isinstance(value, str) and type is int:
-        print(int)
-        return int(value)
-    else:
-        return value
-
+    try:
+        if isinstance(value, type):
+            return value
+        elif isinstance(value, str) and type is bool:
+            return bool(value)
+        elif value is None and type is bool:
+            return False
+        elif isinstance(value, int) and type is str:
+            return str(value)
+        elif value == '' and type is int:
+            return 0
+        elif isinstance(value, str) and type is int:
+            return int(value)
+        else:
+            return value
+    except ValueError:
+        logger.error(f"Value {value} cannot be casted to {type}")
+        return None
 
 class CustomTableItemType:
     columns_names: Dict[int, str] = {}
