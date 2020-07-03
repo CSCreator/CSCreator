@@ -69,9 +69,8 @@ class CharacterModel:
     def get_ch_property(self, ch_property: CHProperty) -> Union[CharacterProperty, None]:
         return self.character_properties.get(ch_property)
 
-    # TODO Any here indicates we need to generalize properties
     def character_view_changed_event(
-            self, character_property: Any, value: Callable
+            self, character_property: CharacterProperty, value: Callable
     ) -> None:
         # Do not call set_value here, otherwise we fire an event back to the View, who has the latest character_property already
         setattr(self, character_property.name, value)

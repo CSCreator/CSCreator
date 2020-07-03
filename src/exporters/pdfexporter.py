@@ -78,8 +78,8 @@ class PDFExporter:
                 logger.info(f"Value {ch_candidate} is not a valid CH")
                 continue
             ch = CHProperty(ch_candidate)
-            #TODO chaining
-            value = self.player_controller.player_model.get_ch_property(ch).value
+            ch_property = self.player_controller.player_model.get_ch_property(ch)
+            value = ch_property.value
             pdf_file.set_field(field, value)
 
         # TODO maybe go to a model where we do not keep track of set fields and check it at another place (plugin?)

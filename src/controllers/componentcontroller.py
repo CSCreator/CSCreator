@@ -63,6 +63,11 @@ class EditableProperty:
         else:
             raise UnknownCharacterProperty("Unknown type of character_property passed")
 
+def create_canvas(size: Tuple[int, int]):
+    width_mm = config_controller.pixel_to_mm(size[0])
+    height_mm = config_controller.pixel_to_mm(size[1])
+    fig = sg.SVGFigure(width_mm, height_mm)
+    return fig
 
 class ComponentController:
     def __init__(
@@ -96,11 +101,7 @@ class ComponentController:
         self.svg_renderer.load(QByteArray(string_image))
         logger.info("Rendered img updated")
 
-    def create_canvas(self, size: Tuple[int, int]):
-        width_mm = config_controller.pixel_to_mm(size[0])
-        height_mm = config_controller.pixel_to_mm(size[1])
-        fig = sg.SVGFigure(width_mm, height_mm)
-        return fig
+
 
     def create_canvas_from_svg(self, file):
         background = sg.fromfile(file)

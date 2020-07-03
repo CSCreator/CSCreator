@@ -29,14 +29,10 @@ class MainController:
         self.main_view.create_new_player += self.new_player_handler
         self.collection_controller.add_player += self.player_added_handler
 
-        # self.import_player(file_name="resc/mpmb_test.pdf")
-        # self.import_player(file_name="resc/aurora.pdf")
         self.import_player(
             file_name="resc/dndbeyond_extreme.pdf",
             plugin=Plugin("src/data/importers/dndbeyond.json"),
         )
-        # self.import_player(file_name="resc/dndbeyond_lance_switched.pdf")
-        # self.import_player(file_name="resc/dndbeyond_boring.pdf")
 
         self.set_sheet_layout()
 
