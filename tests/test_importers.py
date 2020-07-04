@@ -1,8 +1,5 @@
-import sys
 
-from PySide2.QtWidgets import QApplication
-
-from src.data.pluginmanager import PluginManager, Plugin
+from src.data.pluginmanager import Plugin
 from src.importers.pdfimporter import PDFImporter
 
 
