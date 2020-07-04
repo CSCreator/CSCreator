@@ -5,3 +5,4 @@ PyMuPDF
 PyYAML
 obsub
 svgwrite
+pytest
