@@ -1,7 +1,7 @@
 import logging
 
 from PySide2.QtCore import QStandardPaths, Qt
-from PySide2.QtGui import QDesktopServices
+from PySide2.QtGui import QDesktopServices, QKeySequence
 from obsub import event
 
 from src.exporters.exportview import ExportPdfWizardFactory
@@ -27,6 +27,8 @@ class MainView(QMainWindow):
 
         self.setup_menus()
 
+        self.character_tab = QWidget()
+        self.sheet_tab = QWidget()
         self.setup_tabs()
 
         self.setWindowTitle("Charactersheet Creator")
@@ -52,7 +54,7 @@ class MainView(QMainWindow):
         file_menu = self.menuBar().addMenu("&File")
 
         exit_action = file_menu.addAction("E&xit")
-        exit_action.setShortcut("Ctrl+Q")
+        exit_action.setShortcut(QKeySequence("Ctrl+Q"))
 
         character_menu = self.menuBar().addMenu("&Character")
         import_action = character_menu.addAction("&Import from PDF")
@@ -79,8 +81,6 @@ class MainView(QMainWindow):
     def setup_tabs(self):
 
         # Initialize tab screen
-        self.character_tab = QWidget()
-        self.sheet_tab = QWidget()
         self.tabs.resize(300, 200)
 
         # Add tabs

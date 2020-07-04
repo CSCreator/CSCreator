@@ -9,7 +9,7 @@ from src.models.characterenums import CHProperty
 logger = logging.getLogger(__name__)
 
 
-class CollectionController(object):
+class CollectionController:
     def __init__(self):
         self.character_controllers = None
         self.active_character_controller = None

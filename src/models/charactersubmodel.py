@@ -1,5 +1,6 @@
 import logging
 import sys
+from abc import abstractmethod, ABC
 from typing import Iterator, Dict, Any, Union
 
 from PySide2 import QtCore
@@ -11,6 +12,7 @@ from src.views.itemdeligates.checkboxdelegate import CheckBoxDelegate
 from src.views.itemdeligates.spinboxdelegate import SpinBoxDelegate
 
 logger = logging.getLogger(__name__)
+
 
 def standard_type_conversion(value, type):
     try:
@@ -32,10 +34,23 @@ def standard_type_conversion(value, type):
         logger.error(f"Value {value} cannot be casted to {type}")
         return None
 
-class CustomTableItemType:
-    columns_names: Dict[int, str] = {}
-    columns_types: Dict[int, type] = {}
-    delegates: Dict[int, QStyledItemDelegate] = {}
+
+class CustomTableItemType(ABC):
+
+    @property
+    @abstractmethod
+    def columns_names(self) -> Dict[int, str]:
+        pass
+
+    @property
+    @abstractmethod
+    def columns_types(self) -> Dict[int, type]:
+        pass
+
+    @property
+    @abstractmethod
+    def delegates(self) -> Dict[int, QStyledItemDelegate]:
+        pass
 
     def __init__(self, **kwargs):
         self.named_item_enum = None
@@ -51,7 +66,8 @@ class CustomTableItemType:
         column_type = self.columns_types[column]
         value = standard_type_conversion(value, column_type)
         if not isinstance(value, column_type) and value is not None:
-            raise InvalidPropertyType(f"Submodel of type {self.named_item_enum} column {column} is of type {column_type} while value being set is a {type(value)} {value}")
+            raise InvalidPropertyType(
+                f"Submodel of type {self.named_item_enum} column {column} is of type {column_type} while value being set is a {type(value)} {value}")
         self.columns[column] = value
 
 
@@ -170,26 +186,23 @@ class CustomTableModel(QAbstractTableModel):
     def rowCount(self, parent: Any = None) -> int:
         return len(self.items)
 
-    def columnCount(self, parent) -> int:
+    def columnCount(self, parent: Any) -> int:
         return len(self.headers)
 
     def headerData(
-        self, section: int, orientation: QtCore.Qt.Orientation, role: int = ...
+            self, section: int, orientation: QtCore.Qt.Orientation, role: int = ...
     ) -> Union[None, Dict[int, str]]:
         if role == QtCore.Qt.DisplayRole and orientation == QtCore.Qt.Horizontal:
             return self.headers[section]
-        else:
-            return None
 
-    def data(self, index: int, role: QtCore.Qt) -> Any:
+
+    def data(self, index: QtCore.QModelIndex, role: int = QtCore.Qt.ItemDataRole.DisplayRole) -> Any:
         if not index.isValid():
             return None
         elif role == QtCore.Qt.TextAlignmentRole:
             return QtCore.Qt.AlignLeft
-        elif role == QtCore.Qt.DisplayRole or role == QtCore.Qt.EditRole:
+        elif role in [QtCore.Qt.DisplayRole, QtCore.Qt.EditRole]:
             return self.items[index.row()].get_column(index.column())
-        else:
-            return None
 
     def setData(self, index, value, role=QtCore.Qt.EditRole) -> bool:
         if role == QtCore.Qt.EditRole:
@@ -217,9 +230,9 @@ class CustomTableModel(QAbstractTableModel):
 
     def flags(self, index: QModelIndex):
         return (
-            QtCore.Qt.ItemIsEditable
-            | QtCore.Qt.ItemIsEnabled
-            | QtCore.Qt.ItemIsSelectable
+                QtCore.Qt.ItemIsEditable
+                | QtCore.Qt.ItemIsEnabled
+                | QtCore.Qt.ItemIsSelectable
         )
 
     def get_item_at_row(self, index: int) -> CustomTableItemType:
