@@ -77,7 +77,7 @@ class ComponentController:
         **kwargs
     ) -> None:
         self._rendered_img = None
-        self.pixmap = None
+        self.pixmap: QIcon = QIcon()
         self.properties = properties
         self.editable_properties = []
         self.uid = uuid.uuid4()
