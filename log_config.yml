@@ -15,13 +15,15 @@ handlers:
     formatter: precise
     filename: logs/log_info.log
     level: INFO
-    backupCount: 1
+    backupCount: 3
+    mode: w+
   debugfile:
     class : logging.handlers.RotatingFileHandler
     formatter: precise
     level   : DEBUG
     filename: logs/log_debug.log
-    mode: a
+    backupCount: 3
+    mode: w+
 root:
   level     : DEBUG
   handlers  : [console, file, debugfile]
