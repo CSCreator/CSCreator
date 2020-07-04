@@ -243,3 +243,8 @@ class PluginManager:
                     plugins.append(plugin)
 
         return plugins
+
+    def get_importer(self, name: str) -> Plugin:
+        for importer in self.importers:
+            if importer.name == name:
+                return importer

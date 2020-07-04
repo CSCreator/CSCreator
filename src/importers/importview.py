@@ -26,7 +26,7 @@ class PdfWizardFactory:
         self.plugin_manager = None
 
     @event
-    def import_new_player(self, file, importer):
+    def import_new_player(self, file, F):
         logger.info(f"New import request for {file} with {importer}")
 
     def create(self, parent):
