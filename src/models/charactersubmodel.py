@@ -25,7 +25,7 @@ def standard_type_conversion(value, type):
         elif isinstance(value, int) and type is str:
             return str(value)
         elif value == '' and type is int:
-            return 0
+            return None
         elif isinstance(value, str) and type is int:
             return int(value)
         else:

@@ -129,7 +129,6 @@ class CHProperty(CHPropertyName):
     SKIN = auto()
     EYES = auto()
     HAIR = auto()
-    CHARACTER_IMAGE = auto()
     ALLIES_ORGANIZATIONS = auto()
     PERSONALITY_TRAITS = auto()
     IDEALS = auto()
@@ -221,7 +220,6 @@ ch_reader_friendly_name = {
     CHProperty.SKIN: "Skin",
     CHProperty.EYES: "Eyes",
     CHProperty.HAIR: "Hair",
-    CHProperty.CHARACTER_IMAGE: "Character Image",
     CHProperty.ALLIES_ORGANIZATIONS: "Allies & Organizations",
     CHProperty.PERSONALITY_TRAITS: "Personlity Traits",
     CHProperty.IDEALS: "Ideals",
@@ -313,7 +311,6 @@ ch_property_type = {
     CHProperty.SKIN: str,
     CHProperty.EYES: str,
     CHProperty.HAIR: str,
-    CHProperty.CHARACTER_IMAGE: str,
     CHProperty.ALLIES_ORGANIZATIONS: str,
     CHProperty.PERSONALITY_TRAITS: str,
     CHProperty.IDEALS: str,
@@ -323,7 +320,7 @@ ch_property_type = {
     CHProperty.BACKSTORY: str,
     CHProperty.ADDITIONAL_NOTES: str,
     CHProperty.SPELLCASTINGABILITY0: str,
-    CHProperty.SPELLSAVEDC0: str,
-    CHProperty.SPELLATKBONUS0: int,
-    CHProperty.SPELLCASTINGCLASS0: str,
+    CHProperty.SPELLSAVEDC0: str, # TODO When multiclassing, this is a string
+    CHProperty.SPELLATKBONUS0: str, # TODO When multiclassing, this is a string
+    CHProperty.SPELLCASTINGCLASS0: str, # TODO When multiclassing, this is a string
 }

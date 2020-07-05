@@ -58,8 +58,9 @@ def standard_character_properties():
     character_properties[CHProperty.ABILITYSAVEDC2].property_value = 14
     character_properties[CHProperty.SPEED].property_value = "30 ft. (Walking)"
     character_properties[CHProperty.MAX_HP].property_value = 164
-    character_properties[CHProperty.CURRENT_HP].property_value = ""
-    character_properties[CHProperty.TEMP_HP].property_value = ""
+    character_properties[
+        CHProperty.CURRENT_HP].property_value = None  # TODO figure out a more gracious way to handle 0/null
+    character_properties[CHProperty.TEMP_HP].property_value = None
     character_properties[CHProperty.TOTAL_HIT_DICE].property_value = "20d10"
     character_properties[CHProperty.HIT_DICE].property_value = ""
     character_properties[CHProperty.SUCCESSFUL_SAVE_1].property_value = True
@@ -69,7 +70,7 @@ def standard_character_properties():
     character_properties[CHProperty.FAILED_SAVE_2].property_value = False
     character_properties[CHProperty.FAILED_SAVE_3].property_value = False
     character_properties[CHProperty.PROFICIENCIES_LANGUAGES].property_value = '''Proficiencies
-
+ 
 Languages'''
     character_properties[CHProperty.ACTIONS].property_value = "Actions"
     character_properties[CHProperty.FEATURES_TRAITS].property_value = '''Features
@@ -104,8 +105,8 @@ Nobody stays angry at me or around me for long, since I can defuse any amount of
 This is multiline.'''
     character_properties[CHProperty.ADDITIONAL_NOTES].property_value = '''Other notes and such.'''
     character_properties[CHProperty.SPELLCASTINGABILITY0].property_value = "INT"
-    character_properties[CHProperty.SPELLSAVEDC0].property_value = 17
-    character_properties[CHProperty.SPELLATKBONUS0].property_value = 9
+    character_properties[CHProperty.SPELLSAVEDC0].property_value = "17"
+    character_properties[CHProperty.SPELLATKBONUS0].property_value = "+9"
     character_properties[CHProperty.SPELLCASTINGCLASS0].property_value = "Fighter"
 
     return character_properties

@@ -64,7 +64,7 @@ class CharacterModel:
         character_property = self.character_properties[value_name]
         value = standard_type_conversion(value, character_property.type)
 
-        if not isinstance(value, character_property.type):
+        if not isinstance(value, character_property.type) and value:
             raise InvalidPropertyType(
                 f"Setting {value_name} of type {character_property.type} with value {value} of type {type(value)}")
         self.character_properties[value_name].property_value = value
