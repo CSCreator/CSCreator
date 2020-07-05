@@ -25,6 +25,9 @@ class CharacterProperty:
     type: type
     property_value: Union[str, int, bool, None] = None
 
+    def __str__(self):
+        return f'{self.knownchproperty_value}-{self.type}: {self.property_value}'
+
 
 class CharacterModel:
     def __init__(self) -> None:
