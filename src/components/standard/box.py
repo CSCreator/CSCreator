@@ -1,12 +1,13 @@
 import logging
 
+from main import config_controller
 from src.components.utils import unit_str_to_float
 from src.controllers.componentcontroller import (
     ComponentController,
     EditableProperty,
     PropertyTypes,
+    create_canvas,
 )
-from main import config_controller
 
 logger = logging.getLogger(__name__)
 
@@ -36,11 +37,11 @@ class BoxController(ComponentController):
         self.total_width = -1
         self.total_height = -1
 
-    def create(self, box_width_pixels, box_height_pixels):
+    def create(self, box_width_pixels: int, box_height_pixels: int) -> sg.SVGFigure:
         self.total_width = box_width_pixels
         self.total_height = box_height_pixels
 
-        img = self.create_canvas((self.total_width, self.total_height))
+        img = create_canvas((self.total_width, self.total_height))
         size = img.width, img.height
         width = unit_str_to_float(img.width)
         height = unit_str_to_float(img.height)
@@ -61,16 +62,14 @@ class BoxController(ComponentController):
         font_size = 6
         text_to_render = self.header_property.get_value(self.character_controller)
         while (
-            config_controller.pt_to_mm(text_width(text_to_render, fontsize=font_size))
-            >= width
+                config_controller.pt_to_mm(text_width(text_to_render, fontsize=font_size))
+                >= width
         ):
             font_size -= 1
             if font_size <= 1:
                 break
             logger.info(
-                "Changed font size to {} because {} wont fit".format(
-                    font_size, text_to_render
-                )
+                f"Changed font size to {font_size} because {text_to_render} wont fit"
             )
         text_w = config_controller.pt_to_mm(
             text_width(text_to_render, fontsize=font_size)

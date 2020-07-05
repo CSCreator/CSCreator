@@ -6,7 +6,7 @@ from PySide2.QtCore import QStandardPaths
 from fitz import Widget
 
 from exceptions import DefinitionFileUnreadableException
-from src.models.charactermodel import CH
+from src.models.charactermodel import CHProperty
 from src.models.charactersubmodel import str_to_class
 
 logger = logging.getLogger(__name__)
@@ -36,28 +36,30 @@ class HardcodedListParser:
                 forms_values = pdf_file.forms_and_values
                 value = forms_values.get(form_name)
                 if not value:
-                    #TODO handle enums here
-                    value = form_name
+                    # TODO handle enums here
+                    value = None
 
                 submodel_item.set_column(column_index, value)
-            #TODO if submodel_item is completely None or EnumNames, do not add
+            # TODO if submodel_item is completely None or EnumNames, do not add
             character_controller.add_item(self.item_class, submodel_item)
-
 
     def parse_export(self, pdf_file, character_controller):
         character_submodels = character_controller.get_models()
         if self.item_class not in character_submodels:
             return
-        for item_index in range(character_controller.get_n_items(self.item_class)):
-            current_item = character_controller.get_item(self.item_class, item_index)
+        for current_item in character_controller.get_items(self.item_class):
             current_item_enum = current_item.named_item_enum
             if not current_item_enum:
-                logger.warning(f"Trying to export fixed item {self.item_class}, but no named_item_enum_set. Do not know where to place")
+                logger.warning(
+                    f"Trying to export fixed item {self.item_class}, but no named_item_enum_set. Do not know where to place"
+                )
                 continue
 
             current_item_forms = self.items_to_convert.get(current_item_enum)
             if not current_item_forms:
-                logger.warning(f"Current_item_enum {current_item_enum} not found in self.items_to_convert")
+                logger.warning(
+                    f"Current_item_enum {current_item_enum} not found in self.items_to_convert"
+                )
                 continue
 
             for column_index in current_item.columns_names:
@@ -66,22 +68,6 @@ class HardcodedListParser:
                 field_to_set = current_item_forms.get(column_name)
                 if field_to_set:
                     pdf_file.set_field(field_to_set, value)
-
-    def get_candidate_key(self, column_name, index, forms):
-        if self.column_to_form is None:
-            return None
-        unformatted_fields = self.column_to_form.get(column_name)
-        if unformatted_fields is None:
-            return None
-
-        formatted_fields = [field.format(index) for field in unformatted_fields]
-        for formatted_field in formatted_fields:
-            if formatted_field in self.hardcoded_keys:
-                return self.hardcoded_keys[formatted_field]
-            if formatted_field in forms:
-                return formatted_field
-
-        return None
 
 
 class IncrementalListParser:
@@ -93,6 +79,7 @@ class IncrementalListParser:
         self.max_items = incremental_lists.get("max_items")
         self.zero_indexed = incremental_lists.get("zero_indexed")
         self.hardcoded_keys = incremental_lists.get("hardcoded_keys")
+        self.header_key = incremental_lists.get("header_key")
 
     def import_incremental_list(self, pdf_file, character_controller):
         for i in range(self.max_items):
@@ -116,14 +103,17 @@ class IncrementalListParser:
         character_submodels = character_controller.get_models()
         if self.item_class not in character_submodels:
             return
-        for item_index in range(character_controller.get_n_items(self.item_class)):
-            current_item = character_controller.get_item(self.item_class, item_index)
+        for item_index, current_item in enumerate(
+            character_controller.get_items(self.item_class)
+        ):
             if self.zero_indexed:
                 item_index += 1
             for column_index in current_item.columns_names:
                 value = current_item.get_column(column_index)
                 column_name = current_item.columns_names[column_index]
-                field_to_set = self.get_candidate_key(column_name, item_index, pdf_file.forms)
+                field_to_set = self.get_candidate_key(
+                    column_name, item_index, pdf_file.forms
+                )
                 if field_to_set:
                     pdf_file.set_field(field_to_set, value)
 
@@ -173,6 +163,7 @@ class Plugin:
         self.keys_to_ignore = definition.get("keys_to_ignore", None)
         self.wildcards_to_ignore = definition.get("wildcards_to_ignore", None)
         self.pre_processing = definition.get("pre_processing", None)
+        self.override = definition.get("override", None)
 
         self.incremental_lists = []
 
@@ -199,17 +190,23 @@ class Plugin:
         else:
             self.valid = False
 
+    def override_values(self, pdf_file):
+        for key, value in pdf_file.forms_and_values.items():
+            if value in self.override:
+                pdf_file.forms_and_values[key] = self.override[value]
+        return pdf_file
+
     def verify_conversions(self):
         all_conversions_valid = True
         if self.key_conversion:
             for key, value in self.key_conversion.items():
-                if value not in CH._value2member_map_:
+                if value not in CHProperty._value2member_map_:
                     logger.warning(
                         f"Plugin refers to CH field {value} which does not exist"
                     )
                     all_conversions_valid = False
                 else:
-                    self.key_conversion[key] = CH(value)
+                    self.key_conversion[key] = CHProperty(value)
         return all_conversions_valid
 
     def export_character_incremental_lists(self, pdf_file, character_controller):
@@ -246,3 +243,8 @@ class PluginManager:
                     plugins.append(plugin)
 
         return plugins
+
+    def get_importer(self, name: str) -> Plugin:
+        for importer in self.importers:
+            if importer.name == name:
+                return importer

@@ -1,9 +1,12 @@
 import re
+from typing import Union
+
+from PIL import Image
 
 from main import config_controller
 
 
-def scale_width_to_real_size(img, target_size_mm):
+def scale_width_to_real_size(img: Image, target_size_mm: Union[float, int]) -> Image:
     scale_to_pixels = config_controller.mm_to_pixel(target_size_mm)
     factor = scale_to_pixels / img.width
     new_width = img.width * factor
@@ -14,7 +17,7 @@ def scale_width_to_real_size(img, target_size_mm):
     return img
 
 
-def scale_height_to_real_size(img, target_size_mm):
+def scale_height_to_real_size(img: Image, target_size_mm: Union[float, int]) -> Image:
     scale_to_pixels = config_controller.mm_to_pixel(target_size_mm)
     factor = scale_to_pixels / img.height
     new_width = img.width * factor
@@ -25,5 +28,5 @@ def scale_height_to_real_size(img, target_size_mm):
     return img
 
 
-def unit_str_to_float(unit_string):
+def unit_str_to_float(unit_string: str) -> float:
     return float(re.sub("[^0-9.\-]", "", unit_string))

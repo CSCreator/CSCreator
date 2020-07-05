@@ -78,7 +78,6 @@
     "SKIN": "CH.SKIN",
     "EYES": "CH.EYES",
     "HAIR": "CH.HAIR",
-    "CHARACTER IMAGE": "CH.CHARACTER_IMAGE",
     "AlliesOrganizations": "CH.ALLIES_ORGANIZATIONS",
     "PersonalityTraits ": "CH.PERSONALITY_TRAITS",
     "Ideals": "CH.IDEALS",
@@ -240,8 +239,7 @@
       },
       "max_items": 56,
       "zero_indexed": true,
-      "hardcoded_keys": {
-      }
+      "hardcoded_keys": {}
     },
     "Equipment": {
       "column_to_form": {
@@ -330,9 +328,8 @@
         ]
       },
       "max_items": 10,
-      "zero_indexed": true,
-      "hardcoded_keys": {
-      }
+      "zero_indexed": false,
+      "hardcoded_keys": {}
     }
   },
   "hardcoded_lists": {
@@ -464,5 +461,22 @@
         "bonus": "CustomSkill3"
       }
     }
+  },
+  "override": {
+    "=== 1st LEVEL ===": 1,
+    "=== 2nd LEVEL ===": 2,
+    "=== 3rd LEVEL ===": 3,
+    "=== 4th LEVEL ===": 4,
+    "=== 5th LEVEL ===": 5,
+    "=== 6th LEVEL ===": 6,
+    "=== 7th LEVEL ===": 7,
+    "=== 8th LEVEL ===": 8,
+    "1 Slots O": 1,
+    "2 Slots OO": 2,
+    "3 Slots OOO": 3,
+    "4 Slots OOOO": 4,
+    "5 Slots OOOOO": 5,
+    "6 Slots OOOOOO": 6,
+    "7 Slots OOOOOOO": 7
   }
 }

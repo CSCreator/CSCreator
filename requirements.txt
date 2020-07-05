@@ -1,0 +1,9 @@
+PySide2
+Pillow
+svgutils
+PyMuPDF
+PyYAML
+obsub
+svgwrite
+pytest
+pytest-qt

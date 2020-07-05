@@ -1,6 +1,9 @@
 import logging
 
+from PySide2.QtCore import QEvent
+
 from main import config_controller
+from src.views.pageview import PageView
 
 logger = logging.getLogger(__name__)
 
@@ -9,7 +12,7 @@ from PySide2.QtWidgets import QFrame, QBoxLayout, QSpacerItem
 
 
 class SheetView(QFrame):
-    def __init__(self, page_view):
+    def __init__(self, page_view: PageView) -> None:
         super().__init__()
         self.page_view = page_view
         self.aspect_ratio = config_controller.paper_ratio
@@ -23,7 +26,7 @@ class SheetView(QFrame):
         self.setObjectName("AspectRatio")
         self.setStyleSheet("#AspectRatio {background-color:grey;}")
 
-    def resizeEvent(self, e):
+    def resizeEvent(self, e: QEvent) -> None:
         w = e.size().width()
         h = e.size().height()
 

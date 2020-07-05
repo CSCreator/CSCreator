@@ -1,8 +1,11 @@
 import logging
-from enum import Enum, auto
+from dataclasses import dataclass
+from typing import Iterator, Union, Callable, Any
 
 from obsub import event
 
+from exceptions import InvalidPropertyType
+from src.models.characterenums import CHProperty, ch_property_type
 from src.models.charactersubmodel import (
     CustomTableModel,
     Equipment,
@@ -10,133 +13,28 @@ from src.models.charactersubmodel import (
     Attack,
     Skill,
     SpellSlot,
-)
+    CustomTableItemType,
+    standard_type_conversion)
 
 logger = logging.getLogger(__name__)
 
 
-class CHName(Enum):
-    def _generate_next_value_(self, start, count, last_values):
-        return "CH." + self
+@dataclass
+class CharacterProperty:
+    knownchproperty_value: CHProperty
+    type: type
+    property_value: Union[str, int, bool, None] = None
 
-
-class CH(CHName):
-    # Character Info
-    CHARACTER_NAME = auto()
-    CLASS_LEVEL = auto()
-    PLAYER_NAME = auto()
-    RACE = auto()
-    BACKGROUND = auto()
-    XP = auto()
-    # Abilities and proficiencies
-    STR = auto()
-    DEX = auto()
-    CON = auto()
-    INT = auto()
-    WIS = auto()
-    CHA = auto()
-    STR_MOD = auto()
-    DEX_MOD = auto()
-    CON_MOD = auto()
-    INT_MOD = auto()
-    WIS_MOD = auto()
-    CHA_MOD = auto()
-    # Saving throws prof
-    STR_ST_PROF = auto()
-    DEX_ST_PROF = auto()
-    CON_ST_PROF = auto()
-    INT_ST_PROF = auto()
-    WIS_ST_PROF = auto()
-    CHA_ST_PROF = auto()
-    # Saving throws mods
-    STR_ST_MOD = auto()
-    DEX_ST_MOD = auto()
-    CON_ST_MOD = auto()
-    INT_ST_MOD = auto()
-    WIS_ST_MOD = auto()
-    CHA_ST_MOD = auto()
-    # Defenses and resistances
-    DEFENSES = auto()
-    SAVE_MODIFIERS = auto()
-    # Passive
-    PASSIVE_PERCEPTION = auto()
-    PASSIVE_WISDOM = auto()
-    PASSIVE_INVESTIGATION = auto()
-    SENSES = auto()
-    INITIATIVE = auto()
-    AC = auto()
-    PROF_BONUS = auto()
-    ABILITYSAVEDC1 = auto()
-    ABILITYSAVESCORE1 = auto()
-    ABILITYSAVESCORE2 = auto()
-    ABILITYSAVEDC2 = auto()
-    SPEED = auto()
-    MAX_HP = auto()
-    CURRENT_HP = auto()
-    TEMP_HP = auto()
-    TOTAL_HIT_DICE = auto()
-    HIT_DICE = auto()
-    # TODO Verify order
-    SUCCESSFUL_SAVE_1 = auto()
-    SUCCESSFUL_SAVE_2 = auto()
-    SUCCESSFUL_SAVE_3 = auto()
-    FAILED_SAVE_1 = auto()
-    FAILED_SAVE_2 = auto()
-    FAILED_SAVE_3 = auto()
-    PROFICIENCIES_LANGUAGES = auto()
-    # Merge from two boxes
-    ACTIONS = auto()
-    ATTACKS = auto()
-    # Merged from 3 boxes
-    FEATURES_TRAITS = auto()
-    CP = auto()
-    SP = auto()
-    EP = auto()
-    GP = auto()
-    PP = auto()
-    WEIGHT_CARRIED = auto()
-    ENCUMBERED = auto()
-    PUSH_DRAG_LIFT = auto()
-    GENDER = auto()
-    AGE = auto()
-    SIZE = auto()
-    HEIGHT = auto()
-    WEIGHT = auto()
-    ALIGNMENT = auto()
-    FAITH = auto()
-    SKIN = auto()
-    EYES = auto()
-    HAIR = auto()
-    CHARACTER_IMAGE = auto()
-    ALLIES_ORGANIZATIONS = auto()
-    PERSONALITY_TRAITS = auto()
-    IDEALS = auto()
-    BONDS = auto()
-    APPEARANCE = auto()
-    FLAWS = auto()
-    BACKSTORY = auto()
-    ADDITIONAL_NOTES = auto()
-    SPELLCASTINGABILITY0 = auto()
-    SPELLSAVEDC0 = auto()
-    SPELLATKBONUS0 = auto()
-    SPELLCASTINGCLASS0 = auto()
-    SPELL_SLOTS_0 = auto()
-    SPELL_SLOTS_1 = auto()
-    SPELL_SLOTS_2 = auto()
-    SPELL_SLOTS_3 = auto()
-    SPELL_SLOTS_4 = auto()
-    SPELL_SLOTS_5 = auto()
-    SPELL_SLOTS_6 = auto()
-    SPELL_SLOTS_7 = auto()
-    SPELL_SLOTS_8 = auto()
-    SPELL_SLOTS_9 = auto()
-    SPELL_SLOTS_10 = auto()
+    def __str__(self):
+        return f'{self.knownchproperty_value}-{self.type}: {self.property_value}'
 
 
 class CharacterModel:
-    def __init__(self):
-        for value in CH:
-            setattr(self, value.name, None)
+    def __init__(self) -> None:
+        self.character_properties = {}
+
+        for value in CHProperty:
+            self.character_properties[value] = CharacterProperty(value, ch_property_type[value])
 
         self.equipment_model = CustomTableModel(Equipment)
         self.spell_model = CustomTableModel(Spell)
@@ -151,34 +49,37 @@ class CharacterModel:
             Attack: self.attack_model,
         }
 
-    def get_item(self, item_type, index):
+    def get_item(
+            self, item_type: CustomTableItemType, index: int
+    ) -> CustomTableItemType:
         return self.conversion[item_type].get_item_at_row(index)
 
-    def get_n_items(self, item_type):
-        return len(self.conversion[item_type].items)
+    def get_items(
+            self, item_type: CustomTableItemType
+    ) -> Iterator[CustomTableItemType]:
+        return self.conversion[item_type].get_items()
 
     @event
-    def set_value(self, value_name, value):
-        setattr(self, value_name, value)
+    def set_value(self, value_name: CHProperty, value: Union[str, int, bool]) -> None:
+        character_property = self.character_properties[value_name]
+        value = standard_type_conversion(value, character_property.type)
 
-    def character_view_changed_event(self, character_property, value):
+        if not isinstance(value, character_property.type) and value:
+            raise InvalidPropertyType(
+                f"Setting {value_name} of type {character_property.type} with value {value} of type {type(value)}")
+        self.character_properties[value_name].property_value = value
+
+    def get_ch_property(self, ch_property: CHProperty) -> Union[CharacterProperty, None]:
+        return self.character_properties.get(ch_property)
+
+    def character_view_changed_event(
+            self, character_property: CHProperty, value: Callable
+    ) -> None:
         # Do not call set_value here, otherwise we fire an event back to the View, who has the latest character_property already
-        setattr(self, character_property.name, value)
+        self.set_value(character_property, value)
         logger.debug(
-            f"Recieved changed character_property {character_property.name} from the view with value {value}"
+            f"Recieved changed character_property {character_property} from the view with value {value}"
         )
 
-    def get_skill(self, name):
-        skill = None
-        for this_skill in self.skills_model.items:
-            if this_skill.name == name:
-                skill = this_skill
-        return skill
-
-    def get_attack(self, index):
-        if index < len(self.attack_model.items):
-            return self.attack_model.items[index]
-        return None
-
-    def add_item(self, type, item):
+    def add_item(self, type: CustomTableItemType, item: CustomTableItemType) -> None:
         self.conversion[type].add_item(item)

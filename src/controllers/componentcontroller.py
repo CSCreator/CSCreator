@@ -1,13 +1,16 @@
 import logging
 import uuid
 from enum import Enum
+from typing import Tuple, Union, Any
 
 from PySide2 import QtSvg
 from PySide2.QtGui import QIcon
 
 from exceptions import UnknownCharacterProperty
 from main import config_controller
-from src.models.charactermodel import CH
+from src.components.properties import Properties
+from src.controllers.charactercontroller import CharacterController
+from src.models.charactermodel import CHProperty
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +32,14 @@ class PropertyTypes(Enum):
 
 
 class EditableProperty:
-    def __init__(self, property_type, description, value, owner, size_and_pos):
+    def __init__(
+        self,
+        property_type: PropertyTypes,
+        description: str,
+        value: Union[str, int, bool],
+        owner,
+        size_and_pos,
+    ) -> None:
         assert isinstance(property_type, PropertyTypes)
         assert isinstance(description, str)
         self.type = property_type
@@ -42,10 +52,10 @@ class EditableProperty:
         self.value = value
         self.owner.rendered_img = None
 
-    def get_value(self, player):
+    def get_value(self, player: CharacterController) -> Any:
         if isinstance(self.value, str):
             return self.value
-        elif isinstance(self.value, CH):
+        elif isinstance(self.value, CHProperty):
             if player is not None:
                 return getattr(player, self.value.name)
             else:
@@ -53,12 +63,21 @@ class EditableProperty:
         else:
             raise UnknownCharacterProperty("Unknown type of character_property passed")
 
+def create_canvas(size: Tuple[int, int]):
+    width_mm = config_controller.pixel_to_mm(size[0])
+    height_mm = config_controller.pixel_to_mm(size[1])
+    fig = sg.SVGFigure(width_mm, height_mm)
+    return fig
 
 class ComponentController:
-    def __init__(self, properties, character_controller, **kwargs):
-        super(ComponentController, self).__init__(**kwargs)
+    def __init__(
+        self,
+        properties: Properties,
+        character_controller: CharacterController,
+        **kwargs
+    ) -> None:
         self._rendered_img = None
-        self.pixmap = None
+        self.pixmap: QIcon = QIcon()
         self.properties = properties
         self.editable_properties = []
         self.uid = uuid.uuid4()
@@ -82,11 +101,7 @@ class ComponentController:
         self.svg_renderer.load(QByteArray(string_image))
         logger.info("Rendered img updated")
 
-    def create_canvas(self, size):
-        width_mm = config_controller.pixel_to_mm(size[0])
-        height_mm = config_controller.pixel_to_mm(size[1])
-        fig = sg.SVGFigure(width_mm, height_mm)
-        return fig
+
 
     def create_canvas_from_svg(self, file):
         background = sg.fromfile(file)

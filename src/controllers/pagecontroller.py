@@ -2,7 +2,7 @@ import logging
 
 from src.components.properties import Properties
 from src.components.standard.box import BoxController
-from src.models.charactermodel import CH
+from src.models.charactermodel import CHProperty
 from src.models.pagemodel import PageModel
 from src.views.pageview import PageView
 
@@ -49,7 +49,7 @@ class PageController:
             BoxController(
                 Properties(0, 0, 12, 12),
                 "OTHER PROFICIENCIES & LANGUAGES",
-                CH.PROFICIENCIES_LANGUAGES,
+                CHProperty.PROFICIENCIES_LANGUAGES,
                 active_character_controller,
             )
         )

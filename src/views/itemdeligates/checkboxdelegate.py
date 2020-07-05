@@ -34,7 +34,7 @@ class CheckBoxDelegate(QStyledItemDelegate):
         editor: PySide2.QtWidgets.QCheckBox,
         model: PySide2.QtCore.QAbstractItemModel,
         index: PySide2.QtCore.QModelIndex,
-    ):
+    ) -> None:
         value = editor.isChecked()
         logger.debug(f"Setting model {model} with value {value}")
         model.setData(index, value, Qt.EditRole)
@@ -44,5 +44,5 @@ class CheckBoxDelegate(QStyledItemDelegate):
         editor: PySide2.QtWidgets.QWidget,
         option: PySide2.QtWidgets.QStyleOptionViewItem,
         index: PySide2.QtCore.QModelIndex,
-    ):
+    ) -> None:
         editor.setGeometry(option.rect)

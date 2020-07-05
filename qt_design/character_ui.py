@@ -11,11 +11,26 @@
 from PySide2.QtCore import (
     QCoreApplication,
     QMetaObject,
+    QObject,
+    QPoint,
+    QRect,
     QSize,
+    QUrl,
     Qt,
 )
 from PySide2.QtGui import (
+    QBrush,
+    QColor,
+    QConicalGradient,
+    QCursor,
     QFont,
+    QFontDatabase,
+    QIcon,
+    QLinearGradient,
+    QPalette,
+    QPainter,
+    QPixmap,
+    QRadialGradient,
 )
 from PySide2.QtWidgets import *
 
@@ -279,49 +294,10 @@ class Ui_Form(object):
 
         self.horizontalLayout_5.addLayout(self.verticalLayout_41)
 
-        self.EQUIPMENT_TABLE = QTableView(self.tab)
-        self.EQUIPMENT_TABLE.setObjectName(u"EQUIPMENT_TABLE")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(
-            self.EQUIPMENT_TABLE.sizePolicy().hasHeightForWidth()
-        )
-        self.EQUIPMENT_TABLE.setSizePolicy(sizePolicy4)
-        self.EQUIPMENT_TABLE.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
-        self.EQUIPMENT_TABLE.horizontalHeader().setVisible(False)
-        self.EQUIPMENT_TABLE.horizontalHeader().setDefaultSectionSize(200)
+        self.EQUIPMENT_LAYOUT = QHBoxLayout()
+        self.EQUIPMENT_LAYOUT.setObjectName(u"EQUIPMENT_LAYOUT")
 
-        self.horizontalLayout_5.addWidget(self.EQUIPMENT_TABLE)
-
-        self.verticalLayout_46 = QVBoxLayout()
-        self.verticalLayout_46.setObjectName(u"verticalLayout_46")
-        self.equipment_add = QPushButton(self.tab)
-        self.equipment_add.setObjectName(u"equipment_add")
-        sizePolicy1.setHeightForWidth(
-            self.equipment_add.sizePolicy().hasHeightForWidth()
-        )
-        self.equipment_add.setSizePolicy(sizePolicy1)
-        self.equipment_add.setBaseSize(QSize(0, 0))
-
-        self.verticalLayout_46.addWidget(self.equipment_add)
-
-        self.equipment_remove = QPushButton(self.tab)
-        self.equipment_remove.setObjectName(u"equipment_remove")
-        sizePolicy2.setHeightForWidth(
-            self.equipment_remove.sizePolicy().hasHeightForWidth()
-        )
-        self.equipment_remove.setSizePolicy(sizePolicy2)
-
-        self.verticalLayout_46.addWidget(self.equipment_remove)
-
-        self.verticalSpacer_2 = QSpacerItem(
-            20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding
-        )
-
-        self.verticalLayout_46.addItem(self.verticalSpacer_2)
-
-        self.horizontalLayout_5.addLayout(self.verticalLayout_46)
+        self.horizontalLayout_5.addLayout(self.EQUIPMENT_LAYOUT)
 
         self.verticalLayout_20.addLayout(self.horizontalLayout_5)
 
@@ -344,13 +320,13 @@ class Ui_Form(object):
 
         self.SPELLCASTINGCLASS0 = QLineEdit(self.tab_6)
         self.SPELLCASTINGCLASS0.setObjectName(u"SPELLCASTINGCLASS0")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
-        sizePolicy5.setHorizontalStretch(0)
-        sizePolicy5.setVerticalStretch(0)
-        sizePolicy5.setHeightForWidth(
+        sizePolicy4 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(
             self.SPELLCASTINGCLASS0.sizePolicy().hasHeightForWidth()
         )
-        self.SPELLCASTINGCLASS0.setSizePolicy(sizePolicy5)
+        self.SPELLCASTINGCLASS0.setSizePolicy(sizePolicy4)
 
         self.verticalLayout_45.addWidget(self.SPELLCASTINGCLASS0)
 
@@ -363,10 +339,10 @@ class Ui_Form(object):
 
         self.SPELLCASTINGABILITY0 = QLineEdit(self.tab_6)
         self.SPELLCASTINGABILITY0.setObjectName(u"SPELLCASTINGABILITY0")
-        sizePolicy5.setHeightForWidth(
+        sizePolicy4.setHeightForWidth(
             self.SPELLCASTINGABILITY0.sizePolicy().hasHeightForWidth()
         )
-        self.SPELLCASTINGABILITY0.setSizePolicy(sizePolicy5)
+        self.SPELLCASTINGABILITY0.setSizePolicy(sizePolicy4)
 
         self.verticalLayout_45.addWidget(self.SPELLCASTINGABILITY0)
 
@@ -379,10 +355,10 @@ class Ui_Form(object):
 
         self.SPELLSAVEDC0 = QLineEdit(self.tab_6)
         self.SPELLSAVEDC0.setObjectName(u"SPELLSAVEDC0")
-        sizePolicy5.setHeightForWidth(
+        sizePolicy4.setHeightForWidth(
             self.SPELLSAVEDC0.sizePolicy().hasHeightForWidth()
         )
-        self.SPELLSAVEDC0.setSizePolicy(sizePolicy5)
+        self.SPELLSAVEDC0.setSizePolicy(sizePolicy4)
 
         self.verticalLayout_45.addWidget(self.SPELLSAVEDC0)
 
@@ -395,51 +371,24 @@ class Ui_Form(object):
 
         self.SPELLATKBONUS0 = QLineEdit(self.tab_6)
         self.SPELLATKBONUS0.setObjectName(u"SPELLATKBONUS0")
-        sizePolicy5.setHeightForWidth(
+        sizePolicy4.setHeightForWidth(
             self.SPELLATKBONUS0.sizePolicy().hasHeightForWidth()
         )
-        self.SPELLATKBONUS0.setSizePolicy(sizePolicy5)
+        self.SPELLATKBONUS0.setSizePolicy(sizePolicy4)
 
         self.verticalLayout_45.addWidget(self.SPELLATKBONUS0)
 
-        self.SPELLSLOT_TABLE = QTableView(self.tab_6)
-        self.SPELLSLOT_TABLE.setObjectName(u"SPELLSLOT_TABLE")
-        sizePolicy6 = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Expanding)
-        sizePolicy6.setHorizontalStretch(0)
-        sizePolicy6.setVerticalStretch(0)
-        sizePolicy6.setHeightForWidth(
-            self.SPELLSLOT_TABLE.sizePolicy().hasHeightForWidth()
-        )
-        self.SPELLSLOT_TABLE.setSizePolicy(sizePolicy6)
+        self.SPELLSLOT_LAYOUT = QHBoxLayout()
+        self.SPELLSLOT_LAYOUT.setObjectName(u"SPELLSLOT_LAYOUT")
 
-        self.verticalLayout_45.addWidget(self.SPELLSLOT_TABLE)
+        self.verticalLayout_45.addLayout(self.SPELLSLOT_LAYOUT)
 
         self.horizontalLayout_7.addLayout(self.verticalLayout_45)
 
-        self.SPELL_TABLE = QTableView(self.tab_6)
-        self.SPELL_TABLE.setObjectName(u"SPELL_TABLE")
+        self.SPELL_LAYOUT = QHBoxLayout()
+        self.SPELL_LAYOUT.setObjectName(u"SPELL_LAYOUT")
 
-        self.horizontalLayout_7.addWidget(self.SPELL_TABLE)
-
-        self.verticalLayout_48 = QVBoxLayout()
-        self.verticalLayout_48.setObjectName(u"verticalLayout_48")
-        self.spell_add = QPushButton(self.tab_6)
-        self.spell_add.setObjectName(u"spell_add")
-
-        self.verticalLayout_48.addWidget(self.spell_add)
-
-        self.spell_remove = QPushButton(self.tab_6)
-        self.spell_remove.setObjectName(u"spell_remove")
-
-        self.verticalLayout_48.addWidget(self.spell_remove)
-
-        self.verticalSpacer_3 = QSpacerItem(
-            20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding
-        )
-
-        self.verticalLayout_48.addItem(self.verticalSpacer_3)
-
-        self.horizontalLayout_7.addLayout(self.verticalLayout_48)
+        self.horizontalLayout_7.addLayout(self.SPELL_LAYOUT)
 
         self.verticalLayout_44.addLayout(self.horizontalLayout_7)
 
@@ -547,13 +496,10 @@ class Ui_Form(object):
         self.groupBox_15.setObjectName(u"groupBox_15")
         self.verticalLayout = QVBoxLayout(self.groupBox_15)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.ATTACK_TABLE = QTableView(self.groupBox_15)
-        self.ATTACK_TABLE.setObjectName(u"ATTACK_TABLE")
-        self.ATTACK_TABLE.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
-        self.ATTACK_TABLE.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.ATTACK_TABLE.horizontalHeader().setCascadingSectionResizes(True)
+        self.ATTACK_LAYOUT = QHBoxLayout()
+        self.ATTACK_LAYOUT.setObjectName(u"ATTACK_LAYOUT")
 
-        self.verticalLayout.addWidget(self.ATTACK_TABLE)
+        self.verticalLayout.addLayout(self.ATTACK_LAYOUT)
 
         self.horizontalLayout_2.addWidget(self.groupBox_15)
 
@@ -662,11 +608,11 @@ class Ui_Form(object):
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.groupBox_4 = QGroupBox(self.tab_12)
         self.groupBox_4.setObjectName(u"groupBox_4")
-        sizePolicy7 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
-        sizePolicy7.setHorizontalStretch(0)
-        sizePolicy7.setVerticalStretch(0)
-        sizePolicy7.setHeightForWidth(self.groupBox_4.sizePolicy().hasHeightForWidth())
-        self.groupBox_4.setSizePolicy(sizePolicy7)
+        sizePolicy5 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.groupBox_4.sizePolicy().hasHeightForWidth())
+        self.groupBox_4.setSizePolicy(sizePolicy5)
         self.horizontalLayout_24 = QHBoxLayout(self.groupBox_4)
         self.horizontalLayout_24.setObjectName(u"horizontalLayout_24")
         self.APPEARANCE = QTextEdit(self.groupBox_4)
@@ -819,11 +765,11 @@ class Ui_Form(object):
         self.verticalLayout_14.setSizeConstraint(QLayout.SetMaximumSize)
         self.groupBox_2 = QGroupBox(Form)
         self.groupBox_2.setObjectName(u"groupBox_2")
-        sizePolicy8 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
-        sizePolicy8.setHorizontalStretch(0)
-        sizePolicy8.setVerticalStretch(0)
-        sizePolicy8.setHeightForWidth(self.groupBox_2.sizePolicy().hasHeightForWidth())
-        self.groupBox_2.setSizePolicy(sizePolicy8)
+        sizePolicy6 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+        sizePolicy6.setHorizontalStretch(0)
+        sizePolicy6.setVerticalStretch(0)
+        sizePolicy6.setHeightForWidth(self.groupBox_2.sizePolicy().hasHeightForWidth())
+        self.groupBox_2.setSizePolicy(sizePolicy6)
         self.gridLayout_5 = QGridLayout(self.groupBox_2)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.character_info = QGridLayout()
@@ -966,8 +912,8 @@ class Ui_Form(object):
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.WIS = QSpinBox(self.groupBox_10)
         self.WIS.setObjectName(u"WIS")
-        sizePolicy5.setHeightForWidth(self.WIS.sizePolicy().hasHeightForWidth())
-        self.WIS.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.WIS.sizePolicy().hasHeightForWidth())
+        self.WIS.setSizePolicy(sizePolicy4)
         self.WIS.setMinimumSize(QSize(40, 40))
         font5 = QFont()
         font5.setFamily(u"Arial")
@@ -984,8 +930,8 @@ class Ui_Form(object):
         self.horizontalLayout_33.setObjectName(u"horizontalLayout_33")
         self.WIS_MOD = QSpinBox(self.groupBox_10)
         self.WIS_MOD.setObjectName(u"WIS_MOD")
-        sizePolicy5.setHeightForWidth(self.WIS_MOD.sizePolicy().hasHeightForWidth())
-        self.WIS_MOD.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.WIS_MOD.sizePolicy().hasHeightForWidth())
+        self.WIS_MOD.setSizePolicy(sizePolicy4)
         self.WIS_MOD.setMinimum(-5)
         self.WIS_MOD.setMaximum(5)
 
@@ -1016,8 +962,8 @@ class Ui_Form(object):
         self.horizontalLayout_31.setObjectName(u"horizontalLayout_31")
         self.CHA = QSpinBox(self.groupBox_10)
         self.CHA.setObjectName(u"CHA")
-        sizePolicy5.setHeightForWidth(self.CHA.sizePolicy().hasHeightForWidth())
-        self.CHA.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.CHA.sizePolicy().hasHeightForWidth())
+        self.CHA.setSizePolicy(sizePolicy4)
         self.CHA.setMinimumSize(QSize(40, 40))
         self.CHA.setFont(font5)
         self.CHA.setAlignment(Qt.AlignCenter)
@@ -1032,8 +978,8 @@ class Ui_Form(object):
         self.horizontalLayout_35.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.CHA_MOD = QSpinBox(self.groupBox_10)
         self.CHA_MOD.setObjectName(u"CHA_MOD")
-        sizePolicy5.setHeightForWidth(self.CHA_MOD.sizePolicy().hasHeightForWidth())
-        self.CHA_MOD.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.CHA_MOD.sizePolicy().hasHeightForWidth())
+        self.CHA_MOD.setSizePolicy(sizePolicy4)
         self.CHA_MOD.setMinimum(-5)
         self.CHA_MOD.setMaximum(5)
 
@@ -1064,8 +1010,8 @@ class Ui_Form(object):
         self.horizontalLayout_32.setObjectName(u"horizontalLayout_32")
         self.STR = QSpinBox(self.groupBox_10)
         self.STR.setObjectName(u"STR")
-        sizePolicy5.setHeightForWidth(self.STR.sizePolicy().hasHeightForWidth())
-        self.STR.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.STR.sizePolicy().hasHeightForWidth())
+        self.STR.setSizePolicy(sizePolicy4)
         self.STR.setMinimumSize(QSize(40, 40))
         self.STR.setFont(font5)
         self.STR.setAlignment(Qt.AlignCenter)
@@ -1079,8 +1025,8 @@ class Ui_Form(object):
         self.horizontalLayout_30.setObjectName(u"horizontalLayout_30")
         self.STR_MOD = QSpinBox(self.groupBox_10)
         self.STR_MOD.setObjectName(u"STR_MOD")
-        sizePolicy5.setHeightForWidth(self.STR_MOD.sizePolicy().hasHeightForWidth())
-        self.STR_MOD.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.STR_MOD.sizePolicy().hasHeightForWidth())
+        self.STR_MOD.setSizePolicy(sizePolicy4)
         self.STR_MOD.setMinimum(-5)
         self.STR_MOD.setMaximum(5)
 
@@ -1111,8 +1057,8 @@ class Ui_Form(object):
         self.horizontalLayout_34.setObjectName(u"horizontalLayout_34")
         self.INT = QSpinBox(self.groupBox_10)
         self.INT.setObjectName(u"INT")
-        sizePolicy5.setHeightForWidth(self.INT.sizePolicy().hasHeightForWidth())
-        self.INT.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.INT.sizePolicy().hasHeightForWidth())
+        self.INT.setSizePolicy(sizePolicy4)
         self.INT.setMinimumSize(QSize(40, 40))
         self.INT.setFont(font5)
         self.INT.setAlignment(Qt.AlignCenter)
@@ -1126,8 +1072,8 @@ class Ui_Form(object):
         self.horizontalLayout_341.setObjectName(u"horizontalLayout_341")
         self.INT_MOD = QSpinBox(self.groupBox_10)
         self.INT_MOD.setObjectName(u"INT_MOD")
-        sizePolicy5.setHeightForWidth(self.INT_MOD.sizePolicy().hasHeightForWidth())
-        self.INT_MOD.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.INT_MOD.sizePolicy().hasHeightForWidth())
+        self.INT_MOD.setSizePolicy(sizePolicy4)
         self.INT_MOD.setMinimum(-5)
         self.INT_MOD.setMaximum(5)
 
@@ -1158,8 +1104,8 @@ class Ui_Form(object):
         self.horizontalLayout_38.setObjectName(u"horizontalLayout_38")
         self.CON = QSpinBox(self.groupBox_10)
         self.CON.setObjectName(u"CON")
-        sizePolicy5.setHeightForWidth(self.CON.sizePolicy().hasHeightForWidth())
-        self.CON.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.CON.sizePolicy().hasHeightForWidth())
+        self.CON.setSizePolicy(sizePolicy4)
         self.CON.setMinimumSize(QSize(40, 40))
         self.CON.setFont(font5)
         self.CON.setAlignment(Qt.AlignCenter)
@@ -1173,8 +1119,8 @@ class Ui_Form(object):
         self.horizontalLayout_321.setObjectName(u"horizontalLayout_321")
         self.CON_MOD = QSpinBox(self.groupBox_10)
         self.CON_MOD.setObjectName(u"CON_MOD")
-        sizePolicy5.setHeightForWidth(self.CON_MOD.sizePolicy().hasHeightForWidth())
-        self.CON_MOD.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.CON_MOD.sizePolicy().hasHeightForWidth())
+        self.CON_MOD.setSizePolicy(sizePolicy4)
         self.CON_MOD.setMinimum(-5)
         self.CON_MOD.setMaximum(5)
 
@@ -1205,8 +1151,8 @@ class Ui_Form(object):
         self.horizontalLayout_39.setObjectName(u"horizontalLayout_39")
         self.DEX = QSpinBox(self.groupBox_10)
         self.DEX.setObjectName(u"DEX")
-        sizePolicy5.setHeightForWidth(self.DEX.sizePolicy().hasHeightForWidth())
-        self.DEX.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.DEX.sizePolicy().hasHeightForWidth())
+        self.DEX.setSizePolicy(sizePolicy4)
         self.DEX.setMinimumSize(QSize(40, 40))
         self.DEX.setFont(font5)
         self.DEX.setAlignment(Qt.AlignCenter)
@@ -1220,8 +1166,8 @@ class Ui_Form(object):
         self.horizontalLayout_311.setObjectName(u"horizontalLayout_311")
         self.DEX_MOD = QSpinBox(self.groupBox_10)
         self.DEX_MOD.setObjectName(u"DEX_MOD")
-        sizePolicy5.setHeightForWidth(self.DEX_MOD.sizePolicy().hasHeightForWidth())
-        self.DEX_MOD.setSizePolicy(sizePolicy5)
+        sizePolicy4.setHeightForWidth(self.DEX_MOD.sizePolicy().hasHeightForWidth())
+        self.DEX_MOD.setSizePolicy(sizePolicy4)
         self.DEX_MOD.setMinimum(-5)
         self.DEX_MOD.setMaximum(5)
 
@@ -1321,21 +1267,20 @@ class Ui_Form(object):
         self.groupBox_19.setSizePolicy(sizePolicy1)
         self.verticalLayout_47 = QVBoxLayout(self.groupBox_19)
         self.verticalLayout_47.setObjectName(u"verticalLayout_47")
-        self.SKILL_TABLE = QTableView(self.groupBox_19)
-        self.SKILL_TABLE.setObjectName(u"SKILL_TABLE")
-        self.SKILL_TABLE.setAutoFillBackground(False)
+        self.SKILL_LAYOUT = QHBoxLayout()
+        self.SKILL_LAYOUT.setObjectName(u"SKILL_LAYOUT")
 
-        self.verticalLayout_47.addWidget(self.SKILL_TABLE)
+        self.verticalLayout_47.addLayout(self.SKILL_LAYOUT)
 
         self.horizontalLayout_8.addWidget(self.groupBox_19)
 
         self.groupBox_11 = QGroupBox(Form)
         self.groupBox_11.setObjectName(u"groupBox_11")
-        sizePolicy9 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
-        sizePolicy9.setHorizontalStretch(1)
-        sizePolicy9.setVerticalStretch(1)
-        sizePolicy9.setHeightForWidth(self.groupBox_11.sizePolicy().hasHeightForWidth())
-        self.groupBox_11.setSizePolicy(sizePolicy9)
+        sizePolicy7 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        sizePolicy7.setHorizontalStretch(1)
+        sizePolicy7.setVerticalStretch(1)
+        sizePolicy7.setHeightForWidth(self.groupBox_11.sizePolicy().hasHeightForWidth())
+        self.groupBox_11.setSizePolicy(sizePolicy7)
         self.verticalLayout_391 = QVBoxLayout(self.groupBox_11)
         self.verticalLayout_391.setObjectName(u"verticalLayout_391")
         self.gridLayout_2 = QGridLayout()
@@ -1349,11 +1294,11 @@ class Ui_Form(object):
         self.horizontalLayout_40.setObjectName(u"horizontalLayout_40")
         self.label_3 = QLabel(self.groupBox_11)
         self.label_3.setObjectName(u"label_3")
-        sizePolicy10 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
-        sizePolicy10.setHorizontalStretch(0)
-        sizePolicy10.setVerticalStretch(0)
-        sizePolicy10.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
-        self.label_3.setSizePolicy(sizePolicy10)
+        sizePolicy8 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
+        sizePolicy8.setHorizontalStretch(0)
+        sizePolicy8.setVerticalStretch(0)
+        sizePolicy8.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
+        self.label_3.setSizePolicy(sizePolicy8)
         self.label_3.setAlignment(Qt.AlignCenter)
         self.label_3.setWordWrap(True)
 
@@ -1387,8 +1332,8 @@ class Ui_Form(object):
         self.horizontalLayout_381.setObjectName(u"horizontalLayout_381")
         self.label = QLabel(self.groupBox_11)
         self.label.setObjectName(u"label")
-        sizePolicy10.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
-        self.label.setSizePolicy(sizePolicy10)
+        sizePolicy8.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+        self.label.setSizePolicy(sizePolicy8)
         self.label.setMinimumSize(QSize(0, 0))
         self.label.setAlignment(Qt.AlignCenter)
         self.label.setWordWrap(True)
@@ -1448,8 +1393,8 @@ class Ui_Form(object):
         self.horizontalLayout_391.setObjectName(u"horizontalLayout_391")
         self.label_2 = QLabel(self.groupBox_11)
         self.label_2.setObjectName(u"label_2")
-        sizePolicy10.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
-        self.label_2.setSizePolicy(sizePolicy10)
+        sizePolicy8.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
+        self.label_2.setSizePolicy(sizePolicy8)
         self.label_2.setAlignment(Qt.AlignCenter)
         self.label_2.setWordWrap(True)
 
@@ -1476,8 +1421,8 @@ class Ui_Form(object):
         self.horizontalLayout_42.setObjectName(u"horizontalLayout_42")
         self.label_11 = QLabel(self.groupBox_11)
         self.label_11.setObjectName(u"label_11")
-        sizePolicy10.setHeightForWidth(self.label_11.sizePolicy().hasHeightForWidth())
-        self.label_11.setSizePolicy(sizePolicy10)
+        sizePolicy8.setHeightForWidth(self.label_11.sizePolicy().hasHeightForWidth())
+        self.label_11.setSizePolicy(sizePolicy8)
         self.label_11.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_42.addWidget(self.label_11)
@@ -1507,8 +1452,8 @@ class Ui_Form(object):
         self.horizontalLayout_43.setObjectName(u"horizontalLayout_43")
         self.label_12 = QLabel(self.groupBox_11)
         self.label_12.setObjectName(u"label_12")
-        sizePolicy10.setHeightForWidth(self.label_12.sizePolicy().hasHeightForWidth())
-        self.label_12.setSizePolicy(sizePolicy10)
+        sizePolicy8.setHeightForWidth(self.label_12.sizePolicy().hasHeightForWidth())
+        self.label_12.setSizePolicy(sizePolicy8)
         self.label_12.setAlignment(Qt.AlignCenter)
 
         self.horizontalLayout_43.addWidget(self.label_12)
@@ -1540,7 +1485,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.various_tabs.setCurrentIndex(1)
+        self.various_tabs.setCurrentIndex(7)
 
         QMetaObject.connectSlotsByName(Form)
 
@@ -1574,8 +1519,6 @@ class Ui_Form(object):
         self.label_31.setText(
             QCoreApplication.translate("Form", u"Push/Drag/Lift", None)
         )
-        self.equipment_add.setText(QCoreApplication.translate("Form", u"+", None))
-        self.equipment_remove.setText(QCoreApplication.translate("Form", u"-", None))
         self.various_tabs.setTabText(
             self.various_tabs.indexOf(self.tab),
             QCoreApplication.translate("Form", u"Equipment", None),
@@ -1592,8 +1535,6 @@ class Ui_Form(object):
         self.label_35.setText(
             QCoreApplication.translate("Form", u"Spell Attack Bonus", None)
         )
-        self.spell_add.setText(QCoreApplication.translate("Form", u"+", None))
-        self.spell_remove.setText(QCoreApplication.translate("Form", u"-", None))
         self.various_tabs.setTabText(
             self.various_tabs.indexOf(self.tab_6),
             QCoreApplication.translate("Form", u"Spells", None),

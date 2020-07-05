@@ -4,7 +4,7 @@ import os
 from PySide2.QtCore import QStandardPaths
 
 from src.models.characterenums import SkillProficiencies
-from src.models.charactermodel import CH
+from src.models.charactermodel import CHProperty
 from src.pdf.pdffile import PDFFile
 
 logger = logging.getLogger(__name__)
@@ -77,8 +77,9 @@ class PDFExporter:
             if not ch_candidate:
                 logger.info(f"Value {ch_candidate} is not a valid CH")
                 continue
-            ch = CH(ch_candidate)
-            value = getattr(self.player_controller.player_model, ch.name)
+            ch = CHProperty(ch_candidate)
+            ch_property = self.player_controller.player_model.get_ch_property(ch)
+            value = ch_property.value
             pdf_file.set_field(field, value)
 
         # TODO maybe go to a model where we do not keep track of set fields and check it at another place (plugin?)
@@ -88,8 +89,6 @@ class PDFExporter:
 
         # TODO skills
         # forms = self.export_skills(form_fields, self.skill_keys)
-        self.plugin.export_character_incremental_lists(
-            pdf_file, self.player_controller
-        )
+        self.plugin.export_character_incremental_lists(pdf_file, self.player_controller)
 
         pdf_file.save(self.pdf_target)

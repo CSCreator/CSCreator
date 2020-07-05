@@ -37,7 +37,7 @@ class PDFFile:
         for page_number in range(self.doc.pageCount):
             page = self.doc.loadPage(page_number)
             for field in page.widgets():
-                forms[field.field_name] = field.field_value
+                forms[field.field_name] = field.field_value.replace('\r\n', '\n').replace('\r', '\n')
 
         return forms
 
@@ -57,7 +57,7 @@ class PDFFile:
             return
             # TODO either reimplement or do field checking when loading plugin
             # raise InvalidFieldException(
-            #     f"Attempting to set None field with value {value}"
+            #     f"Attempting to set None field with property_value {property_value}"
             # )
 
         value_type = type(value)
@@ -68,7 +68,7 @@ class PDFFile:
             value = bool(value)
         elif value_type is not form_type:
             logging.warning(
-                f"Setting value with type {value_type} to field with type {form_type}"
+                f"Setting value with type {value_type} to field {field_name_to_set} with type {form_type}"
             )
             value = str(value)
         form_to_set.text_fontsize = 0

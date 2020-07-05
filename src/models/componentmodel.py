@@ -1,5 +1,7 @@
 import logging
 
+from src.components.properties import Properties
+
 logger = logging.getLogger(__name__)
 
 import uuid
@@ -9,7 +11,7 @@ import svgutils.transform as sg
 
 
 class ComponentModel:
-    def __init__(self, properties):
+    def __init__(self, properties: Properties) -> None:
         self.properties = properties
         self.editable_properties = []
         self.uid = uuid.uuid4()

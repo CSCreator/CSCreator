@@ -9,7 +9,7 @@ from exceptions import (
 from src.controllers.charactercontroller import CharacterController
 from src.importers.preprocessing_functions import concat, to_boolean_true_if
 from src.models.characterenums import SkillProficiencies, Skills
-from src.models.charactermodel import CH
+from src.models.charactermodel import CHProperty
 from src.models.charactersubmodel import str_to_class
 from src.pdf.pdffile import PDFFile
 
@@ -45,25 +45,14 @@ class PDFImporter:
         ch = self.plugin.key_conversion[key]
         value = form_fields[key]
         form_fields.pop(key, None)
-        if not ch:
-            return
-        if isinstance(ch, str):
-            logging.error(f"Attempting to set attribute {ch} which is not a CH value")
-            return
-        if not hasattr(self.player.player_model, ch.name):
-            logging.error(
-                f"Attempting to set attribute {ch.name} which does not exist in PlayerModel"
-            )
-            return
-
-        self.player.player_model.set_value(ch.name, value)
+        self.player.player_model.set_value(ch, value)
 
     def load(self, file):
         pdf_file = PDFFile(file)
         form_fields = pdf_file.get_forms_and_values()
 
-
         form_fields = self.apply_preprocessing(form_fields)
+        pdf_file = self.plugin.override_values(pdf_file)
         form_fields = self.handle_ability_order(form_fields)
 
         for key in list(form_fields.keys()):
@@ -93,18 +82,18 @@ class PDFImporter:
             conversion_values = list(self.plugin.key_conversion.values())
             return conversion_keys[conversion_values.index(value)]
 
-        str_value = get_key_from_value(CH.STR)
-        dex_value = get_key_from_value(CH.DEX)
-        con_value = get_key_from_value(CH.CON)
-        int_value = get_key_from_value(CH.INT)
-        wis_value = get_key_from_value(CH.WIS)
-        cha_value = get_key_from_value(CH.CHA)
-        str_mod = get_key_from_value(CH.STR_MOD)
-        dex_mod = get_key_from_value(CH.DEX_MOD)
-        con_mod = get_key_from_value(CH.CON_MOD)
-        int_mod = get_key_from_value(CH.INT_MOD)
-        wis_mod = get_key_from_value(CH.WIS_MOD)
-        cha_mod = get_key_from_value(CH.CHA_MOD)
+        str_value = get_key_from_value(CHProperty.STR)
+        dex_value = get_key_from_value(CHProperty.DEX)
+        con_value = get_key_from_value(CHProperty.CON)
+        int_value = get_key_from_value(CHProperty.INT)
+        wis_value = get_key_from_value(CHProperty.WIS)
+        cha_value = get_key_from_value(CHProperty.CHA)
+        str_mod = get_key_from_value(CHProperty.STR_MOD)
+        dex_mod = get_key_from_value(CHProperty.DEX_MOD)
+        con_mod = get_key_from_value(CHProperty.CON_MOD)
+        int_mod = get_key_from_value(CHProperty.INT_MOD)
+        wis_mod = get_key_from_value(CHProperty.WIS_MOD)
+        cha_mod = get_key_from_value(CHProperty.CHA_MOD)
 
         for pair in [
             (str_value, str_mod),

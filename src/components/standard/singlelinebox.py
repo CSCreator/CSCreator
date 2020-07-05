@@ -1,35 +1,64 @@
 import logging
 
+from main import config
+from src.components.properties import Properties
+from src.components.utils import scale_height_to_real_size
+from src.controllers.charactercontroller import CharacterController
+from src.controllers.componentcontroller import EditableProperty, PropertyTypes
+from src.models.componentmodel import ComponentModel
+
 logger = logging.getLogger(__name__)
 
 from PIL import Image, ImageDraw, ImageFont
 
-from config import config
-from src.models.componentmodel import ComponentModel, EditableProperty, PropertyTypes
-from src.components import scale_height_to_real_size
-
-
 linebox = {
     "inspiration": {
-        "begin": {"file": "resc/boxes/inspiration_begin.png", "scale_mm": 9.93},
-        "mid": {"file": "resc/boxes/inspiration_mid.png", "scale_mm": 9.93},
-        "end": {"file": "resc/boxes/inspiration_end.png", "scale_mm": 9.93},
+        "begin": {
+            "file": "resc/boxes/inspiration_begin.png",
+            "scale_mm": 9.93
+        },
+        "mid": {
+            "file": "resc/boxes/inspiration_mid.png",
+            "scale_mm": 9.93
+        },
+        "end": {
+            "file": "resc/boxes/inspiration_end.png",
+            "scale_mm": 9.93
+        },
     },
     "passive_wisdom": {
-        "begin": {"file": "resc/boxes/passive_wisdom_begin.png", "scale_mm": 9.93},
-        "mid": {"file": "resc/boxes/passive_wisdom_mid.png", "scale_mm": 9.93},
-        "end": {"file": "resc/boxes/passive_wisdom_end.png", "scale_mm": 9.93},
+        "begin": {
+            "file": "resc/boxes/passive_wisdom_begin.png",
+            "scale_mm": 9.93
+        },
+        "mid": {
+            "file": "resc/boxes/passive_wisdom_mid.png",
+            "scale_mm": 9.93
+        },
+        "end": {
+            "file": "resc/boxes/passive_wisdom_end.png",
+            "scale_mm": 9.93
+        },
     },
     "proficiency_bonus": {
-        "begin": {"file": "resc/boxes/proficiency_bonus_begin.png", "scale_mm": 12.2},
-        "mid": {"file": "resc/boxes/proficiency_bonus_mid.png", "scale_mm": 12.2},
-        "end": {"file": "resc/boxes/proficiency_bonus_end.png", "scale_mm": 12.2},
+        "begin": {
+            "file": "resc/boxes/proficiency_bonus_begin.png",
+            "scale_mm": 12.2
+        },
+        "mid": {
+            "file": "resc/boxes/proficiency_bonus_mid.png",
+            "scale_mm": 12.2
+        },
+        "end": {
+            "file": "resc/boxes/proficiency_bonus_end.png",
+            "scale_mm": 12.2
+        },
     },
 }
 
 
 class SingleLineBox(ComponentModel):
-    def __init__(self, properties, text="", style="standard"):
+    def __init__(self, properties: Properties, text="", style="standard") -> None:
         super(SingleLineBox, self).__init__(properties)
         self.text = text
         self.style = style
@@ -40,7 +69,9 @@ class SingleLineBox(ComponentModel):
         )
         self.editable_properties.append(self.header_property)
 
-    def create(self, box_width_pixels, box_height_pixels, player):
+    def create(
+            self, box_width_pixels: int, box_height_pixels: int, player: CharacterController
+    ) -> Image:
         total_width = box_width_pixels
         total_height = box_height_pixels
         linebox_begin = Image.open(linebox[self.style]["begin"]["file"], "r")
@@ -57,8 +88,8 @@ class SingleLineBox(ComponentModel):
         )
 
         if (
-            linebox_begin.height > total_height
-            or linebox_begin.width + linebox_end.width > total_width
+                linebox_begin.height > total_height
+                or linebox_begin.width + linebox_end.width > total_width
         ):
             logger.warning("LineBox cramped")
 
