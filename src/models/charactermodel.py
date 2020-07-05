@@ -73,7 +73,7 @@ class CharacterModel:
             self, character_property: CharacterProperty, value: Callable
     ) -> None:
         # Do not call set_value here, otherwise we fire an event back to the View, who has the latest character_property already
-        setattr(self, character_property.name, value)
+        self.character_properties[character_property.name] = value
         logger.debug(
             f"Recieved changed character_property {character_property.name} from the view with value {value}"
         )
