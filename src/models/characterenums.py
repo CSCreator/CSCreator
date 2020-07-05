@@ -109,7 +109,6 @@ class CHProperty(CHPropertyName):
     PROFICIENCIES_LANGUAGES = auto()
     # Merge from two boxes
     ACTIONS = auto()
-    ATTACKS = auto()
     # Merged from 3 boxes
     FEATURES_TRAITS = auto()
     CP = auto()
@@ -203,7 +202,6 @@ ch_reader_friendly_name = {
     CHProperty.FAILED_SAVE_3: None,
     CHProperty.PROFICIENCIES_LANGUAGES: "Proficiencies and Languages",
     CHProperty.ACTIONS: "Actions",
-    CHProperty.ATTACKS: "Attacks",
     CHProperty.FEATURES_TRAITS: "Features & Traits",
     CHProperty.CP: "CP",
     CHProperty.SP: "SP",
@@ -244,7 +242,7 @@ ch_property_type = {
     CHProperty.PLAYER_NAME: str,
     CHProperty.RACE: str,
     CHProperty.BACKGROUND: str,
-    CHProperty.XP: int,
+    CHProperty.XP: str,
     CHProperty.STR: int,
     CHProperty.DEX: int,
     CHProperty.CON: int,
@@ -282,7 +280,7 @@ ch_property_type = {
     CHProperty.ABILITYSAVESCORE1: str,
     CHProperty.ABILITYSAVESCORE2: str,
     CHProperty.ABILITYSAVEDC2: int,
-    CHProperty.SPEED: int,
+    CHProperty.SPEED: str, #TODO maybe make this an int
     CHProperty.MAX_HP: int,
     CHProperty.CURRENT_HP: int,
     CHProperty.TEMP_HP: int,
@@ -327,5 +325,5 @@ ch_property_type = {
     CHProperty.SPELLCASTINGABILITY0: str,
     CHProperty.SPELLSAVEDC0: str,
     CHProperty.SPELLATKBONUS0: int,
-    CHProperty.SPELLCASTINGCLASS0: int,
+    CHProperty.SPELLCASTINGCLASS0: str,
 }

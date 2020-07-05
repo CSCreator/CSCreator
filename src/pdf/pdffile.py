@@ -57,7 +57,7 @@ class PDFFile:
             return
             # TODO either reimplement or do field checking when loading plugin
             # raise InvalidFieldException(
-            #     f"Attempting to set None field with value {value}"
+            #     f"Attempting to set None field with property_value {property_value}"
             # )
 
         value_type = type(value)

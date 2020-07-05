@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 class CharacterProperty:
     knownchproperty_value: CHProperty
     type: type
-    value: Union[str, int, bool, None] = None
+    property_value: Union[str, int, bool, None] = None
 
 
 class CharacterModel:
@@ -64,18 +64,18 @@ class CharacterModel:
         if not isinstance(value, character_property.type):
             raise InvalidPropertyType(
                 f"Setting {value_name} of type {character_property.type} with value {value} of type {type(value)}")
-        self.character_properties[value_name].value = value
+        self.character_properties[value_name].property_value = value
 
     def get_ch_property(self, ch_property: CHProperty) -> Union[CharacterProperty, None]:
         return self.character_properties.get(ch_property)
 
     def character_view_changed_event(
-            self, character_property: CharacterProperty, value: Callable
+            self, character_property: CHProperty, value: Callable
     ) -> None:
         # Do not call set_value here, otherwise we fire an event back to the View, who has the latest character_property already
-        self.character_properties[character_property.name] = value
+        self.set_value(character_property, value)
         logger.debug(
-            f"Recieved changed character_property {character_property.name} from the view with value {value}"
+            f"Recieved changed character_property {character_property} from the view with value {value}"
         )
 
     def add_item(self, type: CustomTableItemType, item: CustomTableItemType) -> None:
