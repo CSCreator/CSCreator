@@ -1,12 +1,8 @@
-from PySide2.QtWidgets import QApplication
-
 from src.data.pluginmanager import Plugin
 from src.importers.pdfimporter import PDFImporter
 
 
-def test_dnd_beyond_import() -> None:
-    # If we not init a QApplication, the character_view writes to bad memory
-    app = QApplication()
+def test_dnd_beyond_import(qtbot) -> None:
     importer = PDFImporter(plugin=Plugin("src/data/importers/dndbeyond.json"))
     print(importer)
     importer.load("tests/pdfs/dndbeyond.pdf")
