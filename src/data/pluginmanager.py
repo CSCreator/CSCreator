@@ -191,6 +191,9 @@ class Plugin:
             self.valid = False
 
     def override_values(self, pdf_file):
+        if not self.override:
+            return pdf_file
+
         for key, value in pdf_file.forms_and_values.items():
             if value in self.override:
                 pdf_file.forms_and_values[key] = self.override[value]

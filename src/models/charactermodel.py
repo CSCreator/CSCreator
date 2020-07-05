@@ -1,6 +1,6 @@
 import logging
 from dataclasses import dataclass
-from typing import Iterator, Union, Callable, Any
+from typing import Iterator, Union, Callable, Any, Type
 
 from obsub import event
 
@@ -28,6 +28,15 @@ class CharacterProperty:
     def __str__(self):
         return f'{self.knownchproperty_value}-{self.type}: {self.property_value}'
 
+    def get_value_as_type(self, requested_type: Type) -> Union[str, int, bool]:
+        if requested_type is int and self.type is requested_type and self.property_value is None:
+            return 0
+
+        if self.type is requested_type:
+            return self.property_value
+
+
+        return requested_type(self.property_value)
 
 class CharacterModel:
     def __init__(self) -> None:

@@ -119,3 +119,11 @@ def test_dnd_beyond_import(qtbot, standard_character_properties) -> None:
     player_controller = importer.player
     assert player_controller
     assert player_controller.player_model.character_properties == standard_character_properties
+
+def test_mpmb_import(qtbot, standard_character_properties) -> None:
+    importer = PDFImporter(plugin=Plugin("src/data/importers/mpmb.json"))
+    print(importer)
+    importer.load("tests/pdfs/mpmb.pdf")
+    player_controller = importer.player
+    assert player_controller
+    assert player_controller.player_model.character_properties == standard_character_properties
