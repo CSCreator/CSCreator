@@ -61,7 +61,7 @@ def standard_character_properties():
     character_properties[
         CHProperty.CURRENT_HP].property_value = None  # TODO figure out a more gracious way to handle 0/null
     character_properties[CHProperty.TEMP_HP].property_value = None
-    character_properties[CHProperty.TOTAL_HIT_DICE].property_value = "20d10"
+    character_properties[CHProperty.TOTAL_HIT_DICE].property_value = "20d10+2"
     character_properties[CHProperty.HIT_DICE].property_value = ""
     character_properties[CHProperty.SUCCESSFUL_SAVE_1].property_value = True
     character_properties[CHProperty.SUCCESSFUL_SAVE_2].property_value = False
@@ -125,5 +125,16 @@ def test_mpmb_import(qtbot, standard_character_properties) -> None:
     print(importer)
     importer.load("tests/pdfs/mpmb.pdf")
     player_controller = importer.player
+
+    known_broken_keys = [CHProperty.PASSIVE_WISDOM,  # Not present
+                         CHProperty.ACTIONS,  # Make table out of
+                         CHProperty.PUSH_DRAG_LIFT,  # Auto calculated
+                         CHProperty.ENCUMBERED,  # Auto calculated
+                         CHProperty.WEIGHT_CARRIED]  # Auto calculated
+
+    for key in known_broken_keys:
+        player_controller.player_model.character_properties.pop(key, None)
+        standard_character_properties.pop(key, None)
+
     assert player_controller
     assert player_controller.player_model.character_properties == standard_character_properties

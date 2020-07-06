@@ -1,75 +1,85 @@
 {
   "name": "MorePurpleMoreBetter",
   "key_conversion": {
-    "PC Name": "CH.CHARACTER_NAME",
-    "Player Name": "CH.PLAYER_NAME",
-    "Race": "CH.RACE",
-    "PP_EXPERIENCE": "CH.XP",
-    "Str": "CH.STR",
-    "Str Mod": "CH.STR_MOD",
-    "Str ST Mod": "CH.STR_ST_MOD",
-    "Dex": "CH.DEX",
-    "Dex Mod": "CH.DEX_MOD",
-    "Dex ST Mod": "CH.DEX_ST_MOD",
-    "Con": "CH.CON",
-    "Con Mod": "CH.CON_MOD",
-    "Con ST Mod": "CH.CON_ST_MOD",
-    "Int": "CH.INT",
-    "Int Mod": "CH.INT_MOD",
-    "Int ST Mod": "CH.INT_ST_MOD",
-    "Wis": "CH.WIS",
-    "Wis Mod": "CH.WIS_MOD",
-    "Wis ST Mod": "CH.WIS_ST_MOD",
-    "Cha": "CH.CHA",
-    "Cha Mod": "CH.CHA_MOD",
-    "Cha ST Mod": "CH.CHA_ST_MOD",
-    "PP_RESISTANCE": "CH.SAVE_MODIFIERS",
-    "PP_DEFENSES": "CH.DEFENSES",
-    "Passive Perception": "CH.PASSIVE_PERCEPTION",
-    "Vision": "CH.SENSES",
-    "Proficiency Bonus": "CH.PROF_BONUS",
-    "HP Max": "CH.MAX_HP",
-    "HP Temp": "CH.TEMP_HP",
-    "HP Current": "CH.CURRENT_HP",
-    "Death Save Success1": "CH.SUCCESSFUL_SAVE_1",
-    "Death Save Success2": "CH.SUCCESSFUL_SAVE_2",
-    "Death Save Success3": "CH.SUCCESSFUL_SAVE_3",
-    "Death Save Fail1": "CH.FAILED_SAVE_1",
-    "Death Save Fail2": "CH.FAILED_SAVE_2",
-    "Death Save Fail3": "CH.FAILED_SAVE_3",
-    "PP_HIT_DICE": "CH.TOTAL_HIT_DICE",
-    "AC": "CH.AC",
-    "Init Bonus": "CH.INITIATIVE",
-    "Speed": "CH.SPEED",
-    "PP_ACTIONS": "CH.ACTIONS",
-    "Sex": "CH.GENDER",
-    "Age": "CH.AGE",
-    "Height": "CH.SIZE",
-    "Weight": "CH.WEIGHT",
-    "Alignment": "CH.ALIGNMENT",
-    "Faith/Deity": "CH.FAITH",
-    "Hair colour": "CH.HAIR",
-    "Eyes colour": "CH.EYES",
-    "Skin colour": "CH.SKIN",
-    "Weight Carried": "CH.WEIGHT_CARRIED",
-    "Weight Encumbered": "CH.ENCUMBERED",
-    "Weight Push/Drag/Lift": "CH.PUSH_DRAG_LIFT",
-    "Copper Pieces": "CH.CP",
-    "Silver Pieces": "CH.SP",
-    "Gold Pieces": "CH.GP",
-    "Electrum Pieces": "CH.EP",
-    "Platinum Pieces": "CH.PP",
-    "Spell DC 1 Mod": "CH.ABILITYSAVEDC1",
-    "Spell DC 2 Mod": "CH.ABILITYSAVEDC2",
-    "Spell save DC 1": "CH.ABILITYSAVESCORE1",
-    "Spell save DC 2": "CH.ABILITYSAVESCORE2",
-    "PP_FEATURES_RACIAL_TRAITS": "CH.FEATURES_TRAITS",
-    "Personality Trait": "CH.PERSONALITY_TRAITS",
-    "Ideal": "CH.IDEALS",
-    "Bond": "CH.BONDS",
-    "Flaw": "CH.FLAWS",
-    "Background_Appearance": "CH.APPEARANCE",
-    "Background_History": "CH.BACKSTORY"
+    "PC Name": "CHProperty.CHARACTER_NAME",
+    "Player Name": "CHProperty.PLAYER_NAME",
+    "PP_BACKGROUND": "CHProperty.BACKGROUND",
+    "PP_CHAR_LEVEL": "CHProperty.CLASS_LEVEL",
+    "PP_NOTES": "CHProperty.ADDITIONAL_NOTES",
+    "Race": "CHProperty.RACE",
+    "PP_EXPERIENCE": "CHProperty.XP",
+    "Str": "CHProperty.STR",
+    "Str Mod": "CHProperty.STR_MOD",
+    "Str ST Mod": "CHProperty.STR_ST_MOD",
+    "Str ST Prof": "CHProperty.STR_ST_PROF",
+    "Dex": "CHProperty.DEX",
+    "Dex Mod": "CHProperty.DEX_MOD",
+    "Dex ST Mod": "CHProperty.DEX_ST_MOD",
+    "Dex ST Prof": "CHProperty.DEX_ST_PROF",
+    "Con": "CHProperty.CON",
+    "Con Mod": "CHProperty.CON_MOD",
+    "Con ST Mod": "CHProperty.CON_ST_MOD",
+    "Con ST Prof": "CHProperty.CON_ST_PROF",
+    "Int": "CHProperty.INT",
+    "Int Mod": "CHProperty.INT_MOD",
+    "Int ST Mod": "CHProperty.INT_ST_MOD",
+    "Int ST Prof": "CHProperty.INT_ST_PROF",
+    "Wis": "CHProperty.WIS",
+    "Wis Mod": "CHProperty.WIS_MOD",
+    "Wis ST Mod": "CHProperty.WIS_ST_MOD",
+    "Wis ST Prof": "CHProperty.WIS_ST_PROF",
+    "Cha": "CHProperty.CHA",
+    "Cha Mod": "CHProperty.CHA_MOD",
+    "Cha ST Mod": "CHProperty.CHA_ST_MOD",
+    "Cha ST Prof": "CHProperty.CHA_ST_PROF",
+    "PP_RESISTANCE": "CHProperty.SAVE_MODIFIERS",
+    "PP_DEFENSES": "CHProperty.DEFENSES",
+    "Passive Perception": "CHProperty.PASSIVE_PERCEPTION",
+    "Vision": "CHProperty.SENSES",
+    "Proficiency Bonus": "CHProperty.PROF_BONUS",
+    "HP Max": "CHProperty.MAX_HP",
+    "HP Temp": "CHProperty.TEMP_HP",
+    "HP Current": "CHProperty.CURRENT_HP",
+    "Death Save Success1": "CHProperty.SUCCESSFUL_SAVE_1",
+    "Death Save Success2": "CHProperty.SUCCESSFUL_SAVE_2",
+    "Death Save Success3": "CHProperty.SUCCESSFUL_SAVE_3",
+    "Death Save Fail1": "CHProperty.FAILED_SAVE_1",
+    "Death Save Fail2": "CHProperty.FAILED_SAVE_2",
+    "Death Save Fail3": "CHProperty.FAILED_SAVE_3",
+    "PP_HIT_DICE": "CHProperty.TOTAL_HIT_DICE",
+    "AC": "CHProperty.AC",
+    "Init Bonus": "CHProperty.INITIATIVE",
+    "Speed": "CHProperty.SPEED",
+    "PP_ACTIONS": "CHProperty.ACTIONS",
+    "Sex": "CHProperty.GENDER",
+    "Age": "CHProperty.AGE",
+    "Height": "CHProperty.HEIGHT",
+    "Weight": "CHProperty.WEIGHT",
+    "Alignment": "CHProperty.ALIGNMENT",
+    "Faith/Deity": "CHProperty.FAITH",
+    "Hair colour": "CHProperty.HAIR",
+    "Eyes colour": "CHProperty.EYES",
+    "Skin colour": "CHProperty.SKIN",
+    "Weight Carried": "CHProperty.WEIGHT_CARRIED",
+    "Weight Encumbered": "CHProperty.ENCUMBERED",
+    "Weight Push/Drag/Lift": "CHProperty.PUSH_DRAG_LIFT",
+    "Copper Pieces": "CHProperty.CP",
+    "Silver Pieces": "CHProperty.SP",
+    "Gold Pieces": "CHProperty.GP",
+    "Electrum Pieces": "CHProperty.EP",
+    "Platinum Pieces": "CHProperty.PP",
+    "Spell DC 1 Mod": "CHProperty.ABILITYSAVEDC1",
+    "Spell DC 2 Mod": "CHProperty.ABILITYSAVEDC2",
+    "Spell save DC 1": "CHProperty.ABILITYSAVESCORE1",
+    "Spell save DC 2": "CHProperty.ABILITYSAVESCORE2",
+    "PP_FEATURES_RACIAL_TRAITS": "CHProperty.FEATURES_TRAITS",
+    "Personality Trait": "CHProperty.PERSONALITY_TRAITS",
+    "Ideal": "CHProperty.IDEALS",
+    "Bond": "CHProperty.BONDS",
+    "Flaw": "CHProperty.FLAWS",
+    "Background_Appearance": "CHProperty.APPEARANCE",
+    "Background_History": "CHProperty.BACKSTORY",
+    "PP_ALLIES_ORGANIZATIONS": "CHProperty.ALLIES_ORGANIZATIONS"
   },
   "keys_to_ignore": [
     "Image.calc_boxes.CSfront",
@@ -173,38 +183,50 @@
   "pre_processing": {
     "PP_CHAR_LEVEL": {
       "method": "concat",
-      "parameters": [
-        "Character Level",
-        "Class and Levels"
-      ],
+      "parameters": {
+        "forms_to_concat": [
+          "Class and Levels",
+          "Character Level"
+        ],
+        "separator": " "
+      },
       "delete_parameters": true
     },
     "PP_BACKGROUND": {
       "method": "concat",
-      "parameters": [
-        "Background",
-        "Background Extra"
-      ],
+      "parameters": {
+        "forms_to_concat": [
+          "Background",
+          "Background Extra"
+        ],
+        "separator": " "
+      },
       "delete_parameters": true
     },
     "PP_EXPERIENCE": {
       "method": "concat",
-      "parameters": [
-        "Total Experience",
-        "Next level"
-      ],
+      "parameters": {
+        "forms_to_concat": [
+          "Total Experience",
+          "Next level"
+        ],
+        "separator": " "
+      },
       "delete_parameters": true
     },
     "PP_RESISTANCE": {
       "method": "concat",
-      "parameters": [
-        "Resistance Damage Type 1",
-        "Resistance Damage Type 2",
-        "Resistance Damage Type 3",
-        "Resistance Damage Type 4",
-        "Resistance Damage Type 5",
-        "Resistance Damage Type 6"
-      ],
+      "parameters": {
+        "forms_to_concat": [
+          "Resistance Damage Type 1",
+          "Resistance Damage Type 2",
+          "Resistance Damage Type 3",
+          "Resistance Damage Type 4",
+          "Resistance Damage Type 5",
+          "Resistance Damage Type 6"
+        ],
+        "separator": " "
+      },
       "delete_parameters": true
     },
     "Str ST Prof": {
@@ -281,66 +303,82 @@
     },
     "PP_HIT_DICE": {
       "method": "concat",
-      "parameters": [
-        "HD1 Level",
-        "HD1 Die",
-        "HD2 Level",
-        "HD2 Die",
-        "HD3 Level",
-        "HD3 Die"
-      ],
+      "parameters": {
+        "forms_to_concat": [
+          "HD1 Level",
+          "HD1 Die",
+          "HD2 Level",
+          "HD2 Die",
+          "HD3 Level",
+          "HD3 Die"
+        ],
+        "separator": " "
+      },
       "delete_parameters": true
     },
     "PP_ACTIONS": {
       "method": "concat",
-      "parameters": [
-        "Action 1",
-        "Action 2",
-        "Action 3",
-        "Action 4",
-        "Action 5",
-        "Action 6",
-        "Bonus Action 1",
-        "Bonus Action 2",
-        "Bonus Action 3",
-        "Bonus Action 4",
-        "Bonus Action 5",
-        "Bonus Action 6",
-        "Reaction 1",
-        "Reaction 2",
-        "Reaction 3",
-        "Reaction 4",
-        "Reaction 5",
-        "Reaction 6"
-      ],
+      "parameters": {
+        "forms_to_concat": [
+          "Action 1",
+          "Action 2",
+          "Action 3",
+          "Action 4",
+          "Action 5",
+          "Action 6",
+          "Bonus Action 1",
+          "Bonus Action 2",
+          "Bonus Action 3",
+          "Bonus Action 4",
+          "Bonus Action 5",
+          "Bonus Action 6",
+          "Reaction 1",
+          "Reaction 2",
+          "Reaction 3",
+          "Reaction 4",
+          "Reaction 5",
+          "Reaction 6"
+        ],
+        "separator": " "
+      },
       "delete_parameters": true
     },
     "PP_NOTES": {
       "method": "concat",
-      "parameters": [
-        "Extra.Notes",
-        "P5.ASnotes.Notes.Left",
-        "P5.ASnotes.Notes.Right",
-        "P6.ASnotes.Notes.Left",
-        "P6.ASnotes.Notes.Right"
-      ],
+      "parameters": {
+        "forms_to_concat": [
+          "Extra.Notes",
+          "P5.ASnotes.Notes.Left",
+          "P5.ASnotes.Notes.Right",
+          "P6.ASnotes.Notes.Left",
+          "P6.ASnotes.Notes.Right"
+        ],
+        "separator": " "
+      },
       "delete_parameters": true
     },
     "PP_FEATURES_RACIAL_TRAITS": {
       "method": "concat",
-      "parameters": [
-        "Class, Features",
-        "Racial Traits"
-      ],
+      "parameters": {
+        "forms_to_concat": [
+          "ClassFeatures",
+          "Class, Features",
+          "Racial Traits"
+        ],
+        "separator": " "
+      },
       "delete_parameters": true
     },
     "PP_ALLIES_ORGANIZATIONS": {
       "method": "concat",
-      "parameters": [
-        "Background_Organisation.Left",
-        "Background_Organisation.Right",
-        "Background_Enemies"
-      ],
+      "parameters": {
+        "forms_to_concat": [
+          "Background_Organisation.Left",
+          "Background_Organisation.Right",
+          "Background_Enemies"
+        ],
+        "separator": " "
+      },
       "delete_parameters": true
     }
   },

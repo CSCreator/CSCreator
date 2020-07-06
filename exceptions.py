@@ -19,3 +19,6 @@ class UnknownCharacterProperty(Warning):
 
 class InvalidPropertyType(Exception):
     pass
+
+class MissingPreprocessingArgumentsException(Exception):
+    pass

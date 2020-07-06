@@ -40,7 +40,7 @@ class SkillProficiencies(Enum):
 
 class CHPropertyName(Enum):
     def _generate_next_value_(self, start: int, count: int, last_values: str) -> str:
-        return "CH." + self
+        return "CHProperty." + self
 
 
 class CHProperty(CHPropertyName):
