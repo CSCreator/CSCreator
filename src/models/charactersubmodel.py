@@ -24,7 +24,7 @@ def standard_type_conversion(value, type):
             return False
         elif isinstance(value, int) and type is str:
             return str(value)
-        elif value == '' and type is int:
+        elif value in ['', '--'] and type is int:
             return None
         elif isinstance(value, str) and type is int:
             return int(value)
@@ -135,6 +135,41 @@ class SpellSlot(CustomTableItemType):
     }
     delegates: Dict[int, QStyledItemDelegate] = {}
 
+class WeaponProf(CustomTableItemType):
+    columns_names: Dict[int, str] = {
+        0: "name",
+    }
+    columns_types: Dict[int, type] = {
+        0: str,
+    }
+    delegates: Dict[int, QStyledItemDelegate] = {}
+
+class ArmorProf(CustomTableItemType):
+    columns_names: Dict[int, str] = {
+        0: "name",
+    }
+    columns_types: Dict[int, type] = {
+        0: str,
+    }
+    delegates: Dict[int, QStyledItemDelegate] = {}
+
+class LanguageProf(CustomTableItemType):
+    columns_names: Dict[int, str] = {
+        0: "name",
+    }
+    columns_types: Dict[int, type] = {
+        0: str,
+    }
+    delegates: Dict[int, QStyledItemDelegate] = {}
+
+class ToolProf(CustomTableItemType):
+    columns_names: Dict[int, str] = {
+        0: "name",
+    }
+    columns_types: Dict[int, type] = {
+        0: str,
+    }
+    delegates: Dict[int, QStyledItemDelegate] = {}
 
 class Spell(CustomTableItemType):
     columns_names: Dict[int, str] = {

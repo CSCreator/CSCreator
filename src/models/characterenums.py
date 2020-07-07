@@ -106,7 +106,6 @@ class CHProperty(CHPropertyName):
     FAILED_SAVE_1 = auto()
     FAILED_SAVE_2 = auto()
     FAILED_SAVE_3 = auto()
-    PROFICIENCIES_LANGUAGES = auto()
     # Merge from two boxes
     ACTIONS = auto()
     # Merged from 3 boxes
@@ -199,7 +198,6 @@ ch_reader_friendly_name = {
     CHProperty.FAILED_SAVE_1: None,
     CHProperty.FAILED_SAVE_2: None,
     CHProperty.FAILED_SAVE_3: None,
-    CHProperty.PROFICIENCIES_LANGUAGES: "Proficiencies and Languages",
     CHProperty.ACTIONS: "Actions",
     CHProperty.FEATURES_TRAITS: "Features & Traits",
     CHProperty.CP: "CP",

@@ -14,7 +14,7 @@ from src.models.charactersubmodel import (
     Skill,
     SpellSlot,
     CustomTableItemType,
-    standard_type_conversion)
+    standard_type_conversion, WeaponProf, ArmorProf, LanguageProf, ToolProf)
 
 logger = logging.getLogger(__name__)
 
@@ -45,17 +45,16 @@ class CharacterModel:
         for value in CHProperty:
             self.character_properties[value] = CharacterProperty(value, ch_property_type[value])
 
-        self.equipment_model = CustomTableModel(Equipment)
-        self.spell_model = CustomTableModel(Spell)
-        self.attack_model = CustomTableModel(Attack)
-        self.skills_model = CustomTableModel(Skill)
-        self.spellslot_model = CustomTableModel(SpellSlot)
         self.conversion = {
-            Spell: self.spell_model,
-            SpellSlot: self.spellslot_model,
-            Skill: self.skills_model,
-            Equipment: self.equipment_model,
-            Attack: self.attack_model,
+            Spell: CustomTableModel(Spell),
+            SpellSlot: CustomTableModel(SpellSlot),
+            Skill: CustomTableModel(Skill),
+            Equipment: CustomTableModel(Equipment),
+            Attack: CustomTableModel(Attack),
+            WeaponProf: CustomTableModel(WeaponProf),
+            ArmorProf: CustomTableModel(ArmorProf),
+            LanguageProf: CustomTableModel(LanguageProf),
+            ToolProf: CustomTableModel(ToolProf),
         }
 
     def get_item(

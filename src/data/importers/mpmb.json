@@ -68,10 +68,10 @@
     "Gold Pieces": "CHProperty.GP",
     "Electrum Pieces": "CHProperty.EP",
     "Platinum Pieces": "CHProperty.PP",
-    "Spell DC 1 Mod": "CHProperty.ABILITYSAVEDC1",
-    "Spell DC 2 Mod": "CHProperty.ABILITYSAVEDC2",
-    "Spell save DC 1": "CHProperty.ABILITYSAVESCORE1",
-    "Spell save DC 2": "CHProperty.ABILITYSAVESCORE2",
+    "Spell save DC 1": "CHProperty.ABILITYSAVEDC1",
+    "Spell save DC 2": "CHProperty.ABILITYSAVEDC2",
+    "Spell DC 1 Mod": "CHProperty.ABILITYSAVESCORE1",
+    "Spell DC 2 Mod": "CHProperty.ABILITYSAVESCORE2",
     "PP_FEATURES_RACIAL_TRAITS": "CHProperty.FEATURES_TRAITS",
     "Personality Trait": "CHProperty.PERSONALITY_TRAITS",
     "Ideal": "CHProperty.IDEALS",
@@ -218,6 +218,7 @@
       "method": "concat",
       "parameters": {
         "forms_to_concat": [
+          "Saving Throw advantages / disadvantages",
           "Resistance Damage Type 1",
           "Resistance Damage Type 2",
           "Resistance Damage Type 3",
@@ -636,5 +637,13 @@
         "name_field": "Too Text"
       }
     }
+  },
+  "override": {
+    "Str Mod": "STR",
+    "Dex Mod": "DEX",
+    "Con Mod": "CON",
+    "Int Mod": "INT",
+    "Wis Mod": "WIS",
+    "Cha Mod": "CHA"
   }
 }
