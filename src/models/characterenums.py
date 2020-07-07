@@ -288,7 +288,6 @@ ch_property_type = {
     CHProperty.FAILED_SAVE_1: bool,
     CHProperty.FAILED_SAVE_2: bool,
     CHProperty.FAILED_SAVE_3: bool,
-    CHProperty.PROFICIENCIES_LANGUAGES: str,
     CHProperty.ACTIONS: str,
     CHProperty.FEATURES_TRAITS: str,
     CHProperty.CP: int,

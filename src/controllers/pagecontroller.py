@@ -45,14 +45,14 @@ class PageController:
         #         active_character_controller,
         #     )
         # )
-        main_grid.add_component_controller(
-            BoxController(
-                Properties(0, 0, 12, 12),
-                "OTHER PROFICIENCIES & LANGUAGES",
-                CHProperty.PROFICIENCIES_LANGUAGES,
-                active_character_controller,
-            )
-        )
+        # main_grid.add_component_controller(
+        #     BoxController(
+        #         Properties(0, 0, 12, 12),
+        #         "OTHER PROFICIENCIES & LANGUAGES",
+        #         CHProperty.PROFICIENCIES_LANGUAGES,
+        #         active_character_controller,
+        #     )
+        # )
         # # main_grid.add_component(
         # #     SingleLineBox(
         # #         Properties(column_1_start, 49, column_1_width, 3),

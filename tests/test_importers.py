@@ -1,6 +1,7 @@
 import pytest
 
-from src.data.pluginmanager import Plugin
+from src.data.importers.dndbeyond import DNDBeyond
+from src.data.importers.importerplugin import ImporterPlugin
 from src.importers.pdfimporter import PDFImporter
 from src.models.characterenums import CHProperty, ch_property_type
 from src.models.charactermodel import CharacterProperty
@@ -69,9 +70,6 @@ def standard_character_properties():
     character_properties[CHProperty.FAILED_SAVE_1].property_value = True
     character_properties[CHProperty.FAILED_SAVE_2].property_value = False
     character_properties[CHProperty.FAILED_SAVE_3].property_value = False
-    character_properties[CHProperty.PROFICIENCIES_LANGUAGES].property_value = '''Proficiencies
- 
-Languages'''
     character_properties[CHProperty.ACTIONS].property_value = "Actions"
     character_properties[CHProperty.FEATURES_TRAITS].property_value = '''Features
 
@@ -113,7 +111,7 @@ This is multiline.'''
 
 
 def test_dnd_beyond_import(qtbot, standard_character_properties) -> None:
-    importer = PDFImporter(plugin=Plugin("src/data/importers/dndbeyond.json"))
+    importer = PDFImporter(plugin=DNDBeyond())
     print(importer)
     importer.load("tests/pdfs/dndbeyond.pdf")
     player_controller = importer.player
