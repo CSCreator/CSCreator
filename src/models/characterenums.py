@@ -40,7 +40,7 @@ class SkillProficiencies(Enum):
 
 class CHPropertyName(Enum):
     def _generate_next_value_(self, start: int, count: int, last_values: str) -> str:
-        return "CH." + self
+        return "CHProperty." + self
 
 
 class CHProperty(CHPropertyName):
@@ -106,7 +106,6 @@ class CHProperty(CHPropertyName):
     FAILED_SAVE_1 = auto()
     FAILED_SAVE_2 = auto()
     FAILED_SAVE_3 = auto()
-    PROFICIENCIES_LANGUAGES = auto()
     # Merge from two boxes
     ACTIONS = auto()
     # Merged from 3 boxes
@@ -199,7 +198,6 @@ ch_reader_friendly_name = {
     CHProperty.FAILED_SAVE_1: None,
     CHProperty.FAILED_SAVE_2: None,
     CHProperty.FAILED_SAVE_3: None,
-    CHProperty.PROFICIENCIES_LANGUAGES: "Proficiencies and Languages",
     CHProperty.ACTIONS: "Actions",
     CHProperty.FEATURES_TRAITS: "Features & Traits",
     CHProperty.CP: "CP",
@@ -278,7 +276,7 @@ ch_property_type = {
     CHProperty.ABILITYSAVESCORE1: str,
     CHProperty.ABILITYSAVESCORE2: str,
     CHProperty.ABILITYSAVEDC2: int,
-    CHProperty.SPEED: str, #TODO maybe make this an int
+    CHProperty.SPEED: str,  # TODO maybe make this an int
     CHProperty.MAX_HP: int,
     CHProperty.CURRENT_HP: int,
     CHProperty.TEMP_HP: int,
@@ -290,7 +288,6 @@ ch_property_type = {
     CHProperty.FAILED_SAVE_1: bool,
     CHProperty.FAILED_SAVE_2: bool,
     CHProperty.FAILED_SAVE_3: bool,
-    CHProperty.PROFICIENCIES_LANGUAGES: str,
     CHProperty.ACTIONS: str,
     CHProperty.FEATURES_TRAITS: str,
     CHProperty.CP: int,
@@ -320,7 +317,7 @@ ch_property_type = {
     CHProperty.BACKSTORY: str,
     CHProperty.ADDITIONAL_NOTES: str,
     CHProperty.SPELLCASTINGABILITY0: str,
-    CHProperty.SPELLSAVEDC0: str, # TODO When multiclassing, this is a string
-    CHProperty.SPELLATKBONUS0: str, # TODO When multiclassing, this is a string
-    CHProperty.SPELLCASTINGCLASS0: str, # TODO When multiclassing, this is a string
+    CHProperty.SPELLSAVEDC0: str,  # TODO When multiclassing, this is a string
+    CHProperty.SPELLATKBONUS0: str,  # TODO When multiclassing, this is a string
+    CHProperty.SPELLCASTINGCLASS0: str,  # TODO When multiclassing, this is a string
 }

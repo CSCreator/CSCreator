@@ -5,7 +5,19 @@ from typing import List
 from PySide2.QtWidgets import QHBoxLayout, QLayout
 
 from src.models.charactermodel import CharacterModel
-from src.models.charactersubmodel import CustomTableModel, CustomTableItemType
+from src.models.charactersubmodel import (
+    CustomTableModel,
+    CustomTableItemType,
+    Equipment,
+    Spell,
+    SpellSlot,
+    Skill,
+    Attack,
+    WeaponProf,
+    ArmorProf,
+    LanguageProf,
+    ToolProf,
+)
 from src.views.charactersubview import get_view_for_submodel
 from src.views.characterview import CharacterView
 
@@ -19,11 +31,33 @@ class CharacterController:
         self.character_view = CharacterView(self.player_model)
 
         layout_per_submodel = {
-            self.character_view.char_layout.EQUIPMENT_LAYOUT: self.player_model.equipment_model,
-            self.character_view.char_layout.SPELL_LAYOUT: self.player_model.spell_model,
-            self.character_view.char_layout.SPELLSLOT_LAYOUT: self.player_model.spellslot_model,
-            self.character_view.char_layout.ATTACK_LAYOUT: self.player_model.attack_model,
-            self.character_view.char_layout.SKILL_LAYOUT: self.player_model.skills_model,
+            self.character_view.char_layout.EQUIPMENT_LAYOUT: self.player_model.conversion[
+                Equipment
+            ],
+            self.character_view.char_layout.SPELL_LAYOUT: self.player_model.conversion[
+                Spell
+            ],
+            self.character_view.char_layout.SPELLSLOT_LAYOUT: self.player_model.conversion[
+                SpellSlot
+            ],
+            self.character_view.char_layout.ATTACK_LAYOUT: self.player_model.conversion[
+                Attack
+            ],
+            self.character_view.char_layout.SKILL_LAYOUT: self.player_model.conversion[
+                Skill
+            ],
+            self.character_view.char_layout.WEAPONS_LAYOUT: self.player_model.conversion[
+                WeaponProf
+            ],
+            self.character_view.char_layout.ARMOR_LAYOUT: self.player_model.conversion[
+                ArmorProf
+            ],
+            self.character_view.char_layout.LANGUAGES_LAYOUT: self.player_model.conversion[
+                LanguageProf
+            ],
+            self.character_view.char_layout.TOOLS_LAYOUT: self.player_model.conversion[
+                ToolProf
+            ],
         }
 
         for layout, submodel in layout_per_submodel.items():

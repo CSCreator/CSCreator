@@ -56,7 +56,7 @@ class PDFImporter:
         form_fields = self.handle_ability_order(form_fields)
 
         for key in list(form_fields.keys()):
-            if key in self.plugin.key_conversion:
+            if key in self.plugin.key_conversion or "PP_" in key:
                 self.set_value_to_player_if_exists(form_fields, key)
             elif (
                 any(wildcard in key for wildcard in self.plugin.wildcards_to_ignore)
@@ -113,6 +113,13 @@ class PDFImporter:
             logger.debug(
                 f"Preprocessing method {process} to create new field {new_field}"
             )
+
+            if new_field not in self.plugin.key_conversion:
+                logger.error(
+                    f"Trying to create {new_field} which is not present in key_conversion"
+                )
+                continue
+
             method = process["method"]
             parameters = process["parameters"]
             delete_after = (
@@ -125,7 +132,7 @@ class PDFImporter:
             if method == "concat":
                 new_value = concat(forms, parameters)
             if method == "to_bool_true_if":
-                if not "field" in parameters:
+                if "field" not in parameters:
                     parameters["field"] = new_field
                 new_value = to_boolean_true_if(forms, parameters)
 

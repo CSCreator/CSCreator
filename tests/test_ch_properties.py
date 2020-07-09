@@ -1,4 +1,9 @@
-from src.models.characterenums import ch_reader_friendly_name, CHPropertyName, ch_property_type, CHProperty
+from src.models.characterenums import (
+    ch_reader_friendly_name,
+    CHPropertyName,
+    ch_property_type,
+    CHProperty,
+)
 
 
 def test_ch_dictionaries_union():

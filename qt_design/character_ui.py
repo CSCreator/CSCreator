@@ -3,18 +3,21 @@
 ################################################################################
 ## Form generated from reading UI file 'character.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.14.1
+## Created by: Qt User Interface Compiler version 5.15.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
 from PySide2.QtCore import (
     QCoreApplication,
+    QDate,
+    QDateTime,
     QMetaObject,
     QObject,
     QPoint,
     QRect,
     QSize,
+    QTime,
     QUrl,
     Qt,
 )
@@ -26,6 +29,7 @@ from PySide2.QtGui import (
     QFont,
     QFontDatabase,
     QIcon,
+    QKeySequence,
     QLinearGradient,
     QPalette,
     QPainter,
@@ -37,7 +41,7 @@ from PySide2.QtWidgets import *
 
 class Ui_Form(object):
     def setupUi(self, Form):
-        if Form.objectName():
+        if not Form.objectName():
             Form.setObjectName(u"Form")
         Form.resize(1200, 900)
         self.gridLayout = QGridLayout(Form)
@@ -401,16 +405,53 @@ class Ui_Form(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.gridLayout_9 = QGridLayout()
         self.gridLayout_9.setObjectName(u"gridLayout_9")
+        self.gridLayout_10 = QGridLayout()
+        self.gridLayout_10.setObjectName(u"gridLayout_10")
+        self.groupBox_20 = QGroupBox(self.tab_2)
+        self.groupBox_20.setObjectName(u"groupBox_20")
+        self.horizontalLayout_18 = QHBoxLayout(self.groupBox_20)
+        self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
+        self.LANGUAGES_LAYOUT = QHBoxLayout()
+        self.LANGUAGES_LAYOUT.setObjectName(u"LANGUAGES_LAYOUT")
+
+        self.horizontalLayout_18.addLayout(self.LANGUAGES_LAYOUT)
+
+        self.gridLayout_10.addWidget(self.groupBox_20, 0, 0, 1, 1)
+
+        self.groupBox_21 = QGroupBox(self.tab_2)
+        self.groupBox_21.setObjectName(u"groupBox_21")
+        self.verticalLayout_21 = QVBoxLayout(self.groupBox_21)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.ARMOR_LAYOUT = QHBoxLayout()
+        self.ARMOR_LAYOUT.setObjectName(u"ARMOR_LAYOUT")
+
+        self.verticalLayout_21.addLayout(self.ARMOR_LAYOUT)
+
+        self.gridLayout_10.addWidget(self.groupBox_21, 1, 0, 1, 1)
+
+        self.groupBox_22 = QGroupBox(self.tab_2)
+        self.groupBox_22.setObjectName(u"groupBox_22")
+        self.verticalLayout_2 = QVBoxLayout(self.groupBox_22)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.TOOLS_LAYOUT = QHBoxLayout()
+        self.TOOLS_LAYOUT.setObjectName(u"TOOLS_LAYOUT")
+
+        self.verticalLayout_2.addLayout(self.TOOLS_LAYOUT)
+
+        self.gridLayout_10.addWidget(self.groupBox_22, 0, 1, 1, 1)
+
         self.groupBox_13 = QGroupBox(self.tab_2)
         self.groupBox_13.setObjectName(u"groupBox_13")
-        self.verticalLayout_2 = QVBoxLayout(self.groupBox_13)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.PROFICIENCIES_LANGUAGES = QTextEdit(self.groupBox_13)
-        self.PROFICIENCIES_LANGUAGES.setObjectName(u"PROFICIENCIES_LANGUAGES")
+        self.verticalLayout_42 = QVBoxLayout(self.groupBox_13)
+        self.verticalLayout_42.setObjectName(u"verticalLayout_42")
+        self.WEAPONS_LAYOUT = QHBoxLayout()
+        self.WEAPONS_LAYOUT.setObjectName(u"WEAPONS_LAYOUT")
 
-        self.verticalLayout_2.addWidget(self.PROFICIENCIES_LANGUAGES)
+        self.verticalLayout_42.addLayout(self.WEAPONS_LAYOUT)
 
-        self.gridLayout_9.addWidget(self.groupBox_13, 0, 0, 1, 1)
+        self.gridLayout_10.addWidget(self.groupBox_13, 1, 1, 1, 1)
+
+        self.gridLayout_9.addLayout(self.gridLayout_10, 1, 0, 1, 1)
 
         self.groupBox_14 = QGroupBox(self.tab_2)
         self.groupBox_14.setObjectName(u"groupBox_14")
@@ -421,7 +462,7 @@ class Ui_Form(object):
 
         self.verticalLayout_40.addWidget(self.DEFENSES)
 
-        self.gridLayout_9.addWidget(self.groupBox_14, 0, 1, 1, 1)
+        self.gridLayout_9.addWidget(self.groupBox_14, 1, 3, 1, 1)
 
         self.verticalLayout_3.addLayout(self.gridLayout_9)
 
@@ -1485,7 +1526,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.various_tabs.setCurrentIndex(7)
+        self.various_tabs.setCurrentIndex(2)
 
         QMetaObject.connectSlotsByName(Form)
 
@@ -1539,9 +1580,12 @@ class Ui_Form(object):
             self.various_tabs.indexOf(self.tab_6),
             QCoreApplication.translate("Form", u"Spells", None),
         )
-        self.groupBox_13.setTitle(
-            QCoreApplication.translate("Form", u"Proficiencies and Languages", None)
+        self.groupBox_20.setTitle(
+            QCoreApplication.translate("Form", u"Languages", None)
         )
+        self.groupBox_21.setTitle(QCoreApplication.translate("Form", u"Armor", None))
+        self.groupBox_22.setTitle(QCoreApplication.translate("Form", u"Tools", None))
+        self.groupBox_13.setTitle(QCoreApplication.translate("Form", u"Weapons", None))
         self.groupBox_14.setTitle(QCoreApplication.translate("Form", u"Defenses", None))
         self.various_tabs.setTabText(
             self.various_tabs.indexOf(self.tab_2),

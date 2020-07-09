@@ -6,6 +6,7 @@ from obsub import event
 from src.controllers.sheetcontroller import SheetController
 from src.views.stagingview import StagingView
 from src.models.characterenums import CHProperty
+
 logger = logging.getLogger(__name__)
 
 
@@ -18,7 +19,9 @@ class CollectionController:
     @event
     def add_player(self, player):
         self.character_controllers = player
-        logger.info(f"Added player {player.player_model.get_ch_property(CHProperty.CHARACTER_NAME)}")
+        logger.info(
+            f"Added player {player.player_model.get_ch_property(CHProperty.CHARACTER_NAME)}"
+        )
 
     @event
     def remove_player(self, player):

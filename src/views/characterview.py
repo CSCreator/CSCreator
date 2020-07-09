@@ -50,26 +50,31 @@ class CharacterView(QWidget):
             attribute, subject.get_ch_property(character_property)
         )
 
-    def set_value_for_generic_widget(self, attribute: QWidget, ch_property: CharacterProperty) -> None:
-        #TODO typechecking here of property_value we are setting
+    def set_value_for_generic_widget(
+        self, attribute: QWidget, ch_property: CharacterProperty
+    ) -> None:
+        # TODO typechecking here of property_value we are setting
         if isinstance(attribute, QLineEdit):
-            attribute.setText(str(ch_property.property_value)) #TODO this casting should occur somewhere else
+            attribute.setText(
+                ch_property.get_value_as_type(str)
+            )  # TODO this casting should occur somewhere else
         elif isinstance(attribute, QSpinBox):
             try:
-                int_value = int(ch_property.property_value)
+                int_value = ch_property.get_value_as_type(int)
+
                 attribute.setValue(int_value)
             except ValueError:
                 logging.warning(
                     f"Attempting to set SpinBox {attribute} with str character_property {ch_property.property_value}, which is not castable to int."
                 )
         elif isinstance(attribute, QLabel):
-            attribute.setText(ch_property.property_value)
+            attribute.setText(ch_property.get_value_as_type(str))
         elif isinstance(attribute, QTextEdit):
             attribute.blockSignals(True)
-            attribute.setText(ch_property.property_value)
+            attribute.setText(ch_property.get_value_as_type(str))
             attribute.blockSignals(False)
         elif isinstance(attribute, QCheckBox):
-            attribute.setChecked(ch_property.property_value)
+            attribute.setChecked(ch_property.get_value_as_type(bool))
         else:
             logging.warning(
                 f"Attempting to set attribute of unknown type {type(attribute)}"
