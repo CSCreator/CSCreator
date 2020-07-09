@@ -2,6 +2,7 @@ import pytest
 
 from src.data.importers.dndbeyond import DNDBeyond
 from src.data.importers.importerplugin import ImporterPlugin
+from src.data.importers.mpmb import MorePurpleMoreBetter
 from src.importers.pdfimporter import PDFImporter
 from src.models.characterenums import CHProperty, ch_property_type
 from src.models.charactermodel import CharacterProperty
@@ -71,9 +72,7 @@ def standard_character_properties():
     character_properties[CHProperty.FAILED_SAVE_2].property_value = False
     character_properties[CHProperty.FAILED_SAVE_3].property_value = False
     character_properties[CHProperty.ACTIONS].property_value = "Actions"
-    character_properties[CHProperty.FEATURES_TRAITS].property_value = '''Features
-
-Traits'''
+    character_properties[CHProperty.FEATURES_TRAITS].property_value = "Features"
     character_properties[CHProperty.CP].property_value = 0
     character_properties[CHProperty.SP].property_value = 1
     character_properties[CHProperty.EP].property_value = 10
@@ -119,7 +118,7 @@ def test_dnd_beyond_import(qtbot, standard_character_properties) -> None:
     assert player_controller.player_model.character_properties == standard_character_properties
 #
 # def test_mpmb_import(qtbot, standard_character_properties) -> None:
-#     importer = PDFImporter(plugin=Plugin("src/data/importers/mpmb.json"))
+#     importer = PDFImporter(plugin=MorePurpleMoreBetter())
 #     print(importer)
 #     importer.load("tests/pdfs/mpmb.pdf")
 #     player_controller = importer.player

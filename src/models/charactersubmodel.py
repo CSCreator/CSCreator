@@ -109,16 +109,18 @@ class Equipment(CustomTableItemType):
 class Skill(CustomTableItemType):
     columns_names: Dict[int, str] = {
         0: "prof",
-        1: "mod",
-        2: "bonus",
-        3: "name",
+        1: "exp",
+        2: "mod",
+        3: "bonus",
+        4: "name",
         # 3: "Custom",
     }
     columns_types: Dict[int, type] = {
         0: bool,
-        1: str,
-        2: int,
-        3: str,
+        1: bool,
+        2: str,
+        3: int,
+        4: str,
     }
     delegates: Dict[int, QStyledItemDelegate] = {}
 
