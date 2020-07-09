@@ -46,7 +46,9 @@ def standard_character_properties():
     character_properties[CHProperty.WIS_ST_MOD].property_value = 3
     character_properties[CHProperty.CHA_ST_MOD].property_value = 0
     character_properties[CHProperty.DEFENSES].property_value = "Defenses"
-    character_properties[CHProperty.SAVE_MODIFIERS].property_value = "Saving throw modifiers"
+    character_properties[
+        CHProperty.SAVE_MODIFIERS
+    ].property_value = "Saving throw modifiers"
     character_properties[CHProperty.PASSIVE_PERCEPTION].property_value = 13
     character_properties[CHProperty.PASSIVE_WISDOM].property_value = 14
     character_properties[CHProperty.PASSIVE_INVESTIGATION].property_value = 15
@@ -61,7 +63,8 @@ def standard_character_properties():
     character_properties[CHProperty.SPEED].property_value = "30 ft. (Walking)"
     character_properties[CHProperty.MAX_HP].property_value = 164
     character_properties[
-        CHProperty.CURRENT_HP].property_value = None  # TODO figure out a more gracious way to handle 0/null
+        CHProperty.CURRENT_HP
+    ].property_value = None  # TODO figure out a more gracious way to handle 0/null
     character_properties[CHProperty.TEMP_HP].property_value = None
     character_properties[CHProperty.TOTAL_HIT_DICE].property_value = "20d10+2"
     character_properties[CHProperty.HIT_DICE].property_value = ""
@@ -92,15 +95,27 @@ def standard_character_properties():
     character_properties[CHProperty.EYES].property_value = "Blue"
     character_properties[CHProperty.HAIR].property_value = "Green"
     character_properties[CHProperty.ALLIES_ORGANIZATIONS].property_value = "Allies"
-    character_properties[CHProperty.PERSONALITY_TRAITS].property_value = '''Nobody stays angry at me or around me for long, since I can defuse any amount of tension. 
-Nobody stays angry at me or around me for long, since I can defuse any amount of tension.'''
-    character_properties[CHProperty.IDEALS].property_value = "Greed. I’m only in it for the money and fame. (Evil)"
-    character_properties[CHProperty.BONDS].property_value = "I want to be famous, whatever it takes."
+    character_properties[
+        CHProperty.PERSONALITY_TRAITS
+    ].property_value = """Nobody stays angry at me or around me for long, since I can defuse any amount of tension. 
+Nobody stays angry at me or around me for long, since I can defuse any amount of tension."""
+    character_properties[
+        CHProperty.IDEALS
+    ].property_value = "Greed. I’m only in it for the money and fame. (Evil)"
+    character_properties[
+        CHProperty.BONDS
+    ].property_value = "I want to be famous, whatever it takes."
     character_properties[CHProperty.APPEARANCE].property_value = "Appearance"
-    character_properties[CHProperty.FLAWS].property_value = "I’m a sucker for a pretty face."
-    character_properties[CHProperty.BACKSTORY].property_value = '''My Backstory. 
-This is multiline.'''
-    character_properties[CHProperty.ADDITIONAL_NOTES].property_value = '''Other notes and such.'''
+    character_properties[
+        CHProperty.FLAWS
+    ].property_value = "I’m a sucker for a pretty face."
+    character_properties[
+        CHProperty.BACKSTORY
+    ].property_value = """My Backstory. 
+This is multiline."""
+    character_properties[
+        CHProperty.ADDITIONAL_NOTES
+    ].property_value = """Other notes and such."""
     character_properties[CHProperty.SPELLCASTINGABILITY0].property_value = "INT"
     character_properties[CHProperty.SPELLSAVEDC0].property_value = "17"
     character_properties[CHProperty.SPELLATKBONUS0].property_value = "+9"
@@ -115,7 +130,12 @@ def test_dnd_beyond_import(qtbot, standard_character_properties) -> None:
     importer.load("tests/pdfs/dndbeyond.pdf")
     player_controller = importer.player
     assert player_controller
-    assert player_controller.player_model.character_properties == standard_character_properties
+    assert (
+        player_controller.player_model.character_properties
+        == standard_character_properties
+    )
+
+
 #
 # def test_mpmb_import(qtbot, standard_character_properties) -> None:
 #     importer = PDFImporter(plugin=MorePurpleMoreBetter())

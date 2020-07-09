@@ -37,7 +37,9 @@ class PDFFile:
         for page_number in range(self.doc.pageCount):
             page = self.doc.loadPage(page_number)
             for field in page.widgets():
-                forms[field.field_name] = field.field_value.replace('\r\n', '\n').replace('\r', '\n')
+                forms[field.field_name] = field.field_value.replace(
+                    "\r\n", "\n"
+                ).replace("\r", "\n")
 
         return forms
 

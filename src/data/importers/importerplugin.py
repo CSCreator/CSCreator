@@ -100,7 +100,7 @@ class IncrementalListParser:
         if self.item_class not in character_submodels:
             return
         for item_index, current_item in enumerate(
-                character_controller.get_items(self.item_class)
+            character_controller.get_items(self.item_class)
         ):
             if self.zero_indexed:
                 item_index += 1
@@ -164,7 +164,8 @@ class ImporterPlugin:
         self.register_hardcoded_lists()
         if not self.conversions_valid():
             logger.warning(
-                f"Not all specified key_conversion are known CHProperty values. This may result in errors later on")
+                f"Not all specified key_conversion are known CHProperty values. This may result in errors later on"
+            )
 
     def conversions_valid(self) -> bool:
         all_conversions_valid = True

@@ -82,7 +82,7 @@ class MorePurpleMoreBetter(ImporterPlugin):
         "Flaw": "CHProperty.FLAWS",
         "Background_Appearance": "CHProperty.APPEARANCE",
         "Background_History": "CHProperty.BACKSTORY",
-        "PP_ALLIES_ORGANIZATIONS": "CHProperty.ALLIES_ORGANIZATIONS"
+        "PP_ALLIES_ORGANIZATIONS": "CHProperty.ALLIES_ORGANIZATIONS",
     }
     keys_to_ignore = [
         "Image.calc_boxes.CSfront",
@@ -170,7 +170,7 @@ class MorePurpleMoreBetter(ImporterPlugin):
         "SR",
         "LR",
         "Dawn",
-        "ShowHide 2nd DC"
+        "ShowHide 2nd DC",
     ]
     wildcards_to_ignore = [
         "AScomp",
@@ -181,23 +181,15 @@ class MorePurpleMoreBetter(ImporterPlugin):
         "BlueText",
         "Limited Feature ",
         "Weapon Selection",
-        " Remember"
+        " Remember",
     ]
     incremental_lists = {
         "Attack": {
             "column_to_form": {
-                "name": [
-                    "Wpn Name {}"
-                ],
-                "attack_bonus": [
-                    "Wpn{} AtkBonus"
-                ],
-                "damage": [
-                    "Wpn{} Damage"
-                ],
-                "notes": [
-                    "Wpn Notes {}"
-                ]
+                "name": ["Wpn Name {}"],
+                "attack_bonus": ["Wpn{} AtkBonus"],
+                "damage": ["Wpn{} Damage"],
+                "notes": ["Wpn Notes {}"],
             },
             "max_items": 6,
             "zero_indexed": False,
@@ -206,85 +198,41 @@ class MorePurpleMoreBetter(ImporterPlugin):
                 "Wpn2 AtkBonus": "Wpn2 AtkBonus ",
                 "Wpn2 Damage": "Wpn2 Damage ",
                 "Wpn3 AtkBonus": "Wpn3 AtkBonus  ",
-                "Wpn3 Damage": "Wpn3 Damage "
-            }
+                "Wpn3 Damage": "Wpn3 Damage ",
+            },
         },
         "Equipment": {
             "column_to_form": {
-                "name": [
-                    "Eq Name{}"
-                ],
-                "quantity": [
-                    "Eq Qty{}"
-                ],
-                "weight": [
-                    "Eq Weight{}"
-                ]
+                "name": ["Eq Name{}"],
+                "quantity": ["Eq Qty{}"],
+                "weight": ["Eq Weight{}"],
             },
             "max_items": 56,
             "zero_indexed": True,
-            "hardcoded_keys": {}
+            "hardcoded_keys": {},
         },
         "Equipment": {
             "column_to_form": {
-                "name": [
-                    "Attuned Name{}"
-                ],
-                "quantity": [
-                    "Attuned Qty{}"
-                ],
-                "weight": [
-                    "Attuned Weight{}"
-                ]
+                "name": ["Attuned Name{}"],
+                "quantity": ["Attuned Qty{}"],
+                "weight": ["Attuned Weight{}"],
             },
             "max_items": 3,
             "zero_indexed": False,
-            "hardcoded_keys": {
-                "Attuned Weight3": "AttunedWeight3"
-            }
+            "hardcoded_keys": {"Attuned Weight3": "AttunedWeight3"},
         },
         "Spell": {
             "column_to_form": {
-                "prepared": [
-                    "spellPrepared{}",
-                    "Prepared{}"
-                ],
-                "name": [
-                    "spellName{}",
-                    "Name{}"
-                ],
-                "source": [
-                    "spellSource{}",
-                    "Source{}"
-                ],
-                "save_hit": [
-                    "spellSaveHit{}",
-                    "SaveHit{}"
-                ],
-                "time": [
-                    "spellCastingTime{}",
-                    "CastingTime{}"
-                ],
-                "spell_range": [
-                    "spellRange{}",
-                    "Range{}"
-                ],
-                "components": [
-                    "spellComponents{}",
-                    "Components{}"
-                ],
-                "duration": [
-                    "spellDuration{}",
-                    "Duration{}"
-                ],
-                "page": [
-                    "spellPage{}",
-                    "Page{}"
-                ],
-                "notes": [
-                    "spellNotes{}",
-                    "Notes{}"
-                ]
+                "prepared": ["spellPrepared{}", "Prepared{}"],
+                "name": ["spellName{}", "Name{}"],
+                "source": ["spellSource{}", "Source{}"],
+                "save_hit": ["spellSaveHit{}", "SaveHit{}"],
+                "time": ["spellCastingTime{}", "CastingTime{}"],
+                "spell_range": ["spellRange{}", "Range{}"],
+                "components": ["spellComponents{}", "Components{}"],
+                "duration": ["spellDuration{}", "Duration{}"],
+                "page": ["spellPage{}", "Page{}"],
+                "notes": ["spellNotes{}", "Notes{}"],
             },
             "max_items": 50,
             "zero_indexed": True,
@@ -298,23 +246,19 @@ class MorePurpleMoreBetter(ImporterPlugin):
                 "spellPage46": "SpellSource46",
                 "spellPage47": "SpellSource47",
                 "spellPage48": "SpellSource48",
-                "spellPage49": "SpellSource49"
+                "spellPage49": "SpellSource49",
             },
-            "header": "spellHeader"
+            "header": "spellHeader",
         },
         "SpellSlot": {
             "column_to_form": {
-                "level": [
-                    "spellHeader{}"
-                ],
-                "n_slots": [
-                    "spellSlotHeader{}"
-                ]
+                "level": ["spellHeader{}"],
+                "n_slots": ["spellSlotHeader{}"],
             },
             "max_items": 10,
             "zero_indexed": False,
-            "hardcoded_keys": {}
-        }
+            "hardcoded_keys": {},
+        },
     }
     hardcoded_lists = {
         "Skill": {
@@ -322,117 +266,117 @@ class MorePurpleMoreBetter(ImporterPlugin):
                 "prof": "Acr Prof",
                 "exp": "Acr Exp",
                 "mod": "Acr",
-                "bonus": "Acr Bonus"
+                "bonus": "Acr Bonus",
             },
             "ANIMALHANDLING": {
                 "prof": "Ani Prof",
                 "exp": "Ani Exp",
                 "mod": "Ani",
-                "bonus": "Ani Bonus"
+                "bonus": "Ani Bonus",
             },
             "ARCANA": {
                 "prof": "Arc Prof",
                 "exp": "Arc Exp",
                 "mod": "Arc",
-                "bonus": "Arc Bonus"
+                "bonus": "Arc Bonus",
             },
             "ATHLETICS": {
                 "prof": "Ath Prof",
                 "exp": "Ath Exp",
                 "mod": "Ath",
-                "bonus": "Ath Bonus"
+                "bonus": "Ath Bonus",
             },
             "DECEPTION": {
                 "prof": "Dec Prof",
                 "exp": "Dec Exp",
                 "mod": "Dec",
-                "bonus": "Dec Bonus"
+                "bonus": "Dec Bonus",
             },
             "HISTORY": {
                 "prof": "His Prof",
                 "exp": "His Exp",
                 "mod": "His",
-                "bonus": "His Bonus"
+                "bonus": "His Bonus",
             },
             "INSIGHT": {
                 "prof": "Ins Prof",
                 "exp": "Ins Exp",
                 "mod": "Ins",
-                "bonus": "Ins Bonus"
+                "bonus": "Ins Bonus",
             },
             "INTIMIDATION": {
                 "prof": "Inti Prof",
                 "exp": "Inti Exp",
                 "mod": "Inti",
-                "bonus": "Inti Bonus"
+                "bonus": "Inti Bonus",
             },
             "INVESTIGATION": {
                 "prof": "Inv Prof",
                 "exp": "Inv Exp",
                 "mod": "Inv",
-                "bonus": "Inv Bonus"
+                "bonus": "Inv Bonus",
             },
             "MEDICINE": {
                 "prof": "Med Prof",
                 "exp": "Med Exp",
                 "mod": "Med",
-                "bonus": "Med Bonus"
+                "bonus": "Med Bonus",
             },
             "NATURE": {
                 "prof": "Nat Prof",
                 "exp": "Nat Exp",
                 "mod": "Nat",
-                "bonus": "Nat Bonus"
+                "bonus": "Nat Bonus",
             },
             "PERCEPTION": {
                 "prof": "Perc Prof",
                 "exp": "Perc Exp",
                 "mod": "Perc",
-                "bonus": "Perc Bonus"
+                "bonus": "Perc Bonus",
             },
             "PERFORMANCE": {
                 "prof": "Perf Prof",
                 "exp": "Perf Exp",
                 "mod": "Perf",
-                "bonus": "Perf Bonus"
+                "bonus": "Perf Bonus",
             },
             "PERSUASION": {
                 "prof": "Pers Prof",
                 "exp": "Pers Exp",
                 "mod": "Pers",
-                "bonus": "Pers Bonus"
+                "bonus": "Pers Bonus",
             },
             "RELIGION": {
                 "prof": "Rel Prof",
                 "exp": "Rel Exp",
                 "mod": "Rel",
-                "bonus": "Rel Bonus"
+                "bonus": "Rel Bonus",
             },
             "SLEIGHTOFHAND": {
                 "prof": "Sle Prof",
                 "exp": "Sle Exp",
                 "mod": "Sle",
-                "bonus": "Sle Bonus"
+                "bonus": "Sle Bonus",
             },
             "STEALTH": {
                 "prof": "Ste Prof",
                 "exp": "Ste Exp",
                 "mod": "Ste",
-                "bonus": "Ste Bonus"
+                "bonus": "Ste Bonus",
             },
             "SURVIVAL": {
                 "prof": "Sur Prof",
                 "exp": "Sur Exp",
                 "mod": "Sur",
-                "bonus": "Sur Bonus"
+                "bonus": "Sur Bonus",
             },
             "Tool": {
                 "prof": "Too Prof",
                 "exp": "Too Exp",
                 "mod": "Too",
                 "bonus": "Too Bonus",
-                "name": "Too Text"
-            }
+                "name": "Too Text",
+            },
         }
     }
     override = {
@@ -441,41 +385,32 @@ class MorePurpleMoreBetter(ImporterPlugin):
         "Con Mod": "CON",
         "Int Mod": "INT",
         "Wis Mod": "WIS",
-        "Cha Mod": "CHA"
+        "Cha Mod": "CHA",
     }
     pre_processing = {
         "PP_CHAR_LEVEL": {
             "method": "concat",
             "parameters": {
-                "forms_to_concat": [
-                    "Class and Levels",
-                    "Character Level"
-                ],
-                "separator": " "
+                "forms_to_concat": ["Class and Levels", "Character Level"],
+                "separator": " ",
             },
-            "delete_parameters": True
+            "delete_parameters": True,
         },
         "PP_BACKGROUND": {
             "method": "concat",
             "parameters": {
-                "forms_to_concat": [
-                    "Background",
-                    "Background Extra"
-                ],
-                "separator": " "
+                "forms_to_concat": ["Background", "Background Extra"],
+                "separator": " ",
             },
-            "delete_parameters": True
+            "delete_parameters": True,
         },
         "PP_EXPERIENCE": {
             "method": "concat",
             "parameters": {
-                "forms_to_concat": [
-                    "Total Experience",
-                    "Next level"
-                ],
-                "separator": " "
+                "forms_to_concat": ["Total Experience", "Next level"],
+                "separator": " ",
             },
-            "delete_parameters": True
+            "delete_parameters": True,
         },
         "PP_RESISTANCE": {
             "method": "concat",
@@ -487,83 +422,41 @@ class MorePurpleMoreBetter(ImporterPlugin):
                     "Resistance Damage Type 3",
                     "Resistance Damage Type 4",
                     "Resistance Damage Type 5",
-                    "Resistance Damage Type 6"
+                    "Resistance Damage Type 6",
                 ],
-                "separator": " "
+                "separator": " ",
             },
-            "delete_parameters": True
+            "delete_parameters": True,
         },
-        "Str ST Prof": {
-            "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
-        },
-        "Dex ST Prof": {
-            "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
-        },
-        "Con ST Prof": {
-            "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
-        },
-        "Int ST Prof": {
-            "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
-        },
-        "Wis ST Prof": {
-            "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
-        },
-        "Cha ST Prof": {
-            "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
-        },
+        "Str ST Prof": {"method": "to_bool_true_if", "parameters": {"value": True}},
+        "Dex ST Prof": {"method": "to_bool_true_if", "parameters": {"value": True}},
+        "Con ST Prof": {"method": "to_bool_true_if", "parameters": {"value": True}},
+        "Int ST Prof": {"method": "to_bool_true_if", "parameters": {"value": True}},
+        "Wis ST Prof": {"method": "to_bool_true_if", "parameters": {"value": True}},
+        "Cha ST Prof": {"method": "to_bool_true_if", "parameters": {"value": True}},
         "Death Save Success1": {
             "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
+            "parameters": {"value": True},
         },
         "Death Save Success2": {
             "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
+            "parameters": {"value": True},
         },
         "Death Save Success3": {
             "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
+            "parameters": {"value": True},
         },
         "Death Save Fail1": {
             "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
+            "parameters": {"value": True},
         },
         "Death Save Fail2": {
             "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
+            "parameters": {"value": True},
         },
         "Death Save Fail3": {
             "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
+            "parameters": {"value": True},
         },
         "PP_HIT_DICE": {
             "method": "concat",
@@ -574,11 +467,11 @@ class MorePurpleMoreBetter(ImporterPlugin):
                     "HD2 Level",
                     "HD2 Die",
                     "HD3 Level",
-                    "HD3 Die"
+                    "HD3 Die",
                 ],
-                "separator": " "
+                "separator": " ",
             },
-            "delete_parameters": True
+            "delete_parameters": True,
         },
         "PP_ACTIONS": {
             "method": "concat",
@@ -601,11 +494,11 @@ class MorePurpleMoreBetter(ImporterPlugin):
                     "Reaction 3",
                     "Reaction 4",
                     "Reaction 5",
-                    "Reaction 6"
+                    "Reaction 6",
                 ],
-                "separator": " "
+                "separator": " ",
             },
-            "delete_parameters": True
+            "delete_parameters": True,
         },
         "PP_NOTES": {
             "method": "concat",
@@ -615,11 +508,11 @@ class MorePurpleMoreBetter(ImporterPlugin):
                     "P5.ASnotes.Notes.Left",
                     "P5.ASnotes.Notes.Right",
                     "P6.ASnotes.Notes.Left",
-                    "P6.ASnotes.Notes.Right"
+                    "P6.ASnotes.Notes.Right",
                 ],
-                "separator": " "
+                "separator": " ",
             },
-            "delete_parameters": True
+            "delete_parameters": True,
         },
         "PP_FEATURES_RACIAL_TRAITS": {
             "method": "concat",
@@ -627,11 +520,11 @@ class MorePurpleMoreBetter(ImporterPlugin):
                 "forms_to_concat": [
                     "Class Features",
                     "Class, Features",
-                    "Racial Traits"
+                    "Racial Traits",
                 ],
-                "separator": " "
+                "separator": " ",
             },
-            "delete_parameters": True
+            "delete_parameters": True,
         },
         "PP_ALLIES_ORGANIZATIONS": {
             "method": "concat",
@@ -639,12 +532,12 @@ class MorePurpleMoreBetter(ImporterPlugin):
                 "forms_to_concat": [
                     "Background_Organisation.Left",
                     "Background_Organisation.Right",
-                    "Background_Enemies"
+                    "Background_Enemies",
                 ],
-                "separator": " "
+                "separator": " ",
             },
-            "delete_parameters": True
-        }
+            "delete_parameters": True,
+        },
     }
 
     def __init__(self):

@@ -12,6 +12,7 @@ from src.models.charactermodel import CHProperty
 
 logger = logging.getLogger(__name__)
 
+
 class PluginManager:
     def __init__(self):
         self.plugin_dir = QStandardPaths.writableLocation(
@@ -19,7 +20,6 @@ class PluginManager:
         )
         self.importers = [DNDBeyond]
         self.exporters = []
-
 
     def get_importer(self, name: str) -> ImporterPlugin:
         for importer in self.importers:

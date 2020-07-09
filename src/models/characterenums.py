@@ -276,7 +276,7 @@ ch_property_type = {
     CHProperty.ABILITYSAVESCORE1: str,
     CHProperty.ABILITYSAVESCORE2: str,
     CHProperty.ABILITYSAVEDC2: int,
-    CHProperty.SPEED: str, #TODO maybe make this an int
+    CHProperty.SPEED: str,  # TODO maybe make this an int
     CHProperty.MAX_HP: int,
     CHProperty.CURRENT_HP: int,
     CHProperty.TEMP_HP: int,
@@ -317,7 +317,7 @@ ch_property_type = {
     CHProperty.BACKSTORY: str,
     CHProperty.ADDITIONAL_NOTES: str,
     CHProperty.SPELLCASTINGABILITY0: str,
-    CHProperty.SPELLSAVEDC0: str, # TODO When multiclassing, this is a string
-    CHProperty.SPELLATKBONUS0: str, # TODO When multiclassing, this is a string
-    CHProperty.SPELLCASTINGCLASS0: str, # TODO When multiclassing, this is a string
+    CHProperty.SPELLSAVEDC0: str,  # TODO When multiclassing, this is a string
+    CHProperty.SPELLATKBONUS0: str,  # TODO When multiclassing, this is a string
+    CHProperty.SPELLCASTINGCLASS0: str,  # TODO When multiclassing, this is a string
 }

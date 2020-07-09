@@ -15,18 +15,19 @@ def concat(forms, parameters):
         this_value = forms.get(form_name, None)
 
         if this_value and not this_value.isspace():
-            #First value does not need a separator. Consecutive only if there was a value before it
+            # First value does not need a separator. Consecutive only if there was a value before it
             if index > 0 and previous_set:
                 new_value += separator
                 previous_set = False
             new_value += this_value
             previous_set = True
 
-
     return new_value
+
 
 def dnd_beyond_split_proficiencies(forms, parameters):
     pass
+
 
 def to_boolean_true_if(forms, parameters):
     new_value = ""

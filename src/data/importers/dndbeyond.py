@@ -90,7 +90,7 @@ class DNDBeyond(ImporterPlugin):
         "spellCastingAbility0": "CHProperty.SPELLCASTINGABILITY0",
         "spellSaveDC0": "CHProperty.SPELLSAVEDC0",
         "spellAtkBonus0": "CHProperty.SPELLATKBONUS0",
-        "spellCastingClass0": "CHProperty.SPELLCASTINGCLASS0"
+        "spellCastingClass0": "CHProperty.SPELLCASTINGCLASS0",
     }
     keys_to_ignore = {
         "CharacterName2": None,
@@ -113,7 +113,7 @@ class DNDBeyond(ImporterPlugin):
         "spellComponentsHeader0": None,
         "spellDurationHeader0": None,
         "spellPageHeader0": None,
-        "spellNotesHeader0": None
+        "spellNotesHeader0": None,
     }
     wildcards_to_ignore = {
         "spellPreparedBlankHeader": None,
@@ -133,23 +133,15 @@ class DNDBeyond(ImporterPlugin):
         "spellComponentsHeader": None,
         "spellDurationHeader": None,
         "spellPageHeader": None,
-        "spellNotesHeader": None
+        "spellNotesHeader": None,
     }
     incremental_lists = {
         "Attack": {
             "column_to_form": {
-                "name": [
-                    "Wpn Name {}"
-                ],
-                "attack_bonus": [
-                    "Wpn{} AtkBonus"
-                ],
-                "damage": [
-                    "Wpn{} Damage"
-                ],
-                "notes": [
-                    "Wpn Notes {}"
-                ]
+                "name": ["Wpn Name {}"],
+                "attack_bonus": ["Wpn{} AtkBonus"],
+                "damage": ["Wpn{} Damage"],
+                "notes": ["Wpn Notes {}"],
             },
             "max_items": 6,
             "zero_indexed": False,
@@ -158,85 +150,41 @@ class DNDBeyond(ImporterPlugin):
                 "Wpn2 AtkBonus": "Wpn2 AtkBonus ",
                 "Wpn2 Damage": "Wpn2 Damage ",
                 "Wpn3 AtkBonus": "Wpn3 AtkBonus  ",
-                "Wpn3 Damage": "Wpn3 Damage "
-            }
+                "Wpn3 Damage": "Wpn3 Damage ",
+            },
         },
         "Equipment": {
             "column_to_form": {
-                "name": [
-                    "Eq Name{}"
-                ],
-                "quantity": [
-                    "Eq Qty{}"
-                ],
-                "weight": [
-                    "Eq Weight{}"
-                ]
+                "name": ["Eq Name{}"],
+                "quantity": ["Eq Qty{}"],
+                "weight": ["Eq Weight{}"],
             },
             "max_items": 56,
             "zero_indexed": True,
-            "hardcoded_keys": {}
+            "hardcoded_keys": {},
         },
         "Equipment": {
             "column_to_form": {
-                "name": [
-                    "Attuned Name{}"
-                ],
-                "quantity": [
-                    "Attuned Qty{}"
-                ],
-                "weight": [
-                    "Attuned Weight{}"
-                ]
+                "name": ["Attuned Name{}"],
+                "quantity": ["Attuned Qty{}"],
+                "weight": ["Attuned Weight{}"],
             },
             "max_items": 3,
             "zero_indexed": False,
-            "hardcoded_keys": {
-                "Attuned Weight3": "AttunedWeight3"
-            }
+            "hardcoded_keys": {"Attuned Weight3": "AttunedWeight3"},
         },
         "Spell": {
             "column_to_form": {
-                "prepared": [
-                    "spellPrepared{}",
-                    "Prepared{}"
-                ],
-                "name": [
-                    "spellName{}",
-                    "Name{}"
-                ],
-                "source": [
-                    "spellSource{}",
-                    "Source{}"
-                ],
-                "save_hit": [
-                    "spellSaveHit{}",
-                    "SaveHit{}"
-                ],
-                "time": [
-                    "spellCastingTime{}",
-                    "CastingTime{}"
-                ],
-                "spell_range": [
-                    "spellRange{}",
-                    "Range{}"
-                ],
-                "components": [
-                    "spellComponents{}",
-                    "Components{}"
-                ],
-                "duration": [
-                    "spellDuration{}",
-                    "Duration{}"
-                ],
-                "page": [
-                    "spellPage{}",
-                    "Page{}"
-                ],
-                "notes": [
-                    "spellNotes{}",
-                    "Notes{}"
-                ]
+                "prepared": ["spellPrepared{}", "Prepared{}"],
+                "name": ["spellName{}", "Name{}"],
+                "source": ["spellSource{}", "Source{}"],
+                "save_hit": ["spellSaveHit{}", "SaveHit{}"],
+                "time": ["spellCastingTime{}", "CastingTime{}"],
+                "spell_range": ["spellRange{}", "Range{}"],
+                "components": ["spellComponents{}", "Components{}"],
+                "duration": ["spellDuration{}", "Duration{}"],
+                "page": ["spellPage{}", "Page{}"],
+                "notes": ["spellNotes{}", "Notes{}"],
             },
             "max_items": 50,
             "zero_indexed": True,
@@ -250,23 +198,19 @@ class DNDBeyond(ImporterPlugin):
                 "spellPage46": "SpellSource46",
                 "spellPage47": "SpellSource47",
                 "spellPage48": "SpellSource48",
-                "spellPage49": "SpellSource49"
+                "spellPage49": "SpellSource49",
             },
-            "header": "spellHeader"
+            "header": "spellHeader",
         },
         "SpellSlot": {
             "column_to_form": {
-                "level": [
-                    "spellHeader{}"
-                ],
-                "n_slots": [
-                    "spellSlotHeader{}"
-                ]
+                "level": ["spellHeader{}"],
+                "n_slots": ["spellSlotHeader{}"],
             },
             "max_items": 10,
             "zero_indexed": False,
-            "hardcoded_keys": {}
-        }
+            "hardcoded_keys": {},
+        },
     }
     hardcoded_lists = {
         "Skill": {
@@ -274,128 +218,128 @@ class DNDBeyond(ImporterPlugin):
                 "name": "Skills.ACROBATICS",
                 "prof": "AcrobaticsProf",
                 "mod": "AcrobaticsMod",
-                "bonus": "Acrobatics"
+                "bonus": "Acrobatics",
             },
             "Skills.ANIMALHANDLING": {
                 "name": "Skills.ANIMALHANDLING",
                 "prof": "AnimalHandlingProf",
                 "mod": "AnimalMod",
-                "bonus": "Animal"
+                "bonus": "Animal",
             },
             "Skills.ARCANA": {
                 "name": "Skills.ARCANA",
                 "prof": "ArcanaProf",
                 "mod": "ArcanaMod",
-                "bonus": "Arcana"
+                "bonus": "Arcana",
             },
             "Skills.ATHLETICS": {
                 "name": "Skills.ATHLETICS",
                 "prof": "AthleticsProf",
                 "mod": "AthleticsMod",
-                "bonus": "Athletics"
+                "bonus": "Athletics",
             },
             "Skills.DECEPTION": {
                 "name": "Skills.DECEPTION",
                 "prof": "DeceptionProf",
                 "mod": "DeceptionMod",
-                "bonus": "Deception"
+                "bonus": "Deception",
             },
             "Skills.HISTORY": {
                 "name": "Skills.HISTORY",
                 "prof": "HistoryProf",
                 "mod": "HistoryMod",
-                "bonus": "History"
+                "bonus": "History",
             },
             "Skills.INSIGHT": {
                 "name": "Skills.INSIGHT",
                 "prof": "InsightProf",
                 "mod": "InsightMod",
-                "bonus": "Insight"
+                "bonus": "Insight",
             },
             "Skills.INTIMIDATION": {
                 "name": "Skills.INTIMIDATION",
                 "prof": "IntimidationProf",
                 "mod": "IntimidationMod",
-                "bonus": "Intimidation"
+                "bonus": "Intimidation",
             },
             "Skills.INVESTIGATION": {
                 "name": "Skills.INVESTIGATION",
                 "prof": "InvestigationProf",
                 "mod": "InvestigationMod",
-                "bonus": "Investigation"
+                "bonus": "Investigation",
             },
             "Skills.MEDICINE": {
                 "name": "Skills.MEDICINE",
                 "prof": "MedicineProf",
                 "mod": "MedicineMod",
-                "bonus": "Medicine"
+                "bonus": "Medicine",
             },
             "Skills.NATURE": {
                 "name": "Skills.NATURE",
                 "prof": "NatureProf",
                 "mod": "NatureMod",
-                "bonus": "Nature"
+                "bonus": "Nature",
             },
             "Skills.PERCEPTION": {
                 "name": "Skills.PERCEPTION",
                 "prof": "PerceptionProf",
                 "mod": "PerceptionMod",
-                "bonus": "Perception"
+                "bonus": "Perception",
             },
             "Skills.PERFORMANCE": {
                 "name": "Skills.PERFORMANCE",
                 "prof": "PerformanceProf",
                 "mod": "PerformanceMod",
-                "bonus": "Performance"
+                "bonus": "Performance",
             },
             "Skills.PERSUASION": {
                 "name": "Skills.PERSUASION",
                 "prof": "PersuasionProf",
                 "mod": "PersuasionMod",
-                "bonus": "Persuasion"
+                "bonus": "Persuasion",
             },
             "Skills.RELIGION": {
                 "name": "Skills.RELIGION",
                 "prof": "ReligionProf",
                 "mod": "ReligionMod",
-                "bonus": "Religion"
+                "bonus": "Religion",
             },
             "Skills.SLEIGHTOFHAND": {
                 "name": "Skills.SLEIGHTOFHAND",
                 "prof": "SleightOfHandProf",
                 "mod": "SleightofHandMod",
-                "bonus": "SleightofHand"
+                "bonus": "SleightofHand",
             },
             "Skills.STEALTH": {
                 "name": "Skills.STEALTH",
                 "prof": "StealthProf",
                 "mod": "StealthMod",
-                "bonus": "Stealth "
+                "bonus": "Stealth ",
             },
             "Skills.SURVIVAL": {
                 "name": "Skills.SURVIVAL",
                 "prof": "SurvivalProf",
                 "mod": "SurvivalMod",
-                "bonus": "Survival"
+                "bonus": "Survival",
             },
             "CustomSkill1": {
                 "name": "Skills.CUSTOM1",
                 "prof": "CustomProf1",
                 "mod": "Custom Skill Bonus 1",
-                "bonus": "CustomSkill1"
+                "bonus": "CustomSkill1",
             },
             "CustomSkill2": {
                 "name": "Skills.CUSTOM2",
                 "prof": "CustomProf2",
                 "mod": "Custom Skill Bonus 2",
-                "bonus": "CustomSkill2"
+                "bonus": "CustomSkill2",
             },
             "CustomSkill3": {
                 "name": "Skills.CUSTOM3",
                 "prof": "CustomProf3",
                 "mod": "Custom Skill Bonus 3",
-                "bonus": "CustomSkill3"
-            }
+                "bonus": "CustomSkill3",
+            },
         }
     }
     override = {
@@ -413,30 +357,24 @@ class DNDBeyond(ImporterPlugin):
         "4 Slots OOOO": 4,
         "5 Slots OOOOO": 5,
         "6 Slots OOOOOO": 6,
-        "7 Slots OOOOOOO": 7
+        "7 Slots OOOOOOO": 7,
     }
     pre_processing = {
         "PP_NOTES": {
             "method": "concat",
             "parameters": {
-                "forms_to_concat": [
-                    "AdditionalNotes1",
-                    "AdditionalNotes2"
-                ],
-                "separator": " "
+                "forms_to_concat": ["AdditionalNotes1", "AdditionalNotes2"],
+                "separator": " ",
             },
-            "delete_parameters": True
+            "delete_parameters": True,
         },
         "PP_ACTIONS": {
             "method": "concat",
             "parameters": {
-                "forms_to_concat": [
-                    "Actions1",
-                    "Actions2"
-                ],
-                "separator": " "
+                "forms_to_concat": ["Actions1", "Actions2"],
+                "separator": " ",
             },
-            "delete_parameters": True
+            "delete_parameters": True,
         },
         "PP_FEATURES": {
             "method": "concat",
@@ -447,48 +385,18 @@ class DNDBeyond(ImporterPlugin):
                     "FeaturesTraits3",
                     "FeaturesTraits4",
                     "FeaturesTraits5",
-                    "FeaturesTraits6"
+                    "FeaturesTraits6",
                 ],
-                "separator": " "
+                "separator": " ",
             },
-            "delete_parameters": True
+            "delete_parameters": True,
         },
-        "StrProf": {
-            "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
-        },
-        "DexProf": {
-            "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
-        },
-        "ConProf": {
-            "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
-        },
-        "IntProf": {
-            "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
-        },
-        "WisProf": {
-            "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
-        },
-        "ChaProf": {
-            "method": "to_bool_true_if",
-            "parameters": {
-                "value": True
-            }
-        }
+        "StrProf": {"method": "to_bool_true_if", "parameters": {"value": True}},
+        "DexProf": {"method": "to_bool_true_if", "parameters": {"value": True}},
+        "ConProf": {"method": "to_bool_true_if", "parameters": {"value": True}},
+        "IntProf": {"method": "to_bool_true_if", "parameters": {"value": True}},
+        "WisProf": {"method": "to_bool_true_if", "parameters": {"value": True}},
+        "ChaProf": {"method": "to_bool_true_if", "parameters": {"value": True}},
     }
 
     def __init__(self):

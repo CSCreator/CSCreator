@@ -24,7 +24,7 @@ def standard_type_conversion(value, type):
             return False
         elif isinstance(value, int) and type is str:
             return str(value)
-        elif value in ['', '--'] and type is int:
+        elif value in ["", "--"] and type is int:
             return None
         elif isinstance(value, str) and type is int:
             return int(value)
@@ -36,7 +36,6 @@ def standard_type_conversion(value, type):
 
 
 class CustomTableItemType(ABC):
-
     @property
     @abstractmethod
     def columns_names(self) -> Dict[int, str]:
@@ -67,7 +66,8 @@ class CustomTableItemType(ABC):
         value = standard_type_conversion(value, column_type)
         if not isinstance(value, column_type) and value is not None:
             raise InvalidPropertyType(
-                f"Submodel of type {self.named_item_enum} column {column} is of type {column_type} while value being set is a {type(value)} {value}")
+                f"Submodel of type {self.named_item_enum} column {column} is of type {column_type} while value being set is a {type(value)} {value}"
+            )
         self.columns[column] = value
 
 
@@ -137,6 +137,7 @@ class SpellSlot(CustomTableItemType):
     }
     delegates: Dict[int, QStyledItemDelegate] = {}
 
+
 class WeaponProf(CustomTableItemType):
     columns_names: Dict[int, str] = {
         0: "name",
@@ -145,6 +146,7 @@ class WeaponProf(CustomTableItemType):
         0: str,
     }
     delegates: Dict[int, QStyledItemDelegate] = {}
+
 
 class ArmorProf(CustomTableItemType):
     columns_names: Dict[int, str] = {
@@ -155,6 +157,7 @@ class ArmorProf(CustomTableItemType):
     }
     delegates: Dict[int, QStyledItemDelegate] = {}
 
+
 class LanguageProf(CustomTableItemType):
     columns_names: Dict[int, str] = {
         0: "name",
@@ -164,6 +167,7 @@ class LanguageProf(CustomTableItemType):
     }
     delegates: Dict[int, QStyledItemDelegate] = {}
 
+
 class ToolProf(CustomTableItemType):
     columns_names: Dict[int, str] = {
         0: "name",
@@ -172,6 +176,7 @@ class ToolProf(CustomTableItemType):
         0: str,
     }
     delegates: Dict[int, QStyledItemDelegate] = {}
+
 
 class Spell(CustomTableItemType):
     columns_names: Dict[int, str] = {
@@ -227,13 +232,14 @@ class CustomTableModel(QAbstractTableModel):
         return len(self.headers)
 
     def headerData(
-            self, section: int, orientation: QtCore.Qt.Orientation, role: int = ...
+        self, section: int, orientation: QtCore.Qt.Orientation, role: int = ...
     ) -> Union[None, Dict[int, str]]:
         if role == QtCore.Qt.DisplayRole and orientation == QtCore.Qt.Horizontal:
             return self.headers[section]
 
-
-    def data(self, index: QtCore.QModelIndex, role: int = QtCore.Qt.ItemDataRole.DisplayRole) -> Any:
+    def data(
+        self, index: QtCore.QModelIndex, role: int = QtCore.Qt.ItemDataRole.DisplayRole
+    ) -> Any:
         if not index.isValid():
             return None
         elif role == QtCore.Qt.TextAlignmentRole:
@@ -267,9 +273,9 @@ class CustomTableModel(QAbstractTableModel):
 
     def flags(self, index: QModelIndex):
         return (
-                QtCore.Qt.ItemIsEditable
-                | QtCore.Qt.ItemIsEnabled
-                | QtCore.Qt.ItemIsSelectable
+            QtCore.Qt.ItemIsEditable
+            | QtCore.Qt.ItemIsEnabled
+            | QtCore.Qt.ItemIsSelectable
         )
 
     def get_item_at_row(self, index: int) -> CustomTableItemType:

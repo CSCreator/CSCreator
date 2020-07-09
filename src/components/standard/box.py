@@ -62,8 +62,8 @@ class BoxController(ComponentController):
         font_size = 6
         text_to_render = self.header_property.get_value(self.character_controller)
         while (
-                config_controller.pt_to_mm(text_width(text_to_render, fontsize=font_size))
-                >= width
+            config_controller.pt_to_mm(text_width(text_to_render, fontsize=font_size))
+            >= width
         ):
             font_size -= 1
             if font_size <= 1:

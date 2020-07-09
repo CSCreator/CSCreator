@@ -115,7 +115,9 @@ class PDFImporter:
             )
 
             if new_field not in self.plugin.key_conversion:
-                logger.error(f"Trying to create {new_field} which is not present in key_conversion")
+                logger.error(
+                    f"Trying to create {new_field} which is not present in key_conversion"
+                )
                 continue
 
             method = process["method"]

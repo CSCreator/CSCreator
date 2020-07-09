@@ -50,10 +50,14 @@ class CharacterView(QWidget):
             attribute, subject.get_ch_property(character_property)
         )
 
-    def set_value_for_generic_widget(self, attribute: QWidget, ch_property: CharacterProperty) -> None:
-        #TODO typechecking here of property_value we are setting
+    def set_value_for_generic_widget(
+        self, attribute: QWidget, ch_property: CharacterProperty
+    ) -> None:
+        # TODO typechecking here of property_value we are setting
         if isinstance(attribute, QLineEdit):
-            attribute.setText(ch_property.get_value_as_type(str)) #TODO this casting should occur somewhere else
+            attribute.setText(
+                ch_property.get_value_as_type(str)
+            )  # TODO this casting should occur somewhere else
         elif isinstance(attribute, QSpinBox):
             try:
                 int_value = ch_property.get_value_as_type(int)
