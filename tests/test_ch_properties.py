@@ -1,8 +1,7 @@
-from src.models.characterenums import (
+from cscreator.character.characterenums import (
     ch_reader_friendly_name,
-    CHPropertyName,
-    ch_property_type,
     CHProperty,
+    ch_property_type,
 )
 
 

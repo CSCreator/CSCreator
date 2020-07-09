@@ -1,11 +1,9 @@
 import pytest
 
-from src.data.importers.dndbeyond import DNDBeyond
-from src.data.importers.importerplugin import ImporterPlugin
-from src.data.importers.mpmb import MorePurpleMoreBetter
-from src.importers.pdfimporter import PDFImporter
-from src.models.characterenums import CHProperty, ch_property_type
-from src.models.charactermodel import CharacterProperty
+from cscreator.character.characterenums import CHProperty, ch_property_type
+from cscreator.character.charactermodel import CharacterProperty
+from cscreator.conversion.pdfimporter import PDFImporter
+from cscreator.plugins.importers.dndbeyond import DNDBeyond
 
 
 @pytest.fixture()

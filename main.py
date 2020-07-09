@@ -1,13 +1,7 @@
-from PySide2.QtCore import QStandardPaths, QDir
-
-from src.controllers.configcontroller import ConfigController
-
-global config_controller
-config_controller = ConfigController()
-
 import logging.config
-import yaml
 
+import yaml
+from PySide2.QtCore import QStandardPaths, QDir
 
 with open("log_config.yml", "r") as stream:
     config = yaml.load(stream, Loader=yaml.FullLoader)
@@ -35,7 +29,8 @@ if __name__ == "__main__":
     logger.info("Application started")
 
     import sys
-    from src.controllers.maincontroller import MainController
+
+    from cscreator.maincontroller import MainController
 
     app = QApplication(sys.argv)
     qss = "qt_design/stylesheet.qss"
@@ -52,7 +47,9 @@ if __name__ == "__main__":
         data_dir.mkdir("importers")
 
     if os.environ.get("DEBUG") is not None:
-        copytree("src/data/importers", os.path.join(data_location, "importers"))
+        copytree(
+            "cscreator/plugins/importers", os.path.join(data_location, "importers")
+        )
 
     main_controller = MainController()
     main_view = main_controller.get_window()
