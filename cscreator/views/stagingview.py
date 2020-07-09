@@ -3,7 +3,7 @@ import logging
 from PySide2 import QtCore
 
 from cscreator.components.componentcontroller import ComponentController
-from cscreator.config import Config
+from cscreator.config import CONFIG
 
 logger = logging.getLogger(__name__)
 
@@ -79,7 +79,7 @@ class StagingView(QListWidget):
         data_stream << hot_spot_point  # pixmap << location
 
         mime_data = QMimeData()
-        mime_data.setData(Config.component_mime, item_data)
+        mime_data.setData(CONFIG.component_mime, item_data)
 
         drag = QDrag(self)
         pixmap = item.parent.pixmap.scaledToWidth(64)
@@ -104,7 +104,7 @@ class StagingView(QListWidget):
 
         source_widget = event.source()
         if isinstance(source_widget, PageModel) and event.mimeData().hasFormat(
-            Config.component_mime
+            CONFIG.component_mime
         ):
             item = source_widget.item_being_dragged
             if item is None:

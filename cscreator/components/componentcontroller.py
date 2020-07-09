@@ -9,7 +9,7 @@ from PySide2.QtGui import QIcon
 from cscreator.character.charactercontroller import CharacterController
 from cscreator.character.characterenums import CHProperty
 from cscreator.components.properties import Properties
-from cscreator.config import Config
+from cscreator.config import CONFIG
 from exceptions import UnknownCharacterProperty
 
 logger = logging.getLogger(__name__)
@@ -65,8 +65,8 @@ class EditableProperty:
 
 
 def create_canvas(size: Tuple[int, int]):
-    width_mm = Config.mm_per_pixel * size[0]
-    height_mm = Config.mm_per_pixel * size[1]
+    width_mm = CONFIG.mm_per_pixel * size[0]
+    height_mm = CONFIG.mm_per_pixel * size[1]
     fig = sg.SVGFigure(width_mm, height_mm)
     return fig
 
@@ -96,8 +96,8 @@ class ComponentController:
         string_image = self._rendered_img.to_str()
         value.save("tmp/pixmap_intermediate.svg")
         pixmap_size = QSize(
-            Config.box_size[0] * self.properties.w,
-            Config.box_size[1] * self.properties.h,
+            CONFIG.box_size[0] * self.properties.w,
+            CONFIG.box_size[1] * self.properties.h,
         )
         self.pixmap = QIcon("tmp/pixmap_intermediate.svg").pixmap(pixmap_size)
         self.svg_renderer.load(QByteArray(string_image))
@@ -108,16 +108,16 @@ class ComponentController:
         return background
 
     def set_position(self, point):
-        self.properties.x = point.x() // Config.box_size[0]
-        self.properties.y = point.y() // Config.box_size[1]
+        self.properties.x = point.x() // CONFIG.box_size[0]
+        self.properties.y = point.y() // CONFIG.box_size[1]
         # logger.info(f"Set positions to {self.properties.x} {self.properties.y}")
 
     def get_q_svg_scene_item(self, parent=None):
 
         # TODO this is overkill, recreating the SVG Widget way too often.
         self.create(
-            Config.box_size[0] * self.properties.w,
-            Config.box_size[1] * self.properties.h,
+            CONFIG.box_size[0] * self.properties.w,
+            CONFIG.box_size[1] * self.properties.h,
         )
 
         q_graphics_svg_item = QGraphicsSvgItem()
@@ -132,8 +132,8 @@ class ComponentController:
         q_graphics_svg_item.uid = self.uid
         q_graphics_svg_item.setSharedRenderer(self.svg_renderer)
         q_graphics_svg_item.setPos(
-            float(Config.box_size[0] * self.properties.x),
-            float(Config.box_size[1] * self.properties.y),
+            float(CONFIG.box_size[0] * self.properties.x),
+            float(CONFIG.box_size[1] * self.properties.y),
         )
         return q_graphics_svg_item
 
@@ -142,8 +142,8 @@ class ComponentController:
         label.parent = parent
         # TODO this is overkill, recreating the SVG Widget way too often.
         self.create(
-            Config.box_size[0] * self.properties.w,
-            Config.box_size[1] * self.properties.h,
+            CONFIG.box_size[0] * self.properties.w,
+            CONFIG.box_size[1] * self.properties.h,
         )
 
         string_image = self.rendered_img.to_str()

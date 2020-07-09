@@ -5,7 +5,7 @@ from PySide2.QtCore import QByteArray, QDataStream, QIODevice, QMimeData, QPoint
 from PySide2.QtGui import Qt, QDrag
 from PySide2.QtWidgets import QGraphicsScene
 
-from cscreator.config import Config
+from cscreator.config import CONFIG
 from cscreator.views.stagingview import StagingView
 
 logger = logging.getLogger(__name__)
@@ -18,8 +18,8 @@ class PageModel(QGraphicsScene):
         self.grids = []
         self.component_controllers = []
         self.setBackgroundBrush(Qt.white)
-        pixels_w = Config.paper_width_pixel
-        pixels_h = Config.paper_height_pixel
+        pixels_w = CONFIG.PAPER_WIDTH_PIXEL
+        pixels_h = CONFIG.PAPER_HEIGHT_PIXEL
         self.setSceneRect(0, 0, pixels_w, pixels_h)
         self.page_view_transform = None
         self.item_being_dragged = None
@@ -30,12 +30,12 @@ class PageModel(QGraphicsScene):
         item = component_controller.get_q_svg_scene_item()
         actual_w = item.boundingRect().size().width()
         actual_h = item.boundingRect().size().height()
-        expected_w = Config.paper_width_pixel * (
-            component_controller.properties.w / Config.h_split
+        expected_w = CONFIG.PAPER_WIDTH_PIXEL * (
+                component_controller.properties.w / CONFIG.H_SPLIT
         )
 
-        expected_h = Config.paper_height_pixel * (
-            component_controller.properties.h / Config.v_split
+        expected_h = CONFIG.PAPER_HEIGHT_PIXEL * (
+                component_controller.properties.h / CONFIG.V_SPLIT
         )
 
         scale_w = expected_w / actual_w
@@ -85,7 +85,7 @@ class PageModel(QGraphicsScene):
 
             hot_spot_point = QPoint()
 
-            item_data = event.mimeData().data(Config.component_mime)
+            item_data = event.mimeData().data(CONFIG.COMPONENT_MIME)
             data_stream = QDataStream(item_data, QIODevice.ReadOnly)
             data_stream >> hot_spot_point
             view_to_scene_transform, succes = self.page_view_transform.inverted()
@@ -101,7 +101,7 @@ class PageModel(QGraphicsScene):
 
         source_widget = event.source()
         if isinstance(source_widget, StagingView) and event.mimeData().hasFormat(
-            Config.component_mime
+            CONFIG.COMPONENT_MIME
         ):
             item = source_widget.item_being_dragged
             if item is None:
@@ -139,7 +139,7 @@ class PageModel(QGraphicsScene):
         data_stream << hot_spot_point  # pixmap << location
 
         mime_data = QMimeData()
-        mime_data.setData(Config.component_mime, item_data)
+        mime_data.setData(CONFIG.COMPONENT_MIME, item_data)
 
         drag = QDrag(self)
         drag.setMimeData(mime_data)

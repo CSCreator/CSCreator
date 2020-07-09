@@ -2,7 +2,7 @@ import logging
 
 from PySide2.QtCore import QEvent
 
-from cscreator.config import Config
+from cscreator.config import CONFIG
 from cscreator.views.pageview import PageView
 
 logger = logging.getLogger(__name__)
@@ -15,7 +15,7 @@ class SheetView(QFrame):
     def __init__(self, page_view: PageView) -> None:
         super().__init__()
         self.page_view = page_view
-        self.aspect_ratio = Config.paper_ratio
+        self.aspect_ratio = CONFIG.PAPER_RATIO
         self.setLayout(QBoxLayout(QBoxLayout.LeftToRight, self))
         #  add spacer, then widget, then spacer
         self.layout().addItem(QSpacerItem(0, 0))
