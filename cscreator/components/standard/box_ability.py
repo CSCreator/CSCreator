@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 from cscreator.character.charactercontroller import CharacterController
 from cscreator.components.properties import Properties
 from cscreator.components.utils import scale_height_to_real_size
-from cscreator.models.componentmodel import ComponentModel
+from cscreator.components.componentmodel import ComponentModel
 from main import config
 
 logger = logging.getLogger(__name__)

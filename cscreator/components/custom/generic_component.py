@@ -1,7 +1,7 @@
 import logging
 
 from cscreator.components.utils import unit_str_to_float
-from cscreator.models.componentmodel import ComponentModel
+from cscreator.components.componentmodel import ComponentModel
 from cscreator.utils.svgtext import text_width
 from main import config
 

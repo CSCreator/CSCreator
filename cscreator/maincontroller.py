@@ -1,11 +1,16 @@
 import logging
 
+from PySide2.QtWidgets import QHBoxLayout
+from obsub import event
+
 from cscreator.character.charactercontroller import CharacterController
-from cscreator.controllers.collectioncontroller import CollectionController
+from cscreator.character.characterenums import CHProperty
 from cscreator.conversion.pdfexporter import PDFExporter
+from cscreator.conversion.pluginmanager import PluginManager
 from cscreator.plugins.importers.dndbeyond import DNDBeyond
-from cscreator.plugins.pluginmanager import PluginManager
+from cscreator.sheet.sheetcontroller import SheetController
 from cscreator.views.mainview import MainView
+from cscreator.views.stagingview import StagingView
 
 logger = logging.getLogger(__name__)
 
@@ -14,8 +19,10 @@ from cscreator.conversion.pdfimporter import PDFImporter
 
 class MainController:
     def __init__(self):
+        self.character_controllers = None
+        self.active_character_controller = None
+
         self.main_view = MainView()
-        self.collection_controller = CollectionController()
         self.plugin_manager = PluginManager()
 
         self.main_view.pdf_wizard_factory.plugin_manager = self.plugin_manager
@@ -26,22 +33,52 @@ class MainController:
         self.main_view.export_pdf_wizard_factory.export_new_player += (
             self.export_player_handler
         )
+
         self.main_view.create_new_player += self.new_player_handler
-        self.collection_controller.add_player += self.player_added_handler
 
         self.import_player(
             file_name="resc/dndbeyond_extreme.pdf", plugin=DNDBeyond(),
         )
 
+
+        self.sheet_controller = SheetController(self.active_character_controller)
         self.set_sheet_layout()
 
+    def new_player_handler(self, subject):
+        character = CharacterController()
+        self.add_player(character)
+        self.set_player_tab()
+
+    @event
+    def add_player(self, player):
+        self.character_controllers = player
+        self.set_player_tab()
+        logger.info(f"Added player {player.player_model.get_ch_property(CHProperty.CHARACTER_NAME)}")
+
+    @event
+    def remove_player(self, player):
+        self.character_controllers = None
+        logger.info(f"Removed player {player.player_model.get_ch_property(CHProperty.CHARACTER_NAME)}")
+
+    def get_character_layout(self):
+        qt_layout = self.character_controllers.get_layout()
+        return qt_layout
+
+    def get_sheet_layout(self):
+        self.layout = QHBoxLayout()
+        self.staging_widget = StagingView()
+        self.staging_layout = QHBoxLayout()
+        self.staging_layout.addWidget(self.staging_widget)
+        self.layout.addLayout(self.staging_layout, 1)
+        self.layout.addLayout(self.sheet_controller.get_layout(), 1)
+        return self.layout
+
     def set_player_tab(self):
-        layout = self.collection_controller.get_character_layout()
+        layout = self.get_character_layout()
         self.main_view.set_character_layout(layout)
 
     def set_sheet_layout(self):
-        layout = self.collection_controller.get_sheet_layout()
-        self.main_view.set_sheet_layout(layout)
+        self.main_view.set_sheet_layout(self.get_sheet_layout())
 
     def get_window(self):
         return self.main_view
@@ -49,20 +86,13 @@ class MainController:
     def import_player_handler(self, subject, file_name, importer):
         self.import_player(file_name, importer)
 
-    def new_player_handler(self, subject):
-        player = CharacterController()
-        self.collection_controller.add_player(player)
-
     def import_player(
-        self, file_name, plugin,
+            self, file_name, plugin,
     ):
         importer = PDFImporter(plugin=plugin)
         importer.load(file_name)
         player_controller = importer.player
-        self.collection_controller.add_player(player_controller)
-
-    def player_added_handler(self, subject, arg):
-        self.set_player_tab()
+        self.add_player(player_controller)
 
     def export_player_handler(self, subject, file_name, exporter):
         current_player = self.collection_controller.character_controllers
