@@ -28,8 +28,9 @@ class PageModel(QGraphicsScene):
     def add_component_controller(self, component_controller):
         self.component_controllers.append(component_controller)
         item = component_controller.get_q_svg_scene_item()
-        actual_w = item.boundingRect().size().width()
-        actual_h = item.boundingRect().size().height()
+        bounding_rect_size = item.boundingRect().size()
+        actual_w = bounding_rect_size.width()
+        actual_h = bounding_rect_size.height()
         expected_w = CONFIG.PAPER_WIDTH_PIXEL * (
                 component_controller.properties.w / CONFIG.H_SPLIT
         )
