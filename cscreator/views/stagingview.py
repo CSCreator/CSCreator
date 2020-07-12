@@ -79,7 +79,7 @@ class StagingView(QListWidget):
         data_stream << hot_spot_point  # pixmap << location
 
         mime_data = QMimeData()
-        mime_data.setData(CONFIG.component_mime, item_data)
+        mime_data.setData(CONFIG.COMPONENT_MIME, item_data)
 
         drag = QDrag(self)
         pixmap = item.parent.pixmap.scaledToWidth(64)
@@ -104,7 +104,7 @@ class StagingView(QListWidget):
 
         source_widget = event.source()
         if isinstance(source_widget, PageModel) and event.mimeData().hasFormat(
-            CONFIG.component_mime
+            CONFIG.COMPONENT_MIME
         ):
             item = source_widget.item_being_dragged
             if item is None:

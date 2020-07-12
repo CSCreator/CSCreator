@@ -65,8 +65,8 @@ class EditableProperty:
 
 
 def create_canvas(size: Tuple[int, int]):
-    width_mm = CONFIG.mm_per_pixel * size[0]
-    height_mm = CONFIG.mm_per_pixel * size[1]
+    width_mm = CONFIG.MM_PER_PIXEL * size[0]
+    height_mm = CONFIG.MM_PER_PIXEL * size[1]
     fig = sg.SVGFigure(width_mm, height_mm)
     return fig
 
@@ -94,10 +94,10 @@ class ComponentController:
     def rendered_img(self, value):
         self._rendered_img = value
         string_image = self._rendered_img.to_str()
-        value.save("tmp/pixmap_intermediate.svg")
+        self._rendered_img.save("tmp/pixmap_intermediate.svg")
         pixmap_size = QSize(
-            CONFIG.box_size[0] * self.properties.w,
-            CONFIG.box_size[1] * self.properties.h,
+            CONFIG.BOX_SIZE[0] * self.properties.w,
+            CONFIG.BOX_SIZE[1] * self.properties.h,
         )
         self.pixmap = QIcon("tmp/pixmap_intermediate.svg").pixmap(pixmap_size)
         self.svg_renderer.load(QByteArray(string_image))
@@ -108,16 +108,16 @@ class ComponentController:
         return background
 
     def set_position(self, point):
-        self.properties.x = point.x() // CONFIG.box_size[0]
-        self.properties.y = point.y() // CONFIG.box_size[1]
+        self.properties.x = point.x() // CONFIG.BOX_SIZE[0]
+        self.properties.y = point.y() // CONFIG.BOX_SIZE[1]
         # logger.info(f"Set positions to {self.properties.x} {self.properties.y}")
 
     def get_q_svg_scene_item(self, parent=None):
 
         # TODO this is overkill, recreating the SVG Widget way too often.
         self.create(
-            CONFIG.box_size[0] * self.properties.w,
-            CONFIG.box_size[1] * self.properties.h,
+            CONFIG.BOX_SIZE[0] * self.properties.w,
+            CONFIG.BOX_SIZE[1] * self.properties.h,
         )
 
         q_graphics_svg_item = QGraphicsSvgItem()
@@ -132,8 +132,8 @@ class ComponentController:
         q_graphics_svg_item.uid = self.uid
         q_graphics_svg_item.setSharedRenderer(self.svg_renderer)
         q_graphics_svg_item.setPos(
-            float(CONFIG.box_size[0] * self.properties.x),
-            float(CONFIG.box_size[1] * self.properties.y),
+            float(CONFIG.BOX_SIZE[0] * self.properties.x),
+            float(CONFIG.BOX_SIZE[1] * self.properties.y),
         )
         return q_graphics_svg_item
 
@@ -142,8 +142,8 @@ class ComponentController:
         label.parent = parent
         # TODO this is overkill, recreating the SVG Widget way too often.
         self.create(
-            CONFIG.box_size[0] * self.properties.w,
-            CONFIG.box_size[1] * self.properties.h,
+            CONFIG.BOX_SIZE[0] * self.properties.w,
+            CONFIG.BOX_SIZE[1] * self.properties.h,
         )
 
         string_image = self.rendered_img.to_str()

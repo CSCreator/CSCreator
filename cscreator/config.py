@@ -15,8 +15,8 @@ class CONFIG:
     PAPER_WIDTH_MM = 215.9
     PAPER_HEIGHT_MM = 279.4
     # TODO this does not update
-    PAPER_WIDTH_PIXEL = PAPER_WIDTH_MM * MM_PER_PIXEL
-    PAPER_HEIGHT_PIXEL = PAPER_HEIGHT_MM * MM_PER_PIXEL
+    PAPER_WIDTH_PIXEL = PAPER_WIDTH_MM / MM_PER_PIXEL
+    PAPER_HEIGHT_PIXEL = PAPER_HEIGHT_MM / MM_PER_PIXEL
     PAPER_RATIO = PAPER_HEIGHT_MM / PAPER_WIDTH_MM
     RESIZE_METHOD = PIL.Image.LANCZOS
     V_SPLIT = 66
@@ -37,11 +37,11 @@ def mm_to_pixel(x):
     return x / CONFIG.MM_PER_PIXEL
 
 
-def pt_to_px(self, pt):
+def pt_to_px(pt):
     return pt / 72 * CONFIG.DPI
 
 
-def px_to_pt(self, px):
+def px_to_pt(px):
     return px * 72 / CONFIG.DPI
 
 
