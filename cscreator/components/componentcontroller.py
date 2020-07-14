@@ -3,8 +3,8 @@ import uuid
 from enum import Enum
 from typing import Tuple, Union, Any
 
-from PySide2 import QtSvg
-from PySide2.QtGui import QIcon
+from PySide2 import QtSvg, QtXml
+from PySide2.QtGui import QIcon, QImage, QPainter
 
 from cscreator.character.charactercontroller import CharacterController
 from cscreator.character.characterenums import CHProperty
@@ -52,16 +52,17 @@ class EditableProperty:
         self.value = value
         self.owner.rendered_img = None
 
-    def get_value(self, player: CharacterController) -> Any:
+    def get_value(self, player: CharacterController) -> Union["str", "int"]:
         if isinstance(self.value, str):
             return self.value
         elif isinstance(self.value, CHProperty):
             if player is not None:
-                return getattr(player, self.value.name)
-            else:
-                return ""
+                ch_property = player.player_model.get_ch_property(self.value)
+                if ch_property:
+                    return ch_property.get_value_as_type("str")
         else:
             raise UnknownCharacterProperty("Unknown type of character_property passed")
+        return ""
 
 
 def create_canvas(size: Tuple[int, int]):
@@ -100,7 +101,7 @@ class ComponentController:
             CONFIG.BOX_SIZE[1] * self.properties.h,
         )
         self.pixmap = QIcon("tmp/pixmap_intermediate.svg").pixmap(pixmap_size)
-        self.svg_renderer.load(QByteArray(string_image))
+        self.svg_renderer.load("tmp/pixmap_intermediate.svg")
         logger.info("Rendered img updated")
 
     def create_canvas_from_svg(self, file):
@@ -116,8 +117,8 @@ class ComponentController:
 
         # TODO this is overkill, recreating the SVG Widget way too often.
         self.create(
-            CONFIG.BOX_SIZE[0] * self.properties.w,
-            CONFIG.BOX_SIZE[1] * self.properties.h,
+            int(CONFIG.BOX_SIZE[0] * self.properties.w),
+            int(CONFIG.BOX_SIZE[1] * self.properties.h),
         )
 
         q_graphics_svg_item = QGraphicsSvgItem()

@@ -32,11 +32,11 @@ class PageModel(QGraphicsScene):
         actual_w = bounding_rect_size.width()
         actual_h = bounding_rect_size.height()
         expected_w = CONFIG.PAPER_WIDTH_PIXEL * (
-                component_controller.properties.w / CONFIG.H_SPLIT
+            component_controller.properties.w / CONFIG.H_SPLIT
         )
 
         expected_h = CONFIG.PAPER_HEIGHT_PIXEL * (
-                component_controller.properties.h / CONFIG.V_SPLIT
+            component_controller.properties.h / CONFIG.V_SPLIT
         )
 
         scale_w = expected_w / actual_w

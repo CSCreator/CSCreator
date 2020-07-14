@@ -1,5 +1,9 @@
 import logging
 
+from cscreator.character.characterenums import CHProperty
+from cscreator.components.custom.generic_component import component_file_parser
+from cscreator.components.properties import Properties
+from cscreator.components.standard.box import BoxController
 from cscreator.sheet.pagemodel import PageModel
 from cscreator.views.pageview import PageView
 
@@ -16,8 +20,10 @@ class PageController:
     def set_standard_layout(self, active_character_controller):
         main_grid = PageModel()
 
-        # banner = component_file_parser("resc/components/banner.json")
-        # main_grid.add_component(banner.get_component(Properties(0, 0, 50, 10)))
+        banner = component_file_parser("resc/components/banner.json")
+        main_grid.add_component_controller(
+            banner.get_component(Properties(0, 0, 50, 10))
+        )
 
         bottom_row_start = 64
 
@@ -34,22 +40,22 @@ class PageController:
         hp_grip_flaws_row = 32
         #
         # # Column1
-        # main_grid.add_component_controller(
-        #     BoxController(
-        #         Properties(column_1_start, bottom_row_start - 12, column_1_width, 12),
-        #         "OTHER PROFICIENCIES & LANGUAGES",
-        #         CH.PROFICIENCIES_LANGUAGES,
-        #         active_character_controller,
-        #     )
-        # )
-        # main_grid.add_component_controller(
-        #     BoxController(
-        #         Properties(0, 0, 12, 12),
-        #         "OTHER PROFICIENCIES & LANGUAGES",
-        #         CHProperty.PROFICIENCIES_LANGUAGES,
-        #         active_character_controller,
-        #     )
-        # )
+        main_grid.add_component_controller(
+            BoxController(
+                Properties(column_1_start, bottom_row_start - 12, column_1_width, 12),
+                "Personality Traits",
+                CHProperty.PERSONALITY_TRAITS,
+                active_character_controller,
+            )
+        )
+        main_grid.add_component_controller(
+            BoxController(
+                Properties(0, 0, 12, 12),
+                "OTHER PROFICIENCIES & LANGUAGES",
+                CHProperty.PERSONALITY_TRAITS,
+                active_character_controller,
+            )
+        )
         # # main_grid.add_component(
         # #     SingleLineBox(
         # #         Properties(column_1_start, 49, column_1_width, 3),
@@ -79,10 +85,22 @@ class PageController:
         # #     AbilityBox(Properties(0, 0, 1, 1), "CHARISMA", "standard")
         # # )
         # main_grid.add_component(ability_scores_grid)
-        # main_grid.add_component(
-        #     Box(Properties(7, ability_skills_attack_row-23, 10, 23), "SKILLS", CH.ATTACKS, "standard")
-        # )
-        # main_grid.add_component(Box(Properties(7, 35, 10, 9), "SAVING THROWS", CH.SAVE_MODIFIERS, "standard"))
+        main_grid.add_component_controller(
+            BoxController(
+                Properties(7, ability_skills_attack_row - 23, 10, 23),
+                "SKILLS",
+                CHProperty.SENSES,
+                active_character_controller,
+            )
+        )
+        main_grid.add_component_controller(
+            BoxController(
+                Properties(7, 35, 10, 9),
+                "SAVING THROWS",
+                CHProperty.SAVE_MODIFIERS,
+                active_character_controller,
+            )
+        )
         # # main_grid.add_component(
         # #     SingleLineBox(Properties(7, 14, 10, 3), "INSPIRATION", "inspiration")
         # # )

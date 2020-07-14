@@ -20,11 +20,12 @@ from cscreator.conversion.pdfimporter import PDFImporter
 class MainController:
     def __init__(self):
         self.character_controllers = None
-        self.active_character_controller = None
 
         self.main_view = MainView()
         self.plugin_manager = PluginManager()
-
+        self.import_player(
+            file_name="resc/dndbeyond_extreme.pdf", plugin=DNDBeyond(),
+        )
         self.main_view.pdf_wizard_factory.plugin_manager = self.plugin_manager
         self.main_view.pdf_wizard_factory.import_new_player += (
             self.import_player_handler
@@ -36,12 +37,7 @@ class MainController:
 
         self.main_view.create_new_player += self.new_player_handler
 
-        self.import_player(
-            file_name="resc/dndbeyond_extreme.pdf", plugin=DNDBeyond(),
-        )
-
-
-        self.sheet_controller = SheetController(self.active_character_controller)
+        self.sheet_controller = SheetController(self.character_controllers)
         self.set_sheet_layout()
 
     def new_player_handler(self, subject):
@@ -53,12 +49,16 @@ class MainController:
     def add_player(self, player):
         self.character_controllers = player
         self.set_player_tab()
-        logger.info(f"Added player {player.player_model.get_ch_property(CHProperty.CHARACTER_NAME)}")
+        logger.info(
+            f"Added player {player.player_model.get_ch_property(CHProperty.CHARACTER_NAME)}"
+        )
 
     @event
     def remove_player(self, player):
         self.character_controllers = None
-        logger.info(f"Removed player {player.player_model.get_ch_property(CHProperty.CHARACTER_NAME)}")
+        logger.info(
+            f"Removed player {player.player_model.get_ch_property(CHProperty.CHARACTER_NAME)}"
+        )
 
     def get_character_layout(self):
         qt_layout = self.character_controllers.get_layout()
@@ -87,7 +87,7 @@ class MainController:
         self.import_player(file_name, importer)
 
     def import_player(
-            self, file_name, plugin,
+        self, file_name, plugin,
     ):
         importer = PDFImporter(plugin=plugin)
         importer.load(file_name)

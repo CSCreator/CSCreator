@@ -2,6 +2,7 @@ import logging.config
 
 import yaml
 from PySide2.QtCore import QStandardPaths, QDir
+from PySide2 import QtSvg, QtXml
 
 with open("log_config.yml", "r") as stream:
     config = yaml.load(stream, Loader=yaml.FullLoader)
@@ -27,12 +28,12 @@ def copytree(src, dst, symlinks=False, ignore=None):
 
 if __name__ == "__main__":
     logger.info("Application started")
-
     import sys
+
+    app = QApplication(sys.argv)
 
     from cscreator.maincontroller import MainController
 
-    app = QApplication(sys.argv)
     qss = "qt_design/stylesheet.qss"
     with open(qss, "r") as fh:
         app.setStyleSheet(fh.read())
