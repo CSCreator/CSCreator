@@ -1,13 +1,13 @@
 import logging
 
 from cscreator.components.properties import Properties
+from cscreator.utils.svgfile import fromfile
 
 logger = logging.getLogger(__name__)
 
 import uuid
 
 standard_background_color = (0, 1, 1, 1)
-import svgutils.transform as sg
 
 
 class ComponentModel:
@@ -17,5 +17,5 @@ class ComponentModel:
         self.uid = uuid.uuid4()
 
     def create_canvas_from_svg(self, file):
-        background = sg.fromfile(file)
+        background = fromfile(file)
         return background

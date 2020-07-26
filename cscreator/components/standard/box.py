@@ -4,17 +4,17 @@ from cscreator.components.componentcontroller import (
     ComponentController,
     EditableProperty,
     PropertyTypes,
-    create_canvas,
+    create_svgfile,
 )
 from cscreator.components.utils import unit_str_to_float
 from cscreator.config import pt_to_mm
+from cscreator.utils.svgfile import SVGFile, fromfile
 from cscreator.utils.svgtext import text_width
 
 logger = logging.getLogger(__name__)
 
 import svgwrite
 
-import svgutils.transform as sg
 
 
 intermediate_border_file = "tmp/box_border_intermediate.svg"
@@ -37,14 +37,14 @@ class BoxController(ComponentController):
         self.total_width = -1
         self.total_height = -1
 
-    def create(self, box_width_pixels: int, box_height_pixels: int) -> sg.SVGFigure:
+    def create(self, box_width_pixels: int, box_height_pixels: int) -> SVGFile:
         self.total_width = box_width_pixels
         self.total_height = box_height_pixels
 
-        img = create_canvas((self.total_width, self.total_height))
+        img = create_svgfile((self.total_width, self.total_height))
         size = img.width, img.height
-        width = unit_str_to_float(img.width)
-        height = unit_str_to_float(img.height)
+        width = img.width
+        height = img.height
         # create new SVG figure
         box = svgwrite.Drawing(filename=intermediate_border_file, size=size)
         borders = box.add(box.g(id="borders", stroke="black", stroke_width=1))
@@ -94,11 +94,11 @@ class BoxController(ComponentController):
 
         text.save()
 
-        text_utils = sg.fromfile(intermediate_border_file)
+        text_utils = fromfile(intermediate_border_file)
         text_utils.set_size(size)
         img.append(text_utils.getroot())
 
-        text_utils = sg.fromfile(intermediate_text_file)
+        text_utils = fromfile(intermediate_text_file)
         text_utils.set_size(size)
         img.append(text_utils.getroot())
         img.save("debug/box{}.svg".format(self.uid))

@@ -20,10 +20,10 @@ class PageController:
     def set_standard_layout(self, active_character_controller):
         main_grid = PageModel()
 
-        banner = component_file_parser("resc/components/banner.json")
-        main_grid.add_component_controller(
-            banner.get_component(Properties(0, 0, 50, 10))
-        )
+        # banner = component_file_parser("resc/components/banner.json")
+        # main_grid.add_component_controller(
+        #     banner.get_component(Properties(0, 0, 50, 10))
+        # )
 
         bottom_row_start = 64
 

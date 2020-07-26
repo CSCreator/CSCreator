@@ -10,6 +10,7 @@ from cscreator.character.charactercontroller import CharacterController
 from cscreator.character.characterenums import CHProperty
 from cscreator.components.properties import Properties
 from cscreator.config import CONFIG
+from cscreator.utils.svgfile import SVGFile
 from exceptions import UnknownCharacterProperty
 
 logger = logging.getLogger(__name__)
@@ -22,8 +23,6 @@ from PySide2.QtSvg import QSvgWidget, QGraphicsSvgItem
 from PySide2.QtWidgets import QGraphicsItem
 
 standard_background_color = (0, 1, 1, 1)
-import svgutils.transform as sg
-
 
 class PropertyTypes(Enum):
     SINGLE_LINE_STRING = 0
@@ -59,16 +58,16 @@ class EditableProperty:
             if player is not None:
                 ch_property = player.player_model.get_ch_property(self.value)
                 if ch_property:
-                    return ch_property.get_value_as_type("str")
+                    return ch_property.get_value_as_type(str)
         else:
             raise UnknownCharacterProperty("Unknown type of character_property passed")
         return ""
 
 
-def create_canvas(size: Tuple[int, int]):
+def create_svgfile(size: Tuple[int, int]):
     width_mm = CONFIG.MM_PER_PIXEL * size[0]
     height_mm = CONFIG.MM_PER_PIXEL * size[1]
-    fig = sg.SVGFigure(width_mm, height_mm)
+    fig = SVGFile(width_mm, height_mm)
     return fig
 
 
