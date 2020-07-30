@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Properties:
+class PageProperties:
     x: int
     y: int
     w: int

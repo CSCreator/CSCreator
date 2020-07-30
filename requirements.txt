@@ -3,6 +3,5 @@ Pillow
 PyMuPDF
 PyYAML
 obsub
-svgwrite
 pytest
 pytest-qt
